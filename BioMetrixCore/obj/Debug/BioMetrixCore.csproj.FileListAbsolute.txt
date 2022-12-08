@@ -1,0 +1,74 @@
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe.config
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.pdb
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csprojResolveAssemblyReference.cache
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\Interop.zkemkeeper.dll
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.ResolveComReference.cache
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.DataEmpty.resources
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Master.resources
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Properties.Resources.resources
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.GenerateResource.Cache
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
+D:\Zktech\ZKTeco Using C#\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+D:\BioMetrix\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe.config
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\Interop.zkemkeeper.dll
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.ResolveComReference.cache
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+D:\BioMetrix\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe
+D:\BioMetrix\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.pdb
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csprojResolveAssemblyReference.cache
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.DataEmpty.resources
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Master.resources
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Properties.Resources.resources
+D:\BioMetrix\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.GenerateResource.Cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.AssemblyReference.cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.SuggestedBindingRedirects.cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\Interop.zkemkeeper.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.ResolveComReference.cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.DataEmpty.resources
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Master.resources
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.Properties.Resources.resources
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.GenerateResource.cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.CoreCompileInputs.cache
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe.config
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.exe
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\BioMetrixCore.pdb
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Data.Sqlite.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\NLog.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\SQLitePCLRaw.core.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Buffers.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Memory.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Data.Sqlite.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\NLog.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Buffers.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Memory.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.CopyComplete
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\AxInterop.FP_CLOCKLib.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.ViewMain.resources
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Newtonsoft.Json.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\RestSharp.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Json.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.ValueTuple.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Newtonsoft.Json.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\RestSharp.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Json.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\System.ValueTuple.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.Auth.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.dll
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.pdb
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.xml
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.Auth.pdb
+C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Debug\Microsoft.Exchange.WebServices.Auth.xml
