@@ -7,9 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -674,12 +676,42 @@ namespace BioMetrixCore
 
         private void btnGetBSSID_Click(object sender, EventArgs e)
         {
-            var wlanClient = new WlanClient();
-            //foreach (WlanClient.WlanInterface wlanInterface in wlanClient.Interfaces)
-            //{
-            //    var test = wlanInterface.CurrentConnection.wlanAssociationAttributes.Dot11Bssid;
-            //    Console.WriteLine(test);
-            //}
+            var a = GetOperatingSystem();
+
+
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.StartInfo.Arguments = $"/C {txtCmdText.Text.Trim()}";
+            cmd.Start();
+
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            //Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+            txtResult.Text = cmd.StandardOutput.ReadToEnd();
+        }
+        public static OSPlatform GetOperatingSystem()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return OSPlatform.OSX;
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return OSPlatform.Linux;
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return OSPlatform.Windows;
+            }
+
+            throw new Exception("Cannot determine operating system!");
         }
     }
 }

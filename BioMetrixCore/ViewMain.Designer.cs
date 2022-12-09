@@ -70,8 +70,11 @@
             this.tbxCompanyCode = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtResult = new System.Windows.Forms.TextBox();
             this.btnGetBSSID = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCmdText = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -514,7 +517,10 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.txtCmdText);
+            this.tabPage3.Controls.Add(this.txtResult);
             this.tabPage3.Controls.Add(this.btnGetBSSID);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -523,23 +529,49 @@
             this.tabPage3.Text = "BSSID";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(257, 60);
+            this.txtResult.Multiline = true;
+            this.txtResult.Name = "txtResult";
+            this.txtResult.Size = new System.Drawing.Size(483, 325);
+            this.txtResult.TabIndex = 1;
+            // 
             // btnGetBSSID
             // 
             this.btnGetBSSID.Location = new System.Drawing.Point(19, 21);
             this.btnGetBSSID.Name = "btnGetBSSID";
             this.btnGetBSSID.Size = new System.Drawing.Size(75, 23);
             this.btnGetBSSID.TabIndex = 0;
-            this.btnGetBSSID.Text = "Lấy BSSID";
+            this.btnGetBSSID.Text = "Run";
             this.btnGetBSSID.UseVisualStyleBackColor = true;
             this.btnGetBSSID.Click += new System.EventHandler(this.btnGetBSSID_Click);
             // 
-            // textBox1
+            // txtCmdText
             // 
-            this.textBox1.Location = new System.Drawing.Point(193, 23);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(567, 325);
-            this.textBox1.TabIndex = 1;
+            this.txtCmdText.Location = new System.Drawing.Point(257, 21);
+            this.txtCmdText.Name = "txtCmdText";
+            this.txtCmdText.Size = new System.Drawing.Size(483, 20);
+            this.txtCmdText.TabIndex = 2;
+            this.txtCmdText.Text = "netsh wlan show networks mode=Bssid";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(173, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Câu lệnh";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(173, 60);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Kết quả";
             // 
             // ViewMain
             // 
@@ -610,7 +642,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dgvLogData;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.Button btnGetBSSID;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtCmdText;
     }
 }
