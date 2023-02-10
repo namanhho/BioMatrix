@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BioMetrixCore.Utilities
 {
-    public class Converter
+    public static class Converter
     {
         private static JsonSerializerSettings _serializerSetting = null;
         private static JsonSerializerSettings SerializerSetting
@@ -73,6 +73,16 @@ namespace BioMetrixCore.Utilities
             }
             var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
             return Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+        public static T GetObject<T>(this Dictionary<string, object> dic, string key)
+        {
+            T value = default(T);
+            if (dic.ContainsKey(key) && dic[key] != null)
+            {
+                value = JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(dic[key]));
+            }
+
+            return value;
         }
     }
 }

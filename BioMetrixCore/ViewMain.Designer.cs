@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewMain));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblDeviceInfo = new System.Windows.Forms.Label();
@@ -70,11 +71,35 @@
             this.tbxCompanyCode = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvListBSSID = new System.Windows.Forms.DataGridView();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCmdText = new System.Windows.Forms.TextBox();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.btnGetBSSID = new System.Windows.Forms.Button();
-            this.txtCmdText = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvListLogByHanetAI = new System.Windows.Forms.DataGridView();
+            this.btnGetLogByHanetAIV2 = new System.Windows.Forms.Button();
+            this.btnGetLogByHanetAI = new System.Windows.Forms.Button();
+            this.dtToDateHanetAI = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateHanetAI = new System.Windows.Forms.DateTimePicker();
+            this.tbRefreshToken = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbAccessToken = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbClientSecret = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbClientID = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtLinkByHysoon = new System.Windows.Forms.TextBox();
+            this.txtPortByHysoon = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnGetLogsByHysoon = new System.Windows.Forms.Button();
+            this.dgvListLogByHysoon = new System.Windows.Forms.DataGridView();
+            this.dtFromDateByHysoon = new System.Windows.Forms.DateTimePicker();
+            this.dtToDateByHysoon = new System.Windows.Forms.DateTimePicker();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -84,6 +109,11 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogData)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListBSSID)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHanetAI)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHysoon)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -91,6 +121,8 @@
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Controls.Add(this.tabPage5);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -390,11 +422,11 @@
             // 
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblStatus.Location = new System.Drawing.Point(3, 414);
+            this.lblStatus.Location = new System.Drawing.Point(3, 395);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.lblStatus.Size = new System.Drawing.Size(790, 11);
+            this.lblStatus.Size = new System.Drawing.Size(790, 30);
             this.lblStatus.TabIndex = 893;
             this.lblStatus.Text = "label3";
             // 
@@ -517,6 +549,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.dgvListBSSID);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.txtCmdText);
@@ -529,12 +562,46 @@
             this.tabPage3.Text = "BSSID";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // dgvListBSSID
+            // 
+            this.dgvListBSSID.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListBSSID.Location = new System.Drawing.Point(19, 183);
+            this.dgvListBSSID.Name = "dgvListBSSID";
+            this.dgvListBSSID.Size = new System.Drawing.Size(721, 234);
+            this.dgvListBSSID.TabIndex = 5;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(173, 60);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Kết quả";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(173, 27);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Câu lệnh";
+            // 
+            // txtCmdText
+            // 
+            this.txtCmdText.Location = new System.Drawing.Point(257, 21);
+            this.txtCmdText.Name = "txtCmdText";
+            this.txtCmdText.Size = new System.Drawing.Size(483, 20);
+            this.txtCmdText.TabIndex = 2;
+            this.txtCmdText.Text = "netsh wlan show networks mode=Bssid";
+            // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(257, 60);
+            this.txtResult.Location = new System.Drawing.Point(257, 57);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(483, 325);
+            this.txtResult.Size = new System.Drawing.Size(483, 109);
             this.txtResult.TabIndex = 1;
             // 
             // btnGetBSSID
@@ -547,31 +614,220 @@
             this.btnGetBSSID.UseVisualStyleBackColor = true;
             this.btnGetBSSID.Click += new System.EventHandler(this.btnGetBSSID_Click);
             // 
-            // txtCmdText
+            // tabPage4
             // 
-            this.txtCmdText.Location = new System.Drawing.Point(257, 21);
-            this.txtCmdText.Name = "txtCmdText";
-            this.txtCmdText.Size = new System.Drawing.Size(483, 20);
-            this.txtCmdText.TabIndex = 2;
-            this.txtCmdText.Text = "netsh wlan show networks mode=Bssid";
+            this.tabPage4.Controls.Add(this.dgvListLogByHanetAI);
+            this.tabPage4.Controls.Add(this.btnGetLogByHanetAIV2);
+            this.tabPage4.Controls.Add(this.btnGetLogByHanetAI);
+            this.tabPage4.Controls.Add(this.dtToDateHanetAI);
+            this.tabPage4.Controls.Add(this.dtFromDateHanetAI);
+            this.tabPage4.Controls.Add(this.tbRefreshToken);
+            this.tabPage4.Controls.Add(this.label14);
+            this.tabPage4.Controls.Add(this.tbAccessToken);
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.tbClientSecret);
+            this.tabPage4.Controls.Add(this.label12);
+            this.tabPage4.Controls.Add(this.tbClientID);
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(796, 428);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "HanetAI";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // dgvListLogByHanetAI
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(173, 27);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 13);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Câu lệnh";
+            this.dgvListLogByHanetAI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListLogByHanetAI.Location = new System.Drawing.Point(21, 172);
+            this.dgvListLogByHanetAI.Name = "dgvListLogByHanetAI";
+            this.dgvListLogByHanetAI.Size = new System.Drawing.Size(597, 231);
+            this.dgvListLogByHanetAI.TabIndex = 12;
             // 
-            // label10
+            // btnGetLogByHanetAIV2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(173, 60);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Kết quả";
+            this.btnGetLogByHanetAIV2.Location = new System.Drawing.Point(543, 75);
+            this.btnGetLogByHanetAIV2.Name = "btnGetLogByHanetAIV2";
+            this.btnGetLogByHanetAIV2.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogByHanetAIV2.TabIndex = 11;
+            this.btnGetLogByHanetAIV2.Text = "Lấy dữ liệu V2";
+            this.btnGetLogByHanetAIV2.UseVisualStyleBackColor = true;
+            this.btnGetLogByHanetAIV2.Click += new System.EventHandler(this.btnGetLogByHanetAIV2_Click);
+            // 
+            // btnGetLogByHanetAI
+            // 
+            this.btnGetLogByHanetAI.Location = new System.Drawing.Point(403, 76);
+            this.btnGetLogByHanetAI.Name = "btnGetLogByHanetAI";
+            this.btnGetLogByHanetAI.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogByHanetAI.TabIndex = 10;
+            this.btnGetLogByHanetAI.Text = "Lấy dữ liệu";
+            this.btnGetLogByHanetAI.UseVisualStyleBackColor = true;
+            this.btnGetLogByHanetAI.Click += new System.EventHandler(this.btnGetLogByHanetAI_Click);
+            // 
+            // dtToDateHanetAI
+            // 
+            this.dtToDateHanetAI.Location = new System.Drawing.Point(403, 42);
+            this.dtToDateHanetAI.Name = "dtToDateHanetAI";
+            this.dtToDateHanetAI.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateHanetAI.TabIndex = 9;
+            // 
+            // dtFromDateHanetAI
+            // 
+            this.dtFromDateHanetAI.Location = new System.Drawing.Point(403, 10);
+            this.dtFromDateHanetAI.Name = "dtFromDateHanetAI";
+            this.dtFromDateHanetAI.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateHanetAI.TabIndex = 8;
+            // 
+            // tbRefreshToken
+            // 
+            this.tbRefreshToken.Location = new System.Drawing.Point(109, 112);
+            this.tbRefreshToken.Name = "tbRefreshToken";
+            this.tbRefreshToken.Size = new System.Drawing.Size(168, 20);
+            this.tbRefreshToken.TabIndex = 7;
+            this.tbRefreshToken.Text = resources.GetString("tbRefreshToken.Text");
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(18, 115);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 13);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "RefreshToken";
+            // 
+            // tbAccessToken
+            // 
+            this.tbAccessToken.Location = new System.Drawing.Point(109, 76);
+            this.tbAccessToken.Name = "tbAccessToken";
+            this.tbAccessToken.Size = new System.Drawing.Size(168, 20);
+            this.tbAccessToken.TabIndex = 5;
+            this.tbAccessToken.Text = resources.GetString("tbAccessToken.Text");
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(18, 79);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "AccessToken";
+            // 
+            // tbClientSecret
+            // 
+            this.tbClientSecret.Location = new System.Drawing.Point(109, 42);
+            this.tbClientSecret.Name = "tbClientSecret";
+            this.tbClientSecret.Size = new System.Drawing.Size(168, 20);
+            this.tbClientSecret.TabIndex = 3;
+            this.tbClientSecret.Text = "6c1ccb99f8b2b5b3f1a284af29b6521e";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(18, 42);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "ClientSecret";
+            // 
+            // tbClientID
+            // 
+            this.tbClientID.Location = new System.Drawing.Point(109, 11);
+            this.tbClientID.Name = "tbClientID";
+            this.tbClientID.Size = new System.Drawing.Size(168, 20);
+            this.tbClientID.TabIndex = 1;
+            this.tbClientID.Text = "9aa03aa84943a9ac5fe4211e5b31da89";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(18, 11);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "ClientID";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.dtToDateByHysoon);
+            this.tabPage5.Controls.Add(this.dtFromDateByHysoon);
+            this.tabPage5.Controls.Add(this.dgvListLogByHysoon);
+            this.tabPage5.Controls.Add(this.btnGetLogsByHysoon);
+            this.tabPage5.Controls.Add(this.txtPortByHysoon);
+            this.tabPage5.Controls.Add(this.label16);
+            this.tabPage5.Controls.Add(this.txtLinkByHysoon);
+            this.tabPage5.Controls.Add(this.label15);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(796, 428);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Hysoon";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(25, 24);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Đường dẫn";
+            // 
+            // txtLinkByHysoon
+            // 
+            this.txtLinkByHysoon.Location = new System.Drawing.Point(113, 21);
+            this.txtLinkByHysoon.Name = "txtLinkByHysoon";
+            this.txtLinkByHysoon.Size = new System.Drawing.Size(153, 20);
+            this.txtLinkByHysoon.TabIndex = 1;
+            this.txtLinkByHysoon.Text = "http://pos.lki.com.vn";
+            // 
+            // txtPortByHysoon
+            // 
+            this.txtPortByHysoon.Location = new System.Drawing.Point(113, 60);
+            this.txtPortByHysoon.Name = "txtPortByHysoon";
+            this.txtPortByHysoon.Size = new System.Drawing.Size(153, 20);
+            this.txtPortByHysoon.TabIndex = 3;
+            this.txtPortByHysoon.Text = "6868";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(25, 63);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Cổng";
+            // 
+            // btnGetLogsByHysoon
+            // 
+            this.btnGetLogsByHysoon.Location = new System.Drawing.Point(574, 22);
+            this.btnGetLogsByHysoon.Name = "btnGetLogsByHysoon";
+            this.btnGetLogsByHysoon.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByHysoon.TabIndex = 4;
+            this.btnGetLogsByHysoon.Text = "Lấy dữ liệu";
+            this.btnGetLogsByHysoon.UseVisualStyleBackColor = true;
+            this.btnGetLogsByHysoon.Click += new System.EventHandler(this.btnGetLogsByHysoon_Click);
+            // 
+            // dgvListLogByHysoon
+            // 
+            this.dgvListLogByHysoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListLogByHysoon.Location = new System.Drawing.Point(26, 145);
+            this.dgvListLogByHysoon.Name = "dgvListLogByHysoon";
+            this.dgvListLogByHysoon.Size = new System.Drawing.Size(736, 272);
+            this.dgvListLogByHysoon.TabIndex = 5;
+            // 
+            // dtFromDateByHysoon
+            // 
+            this.dtFromDateByHysoon.Location = new System.Drawing.Point(311, 21);
+            this.dtFromDateByHysoon.Name = "dtFromDateByHysoon";
+            this.dtFromDateByHysoon.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByHysoon.TabIndex = 6;
+            // 
+            // dtToDateByHysoon
+            // 
+            this.dtToDateByHysoon.Location = new System.Drawing.Point(311, 60);
+            this.dtToDateByHysoon.Name = "dtToDateByHysoon";
+            this.dtToDateByHysoon.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByHysoon.TabIndex = 7;
             // 
             // ViewMain
             // 
@@ -594,6 +850,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogData)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListBSSID)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHanetAI)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHysoon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -647,5 +910,29 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCmdText;
+        private System.Windows.Forms.DataGridView dgvListBSSID;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox tbRefreshToken;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox tbAccessToken;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbClientSecret;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbClientID;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnGetLogByHanetAI;
+        private System.Windows.Forms.DateTimePicker dtToDateHanetAI;
+        private System.Windows.Forms.DateTimePicker dtFromDateHanetAI;
+        private System.Windows.Forms.Button btnGetLogByHanetAIV2;
+        private System.Windows.Forms.DataGridView dgvListLogByHanetAI;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button btnGetLogsByHysoon;
+        private System.Windows.Forms.TextBox txtPortByHysoon;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtLinkByHysoon;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.DataGridView dgvListLogByHysoon;
+        private System.Windows.Forms.DateTimePicker dtToDateByHysoon;
+        private System.Windows.Forms.DateTimePicker dtFromDateByHysoon;
     }
 }

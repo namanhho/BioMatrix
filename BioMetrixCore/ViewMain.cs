@@ -9,10 +9,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -291,6 +294,33 @@ namespace BioMetrixCore
             dgvLogData.Controls.Clear();
             dgvLogData.Rows.Clear();
             dgvLogData.Columns.Clear();
+
+            if (dgvListBSSID.Controls.Count > 2)
+            {
+                dgvListBSSID.Controls.RemoveAt(2);
+            }
+            dgvListBSSID.DataSource = null;
+            dgvListBSSID.Controls.Clear();
+            dgvListBSSID.Rows.Clear();
+            dgvListBSSID.Columns.Clear();
+
+            if (dgvListLogByHanetAI.Controls.Count > 2)
+            {
+                dgvListLogByHanetAI.Controls.RemoveAt(2);
+            }
+            dgvListLogByHanetAI.DataSource = null;
+            dgvListLogByHanetAI.Controls.Clear();
+            dgvListLogByHanetAI.Rows.Clear();
+            dgvListLogByHanetAI.Columns.Clear();
+
+            if (dgvListLogByHysoon.Controls.Count > 2)
+            {
+                dgvListLogByHysoon.Controls.RemoveAt(2);
+            }
+            dgvListLogByHysoon.DataSource = null;
+            dgvListLogByHysoon.Controls.Clear();
+            dgvListLogByHysoon.Rows.Clear();
+            dgvListLogByHysoon.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -303,6 +333,18 @@ namespace BioMetrixCore
             dgvLogData.DataSource = list;
             dgvLogData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvLogData);
+
+            dgvListBSSID.DataSource = list;
+            dgvListBSSID.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvListBSSID);
+
+            dgvListLogByHanetAI.DataSource = list;
+            dgvListLogByHanetAI.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvListLogByHanetAI);
+
+            dgvListLogByHysoon.DataSource = list;
+            dgvListLogByHysoon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvListLogByHysoon);
         }
 
 
@@ -399,7 +441,7 @@ namespace BioMetrixCore
 
         private void btnUploadUserInfo_Click(object sender, EventArgs e)
         {
-            // Add you new UserInfo Here and  uncomment the below code
+            // Add you new UserInfo Here and uncomment the below code
             //List<UserInfo> lstUserInfo = new List<UserInfo>();
             //manipulator.UploadFTPTemplate(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), lstUserInfo);
         }
@@ -423,8 +465,8 @@ namespace BioMetrixCore
             string token = string.Empty;
             string mess = string.Empty;
             login(tbxUserName.Text.Trim(), tbxPass.Text.Trim(), ref url, ref token, ref mess);
-            var fromDate = DateTime.Now.Date.AddYears(-1);
-            var toDate = DateTime.Now.Date.AddYears(1);
+            var fromDate = DateTime.Now.Date.AddDays(-1);
+            var toDate = DateTime.Now.Date;
             var logs = GetDatas(fromDate, toDate, url, token, ref mess);
             var lstLog = new List<LogData>();
             foreach (var log in logs)
@@ -455,25 +497,25 @@ namespace BioMetrixCore
             //var request = new RestRequest(Method.POST);
             //var param = new
             //{
-            //    email = email,
-            //    password = pass
+            // email = email,
+            // password = pass
             //};
             //request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
 
             //IRestResponse response = client.Execute(request);
             //if (!response.IsSuccessful)
             //{
-            //    return;
+            // return;
             //}
             //var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
             //if (content.ContainsKey("status") && int.Parse(content["status"].ToString()) != 10000)
             //{
-            //    mess = content.ContainsKey("error message") ? content["error message"].ToString() : "";
-            //    return;
+            // mess = content.ContainsKey("error message") ? content["error message"].ToString() : "";
+            // return;
             //}
             //var data = content.ContainsKey("data") ? Converter.JsonDeserialize<Dictionary<string, object>>(content["data"].ToString()) : new Dictionary<string, object>();
             //url = data.ContainsKey("api_url") ? data["api_url"].ToString() : "";
-            //token = data.ContainsKey("access_token") ?  data["access_token"].ToString() : "";
+            //token = data.ContainsKey("access_token") ? data["access_token"].ToString() : "";
 
             var param = new
             {
@@ -538,9 +580,9 @@ namespace BioMetrixCore
             //var request = new RestRequest(Method.POST);
             //var param = new
             //{
-            //    company_code = tbxCompanyCode.Text.Trim(),
-            //    start_time = DateTime.Now.Date,
-            //    end_time = DateTime.Now.AddMonths(2)
+            // company_code = tbxCompanyCode.Text.Trim(),
+            // start_time = DateTime.Now.Date,
+            // end_time = DateTime.Now.AddMonths(2)
             //};
             //request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
 
@@ -548,13 +590,13 @@ namespace BioMetrixCore
             //IRestResponse response = client.Execute(request);
             //if (!response.IsSuccessful)
             //{
-            //    return logs;
+            // return logs;
             //}
             //var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
             //if (content.ContainsKey("status") && int.Parse(content["status"].ToString()) != 10000)
             //{
-            //    mess += content.ContainsKey("error message") ? content["error message"]?.ToString() : "";
-            //    return logs;
+            // mess += content.ContainsKey("error message") ? content["error message"]?.ToString() : "";
+            // return logs;
             //}
             //logs = Converter.JsonDeserialize<List<Dictionary<string, object>>>(content["data"].ToString());
 
@@ -583,8 +625,8 @@ namespace BioMetrixCore
             //request.AddCookie("x-deviceid", Utility.GetDeviceId());
             //if (autoAddSessionCookies)
             //{
-            //    request.AddCookie("x-sessionid", this.SessionId);
-            //    request.AddCookie("x-tenantid", this.TenantId);
+            // request.AddCookie("x-sessionid", this.SessionId);
+            // request.AddCookie("x-tenantid", this.TenantId);
             //}
 
             //Body
@@ -674,25 +716,76 @@ namespace BioMetrixCore
             return result;
         }
 
-        private void btnGetBSSID_Click(object sender, EventArgs e)
+        private async void btnGetBSSID_Click(object sender, EventArgs e)
         {
-            var a = GetOperatingSystem();
+            try
+            {
+                //Clipboard.SetText("hnanh");
+                var fileName = "cmd.exe";
+                var cmdText = Utility.GetAppSetting("CMDTextWindows");
+                //var operatingSystem = GetOperatingSystem();
+                //if (operatingSystem == OSPlatform.Windows)
+                //{
+                //    fileName = "cmd.exe";
+                //    cmdText = Utility.GetAppSetting("CMDTextWindows");
+                //}
+                //else if (operatingSystem == OSPlatform.OSX)
+                //{
+                //    fileName = "terminal.exe";
+                //    cmdText = Utility.GetAppSetting("CMDTextOSX");
+                //}
+                //else
+                //{
+                //    return;
+                //}
 
 
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.Arguments = $"/C {txtCmdText.Text.Trim()}";
-            cmd.Start();
+                var operatingSystem = GetOperatingSystemV2();
+                if (operatingSystem == "Windows")
+                {
+                    fileName = "cmd.exe";
+                    cmdText = Utility.GetAppSetting("CMDTextWindows");
+                }
+                else if (operatingSystem == "MacOSX")
+                {
+                    fileName = "terminal.exe";
+                    cmdText = Utility.GetAppSetting("CMDTextOSX");
+                }
+                else
+                {
+                    return;
+                }
+                var args = !string.IsNullOrWhiteSpace(cmdText) ? cmdText : "/C netsh wlan show networks mode=Bssid";
+                Process cmd = new Process()
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = fileName,
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
+                        Arguments = args.Trim()
+                    }
+                };
+                cmd.Start();
+                var outPut = cmd.StandardOutput.ReadToEnd();
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
+                cmd.WaitForExit();
 
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            //Console.WriteLine(cmd.StandardOutput.ReadToEnd());
-            txtResult.Text = cmd.StandardOutput.ReadToEnd();
+                txtResult.Text = outPut;
+
+                var apList = await GetSignalOfNetworks(fileName, args);
+                if (apList.Count > 0)
+                {
+                    BindToGridView(apList);
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayListOutput(ex.Message);
+            }
         }
         public static OSPlatform GetOperatingSystem()
         {
@@ -712,6 +805,642 @@ namespace BioMetrixCore
             }
 
             throw new Exception("Cannot determine operating system!");
+        }
+        public static string GetOperatingSystemV2()
+        {
+            var os = Environment.OSVersion;
+            PlatformID pid = os.Platform;
+            switch (pid)
+            {
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
+                    return "Windows";
+                case PlatformID.MacOSX:
+                    return "MacOSX";
+                case PlatformID.Unix:
+                    return "Unix";
+                default:
+                    return "";
+            }
+
+            throw new Exception("Cannot determine operating system!");
+        }
+        private async Task<List<AccessPoint>> GetSignalOfNetworks(string fileName, string args)
+        {
+            string result = await ExecuteProcessAsync(fileName, args);
+
+            return Regex.Split(result, @"[^B]SSID \d+").Skip(1).SelectMany(network => GetAccessPointFromNetwork(network)).ToList();
+        }
+
+        private static List<AccessPoint> GetAccessPointFromNetwork(string network)
+        {
+            string withoutLineBreaks = Regex.Replace(network, @"[\r\n]+", "@@@###%%%&&&").Trim();
+            //string ssid = Regex.Replace(withoutLineBreaks, @"^:\s+(\S+).*$", "$1");
+            string ssid = Regex.Replace(withoutLineBreaks, @"^:\s+([\w-*|\s*]*).*$", "$1");
+
+            return Regex.Split(withoutLineBreaks, @"\s{4}BSSID \d+").Skip(1).Select(ap => GetAccessPoint(ssid, ap)).ToList();
+        }
+
+        private static AccessPoint GetAccessPoint(string ssid, string ap)
+        {
+            string withoutLineBreaks = Regex.Replace(ap, @"[\r\n]+", " ").Trim();
+            string bssid = Regex.Replace(withoutLineBreaks, @"^:\s+([a-f0-9]{2}(:[a-f0-9]{2}){5}).*$", "$1").Trim();
+            //byte signal = byte.Parse(Regex.Replace(withoutLineBreaks, @"^.*(Signal|Sinal)\s+:\s+(\d+)%.*$", "$2").Trim());
+
+            return new AccessPoint
+            {
+                SSID = ssid,
+                BSSID = bssid,
+                //Signal = signal,
+            };
+        }
+
+        private static async Task<string> ExecuteProcessAsync(string cmd, string args = null)
+        {
+            var process = new Process()
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = cmd,
+                    Arguments = args,
+                    RedirectStandardInput = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = Encoding.UTF8,
+                }
+            };
+
+            process.Start();
+
+            string result = await process.StandardOutput.ReadToEndAsync();
+
+            process.WaitForExit();
+
+            return result;
+        }
+       
+        private string ListToStringCommaSeparator(List<string> list)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in list)
+            {
+                sb.Append(item);
+                sb.Append(',');
+            }
+            sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+        public List<DeviceInfo> GetListDevice(ref string message)
+        {
+            List<DeviceInfo> listDevices = new List<DeviceInfo>();
+            var client = new RestClient(HanetAPIPath.PartnerPath + "/device/get-list-device");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader(HanetAPIPath.ContentType, HanetAPIPath.UrlEncoded);
+            request.AddParameter(HanetAPIPath.Token, tbAccessToken.Text);
+            IRestResponse response = client.Execute(request);
+            // kiem tra response tra ve co loi thi return null
+            if (response.IsSuccessful == false)
+            {
+                message += response.StatusCode;
+                return null;
+            }
+            message = response.Content;
+            var bodyContent = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            try
+            {
+                var returnCode = bodyContent["returnCode"].ToString();
+                // nếu response trả về lỗi thì dùng refresh token xem có đúng ko
+                if (returnCode.Equals("1"))
+                {
+                    // tra ve data thanh cong
+                    var contentData = bodyContent["data"].ToString();
+                    var listDevice = Converter.JsonDeserialize<List<Dictionary<string, object>>>(contentData);
+                    // lay ve du lieu trong listDevice
+                    if (listDevice != null && listDevice.Count() > 0)
+                    {
+                        // lay thong tin ve may cham cong
+                        foreach (Dictionary<string, object> device in listDevice)
+                        {
+                            DeviceInfo keeperConfig = new DeviceInfo();
+                            keeperConfig.ClientID = tbClientID.Text;
+                            keeperConfig.ClientSecret = tbClientSecret.Text;
+                            keeperConfig.AccessToken = tbAccessToken.Text;
+                            keeperConfig.RefreshToken = tbRefreshToken.Text;
+                            keeperConfig.DeviceID = device["deviceID"].ToString();
+                            keeperConfig.PlaceID = device["placeID"].ToString();
+                            listDevices.Add(keeperConfig);
+                        }
+                    }
+                }
+                else
+                {
+                    // co exception
+                    message += " Error code: " + returnCode;
+                    return null;
+                }
+                return listDevices;
+            }
+            catch (Exception e)
+            {
+                // co exception
+                message += " Exception: " + e.ToString();
+                return null;
+            }
+        }
+        private IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
+        }
+        /// <summary>
+        /// Hàm lấy dữ liệu cho HanetAI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGetLogByHanetAI_Click(object sender, EventArgs e)
+        {
+            var mess = "";
+            int limit = 200;
+            int.TryParse(Utility.GetAppSetting("LimitGetLogsByHanetAI"), out limit);
+            var logs = GetLogs(dtFromDateHanetAI.Value, dtToDateHanetAI.Value, limit, ref mess);
+            if (logs.Count > 0)
+            {
+                BindToGridView(logs);
+            }
+        }
+        public List<LogData> GetLogs(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var listLogs = new List<LogData>();
+            try
+            {
+                // lấy list device
+                List<DeviceInfo> listDevices = GetListDevice(ref message);
+                if (listDevices == null || listDevices.Count == 0)
+                {
+                    message += "*No Device Found*";
+                    return null;
+                }
+                // list device ID
+                List<string> deviceIDs = listDevices.Select(item =>
+                {
+                    return item.DeviceID;
+                }).ToList();
+                // set place ID
+                List<string> placeIDs = listDevices.Select(item =>
+                {
+                    return item.PlaceID;
+                }).Distinct().ToList();
+
+                var canGetLogs = false;
+                // dung GetCheckinByPlaceIdInDay de lay du lieu theo from date va to date
+                fromDate = fromDate.HasValue ? fromDate.Value.Date : DateTime.Now.AddMonths(-2);
+                toDate = toDate.HasValue ? toDate.Value.Date.AddDays(1).AddMilliseconds(-1) : DateTime.Now;
+                foreach (DateTime day in EachDay((DateTime)fromDate, (DateTime)toDate))
+                {
+                    foreach (var place in placeIDs)
+                    {
+                        var total = GetTotalCheckinByPlaceIdInDay(deviceIDs, place, day, ref message);
+                        var page = 0;
+                        var size = limit.Value;
+                        while (page * size < total)
+                        {
+                            page++;
+                            canGetLogs = GetCheckinByPlaceIdInDay(deviceIDs, place, ref listLogs, day, page, size, ref message);
+                            if (!canGetLogs)
+                            {
+                                // log ra ngay ko lay duoc log
+                                message += "Error could not get data: " + day.ToString();
+                                return null;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            message += "\n***Số lượng bản ghi: " + listLogs.Count;
+            return listLogs.OrderBy(x => x.CheckTime).ToList();
+        }
+        private int GetTotalCheckinByPlaceIdInDay(List<string> deviceIDs, string place, DateTime dtToRead, ref string message)
+        {
+            var client = new RestClient(HanetAPIPath.PartnerPath + "/person/getTotalCheckinByPlaceIdInDay");
+            client.Timeout = -1;
+            string dtString = dtToRead.ToString("yyyy-MM-dd");
+            string listDeviceIds = ListToStringCommaSeparator(deviceIDs);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter(HanetAPIPath.Token, tbAccessToken.Text);
+            request.AddParameter("placeID", place);
+            request.AddParameter("date", dtString);
+            request.AddParameter("devices", listDeviceIds);
+            // 0 - nhan vien, 1 - khach hang
+            request.AddParameter("type", "0");
+            IRestResponse response = client.Execute(request);
+            // check response tra ve false
+            if (response.IsSuccessful == false)
+            {
+                message += response.StatusCode;
+                return 0;
+            }
+            var bodyContent = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            // check returnCode
+            var returnCode = bodyContent["returnCode"] != null ? bodyContent["returnCode"].ToString() : "1";
+            var returnMessage = bodyContent["returnMessage"] != null ? bodyContent["returnMessage"].ToString() : "";
+            // nếu response trả về lỗi thì dùng refresh token xem có đúng ko
+            var contentData = "0";
+            if (returnCode.Equals("1"))
+            {
+                // tra ve data thanh cong
+                contentData = bodyContent["data"] != null ? bodyContent["data"].ToString() : "0";
+            }
+            else
+            {
+                // co exception
+                message += $" Error code: {returnCode}--- MessErr: {returnMessage}";
+                return 0;
+            }
+            return int.Parse(contentData);
+        }
+        // truyen vao list deviceIDs, place, ngay, device info, tra lai dataLogs
+        public bool GetCheckinByPlaceIdInDay(List<string> deviceIDs, string place, ref List<LogData> listLogs, DateTime dtToRead, int page, int size, ref string message)
+        {
+            var client = new RestClient(HanetAPIPath.PartnerPath + "/person/getCheckinByPlaceIdInDay");
+            client.Timeout = -1;
+            string dtString = dtToRead.ToString("yyyy-MM-dd");
+            string listDeviceIds = ListToStringCommaSeparator(deviceIDs);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter(HanetAPIPath.Token, tbAccessToken.Text);
+            request.AddParameter("placeID", place);
+            request.AddParameter("date", dtString);
+            request.AddParameter("devices", listDeviceIds);
+            request.AddParameter("page", page);
+            request.AddParameter("size", size);
+            // 0 - nhan vien, 1 - khach hang
+            request.AddParameter("type", "0");
+            IRestResponse response = client.Execute(request);
+            // check response tra ve false
+            if (response.IsSuccessful == false)
+            {
+                message += response.StatusCode;
+                return false;
+            }
+            var bodyContent = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            // check returnCode
+            var returnCode = bodyContent["returnCode"].ToString();
+            // nếu response trả về lỗi thì dùng refresh token xem có đúng ko
+            if (returnCode.Equals("1"))
+            {
+                // tra ve data thanh cong
+                var contentData = bodyContent["data"].ToString();
+                var listLog = Converter.JsonDeserialize<List<Dictionary<string, object>>>(contentData);
+                // lay ve du lieu trong listDevice
+                if (listLog != null && listLog.Count() > 0)
+                {
+                    // co danh sach thiet bi
+                    // lay thong tin ve may cham cong
+                    foreach (Dictionary<string, object> item in listLog)
+                    {
+                        // try catch xử lí lỗi sai định dạng unix timestamp
+                        try
+                        {
+                            var unixTimeStamp = Convert.ToDouble(item["checkinTime"].ToString());
+                            var checktime = UnixTimeStampToDateTime(unixTimeStamp);
+                            LogData log = new LogData();
+                            log.CheckTime = checktime;
+                            log.UserID = item["personID"].ToString();
+                            log.FullName = item["deviceID"].ToString();
+                            log.FullName = item["personName"].ToString();
+                            listLogs.Add(log);
+                        }
+                        catch (Exception x)
+                        {
+                            message += x.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // co exception
+                message += "Error code: " + returnCode;
+                return false;
+            }
+            return true;
+        }
+
+        private void btnGetLogByHanetAIV2_Click(object sender, EventArgs e)
+        {
+            var mess = "";
+            int limit = 200;
+            int.TryParse(Utility.GetAppSetting("LimitGetLogsByHanetAI"), out limit);
+            var logs = GetLogs_V2(dtFromDateHanetAI.Value.Date, dtToDateHanetAI.Value.Date.AddDays(1).AddMilliseconds(-1), limit, ref mess);
+            if (logs.Count > 0)
+            {
+                BindToGridView(logs);
+            }
+        }
+        public List<LogData> GetLogs_V2(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var listLogs = new List<LogData>();
+            try
+            {
+                // lấy list device
+                List<DeviceInfo> listDevices = GetListDevice(ref message);
+                if (listDevices == null || listDevices.Count == 0)
+                {
+                    message += "*No Device Found*";
+                    return null;
+                }
+                // list device ID
+                List<string> deviceIDs = listDevices.Select(item =>
+                {
+                    return item.DeviceID;
+                }).ToList();
+                // set place ID
+                List<string> placeIDs = listDevices.Select(item =>
+                {
+                    return item.PlaceID;
+                }).Distinct().ToList();
+
+                fromDate = fromDate.HasValue ? fromDate.Value.Date : DateTime.Now.AddMonths(-2);
+                toDate = toDate.HasValue ? toDate.Value.Date.AddDays(1).AddMilliseconds(-1) : DateTime.Now;
+                if (fromDate.Value.Month != toDate.Value.Month || fromDate.Value.Year != toDate.Value.Year)
+                {
+                    // Xử lý trường hợp api chỉ cho lấy dữ liệu FromDate, ToDate trong cùng 1 tháng
+                    var fromDateNew = fromDate.Value.Date;
+                    var toDateNew = new DateTime(fromDate.Value.Year, fromDate.Value.Month, DateTime.DaysInMonth(fromDate.Value.Year, fromDate.Value.Month)).Date.AddDays(1).AddMilliseconds(-1);
+                    while (toDateNew < toDate)
+                    {
+                        foreach (var place in placeIDs)
+                        { 
+                            var total = GetTotalCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDateNew, ref message);
+                            var page = 0;
+                            var size = limit.Value;
+                            while(page * size < total)
+                            {
+                                page++;
+                                var logs = GetCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDateNew, page, size, ref message);
+                                listLogs.AddRange(logs);
+                            }
+                        }
+                        fromDateNew = toDateNew.AddDays(1).Date;
+                        toDateNew = new DateTime(fromDateNew.Year, fromDateNew.Month, DateTime.DaysInMonth(fromDateNew.Year, fromDateNew.Month)).Date.AddDays(1).AddMilliseconds(-1);
+                    }
+
+                    foreach (var place in placeIDs)
+                    {
+                        var total = GetTotalCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDate, ref message);
+                        var page = 0;
+                        var size = limit.Value;
+                        while (page * size < total)
+                        {
+                            page++;
+                            var logs = GetCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDate, page, size, ref message);
+                            listLogs.AddRange(logs);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var place in placeIDs)
+                    {
+                        var total = GetTotalCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDate, toDate, ref message);
+                        var page = 0;
+                        var size = limit.Value;
+                        while (page * size < total)
+                        {
+                            page++;
+                            var logs = GetCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDate, toDate, page, size, ref message);
+                            listLogs.AddRange(logs);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            message += "\n***Số lượng bản ghi: " + listLogs.Count;
+            return listLogs.OrderBy(x => x.CheckTime).ToList();
+        }
+        private int GetTotalCheckinByPlaceIdInTimestamp(List<string> deviceIDs, string place, DateTime? fromDate, DateTime? toDate, ref string message)
+        {
+            fromDate = fromDate.Value.Date;
+            toDate = toDate.Value.Date.AddDays(1).AddMilliseconds(-1);
+            var dt1 = new DateTimeOffset(fromDate.Value);
+            long from = dt1.ToUnixTimeMilliseconds();
+            var dt2 = new DateTimeOffset(toDate.Value);
+            long to = dt2.ToUnixTimeMilliseconds();
+
+
+            var from_v2 = DateTimeToUnixTimeStamp(fromDate.Value);
+            var to_v2 = DateTimeToUnixTimeStamp(toDate.Value);
+
+            var client = new RestClient(HanetAPIPath.PartnerPath + "/person/getTotalCheckinByPlaceIdInTimestamp");
+            client.Timeout = -1;
+            string listDeviceIds = ListToStringCommaSeparator(deviceIDs);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter(HanetAPIPath.Token, tbAccessToken.Text);
+            request.AddParameter("placeID", place);
+            request.AddParameter("from", from_v2);
+            request.AddParameter("to", to_v2);
+            request.AddParameter("devices", listDeviceIds);
+            // 0 - nhan vien, 1 - khach hang
+            request.AddParameter("type", "0");
+            IRestResponse response = client.Execute(request);
+            // check response tra ve false
+            if (response.IsSuccessful == false)
+            {
+                message += response.StatusCode;
+                return 0;
+            }
+            var bodyContent = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            // check returnCode
+            var returnCode = bodyContent["returnCode"] != null ? bodyContent["returnCode"].ToString() : "1";
+            var returnMessage = bodyContent["returnMessage"] != null ? bodyContent["returnMessage"].ToString() : "";
+            // nếu response trả về lỗi thì dùng refresh token xem có đúng ko
+            var contentData = "0";
+            if (returnCode.Equals("1"))
+            {
+                // tra ve data thanh cong
+                contentData = bodyContent["data"] != null ? bodyContent["data"].ToString() : "0";
+            }
+            else
+            {
+                // co exception
+                message += $" Error code: {returnCode}--- MessErr: {returnMessage}";
+                return 0;
+            }
+            return int.Parse(contentData);
+        }
+        private List<LogData> GetCheckinByPlaceIdInTimestamp(List<string> deviceIDs, string place, DateTime? fromDate, DateTime? toDate, int page, int size, ref string message)
+        {
+            fromDate = fromDate.Value.Date;
+            toDate = toDate.Value.Date.AddDays(1).AddMilliseconds(-1);
+            var dt1 = new DateTimeOffset(fromDate.Value);
+            long from = dt1.ToUnixTimeMilliseconds();
+            var dt2 = new DateTimeOffset(toDate.Value);
+            long to = dt2.ToUnixTimeMilliseconds();
+
+            var from_v2 = DateTimeToUnixTimeStamp(fromDate.Value);
+            var to_v2 = DateTimeToUnixTimeStamp(toDate.Value);
+
+
+            List<LogData> listLogs = new List<LogData>();
+            var client = new RestClient(HanetAPIPath.PartnerPath + "/person/getCheckinByPlaceIdInTimestamp");
+            client.Timeout = -1;
+            string listDeviceIds = ListToStringCommaSeparator(deviceIDs);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter(HanetAPIPath.Token, tbAccessToken.Text);
+            request.AddParameter("placeID", place);
+            request.AddParameter("from", from_v2);
+            request.AddParameter("to", to_v2);
+            request.AddParameter("devices", listDeviceIds);
+            request.AddParameter("page", page);
+            request.AddParameter("size", size);
+            // 0 - nhan vien, 1 - khach hang
+            request.AddParameter("type", "0");
+            IRestResponse response = client.Execute(request);
+            // check response tra ve false
+            if (response.IsSuccessful == false)
+            {
+                message += response.StatusCode;
+                return new List<LogData>();
+            }
+            var bodyContent = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            // check returnCode
+            var returnCode = bodyContent["returnCode"] != null ? bodyContent["returnCode"].ToString() : "1";
+            var returnMessage = bodyContent["returnMessage"] != null ? bodyContent["returnMessage"].ToString() : "";
+            // nếu response trả về lỗi thì dùng refresh token xem có đúng ko
+            if (returnCode.Equals("1"))
+            {
+                // tra ve data thanh cong
+                var contentData = bodyContent["data"].ToString();
+                var listLog = Converter.JsonDeserialize<List<Dictionary<string, object>>>(contentData);
+                // lay ve du lieu trong listDevice
+                if (listLog != null && listLog.Count() > 0)
+                {
+                    // co danh sach thiet bi
+                    // lay thong tin ve may cham cong
+                    foreach (Dictionary<string, object> item in listLog)
+                    {
+                        // try catch xử lí lỗi sai định dạng unix timestamp
+                        try
+                        {
+                            var unixTimeStamp = Convert.ToDouble(item["checkinTime"].ToString());
+                            var checktime = UnixTimeStampToDateTime(unixTimeStamp);
+                            LogData log = new LogData();
+                            log.CheckTime = checktime;
+                            log.UserID = item["personID"].ToString();
+                            log.FullName = item["deviceID"].ToString();
+                            log.FullName = item["personName"].ToString();
+                            listLogs.Add(log);
+                        }
+                        catch (Exception x)
+                        {
+                            message += x.ToString();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // co exception
+                message += $"Error code: {returnCode}--- MessErr: {returnMessage}";
+                return new List<LogData>();
+            }
+            return listLogs;
+        }
+        private DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+        private string DateTimeToUnixTimeStamp(DateTime dateTime)
+        {
+            DateTime dtUtc = dateTime.ToUniversalTime();
+            string result = (dtUtc.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc))).TotalMilliseconds.ToString();
+            return result;
+        }
+        private void btnGetLogsByHysoon_Click(object sender, EventArgs e)
+        {
+            var logs = new List<LogData>();
+            var message = "";
+
+            var fromDate = dtFromDateByHysoon.Value.Date;
+            var toDate = dtToDateByHysoon.Value.AddDays(1).Date.AddSeconds(-1);
+            message += $"\nLay du lieu Hysoon:===Tu ngay: {fromDate}---Den ngay: {toDate}";
+            if (fromDate.AddMonths(1) < toDate)
+            {
+                var logDatas = new List<LogData>();
+                var fromDateNew = fromDate.Date;
+                var toDateNew = fromDate.AddMonths(1);
+                while (toDateNew < toDate)
+                {
+                    message += $"\nLay du lieu Hysoon chia nho:===Tu ngay: {fromDateNew}---Den ngay: {toDateNew}";
+                    logDatas = GetLogsByHysoon(fromDateNew, toDateNew, ref message);
+                    message += $"\nLay du lieu Hysoon chia nho:===Tu ngay: {fromDateNew}---Den ngay: {toDateNew}----SL: {logDatas.Count}";
+                    logs.AddRange(logDatas);
+                    // Tăng lên 1s để lấy dữ liệu liền kề tiếp
+                    fromDateNew = toDateNew.AddDays(1).Date;
+                    toDateNew = toDateNew.AddMonths(1);
+                }
+                logDatas = GetLogsByHysoon(fromDateNew, toDate, ref message);
+                message += $"\nLay du lieu Hysoon chia nho:===Tu ngay: {fromDateNew}---Den ngay: {toDate}----SL: {logDatas.Count}";
+                logs.AddRange(logDatas);
+            }
+            else
+            {
+                logs = GetLogsByHysoon(fromDate, toDate, ref message);
+            }
+            message += $"\nTong du lieu tren may Hysoon:===Tu ngay: {fromDate}---Den ngay: {toDate}----SL: {logs.Count}";
+            if (logs.Count > 0)
+            {
+                BindToGridView(logs);
+            }
+        }
+        private List<LogData> GetLogsByHysoon(DateTime fromDate, DateTime toDate, ref string message)
+        {
+            var queryParams = new Dictionary<string, object>()
+            {
+                { "FromDate", fromDate.Date },
+                { "ToDate", toDate.Date.AddDays(1).AddMilliseconds(-1) },
+            };
+            //var res = CallTimesheetAPI<Dictionary<string, object>>($"{txtLinkByHysoon.Text}:{txtPortByHysoon.Text}/api/Hrm/getTimeKeeperDataLog", Method.GET, null, queryParams, false);
+
+            var client = new RestClient($"{txtLinkByHysoon.Text}:{txtPortByHysoon.Text}/api/Hrm/getTimeKeeperDataLog");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            foreach (var p in queryParams)
+            {
+                request.AddParameter(p.Key, p.Value, ParameterType.QueryString);
+            }
+            var response = client.Execute(request);
+            var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+            var listData = content.GetObject<List<Dictionary<string, object>>>("ReturnData");
+            var logs = new List<LogData>();
+            listData.ForEach(x =>
+            {
+                var log = new LogData();
+                var userID = x.GetObject<string>("EnrollNumber");
+                var time = x.GetObject<string>("ActionDate");
+                var checkTime = DateTime.Now;
+                if (DateTime.TryParse(time, out checkTime) && !string.IsNullOrWhiteSpace(userID))
+                {
+                    log.CheckTime = checkTime;
+                    log.UserID = userID;
+                    logs.Add(log);
+                }
+            });
+            return logs;
         }
     }
 }

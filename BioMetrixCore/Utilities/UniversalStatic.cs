@@ -128,7 +128,5 @@ namespace BioMetrixCore
             dgvMaster.BorderStyle = BorderStyle.Fixed3D;
         }
 
-
-
     }
 }
