@@ -1,4 +1,6 @@
-﻿namespace BioMetrixCore
+﻿using System.ComponentModel;
+
+namespace BioMetrixCore
 {
     public enum ClearFlag
     {

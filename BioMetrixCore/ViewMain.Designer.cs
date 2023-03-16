@@ -92,14 +92,91 @@
             this.tbClientID = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtLinkByHysoon = new System.Windows.Forms.TextBox();
+            this.dtToDateByHysoon = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByHysoon = new System.Windows.Forms.DateTimePicker();
+            this.dgvListLogByHysoon = new System.Windows.Forms.DataGridView();
+            this.btnGetLogsByHysoon = new System.Windows.Forms.Button();
             this.txtPortByHysoon = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.btnGetLogsByHysoon = new System.Windows.Forms.Button();
-            this.dgvListLogByHysoon = new System.Windows.Forms.DataGridView();
-            this.dtFromDateByHysoon = new System.Windows.Forms.DateTimePicker();
-            this.dtToDateByHysoon = new System.Windows.Forms.DateTimePicker();
+            this.txtLinkByHysoon = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnGetLogs_V2ByBioTime = new System.Windows.Forms.Button();
+            this.txtPassByBioTime = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtUserNameByBioTime = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtTotalByBioTime = new System.Windows.Forms.TextBox();
+            this.dgvLogsByBioTime = new System.Windows.Forms.DataGridView();
+            this.btnGetLogsByBioTime = new System.Windows.Forms.Button();
+            this.dtToDateByBioTime = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByBioTime = new System.Windows.Forms.DateTimePicker();
+            this.txtPortByBioTime = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtURLByBioTime = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.txtTotalByUbioXFace = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.dgvLogsByUbioXFace = new System.Windows.Forms.DataGridView();
+            this.dtToDateByUbioXFace = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByUbioXFace = new System.Windows.Forms.DateTimePicker();
+            this.btnGetLogsByUbioXFace = new System.Windows.Forms.Button();
+            this.txtPassByUbioXFace = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtUserNameByUbioXFace = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtPortByUbioXFace = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtURLByUbioXFace = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelInfo = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.labelTotal = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnReadGLogData = new System.Windows.Forms.Button();
+            this.btnReadAllGLogData = new System.Windows.Forms.Button();
+            this.btnEmptyGLogData = new System.Windows.Forms.Button();
+            this.btnEmptySLogData = new System.Windows.Forms.Button();
+            this.btnReadAllSLogData = new System.Windows.Forms.Button();
+            this.btnReadSLogData = new System.Windows.Forms.Button();
+            this.cmbMachineNumber = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ipAddressControl1 = new IPAddressControlLib.IPAddressControl();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.P2STimeOut = new System.Windows.Forms.TextBox();
+            this.P2SPort = new System.Windows.Forms.TextBox();
+            this.textPassword = new System.Windows.Forms.TextBox();
+            this.textPort = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.cmbComPort = new System.Windows.Forms.ComboBox();
+            this.cmbInterface = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.btnOpenDev = new System.Windows.Forms.Button();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.textTotalByAIKYO = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.dgvLogsByAIKYO = new System.Windows.Forms.DataGridView();
+            this.dtToDateByAIKYO = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByAIKYO = new System.Windows.Forms.DateTimePicker();
+            this.btnGetLogsByAIKYO = new System.Windows.Forms.Button();
+            this.textPathByAIKYO = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -114,6 +191,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHanetAI)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHysoon)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByBioTime)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByUbioXFace)).BeginInit();
+            this.tabPage8.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByAIKYO)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -123,6 +209,10 @@
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Controls.Add(this.tabPage5);
+            this.tabControl.Controls.Add(this.tabPage6);
+            this.tabControl.Controls.Add(this.tabPage7);
+            this.tabControl.Controls.Add(this.tabPage8);
+            this.tabControl.Controls.Add(this.tabPage9);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -763,22 +853,37 @@
             this.tabPage5.Text = "Hysoon";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // dtToDateByHysoon
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(25, 24);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Đường dẫn";
+            this.dtToDateByHysoon.Location = new System.Drawing.Point(311, 60);
+            this.dtToDateByHysoon.Name = "dtToDateByHysoon";
+            this.dtToDateByHysoon.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByHysoon.TabIndex = 7;
             // 
-            // txtLinkByHysoon
+            // dtFromDateByHysoon
             // 
-            this.txtLinkByHysoon.Location = new System.Drawing.Point(113, 21);
-            this.txtLinkByHysoon.Name = "txtLinkByHysoon";
-            this.txtLinkByHysoon.Size = new System.Drawing.Size(153, 20);
-            this.txtLinkByHysoon.TabIndex = 1;
-            this.txtLinkByHysoon.Text = "http://pos.lki.com.vn";
+            this.dtFromDateByHysoon.Location = new System.Drawing.Point(311, 21);
+            this.dtFromDateByHysoon.Name = "dtFromDateByHysoon";
+            this.dtFromDateByHysoon.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByHysoon.TabIndex = 6;
+            // 
+            // dgvListLogByHysoon
+            // 
+            this.dgvListLogByHysoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListLogByHysoon.Location = new System.Drawing.Point(26, 145);
+            this.dgvListLogByHysoon.Name = "dgvListLogByHysoon";
+            this.dgvListLogByHysoon.Size = new System.Drawing.Size(736, 272);
+            this.dgvListLogByHysoon.TabIndex = 5;
+            // 
+            // btnGetLogsByHysoon
+            // 
+            this.btnGetLogsByHysoon.Location = new System.Drawing.Point(574, 22);
+            this.btnGetLogsByHysoon.Name = "btnGetLogsByHysoon";
+            this.btnGetLogsByHysoon.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByHysoon.TabIndex = 4;
+            this.btnGetLogsByHysoon.Text = "Lấy dữ liệu";
+            this.btnGetLogsByHysoon.UseVisualStyleBackColor = true;
+            this.btnGetLogsByHysoon.Click += new System.EventHandler(this.btnGetLogsByHysoon_Click);
             // 
             // txtPortByHysoon
             // 
@@ -797,37 +902,814 @@
             this.label16.TabIndex = 2;
             this.label16.Text = "Cổng";
             // 
-            // btnGetLogsByHysoon
+            // txtLinkByHysoon
             // 
-            this.btnGetLogsByHysoon.Location = new System.Drawing.Point(574, 22);
-            this.btnGetLogsByHysoon.Name = "btnGetLogsByHysoon";
-            this.btnGetLogsByHysoon.Size = new System.Drawing.Size(75, 23);
-            this.btnGetLogsByHysoon.TabIndex = 4;
-            this.btnGetLogsByHysoon.Text = "Lấy dữ liệu";
-            this.btnGetLogsByHysoon.UseVisualStyleBackColor = true;
-            this.btnGetLogsByHysoon.Click += new System.EventHandler(this.btnGetLogsByHysoon_Click);
+            this.txtLinkByHysoon.Location = new System.Drawing.Point(113, 25);
+            this.txtLinkByHysoon.Name = "txtLinkByHysoon";
+            this.txtLinkByHysoon.Size = new System.Drawing.Size(153, 20);
+            this.txtLinkByHysoon.TabIndex = 1;
+            this.txtLinkByHysoon.Text = "http://pos.lki.com.vn";
             // 
-            // dgvListLogByHysoon
+            // label15
             // 
-            this.dgvListLogByHysoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListLogByHysoon.Location = new System.Drawing.Point(26, 145);
-            this.dgvListLogByHysoon.Name = "dgvListLogByHysoon";
-            this.dgvListLogByHysoon.Size = new System.Drawing.Size(736, 272);
-            this.dgvListLogByHysoon.TabIndex = 5;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(25, 24);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Đường dẫn";
             // 
-            // dtFromDateByHysoon
+            // tabPage6
             // 
-            this.dtFromDateByHysoon.Location = new System.Drawing.Point(311, 21);
-            this.dtFromDateByHysoon.Name = "dtFromDateByHysoon";
-            this.dtFromDateByHysoon.Size = new System.Drawing.Size(200, 20);
-            this.dtFromDateByHysoon.TabIndex = 6;
+            this.tabPage6.Controls.Add(this.btnGetLogs_V2ByBioTime);
+            this.tabPage6.Controls.Add(this.txtPassByBioTime);
+            this.tabPage6.Controls.Add(this.label21);
+            this.tabPage6.Controls.Add(this.txtUserNameByBioTime);
+            this.tabPage6.Controls.Add(this.label20);
+            this.tabPage6.Controls.Add(this.label19);
+            this.tabPage6.Controls.Add(this.txtTotalByBioTime);
+            this.tabPage6.Controls.Add(this.dgvLogsByBioTime);
+            this.tabPage6.Controls.Add(this.btnGetLogsByBioTime);
+            this.tabPage6.Controls.Add(this.dtToDateByBioTime);
+            this.tabPage6.Controls.Add(this.dtFromDateByBioTime);
+            this.tabPage6.Controls.Add(this.txtPortByBioTime);
+            this.tabPage6.Controls.Add(this.label18);
+            this.tabPage6.Controls.Add(this.txtURLByBioTime);
+            this.tabPage6.Controls.Add(this.label17);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(796, 428);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "BioTime";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // dtToDateByHysoon
+            // btnGetLogs_V2ByBioTime
             // 
-            this.dtToDateByHysoon.Location = new System.Drawing.Point(311, 60);
-            this.dtToDateByHysoon.Name = "dtToDateByHysoon";
-            this.dtToDateByHysoon.Size = new System.Drawing.Size(200, 20);
-            this.dtToDateByHysoon.TabIndex = 7;
+            this.btnGetLogs_V2ByBioTime.Location = new System.Drawing.Point(584, 45);
+            this.btnGetLogs_V2ByBioTime.Name = "btnGetLogs_V2ByBioTime";
+            this.btnGetLogs_V2ByBioTime.Size = new System.Drawing.Size(109, 23);
+            this.btnGetLogs_V2ByBioTime.TabIndex = 15;
+            this.btnGetLogs_V2ByBioTime.Text = "Lấy dữ liệu_V2";
+            this.btnGetLogs_V2ByBioTime.UseVisualStyleBackColor = true;
+            this.btnGetLogs_V2ByBioTime.Click += new System.EventHandler(this.btnGetLogs_V2ByBioTime_Click);
+            // 
+            // txtPassByBioTime
+            // 
+            this.txtPassByBioTime.Location = new System.Drawing.Point(112, 95);
+            this.txtPassByBioTime.Name = "txtPassByBioTime";
+            this.txtPassByBioTime.Size = new System.Drawing.Size(100, 20);
+            this.txtPassByBioTime.TabIndex = 14;
+            this.txtPassByBioTime.Text = "admin123";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 95);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(52, 13);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "Mật khẩu";
+            // 
+            // txtUserNameByBioTime
+            // 
+            this.txtUserNameByBioTime.Location = new System.Drawing.Point(112, 69);
+            this.txtUserNameByBioTime.Name = "txtUserNameByBioTime";
+            this.txtUserNameByBioTime.Size = new System.Drawing.Size(100, 20);
+            this.txtUserNameByBioTime.TabIndex = 12;
+            this.txtUserNameByBioTime.Text = "admin";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(9, 68);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(81, 13);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "Tên đăng nhập";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 406);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(32, 13);
+            this.label19.TabIndex = 10;
+            this.label19.Text = "Tổng";
+            // 
+            // txtTotalByBioTime
+            // 
+            this.txtTotalByBioTime.Location = new System.Drawing.Point(65, 403);
+            this.txtTotalByBioTime.Name = "txtTotalByBioTime";
+            this.txtTotalByBioTime.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalByBioTime.TabIndex = 9;
+            this.txtTotalByBioTime.Text = "0";
+            // 
+            // dgvLogsByBioTime
+            // 
+            this.dgvLogsByBioTime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByBioTime.Location = new System.Drawing.Point(11, 121);
+            this.dgvLogsByBioTime.Name = "dgvLogsByBioTime";
+            this.dgvLogsByBioTime.Size = new System.Drawing.Size(682, 276);
+            this.dgvLogsByBioTime.TabIndex = 7;
+            // 
+            // btnGetLogsByBioTime
+            // 
+            this.btnGetLogsByBioTime.Location = new System.Drawing.Point(584, 6);
+            this.btnGetLogsByBioTime.Name = "btnGetLogsByBioTime";
+            this.btnGetLogsByBioTime.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByBioTime.TabIndex = 6;
+            this.btnGetLogsByBioTime.Text = "Lấy dữ liệu";
+            this.btnGetLogsByBioTime.UseVisualStyleBackColor = true;
+            this.btnGetLogsByBioTime.Click += new System.EventHandler(this.btnGetLogsByBioTime_Click);
+            // 
+            // dtToDateByBioTime
+            // 
+            this.dtToDateByBioTime.Location = new System.Drawing.Point(313, 44);
+            this.dtToDateByBioTime.Name = "dtToDateByBioTime";
+            this.dtToDateByBioTime.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByBioTime.TabIndex = 5;
+            // 
+            // dtFromDateByBioTime
+            // 
+            this.dtFromDateByBioTime.Location = new System.Drawing.Point(313, 4);
+            this.dtFromDateByBioTime.Name = "dtFromDateByBioTime";
+            this.dtFromDateByBioTime.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByBioTime.TabIndex = 4;
+            // 
+            // txtPortByBioTime
+            // 
+            this.txtPortByBioTime.Location = new System.Drawing.Point(112, 35);
+            this.txtPortByBioTime.Name = "txtPortByBioTime";
+            this.txtPortByBioTime.Size = new System.Drawing.Size(100, 20);
+            this.txtPortByBioTime.TabIndex = 3;
+            this.txtPortByBioTime.Text = "8098";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 34);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Cổng";
+            // 
+            // txtURLByBioTime
+            // 
+            this.txtURLByBioTime.Location = new System.Drawing.Point(112, 9);
+            this.txtURLByBioTime.Name = "txtURLByBioTime";
+            this.txtURLByBioTime.Size = new System.Drawing.Size(100, 20);
+            this.txtURLByBioTime.TabIndex = 1;
+            this.txtURLByBioTime.Text = "http://127.0.0.1";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(8, 12);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(29, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "URL";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.txtTotalByUbioXFace);
+            this.tabPage7.Controls.Add(this.label26);
+            this.tabPage7.Controls.Add(this.dgvLogsByUbioXFace);
+            this.tabPage7.Controls.Add(this.dtToDateByUbioXFace);
+            this.tabPage7.Controls.Add(this.dtFromDateByUbioXFace);
+            this.tabPage7.Controls.Add(this.btnGetLogsByUbioXFace);
+            this.tabPage7.Controls.Add(this.txtPassByUbioXFace);
+            this.tabPage7.Controls.Add(this.label25);
+            this.tabPage7.Controls.Add(this.txtUserNameByUbioXFace);
+            this.tabPage7.Controls.Add(this.label24);
+            this.tabPage7.Controls.Add(this.txtPortByUbioXFace);
+            this.tabPage7.Controls.Add(this.label23);
+            this.tabPage7.Controls.Add(this.txtURLByUbioXFace);
+            this.tabPage7.Controls.Add(this.label22);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(796, 428);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "UBio-X Face";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // txtTotalByUbioXFace
+            // 
+            this.txtTotalByUbioXFace.Location = new System.Drawing.Point(77, 397);
+            this.txtTotalByUbioXFace.Name = "txtTotalByUbioXFace";
+            this.txtTotalByUbioXFace.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalByUbioXFace.TabIndex = 13;
+            this.txtTotalByUbioXFace.Text = "0";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(21, 404);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(32, 13);
+            this.label26.TabIndex = 12;
+            this.label26.Text = "Tổng";
+            // 
+            // dgvLogsByUbioXFace
+            // 
+            this.dgvLogsByUbioXFace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByUbioXFace.Location = new System.Drawing.Point(21, 110);
+            this.dgvLogsByUbioXFace.Name = "dgvLogsByUbioXFace";
+            this.dgvLogsByUbioXFace.Size = new System.Drawing.Size(664, 271);
+            this.dgvLogsByUbioXFace.TabIndex = 11;
+            // 
+            // dtToDateByUbioXFace
+            // 
+            this.dtToDateByUbioXFace.Location = new System.Drawing.Point(441, 56);
+            this.dtToDateByUbioXFace.Name = "dtToDateByUbioXFace";
+            this.dtToDateByUbioXFace.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByUbioXFace.TabIndex = 10;
+            // 
+            // dtFromDateByUbioXFace
+            // 
+            this.dtFromDateByUbioXFace.Location = new System.Drawing.Point(441, 13);
+            this.dtFromDateByUbioXFace.Name = "dtFromDateByUbioXFace";
+            this.dtFromDateByUbioXFace.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByUbioXFace.TabIndex = 9;
+            // 
+            // btnGetLogsByUbioXFace
+            // 
+            this.btnGetLogsByUbioXFace.Location = new System.Drawing.Point(670, 10);
+            this.btnGetLogsByUbioXFace.Name = "btnGetLogsByUbioXFace";
+            this.btnGetLogsByUbioXFace.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByUbioXFace.TabIndex = 8;
+            this.btnGetLogsByUbioXFace.Text = "Lấy dữ liệu";
+            this.btnGetLogsByUbioXFace.UseVisualStyleBackColor = true;
+            this.btnGetLogsByUbioXFace.Click += new System.EventHandler(this.btnGetLogsByUbioXFace_Click);
+            // 
+            // txtPassByUbioXFace
+            // 
+            this.txtPassByUbioXFace.Location = new System.Drawing.Point(317, 56);
+            this.txtPassByUbioXFace.Name = "txtPassByUbioXFace";
+            this.txtPassByUbioXFace.Size = new System.Drawing.Size(100, 20);
+            this.txtPassByUbioXFace.TabIndex = 7;
+            this.txtPassByUbioXFace.Text = "0000";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(230, 63);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(52, 13);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "Mật khẩu";
+            // 
+            // txtUserNameByUbioXFace
+            // 
+            this.txtUserNameByUbioXFace.Location = new System.Drawing.Point(317, 13);
+            this.txtUserNameByUbioXFace.Name = "txtUserNameByUbioXFace";
+            this.txtUserNameByUbioXFace.Size = new System.Drawing.Size(100, 20);
+            this.txtUserNameByUbioXFace.TabIndex = 5;
+            this.txtUserNameByUbioXFace.Text = "Master";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(230, 20);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(81, 13);
+            this.label24.TabIndex = 4;
+            this.label24.Text = "Tên đăng nhập";
+            // 
+            // txtPortByUbioXFace
+            // 
+            this.txtPortByUbioXFace.Location = new System.Drawing.Point(86, 60);
+            this.txtPortByUbioXFace.Name = "txtPortByUbioXFace";
+            this.txtPortByUbioXFace.Size = new System.Drawing.Size(116, 20);
+            this.txtPortByUbioXFace.TabIndex = 3;
+            this.txtPortByUbioXFace.Text = "9004";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(18, 63);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(32, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Cổng";
+            // 
+            // txtURLByUbioXFace
+            // 
+            this.txtURLByUbioXFace.Location = new System.Drawing.Point(86, 17);
+            this.txtURLByUbioXFace.Name = "txtURLByUbioXFace";
+            this.txtURLByUbioXFace.Size = new System.Drawing.Size(116, 20);
+            this.txtURLByUbioXFace.TabIndex = 1;
+            this.txtURLByUbioXFace.Text = "http://172.18.20.29";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(18, 20);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(29, 13);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "URL";
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.button1);
+            this.tabPage8.Controls.Add(this.labelInfo);
+            this.tabPage8.Controls.Add(this.listView1);
+            this.tabPage8.Controls.Add(this.labelTotal);
+            this.tabPage8.Controls.Add(this.checkBox1);
+            this.tabPage8.Controls.Add(this.groupBox2);
+            this.tabPage8.Controls.Add(this.btnEmptySLogData);
+            this.tabPage8.Controls.Add(this.btnReadAllSLogData);
+            this.tabPage8.Controls.Add(this.btnReadSLogData);
+            this.tabPage8.Controls.Add(this.cmbMachineNumber);
+            this.tabPage8.Controls.Add(this.label27);
+            this.tabPage8.Controls.Add(this.groupBox1);
+            this.tabPage8.Controls.Add(this.btnOpenDev);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(796, 428);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Ronald jack";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(472, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 32);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Udisk Read GLogData";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.UDGLogRead_Click);
+            // 
+            // labelInfo
+            // 
+            this.labelInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelInfo.Location = new System.Drawing.Point(345, 114);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.Size = new System.Drawing.Size(277, 38);
+            this.labelInfo.TabIndex = 24;
+            this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(344, 159);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(438, 255);
+            this.listView1.TabIndex = 23;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Location = new System.Drawing.Point(629, 139);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(34, 13);
+            this.labelTotal.TabIndex = 22;
+            this.labelTotal.Text = "Total:";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(703, 136);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(102, 17);
+            this.checkBox1.TabIndex = 21;
+            this.checkBox1.Text = "ReadOnceMark";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnReadGLogData);
+            this.groupBox2.Controls.Add(this.btnReadAllGLogData);
+            this.groupBox2.Controls.Add(this.btnEmptyGLogData);
+            this.groupBox2.Location = new System.Drawing.Point(628, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(177, 124);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = " GLogData";
+            // 
+            // btnReadGLogData
+            // 
+            this.btnReadGLogData.Location = new System.Drawing.Point(24, 23);
+            this.btnReadGLogData.Name = "btnReadGLogData";
+            this.btnReadGLogData.Size = new System.Drawing.Size(130, 25);
+            this.btnReadGLogData.TabIndex = 4;
+            this.btnReadGLogData.Text = "Read";
+            this.btnReadGLogData.UseVisualStyleBackColor = true;
+            this.btnReadGLogData.Click += new System.EventHandler(this.btnReadGLogData_Click);
+            // 
+            // btnReadAllGLogData
+            // 
+            this.btnReadAllGLogData.Location = new System.Drawing.Point(24, 86);
+            this.btnReadAllGLogData.Name = "btnReadAllGLogData";
+            this.btnReadAllGLogData.Size = new System.Drawing.Size(130, 32);
+            this.btnReadAllGLogData.TabIndex = 5;
+            this.btnReadAllGLogData.Text = "Read All";
+            this.btnReadAllGLogData.UseVisualStyleBackColor = true;
+            this.btnReadAllGLogData.Click += new System.EventHandler(this.btnReadAllGLogData_Click);
+            // 
+            // btnEmptyGLogData
+            // 
+            this.btnEmptyGLogData.Location = new System.Drawing.Point(24, 54);
+            this.btnEmptyGLogData.Name = "btnEmptyGLogData";
+            this.btnEmptyGLogData.Size = new System.Drawing.Size(130, 25);
+            this.btnEmptyGLogData.TabIndex = 4;
+            this.btnEmptyGLogData.Text = "Empty";
+            this.btnEmptyGLogData.UseVisualStyleBackColor = true;
+            this.btnEmptyGLogData.Click += new System.EventHandler(this.btnEmptyGLogData_Click);
+            // 
+            // btnEmptySLogData
+            // 
+            this.btnEmptySLogData.Location = new System.Drawing.Point(344, 86);
+            this.btnEmptySLogData.Name = "btnEmptySLogData";
+            this.btnEmptySLogData.Size = new System.Drawing.Size(122, 25);
+            this.btnEmptySLogData.TabIndex = 15;
+            this.btnEmptySLogData.Text = "Empty SLogData";
+            this.btnEmptySLogData.UseVisualStyleBackColor = true;
+            this.btnEmptySLogData.Click += new System.EventHandler(this.btnEmptySLogData_Click);
+            // 
+            // btnReadAllSLogData
+            // 
+            this.btnReadAllSLogData.Location = new System.Drawing.Point(344, 54);
+            this.btnReadAllSLogData.Name = "btnReadAllSLogData";
+            this.btnReadAllSLogData.Size = new System.Drawing.Size(122, 25);
+            this.btnReadAllSLogData.TabIndex = 16;
+            this.btnReadAllSLogData.Text = "Read All SLogData";
+            this.btnReadAllSLogData.UseVisualStyleBackColor = true;
+            this.btnReadAllSLogData.Click += new System.EventHandler(this.btnReadAllSLogData_Click);
+            // 
+            // btnReadSLogData
+            // 
+            this.btnReadSLogData.Location = new System.Drawing.Point(344, 23);
+            this.btnReadSLogData.Name = "btnReadSLogData";
+            this.btnReadSLogData.Size = new System.Drawing.Size(122, 25);
+            this.btnReadSLogData.TabIndex = 17;
+            this.btnReadSLogData.Text = "Read SLogData";
+            this.btnReadSLogData.UseVisualStyleBackColor = true;
+            this.btnReadSLogData.Click += new System.EventHandler(this.btnReadSLogData_Click);
+            // 
+            // cmbMachineNumber
+            // 
+            this.cmbMachineNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMachineNumber.FormattingEnabled = true;
+            this.cmbMachineNumber.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.cmbMachineNumber.Location = new System.Drawing.Point(178, 398);
+            this.cmbMachineNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbMachineNumber.Name = "cmbMachineNumber";
+            this.cmbMachineNumber.Size = new System.Drawing.Size(54, 21);
+            this.cmbMachineNumber.TabIndex = 13;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(64, 401);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(88, 13);
+            this.label27.TabIndex = 14;
+            this.label27.Text = "Machine Number";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ipAddressControl1);
+            this.groupBox1.Controls.Add(this.label28);
+            this.groupBox1.Controls.Add(this.label29);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Controls.Add(this.label31);
+            this.groupBox1.Controls.Add(this.label32);
+            this.groupBox1.Controls.Add(this.P2STimeOut);
+            this.groupBox1.Controls.Add(this.P2SPort);
+            this.groupBox1.Controls.Add(this.textPassword);
+            this.groupBox1.Controls.Add(this.textPort);
+            this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.label34);
+            this.groupBox1.Controls.Add(this.label35);
+            this.groupBox1.Controls.Add(this.label36);
+            this.groupBox1.Controls.Add(this.cmbComPort);
+            this.groupBox1.Controls.Add(this.cmbInterface);
+            this.groupBox1.Controls.Add(this.label37);
+            this.groupBox1.Controls.Add(this.label38);
+            this.groupBox1.Controls.Add(this.label39);
+            this.groupBox1.Controls.Add(this.label40);
+            this.groupBox1.Location = new System.Drawing.Point(17, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(322, 344);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Configuration";
+            // 
+            // ipAddressControl1
+            // 
+            this.ipAddressControl1.AllowInternalTab = false;
+            this.ipAddressControl1.AutoHeight = true;
+            this.ipAddressControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.ipAddressControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ipAddressControl1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ipAddressControl1.Location = new System.Drawing.Point(159, 127);
+            this.ipAddressControl1.MinimumSize = new System.Drawing.Size(87, 20);
+            this.ipAddressControl1.Name = "ipAddressControl1";
+            this.ipAddressControl1.ReadOnly = false;
+            this.ipAddressControl1.Size = new System.Drawing.Size(100, 20);
+            this.ipAddressControl1.TabIndex = 12;
+            this.ipAddressControl1.Text = "192.168.1.200";
+            // 
+            // label28
+            // 
+            this.label28.Location = new System.Drawing.Point(6, 234);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(47, 13);
+            this.label28.TabIndex = 0;
+            this.label28.Text = " P2S Cfg";
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(5, 111);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(47, 13);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "NET Cfg";
+            // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(5, 54);
+            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(47, 13);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "COM Cfg";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(88, 307);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(47, 13);
+            this.label31.TabIndex = 10;
+            this.label31.Text = "TimeOut";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(70, 262);
+            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(57, 13);
+            this.label32.TabIndex = 10;
+            this.label32.Text = "ServerPort";
+            // 
+            // P2STimeOut
+            // 
+            this.P2STimeOut.Location = new System.Drawing.Point(158, 298);
+            this.P2STimeOut.Margin = new System.Windows.Forms.Padding(2);
+            this.P2STimeOut.Name = "P2STimeOut";
+            this.P2STimeOut.Size = new System.Drawing.Size(103, 20);
+            this.P2STimeOut.TabIndex = 9;
+            // 
+            // P2SPort
+            // 
+            this.P2SPort.Location = new System.Drawing.Point(158, 254);
+            this.P2SPort.Margin = new System.Windows.Forms.Padding(2);
+            this.P2SPort.Name = "P2SPort";
+            this.P2SPort.Size = new System.Drawing.Size(103, 20);
+            this.P2SPort.TabIndex = 9;
+            // 
+            // textPassword
+            // 
+            this.textPassword.Location = new System.Drawing.Point(159, 194);
+            this.textPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.textPassword.Name = "textPassword";
+            this.textPassword.PasswordChar = '@';
+            this.textPassword.Size = new System.Drawing.Size(103, 20);
+            this.textPassword.TabIndex = 9;
+            this.textPassword.Text = "1";
+            // 
+            // textPort
+            // 
+            this.textPort.Location = new System.Drawing.Point(159, 161);
+            this.textPort.Margin = new System.Windows.Forms.Padding(2);
+            this.textPort.Name = "textPort";
+            this.textPort.Size = new System.Drawing.Size(103, 20);
+            this.textPort.TabIndex = 8;
+            this.textPort.Text = "4370";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(95, 132);
+            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(39, 13);
+            this.label33.TabIndex = 7;
+            this.label33.Text = "IPAddr";
+            // 
+            // label34
+            // 
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label34.Location = new System.Drawing.Point(0, 239);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(322, 2);
+            this.label34.TabIndex = 5;
+            // 
+            // label35
+            // 
+            this.label35.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label35.Location = new System.Drawing.Point(1, 117);
+            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(322, 2);
+            this.label35.TabIndex = 5;
+            // 
+            // label36
+            // 
+            this.label36.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label36.Location = new System.Drawing.Point(-1, 55);
+            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(322, 2);
+            this.label36.TabIndex = 5;
+            // 
+            // cmbComPort
+            // 
+            this.cmbComPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbComPort.FormattingEnabled = true;
+            this.cmbComPort.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.cmbComPort.Location = new System.Drawing.Point(160, 83);
+            this.cmbComPort.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbComPort.Name = "cmbComPort";
+            this.cmbComPort.Size = new System.Drawing.Size(102, 21);
+            this.cmbComPort.TabIndex = 3;
+            // 
+            // cmbInterface
+            // 
+            this.cmbInterface.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInterface.FormattingEnabled = true;
+            this.cmbInterface.Items.AddRange(new object[] {
+            "COM",
+            "NET",
+            "P2S",
+            "USB"});
+            this.cmbInterface.Location = new System.Drawing.Point(160, 32);
+            this.cmbInterface.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbInterface.Name = "cmbInterface";
+            this.cmbInterface.Size = new System.Drawing.Size(102, 21);
+            this.cmbInterface.TabIndex = 1;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(82, 194);
+            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(53, 13);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "Password";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(106, 167);
+            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(26, 13);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Port";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(82, 86);
+            this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(53, 13);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "COM Port";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(53, 32);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(68, 13);
+            this.label40.TabIndex = 2;
+            this.label40.Text = "Set Interface";
+            // 
+            // btnOpenDev
+            // 
+            this.btnOpenDev.Location = new System.Drawing.Point(263, 396);
+            this.btnOpenDev.Margin = new System.Windows.Forms.Padding(2);
+            this.btnOpenDev.Name = "btnOpenDev";
+            this.btnOpenDev.Size = new System.Drawing.Size(62, 23);
+            this.btnOpenDev.TabIndex = 11;
+            this.btnOpenDev.Text = "Open";
+            this.btnOpenDev.UseVisualStyleBackColor = true;
+            this.btnOpenDev.Click += new System.EventHandler(this.btnOpenDev_Click);
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.textTotalByAIKYO);
+            this.tabPage9.Controls.Add(this.label42);
+            this.tabPage9.Controls.Add(this.dgvLogsByAIKYO);
+            this.tabPage9.Controls.Add(this.dtToDateByAIKYO);
+            this.tabPage9.Controls.Add(this.dtFromDateByAIKYO);
+            this.tabPage9.Controls.Add(this.btnGetLogsByAIKYO);
+            this.tabPage9.Controls.Add(this.textPathByAIKYO);
+            this.tabPage9.Controls.Add(this.label41);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(796, 428);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "AIKYO";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // textTotalByAIKYO
+            // 
+            this.textTotalByAIKYO.Location = new System.Drawing.Point(96, 390);
+            this.textTotalByAIKYO.Name = "textTotalByAIKYO";
+            this.textTotalByAIKYO.Size = new System.Drawing.Size(100, 20);
+            this.textTotalByAIKYO.TabIndex = 16;
+            this.textTotalByAIKYO.Text = "0";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(40, 397);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(32, 13);
+            this.label42.TabIndex = 15;
+            this.label42.Text = "Tổng";
+            // 
+            // dgvLogsByAIKYO
+            // 
+            this.dgvLogsByAIKYO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByAIKYO.Location = new System.Drawing.Point(40, 103);
+            this.dgvLogsByAIKYO.Name = "dgvLogsByAIKYO";
+            this.dgvLogsByAIKYO.Size = new System.Drawing.Size(664, 271);
+            this.dgvLogsByAIKYO.TabIndex = 14;
+            // 
+            // dtToDateByAIKYO
+            // 
+            this.dtToDateByAIKYO.Location = new System.Drawing.Point(400, 51);
+            this.dtToDateByAIKYO.Name = "dtToDateByAIKYO";
+            this.dtToDateByAIKYO.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByAIKYO.TabIndex = 13;
+            // 
+            // dtFromDateByAIKYO
+            // 
+            this.dtFromDateByAIKYO.Location = new System.Drawing.Point(400, 14);
+            this.dtFromDateByAIKYO.Name = "dtFromDateByAIKYO";
+            this.dtFromDateByAIKYO.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByAIKYO.TabIndex = 12;
+            // 
+            // btnGetLogsByAIKYO
+            // 
+            this.btnGetLogsByAIKYO.Location = new System.Drawing.Point(629, 15);
+            this.btnGetLogsByAIKYO.Name = "btnGetLogsByAIKYO";
+            this.btnGetLogsByAIKYO.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByAIKYO.TabIndex = 11;
+            this.btnGetLogsByAIKYO.Text = "Lấy dữ liệu";
+            this.btnGetLogsByAIKYO.UseVisualStyleBackColor = true;
+            this.btnGetLogsByAIKYO.Click += new System.EventHandler(this.btnGetLogsByAIKYO_Click);
+            // 
+            // textPathByAIKYO
+            // 
+            this.textPathByAIKYO.Location = new System.Drawing.Point(116, 34);
+            this.textPathByAIKYO.Name = "textPathByAIKYO";
+            this.textPathByAIKYO.Size = new System.Drawing.Size(231, 20);
+            this.textPathByAIKYO.TabIndex = 3;
+            this.textPathByAIKYO.Text = "D:\\Fullshare\\Data\\RJData.mdb";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(40, 37);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(60, 13);
+            this.label41.TabIndex = 2;
+            this.label41.Text = "Đường dẫn";
             // 
             // ViewMain
             // 
@@ -857,6 +1739,20 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHysoon)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByBioTime)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByUbioXFace)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByAIKYO)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -934,5 +1830,83 @@
         private System.Windows.Forms.DataGridView dgvListLogByHysoon;
         private System.Windows.Forms.DateTimePicker dtToDateByHysoon;
         private System.Windows.Forms.DateTimePicker dtFromDateByHysoon;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TextBox txtPortByBioTime;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtURLByBioTime;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.DataGridView dgvLogsByBioTime;
+        private System.Windows.Forms.Button btnGetLogsByBioTime;
+        private System.Windows.Forms.DateTimePicker dtToDateByBioTime;
+        private System.Windows.Forms.DateTimePicker dtFromDateByBioTime;
+        private System.Windows.Forms.TextBox txtPassByBioTime;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtUserNameByBioTime;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtTotalByBioTime;
+        private System.Windows.Forms.Button btnGetLogs_V2ByBioTime;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.DateTimePicker dtToDateByUbioXFace;
+        private System.Windows.Forms.DateTimePicker dtFromDateByUbioXFace;
+        private System.Windows.Forms.Button btnGetLogsByUbioXFace;
+        private System.Windows.Forms.TextBox txtPassByUbioXFace;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txtUserNameByUbioXFace;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txtPortByUbioXFace;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtURLByUbioXFace;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.DataGridView dgvLogsByUbioXFace;
+        private System.Windows.Forms.TextBox txtTotalByUbioXFace;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnReadGLogData;
+        private System.Windows.Forms.Button btnReadAllGLogData;
+        private System.Windows.Forms.Button btnEmptyGLogData;
+        private System.Windows.Forms.Button btnEmptySLogData;
+        private System.Windows.Forms.Button btnReadAllSLogData;
+        private System.Windows.Forms.Button btnReadSLogData;
+        private AxFP_CLOCKLib.AxFP_CLOCK axFP_CLOCK;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label labelInfo;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbMachineNumber;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox P2STimeOut;
+        private System.Windows.Forms.TextBox P2SPort;
+        private System.Windows.Forms.TextBox textPassword;
+        private System.Windows.Forms.TextBox textPort;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.ComboBox cmbComPort;
+        private System.Windows.Forms.ComboBox cmbInterface;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Button btnOpenDev;
+        private IPAddressControlLib.IPAddressControl ipAddressControl1;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.DateTimePicker dtToDateByAIKYO;
+        private System.Windows.Forms.DateTimePicker dtFromDateByAIKYO;
+        private System.Windows.Forms.Button btnGetLogsByAIKYO;
+        private System.Windows.Forms.TextBox textPathByAIKYO;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox textTotalByAIKYO;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.DataGridView dgvLogsByAIKYO;
     }
 }

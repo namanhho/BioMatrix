@@ -1,0 +1,152 @@
+2023-02-13 11:19:29.9625 
+Ket qua call API: apiPath: https://cloud.beetai.com/api/login_integrate-----response: {"status":10000,"error_message":"","data":{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJiaWZhY2UvY2FwdHVyZTp1cGxvYWRfaW1hZ2UiLCJiaWZhY2Uvc3RhZmY6aW5zZXJ0X29yX3VwZGF0ZSIsImJpZmFjZS9zdGFmZjpkZWxldGUiLCJiaWZhY2UvY2FwdHVyZTpkZWxldGVfaW1hZ2UiLCJiaWZhY2UvY2FwdHVyZTp2aWV3IiwiYmlmYWNlL3N1Yl9tb2RlbDppbnNlcnRfb3JfdXBkYXRlIiwiYmlmYWNlL2ludGVncmF0ZTpzZXR1cF9jb21wYW55IiwiYmlmYWNlL2ludGVncmF0ZTpzeW5jX29lbSIsImJpZmFjZS9oaXN0b3J5OnZpZXdfYWxsIiwiYmlmYWNlL3RpbWVrZWVwaW5nOnZpZXdfYWxsIiwiY21zL2NvbXBhbnk6aW5zZXJ0X29yX3VwZGF0ZSIsImNtcy9ib3g6aW5zZXJ0X29yX3VwZGF0ZSJdLCJlbWFpbCI6Im1pc2FAZ21haWwuY29tIiwicnVsZSI6IjIiLCJ1c2VyX2lkIjoxOTQsImV4cCI6MTY3NjM0ODM2OX0.bo7TAG7ANMqI9AYqzzgJATLZy2Q10zd0HaeZxLu94I0","api_url":"https://biface2.beetai.com"}}
+2023-02-13 11:29:02.3457 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 11:29:14.4158 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:30:04.6932 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 11:33:21.3058 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 11:33:23.4153 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:33:23.4153 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 11:33:25.4721 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:33:41.3627 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/jwt-api-token-auth/==============
+2023-02-13 11:33:43.3943 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:33:43.3943 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 2----token: ==============
+2023-02-13 11:33:45.4322 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:40:00.6195 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/jwt-api-token-auth/==============
+2023-02-13 11:40:07.0666 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:40:07.0666 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 2----token: ==============
+2023-02-13 11:40:09.1271 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:42:03.0767 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 11:42:05.0985 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 11:42:34.0660 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 11:42:36.0880 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 12:18:48.6206 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 12:18:50.7605 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 12:18:54.0949 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 12:18:56.1467 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:35:38.2728 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:35:40.5009 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:35:40.5009 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:35:42.5504 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:37:21.2058 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:37:23.2523 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:37:23.2523 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:37:25.3037 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:38:29.9781 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:38:32.1116 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:38:32.1116 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:38:34.1468 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:42:52.0540 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:42:54.1684 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:42:54.1684 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:42:56.2116 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:53:33.1527 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:53:35.2634 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:53:35.2634 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:53:37.3021 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:59:29.5946 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 13:59:31.7023 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 13:59:31.7023 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 13:59:33.7535 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:00:19.5676 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:00:21.7049 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:00:21.7049 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:00:23.7446 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:01:00.2442 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:01:02.2885 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:01:02.2885 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:01:04.3293 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:01:09.7815 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/jwt-api-token-auth/==============
+2023-02-13 14:01:11.8323 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:01:11.8323 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 2----token: ==============
+2023-02-13 14:01:13.8747 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:32:45.7050 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:32:47.8542 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:32:47.8542 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:32:49.8972 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:33:39.3149 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:33:41.4415 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:33:41.4415 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:33:43.4874 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:35:07.0725 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:35:09.2017 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:35:09.2017 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:35:11.2364 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:35:32.1567 
+================LoginByBioTime : Bat dau login by Bio Time: apiPath: http://127.0.0.1:8098/api-token-auth/==============
+2023-02-13 14:35:34.2895 
+Ket qua login: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server
+2023-02-13 14:35:34.2895 
+==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: 1----token: ==============
+2023-02-13 14:35:36.3317 
+Ket qua lay phong ban: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server

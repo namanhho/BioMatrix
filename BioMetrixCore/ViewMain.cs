@@ -18,6 +18,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mapster;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Data.Odbc;
+using System.Data.SqlClient;
 
 namespace BioMetrixCore
 {
@@ -34,6 +39,7 @@ namespace BioMetrixCore
         DeviceManipulator manipulator = new DeviceManipulator();
         public ZkemClient objZkeeper;
         private bool isDeviceConnected = false;
+        private readonly string[] formatDateTimes = { "dd/MM/yyyy HH:mm:ss", "dd/M/yyyy HH:mm:ss", "d/MM/yyyy HH:mm:ss", "d/M/yyyy HH:mm:ss", "M/d/yyyy HH:mm:ss", "MM/d/yyyy HH:mm:ss", "M/d/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss", "M/dd/yyyy HH:mm:ss" };
 
         public bool IsDeviceConnected
         {
@@ -321,6 +327,34 @@ namespace BioMetrixCore
             dgvListLogByHysoon.Controls.Clear();
             dgvListLogByHysoon.Rows.Clear();
             dgvListLogByHysoon.Columns.Clear();
+
+            if (dgvLogsByBioTime.Controls.Count > 2)
+            {
+                dgvLogsByBioTime.Controls.RemoveAt(2);
+            }
+            dgvLogsByBioTime.DataSource = null;
+            dgvLogsByBioTime.Controls.Clear();
+            dgvLogsByBioTime.Rows.Clear();
+            dgvLogsByBioTime.Columns.Clear();
+
+            if (dgvLogsByUbioXFace.Controls.Count > 2)
+            {
+                dgvLogsByUbioXFace.Controls.RemoveAt(2);
+            }
+            dgvLogsByUbioXFace.DataSource = null;
+            dgvLogsByUbioXFace.Controls.Clear();
+            dgvLogsByUbioXFace.Rows.Clear();
+            dgvLogsByUbioXFace.Columns.Clear();
+
+
+            if (dgvLogsByAIKYO.Controls.Count > 2)
+            {
+                dgvLogsByAIKYO.Controls.RemoveAt(2);
+            }
+            dgvLogsByAIKYO.DataSource = null;
+            dgvLogsByAIKYO.Controls.Clear();
+            dgvLogsByAIKYO.Rows.Clear();
+            dgvLogsByAIKYO.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -345,6 +379,18 @@ namespace BioMetrixCore
             dgvListLogByHysoon.DataSource = list;
             dgvListLogByHysoon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvListLogByHysoon);
+
+            dgvLogsByBioTime.DataSource = list;
+            dgvLogsByBioTime.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByBioTime);
+
+            dgvLogsByUbioXFace.DataSource = list;
+            dgvLogsByUbioXFace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByUbioXFace);
+
+            dgvLogsByAIKYO.DataSource = list;
+            dgvLogsByAIKYO.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByAIKYO);
         }
 
 
@@ -450,7 +496,7 @@ namespace BioMetrixCore
         {
 
         }
-
+        #region BiFace
         private void button1_Click(object sender, EventArgs e)
         {
             string url = string.Empty;
@@ -684,6 +730,8 @@ namespace BioMetrixCore
             //Get response
             if (response.IsSuccessful)
             {
+                Logger.LogInfo($"\nKet qua call API: apiPath: {apiPath}-----response: {response.Content}");
+                var content = response.Content;
                 if (!getRaw)
                 {
                     var responseData = Converter.JsonDeserialize<ServiceResult<object>>(response.Content);
@@ -715,7 +763,8 @@ namespace BioMetrixCore
             }
             return result;
         }
-
+        #endregion
+        #region GET BSSID
         private async void btnGetBSSID_Click(object sender, EventArgs e)
         {
             try
@@ -882,7 +931,7 @@ namespace BioMetrixCore
 
             return result;
         }
-       
+        #endregion
         private string ListToStringCommaSeparator(List<string> list)
         {
             StringBuilder sb = new StringBuilder();
@@ -957,6 +1006,7 @@ namespace BioMetrixCore
             for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
                 yield return day;
         }
+        #region HanetAI
         /// <summary>
         /// Hàm lấy dữ liệu cho HanetAI
         /// </summary>
@@ -1178,11 +1228,11 @@ namespace BioMetrixCore
                     while (toDateNew < toDate)
                     {
                         foreach (var place in placeIDs)
-                        { 
+                        {
                             var total = GetTotalCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDateNew, ref message);
                             var page = 0;
                             var size = limit.Value;
-                            while(page * size < total)
+                            while (page * size < total)
                             {
                                 page++;
                                 var logs = GetCheckinByPlaceIdInTimestamp(deviceIDs, place, fromDateNew, toDateNew, page, size, ref message);
@@ -1370,6 +1420,8 @@ namespace BioMetrixCore
             string result = (dtUtc.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc))).TotalMilliseconds.ToString();
             return result;
         }
+        #endregion
+        #region Hysoon
         private void btnGetLogsByHysoon_Click(object sender, EventArgs e)
         {
             var logs = new List<LogData>();
@@ -1432,15 +1484,1159 @@ namespace BioMetrixCore
                 var log = new LogData();
                 var userID = x.GetObject<string>("EnrollNumber");
                 var time = x.GetObject<string>("ActionDate");
-                var checkTime = DateTime.Now;
-                if (DateTime.TryParse(time, out checkTime) && !string.IsNullOrWhiteSpace(userID))
+                //var checkTime = DateTime.Now;
+                DateTime tempDate;
+                var isConvertDateTime = DateTime.TryParseExact(time, formatDateTimes, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), System.Globalization.DateTimeStyles.None, out tempDate);
+                if (isConvertDateTime && !string.IsNullOrWhiteSpace(userID))
                 {
-                    log.CheckTime = checkTime;
+                    log.CheckTime = tempDate;
                     log.UserID = userID;
                     logs.Add(log);
                 }
             });
             return logs;
         }
+        #endregion
+        #region BioTime
+        private void btnGetLogsByBioTime_Click(object sender, EventArgs e)
+        {
+            //var a = "\"count\":47,\"next\":null,\"previous\":null,\"msg\":\"\",\"code\":0,\"data\":[{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:53\"},{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"07:01:08,17:02:09\"},{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:49\"},{\"emp_code\":\"104\",\"first_name\":\"pham viet hung\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"14:01:49\"},{\"emp_code\":\"104\",\"first_name\":\"pham viet hung\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:47:58\"},{\"emp_code\":\"108\",\"first_name\":\"ta ngoc tuan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"06:10:14,17:00:19\"},{\"emp_code\":\"108\",\"first_name\":\"ta ngoc tuan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:50:53,17:01:03\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"06:24:07,17:03:57\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:55:26\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"07:25:31\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:38\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:35:28,17:03:49\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:51:55,17:00:58\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:55\"},{\"emp_code\":\"139\",\"first_name\":\"do dinh huan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"08:31:49\"},{\"emp_code\":\"14\",\"first_name\":\"han duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"14:06:12\"},{\"emp_code\":\"16\",\"first_name\":\"hoang phuc duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:46:17,16:23:08\"},{\"emp_code\":\"16\",\"first_name\":\"hoang phuc duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:42\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:39:01\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:01:02\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:55:31\"},{\"emp_code\":\"36\",\"first_name\":\"luong truong  son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:05\"},{\"emp_code\":\"36\",\"first_name\":\"luong truong  son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"17:04:03\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:15:02\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:35:07,17:00:08\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:52:13,17:00:45\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:51:54\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"14:04:11\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"06:06:50\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":6,\"punch_set\":\"07:14:02,07:32:18,07:50:21,08:03:36,08:10:23,14:06:26\"},{\"emp_code\":\"4\",\"first_name\":\"cao thanh at\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:38:09\"},{\"emp_code\":\"49\",\"first_name\":\"nguyen hong duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:41:29\"},{\"emp_code\":\"55\",\"first_name\":\"nguyen ngoc sy\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":4,\"punch_set\":\"14:02:47,14:04:07,15:10:14,15:23:53\"},{\"emp_code\":\"56\",\"first_name\":\"nguyen quang son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"06:10:07\"},{\"emp_code\":\"58\",\"first_name\":\"nguyen thanh mai\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:46:01,17:00:25\"},{\"emp_code\":\"75\",\"first_name\":\"nguyen van anh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:40:21,17:00:11\"},{\"emp_code\":\"75\",\"first_name\":\"nguyen van anh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:01:25\"},{\"emp_code\":\"79\",\"first_name\":\"nguyen van khoi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"14:09:02\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:10:26\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"17:03:43\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"13:01:35\"},{\"emp_code\":\"82\",\"first_name\":\"nguyen van tan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:31\"},{\"emp_code\":\"87\",\"first_name\":\"nguyen  xuan quynh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:49:08,17:00:00\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:44:22\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"17:02:32\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-12\",\"punch_times\":1,\"punch_set\":\"06:24:58\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:18:54\"}]";
+            //var content = Converter.JsonDeserialize<Dictionary<string, object>>(a);
+            var logs = GetLogsByBioTime(dtFromDateByBioTime.Value, dtToDateByBioTime.Value, 1);
+            
+            //var a = new Dictionary<string, object>()
+            //{
+            //    { "emp_code", "108" },
+            //    { "att_date", "2023-02-10" },
+            //    { "punch_set", "06:10:14,17:00:19" }
+            //};
+            //var userID = a.GetObject<string>("emp_code");
+            //var date = a.GetObject<DateTime>("att_date");
+            //var times = a.GetObject<string>("punch_set");
+            //var listTime = !string.IsNullOrWhiteSpace(times) ? times.Replace(';', ',').Split(',').ToList() : new List<string>();
+            //listTime.ForEach(z =>
+            //{
+            //    var log = new LogData();
+            //    var time = TimeSpan.Parse(z);
+            //    var checkTime = date.Add(time);
+            //    log.CheckTime = checkTime;
+            //    log.UserID = userID;
+            //    logs.Add(log);
+            //});
+            if (logs.Count > 0)
+            {
+                txtTotalByBioTime.Text = logs.Count.ToString();
+                BindToGridView(logs);
+            }
+        }
+        private string LoginByBioTime(int type)
+        {
+            var token = string.Empty;
+            try
+            {
+                var param = new
+                {
+                    username = txtUserNameByBioTime.Text,
+                    password = txtPassByBioTime.Text
+                };
+
+                var apiPath = $"{txtURLByBioTime.Text}:{txtPortByBioTime.Text}/api-token-auth/";
+                if (type == 2)
+                {
+                    apiPath = $"{txtURLByBioTime.Text}:{txtPortByBioTime.Text}/jwt-api-token-auth/";
+                }
+                var client = new RestClient(apiPath);
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+
+                // Header
+                request.AddHeader("Content-Type", "application/json");
+
+                //Body
+                if (param != null)
+                {
+                    request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
+                }
+
+                Logger.LogInfo($"\n================LoginByBioTime : Bat dau login by Bio Time: apiPath: {apiPath}==============");
+                var response = client.Execute(request);
+                Logger.LogInfo($"\nKet qua login: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}");
+                if (response.IsSuccessful)
+                {
+                    var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+                    token = content.GetObject<string>("token");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n==============LoginByBioTime Exception: Err: {ex.Message}==============");
+            }
+            return token;
+        }
+        private List<int> GetDepartmentByBioTime(string token, int type)
+        {
+            var ids = new List<int>();
+            try
+            {
+                var client = new RestClient($"{txtURLByBioTime.Text}:{txtPortByBioTime.Text}/personnel/api/departments/");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.GET);
+
+                // Header
+                request.AddHeader("Content-Type", "application/json");
+                if (type == 1)
+                {
+                    request.AddHeader("Authorization", $"Token {token}");
+                }
+                else
+                {
+                    request.AddHeader("Authorization", $"JWT {token}");
+                }
+
+                Logger.LogInfo($"\n==============GetDepartmentByBioTime : Bat dau lay phong ban by Bio Time: type: {type}----token: {token}==============");
+                var response = client.Execute(request);
+                Logger.LogInfo($"\nKet qua lay phong ban: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}");
+                if (response.IsSuccessful)
+                {
+                    var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+                    var datas = content.GetObject<List<Dictionary<string, object>>>("data");
+                    datas.ForEach(x =>
+                    {
+                        var id = x.ContainsKey("id") ? x["id"].ToString() : null;
+                        var depID = 0;
+                        if (!string.IsNullOrWhiteSpace(id) && int.TryParse(id, out depID))
+                        {
+                            ids.Add(depID);
+                        }
+                    });
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError($"\n==============GetDepartmentByBioTime Exception: Err: {ex.Message}==============");
+            }
+            return ids;
+        }
+        private List<LogData> GetLogsByBioTime(DateTime? fromDate, DateTime? toDate, int type)
+        {
+            var logs = new List<LogData>();
+            try
+            {
+                var token = LoginByBioTime(type);
+                var departmnetIDs = GetDepartmentByBioTime(token, type);
+                departmnetIDs.ForEach(x =>
+                {
+                    var count = 0;
+                    var pageIndex = 0;
+                    var pageSize = 100;
+                    do
+                    {
+                        pageIndex++;
+                        var queryParams = new Dictionary<string, object>()
+                        {
+                            { "page", pageIndex },
+                            { "page_size", pageSize},
+                            { "start_date", dtFromDateByBioTime.Value.Date.ToString("yyyy-MM-dd") },
+                            { "end_date", dtToDateByBioTime.Value.Date.AddDays(1).AddMilliseconds(-1).ToString("yyyy-MM-dd") },
+                            { "departments", x },
+                            { "areas", -1 },
+                            { "groups", -1 },
+                            { "employees", -1 },
+                        };
+                        var client = new RestClient($"{txtURLByBioTime.Text}:{txtPortByBioTime.Text}/att/api/timeCardReport/");
+                        client.Timeout = -1;
+                        var request = new RestRequest(Method.GET);
+
+                        //Header
+                        request.AddHeader("Content-Type", "application/json");
+                        if (type == 1)
+                        {
+                            request.AddHeader("Authorization", $"Token {token}");
+                        }
+                        else
+                        {
+                            request.AddHeader("Authorization", $"JWT {token}");
+                        }
+
+                        foreach (var p in queryParams)
+                        {
+                            request.AddParameter(p.Key, p.Value, ParameterType.QueryString);
+                        }
+
+                        Logger.LogInfo($"\n==============GetLogsByBioTime : Bat dau lay du lieu by Bio Time: type: {type}----token: {token}==============");
+                        var response = client.Execute(request);
+                        Logger.LogInfo($"\nKet qua lay du lieu: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}");
+                        if (response.IsSuccessful)
+                        {
+                            var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+                            var datas = content.GetObject<List<Dictionary<string, object>>>("data");
+                            count = content.GetObject<int>("count");
+                            datas.ForEach(y =>
+                            {
+                                var userID = y.GetObject<string>("emp_code");
+                                var date = y.GetObject<DateTime>("att_date");
+                                var times = y.GetObject<string>("punch_set");
+                                var listTime = !string.IsNullOrWhiteSpace(times) ? times.Replace(';', ',').Split(',').ToList() : new List<string>();
+                                listTime.ForEach(z =>
+                                {
+                                    var log = new LogData();
+                                    var time = TimeSpan.Parse(z);
+                                    var checkTime = date.Add(time);
+                                    log.CheckTime = checkTime;
+                                    log.UserID = userID;
+                                    logs.Add(log);
+                                });
+                            });
+                        }
+                    }
+                    while (pageIndex * pageSize < count);
+                });
+            }
+            catch(Exception ex)
+            {
+                Logger.LogError($"\n==============GetLogsByBioTime Exception: Err: {ex.Message}==============");
+            }
+            return logs.OrderBy(x => x.CheckTime).ToList();
+        }
+        private void btnGetLogs_V2ByBioTime_Click(object sender, EventArgs e)
+        {
+            var mess = string.Empty;
+            var logs = GetLogsByBioTime(dtFromDateByBioTime.Value, dtToDateByBioTime.Value, 2);
+            if (logs.Count > 0)
+            {
+                txtTotalByBioTime.Text = logs.Count.ToString();
+                BindToGridView(logs);
+            }
+        }
+        #endregion
+        #region Ubio XFace
+        private void btnGetLogsByUbioXFace_Click(object sender, EventArgs e)
+        {
+            var ucsinfo = string.Empty;
+            var extinfo = string.Empty;
+            var cookies = LoginByUbioXFace(ref ucsinfo, ref extinfo);
+            var logs = GetLogsByUbioXFace(cookies, ucsinfo, extinfo);
+            logs = logs.OrderBy(x => x.CheckTime).ToList();
+            if (logs.Count > 0)
+            {
+                txtTotalByUbioXFace.Text = logs.Count.ToString();
+                BindToGridView(logs);
+            }
+        }
+        private Dictionary<string, Cookie> LoginByUbioXFace(ref string ucsinfo, ref string extinfo)
+        {
+            var cookies = new Dictionary<string, Cookie>();
+            try
+            {
+                var client = new RestClient($"{txtURLByUbioXFace.Text}:{txtPortByUbioXFace.Text}/v1/login");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+
+                // Header
+                int typeLoginByUbioXFace = 2;
+                int.TryParse(Utility.GetAppSetting("TypeLoginByUbioXFace"), out typeLoginByUbioXFace);
+                if (typeLoginByUbioXFace == 1)
+                {
+                    request.AddHeader("Content-Type", "application/json");
+                    request.AddJsonBody("test1=2&test2=3&%40d1%23userId=Master&%40d1%23password=0000&%40d1%23userType=2&%40d%23=%40d1%23&%40d1%23=dmLoginReq&%40d1%23tp=dm&");
+                }
+                else if(typeLoginByUbioXFace == 2)
+                {
+                    request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                    request.AddParameter("test1", 2);
+                    request.AddParameter("test2", 3);
+                    request.AddParameter("%40d1%23userId", txtUserNameByUbioXFace.Text);
+                    request.AddParameter("%40d1%23password", txtPassByUbioXFace.Text);
+                    request.AddParameter("%40d1%23userType", 2);
+                    request.AddParameter("%40d%23", "%40d1%23");
+                    request.AddParameter("%40d1%23", "dmLoginReq");
+                    request.AddParameter("%40d1%23tp", "dm");
+                }
+                else if(typeLoginByUbioXFace == 3)
+                {
+                    request.AddParameter("application/x-www-form-urlencoded", $"test1=2&test2=3&%40d1%23userId={txtUserNameByUbioXFace.Text}&%40d1%23password={txtPassByUbioXFace.Text}&%40d1%23userType=2&%40d%23=%40d1%23&%40d1%23=dmLoginReq&%40d1%23tp=dm&", ParameterType.RequestBody);
+                }
+                else
+                {
+                    request.AddHeader("Content-Type", "application/json");
+                    request.AddParameter("test1=2&test2=3&%40d1%23userId=Master&%40d1%23password=0000&%40d1%23userType=2&%40d%23=%40d1%23&%40d1%23=dmLoginReq&%40d1%23tp=dm&", "");
+                }
+
+                Logger.LogInfo($"\n================LoginByUbioXFace : Bat dau login by UbioXFace==================");
+                var response = client.Execute(request);
+                Logger.LogInfo($"\nKet qua login: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}");
+                if (response.IsSuccessful)
+                {
+                    var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+                    //Get cookies
+                    if (response.Cookies != null)
+                    {
+                        Logger.LogInfo($"\n==========LoginByUbioXFace-------Ket qua login: success: {response.IsSuccessful}-----Cookies: {Converter.JsonSerialize(response.Cookies)}");
+                        foreach (var c in response.Cookies)
+                        {
+                            cookies.Add(c.Name, c.Adapt<Cookie>());
+                            if(c.Name == "ucsinfo")
+                            {
+                                ucsinfo = c.Adapt<Cookie>().Value;
+                            }
+                            if (c.Name == "extinfo")
+                            {
+                                extinfo = c.Adapt<Cookie>().Value;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogInfo($"\n================LoginByUbioXFace : Exception: {ex.Message}==================");
+            }
+            return cookies;
+        }
+        private List<LogData> GetLogsByUbioXFace(Dictionary<string, Cookie> cookies, string ucsinfo, string extinfo)
+        {
+            var logs = new List<LogData>();
+            try
+            {
+                var pageSize = 100;
+                var pageIndex = -1;
+                var count = 0;
+                do
+                {
+                    pageIndex++;
+                    var client = new RestClient($"{txtURLByUbioXFace.Text}:{txtPortByUbioXFace.Text}/v1/authLogs");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.GET);
+
+                    var ucsinfoConfig = ucsinfo;
+                    var extinfoConfig = extinfo;
+                    if (!string.IsNullOrWhiteSpace(Utility.GetAppSetting("ucsinfo")) && !string.IsNullOrWhiteSpace(Utility.GetAppSetting("extinfo")))
+                    {
+                        ucsinfoConfig = Utility.GetAppSetting("ucsinfo");
+                        extinfoConfig = Utility.GetAppSetting("extinfo");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(ucsinfoConfig) && !string.IsNullOrWhiteSpace(extinfoConfig))
+                    {
+                        request.AddCookie("ucsinfo", ucsinfoConfig);
+                        request.AddCookie("extinfo", extinfoConfig);
+                    }
+
+                    // Header
+                    //request.AddHeader("Content-Type", "application/json");
+
+                    var queryParams = new Dictionary<string, object>()
+                    {
+                        { "startTime", dtFromDateByUbioXFace.Value.Date.ToString("yyyy-MM-dd HH:mm:ss") },
+                        { "endTime", dtToDateByUbioXFace.Value.Date.AddDays(1).AddMilliseconds(-1).ToString("yyyy-MM-dd HH:mm:ss") },
+                        { "offset", pageSize * pageIndex },
+                        { "limit", pageSize },
+                        { "groupID", 0 },
+                        { "searchCategory", "all" },
+                    };
+                    foreach (var p in queryParams)
+                    {
+                        request.AddParameter(p.Key, p.Value, ParameterType.QueryString);
+                    }
+
+                    //if (queryParams != null)
+                    //{
+                    //    request.AddParameter("application/json", Converter.JsonSerialize(queryParams), ParameterType.RequestBody);
+                    //}
+                    Logger.LogInfo($"\n==============GetLogsByUbioXFace: Bat dau lay du lieu by Ubio XFace: cookies: {Converter.JsonSerialize(cookies)}--ucsinfo: {ucsinfoConfig}---extinfo: {extinfoConfig}-==============");
+                    var response = client.Execute(request);
+                    Logger.LogInfo($"\nKet qua lay du lieu: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}");
+                    if (response.IsSuccessful)
+                    {
+                        Logger.LogInfo($"\nKet qua lay du lieu:----total: {count}----pageIndex: {pageIndex}----queryParams: {Converter.JsonSerialize(queryParams)}");
+                        var content = Converter.JsonDeserialize<Dictionary<string, object>>(response.Content);
+                        var datas = content.GetObject<List<Dictionary<string, object>>>("AuthLogList");
+                        var total = content.GetObject<Dictionary<string, object>>("Total");
+                        count = total.GetObject<int>("Count");
+                        datas.ForEach(y =>
+                        {
+                            var userID = y.GetObject<string>("UserID");
+                            var date = y.GetObject<string>("EventTime");
+                            var checkTime = DateTime.Now;
+                            if (DateTime.TryParse(date, out checkTime) && !string.IsNullOrWhiteSpace(userID))
+                            {
+                                var log = new LogData();
+                                log.CheckTime = checkTime;
+                                log.UserID = userID;
+                                logs.Add(log);
+                            }
+                        });
+                    }
+                }
+                while (pageSize * pageIndex < count);
+            }
+            catch(Exception ex)
+            {
+                Logger.LogInfo($"\n==============GetLogsByUbioXFace : Exception: {ex.Message}==============");
+            }
+            return logs;
+        }
+        #endregion
+
+        #region Ronald jack
+        private bool m_bDeviceOpened = false;
+        private int m_nCurSelID = 1;
+        private AxFP_CLOCKLib.AxFP_CLOCK pOcxObject;
+        private int m_nMachineNum;
+        private void btnOpenDevice_Click(object sender, EventArgs e)
+        {
+            bool bRet;
+
+            if (m_bDeviceOpened)
+            {
+                btnOpenDev.Text = "Open";
+                m_bDeviceOpened = false;
+
+                axFP_CLOCK.CloseCommPort();
+                return;
+            }
+
+            this.axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            int nConnecttype = this.cmbInterface.SelectedIndex;
+
+            switch (nConnecttype)
+            {
+                case (int)CURDEVICETYPE.DEVICE_COM:
+                    {
+                        this.axFP_CLOCK.CommPort = this.cmbComPort.SelectedIndex + 1;
+                        axFP_CLOCK.Baudrate = 38400;
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_NET:
+                    {
+                        int nPort = Convert.ToInt32(textPort.Text);
+                        int nPassword = Convert.ToInt32(textPassword.Text);
+                        string strIP = ipAddressControl1.IPAddress.ToString();
+                        bRet = axFP_CLOCK.SetIPAddress(ref strIP, nPort, nPassword);
+                        if (!bRet)
+                        {
+                            return;
+                        }
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_USB:
+                    {
+                        axFP_CLOCK.IsUSB = true;
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_P2S:
+                    {
+                        int nPort = Convert.ToInt32(P2SPort.Text);
+                        int nTimeOut = Convert.ToInt32(P2STimeOut.Text);
+
+                        axFP_CLOCK.SetServerPortandtick(nPort, nTimeOut);
+                    }
+                    break;
+            }
+
+            bRet = axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            if (bRet)
+            {
+                m_bDeviceOpened = true;
+                btnOpenDev.Text = "Close";
+            }
+        }
+        private void btnOpenDev_Click(object sender, EventArgs e)
+        {
+            bool bRet;
+
+            if (m_bDeviceOpened)
+            {
+                btnOpenDev.Text = "Open";
+                m_bDeviceOpened = false;
+
+                axFP_CLOCK.CloseCommPort();
+                return;
+            }
+
+            this.axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            int nConnecttype = this.cmbInterface.SelectedIndex;
+
+            switch (nConnecttype)
+            {
+                case (int)CURDEVICETYPE.DEVICE_COM:
+                    {
+                        this.axFP_CLOCK.CommPort = this.cmbComPort.SelectedIndex + 1;
+                        axFP_CLOCK.Baudrate = 38400;
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_NET:
+                    {
+                        int nPort = Convert.ToInt32(textPort.Text);
+                        int nPassword = Convert.ToInt32(textPassword.Text);
+                        string strIP = ipAddressControl1.IPAddress.ToString();
+                        bRet = axFP_CLOCK.SetIPAddress(ref strIP, nPort, nPassword);
+                        if (!bRet)
+                        {
+                            return;
+                        }
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_USB:
+                    {
+                        axFP_CLOCK.IsUSB = true;
+
+                    }
+                    break;
+                case (int)CURDEVICETYPE.DEVICE_P2S:
+                    {
+                        int nPort = Convert.ToInt32(P2SPort.Text);
+                        int nTimeOut = Convert.ToInt32(P2STimeOut.Text);
+
+                        axFP_CLOCK.SetServerPortandtick(nPort, nTimeOut);
+                    }
+                    break;
+            }
+
+            bRet = axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            if (bRet)
+            {
+                m_bDeviceOpened = true;
+                btnOpenDev.Text = "Close";
+                this.pOcxObject = axFP_CLOCK;
+            }
+        }
+        private void InitSLogListView()
+        {
+            listView1.Clear();
+            listView1.Columns.Add("", 40, HorizontalAlignment.Left);
+            listView1.Columns.Add("TMNo", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("SEnlNo", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("SMNo", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("GEnlNo", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("GMNo", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("Manipulation", 190, HorizontalAlignment.Left);
+            listView1.Columns.Add("FpNo", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("DateTime", 110, HorizontalAlignment.Left);
+        }
+        private bool DisableDevice()
+        {
+            labelInfo.Text = "Working...";
+            bool bRet = pOcxObject.EnableDevice(m_nMachineNum, 0);
+            if (bRet)
+            {
+                labelInfo.Text = "Disable Device Success!";
+                return true;
+            }
+            else
+            {
+                labelInfo.Text = "No Device...";
+                return false;
+            }
+        }
+        private void ShowErrorInfo()
+        {
+            int nErrorValue = 0;
+            pOcxObject.GetLastError(ref nErrorValue);
+            labelInfo.Text = common.FormErrorStr(nErrorValue);
+        }
+        private void btnReadSLogData_Click(object sender, EventArgs e)
+        {
+            InitSLogListView();
+
+            DisableDevice();
+
+            pOcxObject.ReadMark = checkBox1.Checked;
+
+            bool bRet;
+            bRet = pOcxObject.ReadSuperLogData(m_nMachineNum);
+            if (!bRet)
+            {
+                ShowErrorInfo();
+
+                pOcxObject.EnableDevice(m_nMachineNum, 1);
+
+                return;
+            }
+
+            SuperLogInfo sLogInfo = new SuperLogInfo();
+            List<SuperLogInfo> myArray = new List<SuperLogInfo>();
+
+            do
+            {
+                bRet = pOcxObject.GetSuperLogData(
+                    m_nMachineNum,
+                    ref sLogInfo.dwTMachineNumber,
+                    ref sLogInfo.dwSEnrollNumber,
+                    ref sLogInfo.dwSEMachineNumber,
+                    ref sLogInfo.dwGEMachineNumber,
+                    ref sLogInfo.dwGEMachineNumber,
+                    ref sLogInfo.dwManipulation,
+                    ref sLogInfo.dwFingerNumber,
+                    ref sLogInfo.dwYear,
+                    ref sLogInfo.dwMonth,
+                    ref sLogInfo.dwDay,
+                    ref sLogInfo.dwHour,
+                    ref sLogInfo.dwMinute
+                    );
+
+                if (bRet)
+                {
+                    myArray.Add(sLogInfo);
+                }
+
+            } while (bRet);
+
+            int i = 1;
+            String str;
+            foreach (SuperLogInfo sInfo in myArray)
+            {
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.Text = i.ToString();
+                i++;
+
+                lvi.SubItems.Add(sInfo.dwTMachineNumber.ToString());
+                lvi.SubItems.Add(sInfo.dwSEnrollNumber.ToString("D8"));
+                lvi.SubItems.Add(sInfo.dwSEMachineNumber.ToString());
+
+                lvi.SubItems.Add(sInfo.dwGEnrollNumber.ToString());  //GEnlNo
+                lvi.SubItems.Add(sInfo.dwGEMachineNumber.ToString());
+
+                str = sInfo.dwManipulation.ToString("0--") + common.FormSLogStr(sInfo.dwManipulation);
+                lvi.SubItems.Add(str);                                          // Verify Mode
+
+                if (sInfo.dwFingerNumber < 10)
+                {
+                    str = sInfo.dwFingerNumber.ToString();
+                }
+                else if (sInfo.dwFingerNumber == 10)
+                {
+                    str = "Password";
+
+                }
+                else
+                {
+                    str = "Card";
+
+                }
+
+                lvi.SubItems.Add(str);
+
+                //如果要提高效率
+                DateTime dt = new DateTime(sInfo.dwYear,
+                    sInfo.dwMonth,
+                    sInfo.dwDay,
+                    sInfo.dwHour,
+                    sInfo.dwMinute,
+                    0);
+
+                lvi.SubItems.Add(dt.ToString("yyyy/MM/dd HH:mm"));
+
+
+                listView1.Items.Add(lvi);
+
+            }
+            i -= 1;
+            labelTotal.Text = i.ToString("Total Read 0");
+
+            labelInfo.Text = "GetSuperLogData Success...";
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+
+        }
+        private void btnReadAllSLogData_Click(object sender, EventArgs e)
+        {
+            InitSLogListView();
+
+            DisableDevice();
+
+            bool bRet;
+            bRet = pOcxObject.ReadSuperLogData(m_nMachineNum);
+            if (!bRet)
+            {
+                ShowErrorInfo();
+
+                pOcxObject.EnableDevice(m_nMachineNum, 1);
+
+                return;
+            }
+
+            SuperLogInfo sLogInfo = new SuperLogInfo();
+            List<SuperLogInfo> myArray = new List<SuperLogInfo>();
+
+            do
+            {
+                bRet = pOcxObject.GetAllSLogData(
+                    m_nMachineNum,
+                    ref sLogInfo.dwTMachineNumber,
+                    ref sLogInfo.dwSEnrollNumber,
+                    ref sLogInfo.dwSEMachineNumber,
+                    ref sLogInfo.dwGEMachineNumber,
+                    ref sLogInfo.dwGEMachineNumber,
+                    ref sLogInfo.dwManipulation,
+                    ref sLogInfo.dwFingerNumber,
+                    ref sLogInfo.dwYear,
+                    ref sLogInfo.dwMonth,
+                    ref sLogInfo.dwDay,
+                    ref sLogInfo.dwHour,
+                    ref sLogInfo.dwMinute
+                    );
+
+                if (bRet)
+                {
+                    myArray.Add(sLogInfo);
+                }
+
+            } while (bRet);
+
+            int i = 1;
+            String str;
+            foreach (SuperLogInfo sInfo in myArray)
+            {
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.Text = i.ToString();
+                i++;
+
+                lvi.SubItems.Add(sInfo.dwTMachineNumber.ToString());
+                lvi.SubItems.Add(sInfo.dwSEnrollNumber.ToString("D8"));
+                lvi.SubItems.Add(sInfo.dwSEMachineNumber.ToString());
+
+                lvi.SubItems.Add(sInfo.dwGEnrollNumber.ToString("D8"));  //GEnlNo
+                lvi.SubItems.Add(sInfo.dwGEMachineNumber.ToString());
+
+                str = sInfo.dwManipulation.ToString("0--") + common.FormSLogStr(sInfo.dwManipulation);
+                lvi.SubItems.Add(str);                                          // Verify Mode
+
+                if (sInfo.dwFingerNumber < 10)
+                {
+                    str = sInfo.dwFingerNumber.ToString();
+                }
+                else if (sInfo.dwFingerNumber == 10)
+                {
+                    str = "Password";
+
+                }
+                else
+                {
+                    str = "Card";
+
+                }
+
+                lvi.SubItems.Add(str);
+
+                //如果要提高效率
+                DateTime dt = new DateTime(sInfo.dwYear,
+                    sInfo.dwMonth,
+                    sInfo.dwDay,
+                    sInfo.dwHour,
+                    sInfo.dwMinute,
+                    0);
+
+                lvi.SubItems.Add(dt.ToString("yyyy/MM/dd HH:mm"));
+
+
+                listView1.Items.Add(lvi);
+
+            }
+
+            i -= 1;
+            labelTotal.Text = i.ToString("Total Read 0");
+
+            labelInfo.Text = "GetAllSLogData Success...";
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+        }
+        private void btnEmptySLogData_Click(object sender, EventArgs e)
+        {
+            bool bRet;
+
+            DisableDevice();
+
+            bRet = pOcxObject.EmptySuperLogData(m_nMachineNum);
+            if (bRet)
+            {
+                labelInfo.Text = "EmptySuperLogData OK";
+            }
+            else
+            {
+                ShowErrorInfo();
+            }
+
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+        }
+        private void InitGLogListView()
+        {
+            listView1.Clear();
+            listView1.Columns.Add("", 40, HorizontalAlignment.Left);
+            listView1.Columns.Add("TMchNo", 90, HorizontalAlignment.Left);
+            listView1.Columns.Add("EnrollNo", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("EMchNo", 90, HorizontalAlignment.Left);     //
+            listView1.Columns.Add("InOut", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("VeriMode", 130, HorizontalAlignment.Left);
+            listView1.Columns.Add("DateTime", 130, HorizontalAlignment.Left);
+        }
+        private void UDGLogRead_Click(object sender, EventArgs e)
+        {
+            string strFilePath;
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = System.Environment.CurrentDirectory;
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                strFilePath = openFileDialog1.FileName;
+
+            }
+            else
+            {
+                return;
+            }
+
+            bool bRet;
+            bRet = pOcxObject.USBReadGeneralLogData(strFilePath);
+            if (!bRet)
+            {
+                ShowErrorInfo();
+                return;
+            }
+
+            GeneralLogInfo gLogInfo = new GeneralLogInfo();
+            List<GeneralLogInfo> myArray = new List<GeneralLogInfo>();
+
+            do
+            {
+                bRet = pOcxObject.GetAllGLogData(m_nMachineNum,
+                ref gLogInfo.dwTMachineNumber,
+                ref gLogInfo.dwEnrollNumber,
+                ref gLogInfo.dwEMachineNumber,
+                ref gLogInfo.dwVerifyMode,
+                ref gLogInfo.dwYear,
+                ref gLogInfo.dwMonth,
+                ref gLogInfo.dwDay,
+                ref gLogInfo.dwHour,
+                ref gLogInfo.dwMinute
+                );
+
+                if (bRet)
+                {
+                    myArray.Add(gLogInfo);
+                }
+
+            } while (bRet);
+
+            InitGLogListView();
+
+            int i = 1;
+            string str;
+            foreach (GeneralLogInfo gInfo in myArray)
+            {
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.Text = i.ToString();
+                i++;
+
+                lvi.SubItems.Add(gInfo.dwTMachineNumber.ToString());
+                lvi.SubItems.Add(gInfo.dwEnrollNumber.ToString("D8"));
+                lvi.SubItems.Add(gInfo.dwEMachineNumber.ToString());
+
+                int nInOut = gInfo.dwVerifyMode / 8;
+                lvi.SubItems.Add(nInOut.ToString());                             //INOUT
+
+                str = common.FormString(gInfo.dwVerifyMode, gInfo.dwEnrollNumber);
+                lvi.SubItems.Add(str);                                          // Verify Mode
+
+                DateTime dt = new DateTime(gInfo.dwYear,
+                    gInfo.dwMonth,
+                    gInfo.dwDay,
+                    gInfo.dwHour,
+                    gInfo.dwMinute,
+                    0);
+
+                lvi.SubItems.Add(dt.ToString("yyyy/MM/dd HH:mm"));
+
+
+                listView1.Items.Add(lvi);
+
+            }
+
+            i -= 1;
+            labelTotal.Text = i.ToString("Total Read 0");
+
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+        }
+        private void btnReadGLogData_Click(object sender, EventArgs e)
+        {
+            InitGLogListView();
+
+            bool bRet;
+            GeneralLogInfo gLogInfo = new GeneralLogInfo();
+
+            List<GeneralLogInfo> myArray = new List<GeneralLogInfo>();
+
+            // if true, only read new log
+            pOcxObject.ReadMark = checkBox1.Checked;
+
+            DisableDevice();
+
+            bRet = pOcxObject.ReadGeneralLogData(m_nMachineNum);
+            if (!bRet)
+            {
+                ShowErrorInfo();
+
+                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                return;
+            }
+
+            do
+            {
+                bRet = pOcxObject.GetGeneralLogData(m_nMachineNum,
+                ref gLogInfo.dwTMachineNumber,
+                ref gLogInfo.dwEnrollNumber,
+                ref gLogInfo.dwEMachineNumber,
+                ref gLogInfo.dwVerifyMode,
+                ref gLogInfo.dwYear,
+                ref gLogInfo.dwMonth,
+                ref gLogInfo.dwDay,
+                ref gLogInfo.dwHour,
+                ref gLogInfo.dwMinute
+                );
+
+                if (bRet)
+                {
+                    myArray.Add(gLogInfo);
+                }
+
+            } while (bRet);
+
+            int i = 1;
+            foreach (GeneralLogInfo gInfo in myArray)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = i.ToString();
+                i++;
+
+                lvi.SubItems.Add(gInfo.dwTMachineNumber.ToString());
+                lvi.SubItems.Add(gInfo.dwEnrollNumber.ToString("D8"));
+                lvi.SubItems.Add(gInfo.dwEMachineNumber.ToString());
+
+                int nInOut = gInfo.dwVerifyMode / 8;
+                lvi.SubItems.Add(nInOut.ToString());                             //INOUT
+
+                string str = common.FormString(gInfo.dwVerifyMode, gInfo.dwEnrollNumber);
+                lvi.SubItems.Add(str);                                          // Verify Mode
+
+                DateTime dt = new DateTime(gInfo.dwYear,
+                    gInfo.dwMonth,
+                    gInfo.dwDay,
+                    gInfo.dwHour,
+                    gInfo.dwMinute,
+                    0);
+
+                lvi.SubItems.Add(dt.ToString("yyyy/MM/dd HH:mm"));
+
+
+                listView1.Items.Add(lvi);
+
+            }
+
+            labelInfo.Text = "success...";
+
+            i -= 1;
+            labelTotal.Text = i.ToString("Total Read 0");
+
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+        }
+        private void btnEmptyGLogData_Click(object sender, EventArgs e)
+        {
+            bool bRet;
+
+            DisableDevice();
+
+            bRet = pOcxObject.EmptyGeneralLogData(m_nMachineNum);
+            if (bRet)
+            {
+                labelInfo.Text = "EmptyGeneralLogData OK";
+            }
+            else
+            {
+                ShowErrorInfo();
+            }
+
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+
+        }
+        private void btnReadAllGLogData_Click(object sender, EventArgs e)
+        {
+            InitGLogListView();
+
+            bool bRet;
+            GeneralLogInfo gLogInfo = new GeneralLogInfo();
+
+            List<GeneralLogInfo> myArray = new List<GeneralLogInfo>();
+
+
+            DisableDevice();
+            bRet = pOcxObject.ReadAllGLogData(m_nMachineNum);
+            if (!bRet)
+            {
+                ShowErrorInfo();
+
+                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                return;
+            }
+
+            do
+            {
+                bRet = pOcxObject.GetAllGLogData(m_nMachineNum,
+                ref gLogInfo.dwTMachineNumber,
+                ref gLogInfo.dwEnrollNumber,
+                ref gLogInfo.dwEMachineNumber,
+                ref gLogInfo.dwVerifyMode,
+                ref gLogInfo.dwYear,
+                ref gLogInfo.dwMonth,
+                ref gLogInfo.dwDay,
+                ref gLogInfo.dwHour,
+                ref gLogInfo.dwMinute
+                );
+
+                if (bRet)
+                {
+                    myArray.Add(gLogInfo);
+                }
+
+            } while (bRet);
+
+            int i = 1;
+            string str;
+            foreach (GeneralLogInfo gInfo in myArray)
+            {
+                ListViewItem lvi = new ListViewItem();
+
+                lvi.Text = i.ToString();
+                i++;
+
+                lvi.SubItems.Add(gInfo.dwTMachineNumber.ToString());
+                lvi.SubItems.Add(gInfo.dwEnrollNumber.ToString("D8"));
+                lvi.SubItems.Add(gInfo.dwEMachineNumber.ToString());
+
+                int nInOut = gInfo.dwVerifyMode / 8;
+                lvi.SubItems.Add(nInOut.ToString());                             //INOUT
+
+                str = common.FormString(gInfo.dwVerifyMode, gInfo.dwEnrollNumber);
+                lvi.SubItems.Add(str);                                          // Verify Mode
+
+                //如果要提高效率
+                DateTime dt = new DateTime(gInfo.dwYear,
+                    gInfo.dwMonth,
+                    gInfo.dwDay,
+                    gInfo.dwHour,
+                    gInfo.dwMinute,
+                    0);
+
+                lvi.SubItems.Add(dt.ToString("yyyy/MM/dd HH:mm"));
+
+
+                listView1.Items.Add(lvi);
+
+            }
+
+            i -= 1;
+            labelTotal.Text = i.ToString("Total Read 0");
+
+            pOcxObject.EnableDevice(m_nMachineNum, 1);
+        }
+        #endregion
+
+        #region AIKYO
+        private void btnGetLogsByAIKYO_Click(object sender, EventArgs e)
+        {
+            var mess = string.Empty;
+            var logs = GetLogsByAIKYO(dtFromDateByAIKYO.Value, dtToDateByAIKYO.Value, 0, ref mess);
+            if (logs.Count > 0)
+            {
+                BindToGridView(logs);
+                textTotalByAIKYO.Text = logs.Count.ToString();
+            }
+        }
+        public bool ConnectByAIKYO(ref string message)
+        {
+            var connectionString = "Driver={Microsoft Access Driver (*.mdb)};" + $"Dbq={textPathByAIKYO.Text};";
+            if (string.IsNullOrEmpty(connectionString) || string.IsNullOrWhiteSpace(textPathByAIKYO.Text))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public List<LogData> GetLogsByAIKYO(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var listLogs = new List<LogData>();
+            try
+            {
+                var startDate = fromDate.HasValue ? fromDate.Value.Date : DateTime.Now;
+                var endDate = toDate.HasValue ? toDate.Value.Date.AddDays(1).AddMilliseconds(-1) : DateTime.Now;
+                // lấy dữ liệu từ DB access
+                listLogs = GetTimeKeeperDataFromAccess(startDate, endDate, ref message);
+                message += $"\n=========GetLogsByAIKYO-----Số lượng bản ghi: {listLogs.Count}============";
+                return listLogs.OrderBy(x => x.CheckTime).ToList();
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                Logger.LogInfo($"\n==============GetLogsByAIKYO : Exception: {ex.Message}==============");
+            }
+            return listLogs;
+        }
+        private List<LogData> GetTimeKeeperDataFromAccess(DateTime fromDate, DateTime toDate, ref string message)
+        {
+            var connectionString = "Driver={Microsoft Access Driver (*.mdb)};" + $"Dbq={textPathByAIKYO.Text};";
+            if (!string.IsNullOrWhiteSpace(Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess")))
+            {
+                connectionString = Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess");
+            }
+            List<LogData> timeKeeperDatas = new List<LogData>();
+            try
+            {
+                var con = new OdbcConnection();
+                con.ConnectionString = connectionString;
+                var cmd = new OdbcCommand { Connection = con };
+                con.Open();
+                cmd.CommandText = "SELECT a.UserFullCode, a.UserEnrollNumber, a.TimeStr, a.MachineNo FROM InOutRun a WHERE a.TimeStr BETWEEN ? AND ?;";
+                cmd.Parameters.Add("?",OdbcType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate;
+                
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        LogData timeKeeperData = new LogData();
+                        var userID = 1;
+                        if (reader[0] != null && int.TryParse(reader[0].ToString(), out userID))
+                        {
+                            timeKeeperData.UserID = userID.ToString();
+                            var time = DateTime.Now;
+                            if(reader[2] != null && DateTime.TryParse(reader[2].ToString(), out time))
+                            {
+                                timeKeeperData.CheckTime = time;
+                                timeKeeperData.DeviceID = reader[3] != null ? reader[3].ToString() : String.Empty;
+                                timeKeeperDatas.Add(timeKeeperData);
+                            }
+                        }
+                    }
+                }
+                con.Close();
+                return timeKeeperDatas;
+            }
+            catch (Exception ex)
+            {
+                message += ex.ToString();
+                Logger.LogInfo($"\n==============GetTimeKeeperDataFromAccess : Exception: {ex.Message}==============");
+                return new List<LogData>();
+            }
+        }
+        #endregion
     }
 }

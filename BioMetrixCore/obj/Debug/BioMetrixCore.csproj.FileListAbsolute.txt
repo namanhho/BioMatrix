@@ -124,3 +124,8 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.cspro
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.CopyComplete
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\NLog.config
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\Mapster.Core.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\Mapster.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\IPAddressControlLib.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\AxInterop.FP_CLOCKLib.dll

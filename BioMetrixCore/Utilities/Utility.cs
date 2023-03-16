@@ -18,16 +18,16 @@ namespace BioMetrixCore.Utilities
         {
             //var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //var value = config.AppSettings.Settings[key].Value;
-            var value = ConfigurationManager.AppSettings[key];
+            var value = System.Configuration.ConfigurationManager.AppSettings[key];
             return value;
         }
 
         public static void SaveAppSetting(string key, string value)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings[key].Value = value;
             config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection("appSettings");
+            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
