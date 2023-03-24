@@ -23,6 +23,9 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Data.Odbc;
 using System.Data.SqlClient;
+using AxFP_CLOCKLib;
+using zkemkeeper;
+using System.Threading;
 
 namespace BioMetrixCore
 {
@@ -2638,5 +2641,879 @@ namespace BioMetrixCore
             }
         }
         #endregion
+        public bool ConnectByRonaldJack(ref string message)
+        {
+            bool success = false;
+            bool ronaldJackConnectOnly = false;
+            try
+            {
+                Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["RonaldJackConnectOnly"], out ronaldJackConnectOnly);
+                // connect using zkteco sdk first
+                if (!ronaldJackConnectOnly)
+                {
+                    success = ConnectTCP(ref message);
+                }
+                // if cannot connect then using ronald jack sdk
+                else
+                {
+                    //success = ConnectTCP(ref message);
+                    //if (!success)
+                    //{
+                    if (this.axCLOCK == null)
+                    {
+                        var thr = new Thread(() =>
+                        {
+                            this.axCLOCK = new AxFP_CLOCK();
+                        });
+                        thr.SetApartmentState(ApartmentState.STA);
+                        thr.Start();
+                    }
+                    if (!string.IsNullOrEmpty(txtIPByRonaldJack.Text))
+                    {
+                        message += $"Start connecting using ronald jack sdk \n";
+                        var ip = txtIPByRonaldJack.Text;
+                        int nPassword = int.Parse(txtPassByRonaldJack.Text);
+                        bool fpClockCreateControl = true;
+                        Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl"], out fpClockCreateControl);
+                        if (fpClockCreateControl)
+                        {
+                            axCLOCK.CreateControl();
+                        }
+                        success = axCLOCK.OpenCommPort(1);
+                        message += $"OpenComPort 1st time: {success} \n";
+                        axCLOCK.SetIPAddress(ref ip, int.Parse(txtPortByRonaldJack.Text), nPassword);
+
+                        success = axCLOCK.OpenCommPort(1);
+                        if (success)
+                        {
+                            _isConnected = true;
+
+                            string sn = string.Empty;
+                            axCLOCK.GetSerialNumber(1, ref sn);
+                            message += $"GetSerialNumber: {sn} \n";
+                            //Config.SerialNumber = sn;
+                            axCLOCK.EnableDevice(1, 1);
+                        }
+
+                        if (!success)
+                        {
+                            int code = 0;
+                            axCLOCK.GetLastError(ref code);
+                            message += $"Connect ronald jack failed with code: {code}";
+                        }
+                    }
+                    else
+                    {
+                        message += "Invalid config";
+                    }
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                message = ex.Message;
+            }
+
+            return success;
+        }
+
+        private AxFP_CLOCK axCLOCK;
+        private CZKEM axCZKEM;
+        private bool _isConnected;
+        private int[] ModeInArr = new int[3] { 0, 3, 4 };
+        private int[] ModeOutArr = new int[3] { 1, 2, 5 };
+        protected string[] formatDates = { "MM/dd/yyyy HH:mm", "MM/dd/yyyy H:mm", "MM/dd/yyyy HH:m", "MM/dd/yyyy HH:m", "M/dd/yyyy HH:mm", "M/dd/yyyy H:mm", "M/dd/yyyy HH:m", "M/dd/yyyy H:m", "M/d/yyyy HH:mm", "M/d/yyyy H:mm", "M/d/yyyy HH:m", "M/d/yyyy H:m", "MM/d/yyyy HH:mm", "MM/d/yyyy H:mm", "MM/d/yyyy HH:m", "MM/d/yyyy H:m" };
+        private List<LogData> GetLogsFromDevice(DeviceInfo config, DateTime? fromDate, DateTime? toDate)
+        {
+            List<LogData> logs = new List<LogData>();
+
+            try
+            {
+                Logger.LogError($"\nGetLogsFromDevice_Bat đau InitClient");
+                Logger.LogError($"\nGetLogsFromDevice_InitClient xong");
+                string message = string.Empty;
+                var connected = true;
+                bool customConnectByGetLogsFromDevice = false;
+                Boolean.TryParse(Utility.GetAppSetting("CustomConnectByGetLogsFromDevice"), out customConnectByGetLogsFromDevice);
+                if (!customConnectByGetLogsFromDevice)
+                {
+                    Logger.LogError($"\nGetLogsFromDevice_Bat đau ket noi");
+                    connected = ConnectByRonaldJack(ref message);
+                }
+                Logger.LogError($"\nGetLogsFromDevice_Ket noi xong: {connected}");
+                if (connected)
+                {
+                    int limitDataLog = 6;
+                    Logger.LogError($"\nGetLogsFromDevice_Bat đau lay du lieu");
+                    logs = GetLogsByRonalJack(fromDate, toDate, limitDataLog, ref message);
+                    Logger.LogError($"\nGetLogsFromDevice_Lay du lieu xong, Count: {logs.Count}");
+                }
+                Logger.LogError($"\nGetLogsFromDevice: {message} ======== Count: {logs.Count}");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\nGetLogsFromDevice_Exception");
+                Logger.HandleException(ex);
+            }
+
+            return logs;
+        }
+        private bool ConnectDevice()
+        {
+            var success = false;
+            try
+            {
+                string message = string.Empty;
+                success = ConnectByRonaldJack(ref message);
+                if (success)
+                {
+                    Logger.LogError($"ConnectDevice : {success} - Message: {message}");
+                }
+                else
+                {
+                    Logger.LogError($"ConnectDevice Failed: {message}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.HandleException(ex);
+            }
+
+            return success;
+        }
+        private bool ConnectTCP(ref string message)
+        {
+            bool success = false;
+            try
+            {
+                int pass = 0;
+                if (!string.IsNullOrEmpty(txtIPByRonaldJack.Text) && int.TryParse(txtPassByRonaldJack.Text, out pass))
+                {
+                    axCZKEM.Beep(5000);
+                    axCZKEM.SetCommPassword(pass);
+                    success = axCZKEM.Connect_Net(txtIPByRonaldJack.Text, int.Parse(txtPortByRonaldJack.Text));
+                    if (success)
+                    {
+                        _isConnected = true;
+
+                        axCZKEM.DisableDeviceWithTimeOut(1, 60);
+                        string sn = string.Empty;
+                        axCZKEM.GetSerialNumber(1, out sn);
+                        //Config.SerialNumber = sn;
+                        axCZKEM.EnableDevice(1, true);
+                    }
+
+                    if (!success)
+                    {
+                        int code = 0;
+                        axCZKEM.GetLastError(ref code);
+                        message += $"Connect zkteco failed with code: {code}";
+                        Utility.SaveAppSetting("RonaldJackConnectOnly", "true");
+                    }
+                }
+                else
+                {
+                    message += "Invalid config";
+                    Utility.SaveAppSetting("RonaldJackConnectOnly", "true");
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                message = ex.Message;
+                Utility.SaveAppSetting("RonaldJackConnectOnly", "true");
+            }
+            return success;
+        }
+        public List<LogData> GetLogsByRonalJack(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var logs = new List<LogData>();
+            try
+            {
+                if (_isConnected || true)
+                {
+                    var getLogOption = 0;
+                    int.TryParse(System.Configuration.ConfigurationSettings.AppSettings["GetLogOption"], out getLogOption);
+                    if (getLogOption > 0)
+                    {
+                        switch (getLogOption)
+                        {
+                            case 1:
+                                logs = GetLogsRonaldJackGLog(ref message);
+                                break;
+                            case 2:
+                                logs = GetLogsRonaldJackAllSLog(ref message);
+                                break;
+                            case 3:
+                                logs = GetLogsRonaldJackSLog(ref message);
+                                break;
+                            case 4:
+                                logs = GetLogsRonaldJackAllGLog(ref message);
+                                break;
+                            case 5:
+                                logs = GetLogsRonaldJackAllGLogWithSecond(ref message);
+                                break;
+                            case 6:
+                                logs = GetLogsZkTeco(ref message);
+                                break;
+                            default:
+                                logs = GetLogsZkTeco(ref message);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "5");
+                            logs = GetLogsRonaldJackAllGLogWithSecond(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "4");
+                            logs = GetLogsRonaldJackAllGLog(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "3");
+                            logs = GetLogsRonaldJackSLog(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "2");
+                            logs = GetLogsRonaldJackAllSLog(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "1");
+                            logs = GetLogsRonaldJackGLog(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "6");
+                            logs = GetLogsZkTeco(ref message);
+                        }
+                        if (logs.Count == 0)
+                        {
+                            Utility.SaveAppSetting("GetLogOption", "0");
+                        }
+                    }
+
+                }
+                else
+                {
+                    message = "Connect failed";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            if (logs.Count() == 0)
+            {
+                Utility.SaveAppSetting("GetLogOption", "0");
+            }
+            // ntgiang2 6.5.2021 nếu logs có nhiều hơn 2 bản ghi và checktime bản ghi đầu tên là gần nhất thì đảo lại để luôn cho bản ghi mới nhất là cuối cùng
+            if (logs.Count() >= 2 && logs[0].CheckTime >= logs[1].CheckTime)
+            {
+                var sortedListLogs = logs.OrderBy(x => x.CheckTime).ToList();
+                return sortedListLogs;
+            }
+            return logs;
+        }
+        public List<LogData> GetLogsZkTeco(ref string message)
+        {
+            var logs = new List<LogData>();
+            try
+            {
+                ConnectTCP(ref message);
+
+                if (_isConnected)
+                {
+                    axCZKEM.DisableDeviceWithTimeOut(1, 60);
+
+                    var flagRead = axCZKEM.ReadGeneralLogData(1);
+                    if (!flagRead)
+                    {
+                        int code = 0;
+                        axCZKEM.GetLastError(ref code);
+                        message += $"Zkteco can't read, failed with code: {code}";
+                    }
+
+                    string sdwEnrollNumber;
+                    int idwEnrollNumber = 0,
+                        dwVerifyMode = 0,
+                        dwInOutMode = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0,
+                        dwSecond = 0,
+                        dwWorkCode = 0;
+                    int dwTMachineNumber = 0,
+                        dwEMachineNumber = 0;
+                    // ntgiang2 23.4.2021 lấy product code của máy. Nếu trong list bỏ check thì bỏ check xem có phải kiểu màn hình đen trắng không
+                    bool colorMachine = false;
+
+                    if (colorMachine || axCZKEM.IsTFTMachine(1))
+                    {
+                        while (axCZKEM.SSR_GetGeneralLogData(1,
+                                                             out sdwEnrollNumber,
+                                                             out dwVerifyMode,
+                                                             out dwInOutMode,
+                                                             out dwYear,
+                                                             out dwMonth,
+                                                             out dwDay,
+                                                             out dwHour,
+                                                             out dwMinute,
+                                                             out dwSecond,
+                                                             ref dwWorkCode))
+                        {
+                            var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                            DateTime d;
+                            if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                                   System.Globalization.DateTimeStyles.None, out d))
+                            {
+                                var log = new LogData()
+                                {
+                                    UserID = sdwEnrollNumber,
+                                    FullName = string.Empty,
+                                    CheckTime = d,
+                                };
+                                logs.Add(log);
+                            }
+                            else
+                            {
+                                message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        while (axCZKEM.GetGeneralLogData(1,
+                                                         ref dwTMachineNumber,
+                                                         ref idwEnrollNumber,
+                                                         ref dwEMachineNumber,
+                                                         ref dwVerifyMode,
+                                                         ref dwInOutMode,
+                                                         ref dwYear,
+                                                         ref dwMonth,
+                                                         ref dwDay,
+                                                         ref dwHour,
+                                                         ref dwMinute))
+                        {
+                            var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                            DateTime d;
+                            if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                                   System.Globalization.DateTimeStyles.None, out d))
+                            {
+                                var log = new LogData()
+                                {
+                                    UserID = idwEnrollNumber.ToString(),
+                                    FullName = string.Empty,
+                                    CheckTime = d
+                                };
+                                logs.Add(log);
+                            }
+                            else
+                            {
+                                message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    message += "Connect failed";
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            message += $"Zkteco get {logs.Count} records";
+            return logs;
+        }
+        // get logs ronald jack 1
+        public List<LogData> GetLogsRonaldJackGLog(ref string message)
+        {
+            var logs = new List<LogData>();
+            if (this.axCLOCK == null)
+            {
+                var thr = new Thread(() =>
+                {
+                    this.axCLOCK = new AxFP_CLOCK();
+                });
+                thr.SetApartmentState(ApartmentState.STA);
+                thr.Start();
+            }
+            // Tạo control
+            bool fpClockCreateControl = true;
+            Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl1"], out fpClockCreateControl);
+            if (fpClockCreateControl)
+            {
+                this.axCLOCK.CreateControl();
+            }
+            try
+            {
+                var isEnable = this.axCLOCK.EnableDevice(1, 0);
+                var bRet = this.axCLOCK.ReadGeneralLogData(1);
+                if (!bRet)
+                {
+                    int code = 0;
+                    this.axCLOCK.GetLastError(ref code);
+                    message += $"Ronald Jack 1 can't read, failed with code: {code}";
+                    this.axCLOCK.EnableDevice(1, 1);
+                    return logs;
+                }
+
+                do
+                {
+                    int dwEnrollNumber = 0,
+                        dwVerifyMode = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0;
+                    int dwTMachineNumber = 0,
+                        dwEMachineNumber = 0;
+                    bRet = this.axCLOCK.GetGeneralLogData(1,
+                    ref dwTMachineNumber,
+                    ref dwEnrollNumber,
+                    ref dwEMachineNumber,
+                    ref dwVerifyMode,
+                    ref dwYear,
+                    ref dwMonth,
+                    ref dwDay,
+                    ref dwHour,
+                    ref dwMinute
+                    );
+
+                    if (bRet)
+                    {
+                        var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                        DateTime d;
+                        if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                               System.Globalization.DateTimeStyles.None, out d))
+                        {
+                            var log = new LogData()
+                            {
+                                UserID = dwEnrollNumber.ToString(),
+                                FullName = string.Empty,
+                                CheckTime = d,
+                            };
+                            logs.Add(log);
+                        }
+                        else
+                        {
+                            message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                        }
+                    }
+
+                } while (bRet);
+
+                message += $"Ronald jack 1 get {logs.Count} records";
+                this.axCLOCK.EnableDevice(1, 1);
+
+            }
+            catch (Exception ex)
+            {
+                message += ex.Message;
+            }
+            return logs;
+        }
+        // get logs ronald jack 2
+        public List<LogData> GetLogsRonaldJackAllSLog(ref string message)
+        {
+            var logs = new List<LogData>();
+            if (this.axCLOCK == null)
+            {
+                var thr = new Thread(() =>
+                {
+                    this.axCLOCK = new AxFP_CLOCK();
+                });
+                thr.SetApartmentState(ApartmentState.STA);
+                thr.Start();
+            }
+            // Tạo control
+            bool fpClockCreateControl = true;
+            Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl1"], out fpClockCreateControl);
+            if (fpClockCreateControl)
+            {
+                this.axCLOCK.CreateControl();
+            }
+            try
+            {
+                var isEnable = this.axCLOCK.EnableDevice(1, 0);
+                var bRet = this.axCLOCK.ReadSuperLogData(1);
+                if (!bRet)
+                {
+                    int code = 0;
+                    this.axCLOCK.GetLastError(ref code);
+                    message += $"Ronald Jack 2 can't read, failed with code: {code}";
+                    this.axCLOCK.EnableDevice(1, 1);
+                    return logs;
+                }
+
+                do
+                {
+                    int dwSEnrollNumber = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0;
+                    int dwTMachineNumber = 0,
+                        dwSEMachineNumber = 0,
+                        dwGEMachineNumber = 0,
+                        dwManipulation = 0,
+                        dwFingerNumber = 0;
+                    bRet = this.axCLOCK.GetAllSLogData(1,
+                    ref dwTMachineNumber,
+                    ref dwSEnrollNumber,
+                    ref dwSEMachineNumber,
+                    ref dwGEMachineNumber,
+                    ref dwGEMachineNumber,
+                    ref dwManipulation,
+                    ref dwFingerNumber,
+                    ref dwYear,
+                    ref dwMonth,
+                    ref dwDay,
+                    ref dwHour,
+                    ref dwMinute
+                    );
+
+                    if (bRet)
+                    {
+                        var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                        DateTime d;
+                        if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                               System.Globalization.DateTimeStyles.None, out d))
+                        {
+                            var log = new LogData()
+                            {
+                                UserID = dwSEnrollNumber.ToString(),
+                                FullName = string.Empty,
+                                CheckTime = d,
+                            };
+                            logs.Add(log);
+                        }
+                        else
+                        {
+                            message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                        }
+                    }
+
+                } while (bRet);
+
+                message += $"Ronald jack 2 get {logs.Count} records";
+                this.axCLOCK.EnableDevice(1, 1);
+
+            }
+            catch (Exception ex)
+            {
+                message += ex.Message;
+            }
+            return logs;
+        }
+        // get logs ronald jack 3
+        public List<LogData> GetLogsRonaldJackSLog(ref string message)
+        {
+            var logs = new List<LogData>();
+            if (this.axCLOCK == null)
+            {
+                var thr = new Thread(() =>
+                {
+                    this.axCLOCK = new AxFP_CLOCK();
+                });
+                thr.SetApartmentState(ApartmentState.STA);
+                thr.Start();
+            }
+            // Tạo control
+            bool fpClockCreateControl = true;
+            Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl1"], out fpClockCreateControl);
+            if (fpClockCreateControl)
+            {
+                this.axCLOCK.CreateControl();
+            }
+            try
+            {
+                var isEnable = this.axCLOCK.EnableDevice(1, 0);
+                var bRet = this.axCLOCK.ReadSuperLogData(1);
+                if (!bRet)
+                {
+                    int code = 0;
+                    this.axCLOCK.GetLastError(ref code);
+                    message += $"Ronald Jack 3 can't read, failed with code: {code}";
+                    this.axCLOCK.EnableDevice(1, 1);
+                    return logs;
+                }
+
+                do
+                {
+                    int dwSEnrollNumber = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0;
+                    int dwTMachineNumber = 0,
+                        dwSEMachineNumber = 0,
+                        dwGEMachineNumber = 0,
+                        dwManipulation = 0,
+                        dwFingerNumber = 0;
+                    bRet = this.axCLOCK.GetSuperLogData(1,
+                    ref dwTMachineNumber,
+                    ref dwSEnrollNumber,
+                    ref dwSEMachineNumber,
+                    ref dwGEMachineNumber,
+                    ref dwGEMachineNumber,
+                    ref dwManipulation,
+                    ref dwFingerNumber,
+                    ref dwYear,
+                    ref dwMonth,
+                    ref dwDay,
+                    ref dwHour,
+                    ref dwMinute
+                    );
+
+                    if (bRet)
+                    {
+                        var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                        DateTime d;
+                        if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                               System.Globalization.DateTimeStyles.None, out d))
+                        {
+                            var log = new LogData()
+                            {
+                                UserID = dwSEnrollNumber.ToString(),
+                                FullName = string.Empty,
+                                CheckTime = d,
+                            };
+                            logs.Add(log);
+                        }
+                        else
+                        {
+                            message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                        }
+                    }
+
+                } while (bRet);
+
+                message += $"Ronald jack 3 get {logs.Count} records";
+                this.axCLOCK.EnableDevice(1, 1);
+
+            }
+            catch (Exception ex)
+            {
+                message += ex.Message;
+            }
+            return logs;
+        }
+        // get logs ronald jack 4
+        public List<LogData> GetLogsRonaldJackAllGLog(ref string message)
+        {
+            var logs = new List<LogData>();
+            if (this.axCLOCK == null)
+            {
+                var thr = new Thread(() =>
+                {
+                    this.axCLOCK = new AxFP_CLOCK();
+                });
+                thr.SetApartmentState(ApartmentState.STA);
+                thr.Start();
+            }
+            // Tạo control
+            bool fpClockCreateControl = true;
+            Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl1"], out fpClockCreateControl);
+            if (fpClockCreateControl)
+            {
+                this.axCLOCK.CreateControl();
+            }
+            try
+            {
+                var isEnable = this.axCLOCK.EnableDevice(1, 0);
+                var bRet = this.axCLOCK.ReadAllGLogData(1);
+                if (!bRet)
+                {
+                    int code = 0;
+                    this.axCLOCK.GetLastError(ref code);
+                    message += $"Ronald Jack 4 can't read, failed with code: {code}";
+                    this.axCLOCK.EnableDevice(1, 1);
+                    return logs;
+                }
+
+                do
+                {
+                    int dwTMachineNumber = 0,
+                        dwEnrollNumber = 0,
+                        dwEMachineNumber = 0,
+                        dwVerifyMode = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0;
+                    bRet = this.axCLOCK.GetAllGLogData(1,
+                                                                    ref dwTMachineNumber,
+                                                                    ref dwEnrollNumber,
+                                                                    ref dwEMachineNumber,
+                                                                    ref dwVerifyMode,
+                                                                    ref dwYear,
+                                                                    ref dwMonth,
+                                                                    ref dwDay,
+                                                                    ref dwHour,
+                                                                    ref dwMinute);
+
+                    if (bRet)
+                    {
+                        var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                        DateTime d;
+                        if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                               System.Globalization.DateTimeStyles.None, out d))
+                        {
+                            var log = new LogData()
+                            {
+                                UserID = dwEnrollNumber.ToString(),
+                                FullName = string.Empty,
+                                CheckTime = d,
+                            };
+                            logs.Add(log);
+                        }
+                        else
+                        {
+                            message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                        }
+                    }
+
+                } while (bRet);
+
+                message += $"Ronald jack 4 get {logs.Count} records";
+                this.axCLOCK.EnableDevice(1, 1);
+
+            }
+            catch (Exception ex)
+            {
+                message += ex.Message;
+            }
+            return logs;
+        }
+        // get logs ronald jack 5
+        public List<LogData> GetLogsRonaldJackAllGLogWithSecond(ref string message)
+        {
+            var logs = new List<LogData>();
+            if (this.axCLOCK == null)
+            {
+                var thr = new Thread(() =>
+                {
+                    this.axCLOCK = new AxFP_CLOCK();
+                });
+                thr.SetApartmentState(ApartmentState.STA);
+                thr.Start();
+            }
+            // Tạo control
+            bool fpClockCreateControl = true;
+            Boolean.TryParse(System.Configuration.ConfigurationSettings.AppSettings["FpClockCreateControl1"], out fpClockCreateControl);
+            if (fpClockCreateControl)
+            {
+                this.axCLOCK.CreateControl();
+            }
+            try
+            {
+                var isEnable = this.axCLOCK.EnableDevice(1, 0);
+                var bRet = this.axCLOCK.ReadAllGLogData(1);
+                if (!bRet)
+                {
+                    int code = 0;
+                    this.axCLOCK.GetLastError(ref code);
+                    message += $"Ronald Jack 5 can't read, failed with code: {code}";
+                    this.axCLOCK.EnableDevice(1, 1);
+                    return logs;
+                }
+
+                do
+                {
+                    int dwTMachineNumber = 0,
+                        dwEnrollNumber = 0,
+                        dwEMachineNumber = 0,
+                        dwVerifyMode = 0,
+                        dwInout = 0,
+                        dwEvent = 0,
+                        dwYear = 0,
+                        dwMonth = 0,
+                        dwDay = 0,
+                        dwHour = 0,
+                        dwMinute = 0,
+                        dwSecond = 0;
+                    bRet = this.axCLOCK.GetAllGLogDataWithSecond(1,
+                                                                    ref dwTMachineNumber,
+                                                                    ref dwEnrollNumber,
+                                                                    ref dwEMachineNumber,
+                                                                    ref dwVerifyMode,
+                                                                    ref dwInout,
+                                                                    ref dwEvent,
+                                                                    ref dwYear,
+                                                                    ref dwMonth,
+                                                                    ref dwDay,
+                                                                    ref dwHour,
+                                                                    ref dwMinute,
+                                                                    ref dwSecond);
+
+                    if (bRet)
+                    {
+                        var stringDate = $"{dwMonth}/{dwDay}/{dwYear} {dwHour}:{dwMinute}";
+                        DateTime d;
+                        if (DateTime.TryParseExact(stringDate, formatDates, System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),
+                               System.Globalization.DateTimeStyles.None, out d))
+                        {
+                            var log = new LogData()
+                            {
+                                UserID = dwEnrollNumber.ToString(),
+                                FullName = string.Empty,
+                                CheckTime = d,
+                            };
+                            logs.Add(log);
+                        }
+                        else
+                        {
+                            message += $"Error Data: Year: {dwYear} - Month: {dwMonth} - Day: {dwDay} - Hour: {dwHour} - Minute: {dwMinute}";
+                        }
+                    }
+
+                } while (bRet);
+
+                message += $"Ronald jack 5 get {logs.Count} records";
+                this.axCLOCK.EnableDevice(1, 1);
+
+            }
+            catch (Exception ex)
+            {
+                message += ex.Message;
+            }
+            return logs;
+        }
+
+        private void btnConnectByRonaldJack_Click(object sender, EventArgs e)
+        {
+            var connect = ConnectDevice();
+            if (connect)
+            {
+                txtTotalLogsByRonaldJack.Text = "Kết nối thành công";
+            }
+            else
+            {
+                txtTotalLogsByRonaldJack.Text = "Kết nối thất bại";
+            }
+        }
+
+        private void btnGetLogByRonaldJack_Click(object sender, EventArgs e)
+        {
+            var logs = GetLogsFromDevice(new DeviceInfo(), dtFromDateByRonaldJack.Value, dtToDateByRonaldJack.Value);
+            logs = logs.OrderBy(x => x.CheckTime).ToList();
+            txtTotalLogsByRonaldJack.Text = logs.Count.ToString();
+        }
     }
 }

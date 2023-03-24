@@ -1,0 +1,24 @@
+2023-03-24 17:33:54.9554 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-24 17:34:03.2531 ConnectDevice Failed: Could not load file or assembly 'Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+2023-03-24 17:34:56.9967 ConnectDevice Failed: Could not load file or assembly 'Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+2023-03-24 17:34:59.7475 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-24 17:34:59.7475 
+GetLogsFromDevice_InitClient xong
+2023-03-24 17:34:59.7475 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-24 17:35:02.6218 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-24 17:35:02.6218 
+GetLogsFromDevice: Could not load file or assembly 'Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified. ======== Count: 0
+2023-03-24 17:35:25.8846 ConnectDevice Failed: Could not load file or assembly 'Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified.
+2023-03-24 17:36:52.2459 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-24 17:36:52.2459 
+GetLogsFromDevice_InitClient xong
+2023-03-24 17:36:52.2459 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-24 17:40:03.3120 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-24 17:40:03.3120 
+GetLogsFromDevice: Could not load file or assembly 'Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies. The system cannot find the file specified. ======== Count: 0
