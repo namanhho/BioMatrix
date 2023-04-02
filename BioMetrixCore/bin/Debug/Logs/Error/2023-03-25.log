@@ -1,0 +1,1124 @@
+2023-03-25 12:15:34.0512 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 12:15:34.0522 
+GetLogsFromDevice_InitClient xong
+2023-03-25 12:15:34.0522 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 12:15:34.0522 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 12:15:47.2329 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 12:15:47.2329 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2 ======== Count: 0
+2023-03-25 12:15:59.2030 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 12:19:03.4419 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 12:19:14.3879 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 12:20:15.1959 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 15:15:31.1574 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 15:15:40.8839 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 15:15:46.0678 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 15:15:46.0678 
+GetLogsFromDevice_InitClient xong
+2023-03-25 15:15:46.0678 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 15:15:46.0678 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 15:16:17.4584 
+GetLogsFromDevice_Lay du lieu xong, Count: 18993
+2023-03-25 15:16:17.4584 
+GetLogsFromDevice: Ronald jack 5 get 18993 records ======== Count: 18993
+2023-03-25 15:17:44.9251 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 15:17:59.9074 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 15:17:59.9074 
+GetLogsFromDevice_InitClient xong
+2023-03-25 15:17:59.9074 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 15:17:59.9074 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 15:41:39.5506 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 15:41:47.2853 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 15:41:53.5811 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 15:41:53.5811 
+GetLogsFromDevice_InitClient xong
+2023-03-25 15:41:53.5811 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 15:42:20.5582 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 15:42:20.5582 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 15:42:30.9397 
+GetLogsFromDevice_Lay du lieu xong, Count: 18993
+2023-03-25 15:42:30.9397 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18993 records ======== Count: 18993
+2023-03-25 16:45:01.8049 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 16:45:21.1979 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 16:46:30.4807 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 16:46:38.2774 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:46:38.2774 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:46:38.2774 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:46:53.1577 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:46:53.1577 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 16:47:05.4446 
+GetLogsFromDevice_Lay du lieu xong, Count: 18995
+2023-03-25 16:47:05.4446 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18995 records ======== Count: 18995
+2023-03-25 16:47:49.6698 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:47:49.6698 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:47:49.6698 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:48:02.3489 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:48:02.3489 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 16:48:12.3243 
+GetLogsFromDevice_Lay du lieu xong, Count: 18995
+2023-03-25 16:48:12.3243 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18995 records ======== Count: 18995
+2023-03-25 16:48:32.2508 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:48:32.2508 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:48:32.2508 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:49:54.1286 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:49:54.1306 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:49:54.1306 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:50:08.1835 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:50:08.1835 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 16:50:19.0470 
+GetLogsFromDevice_Lay du lieu xong, Count: 18995
+2023-03-25 16:50:19.0470 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18995 records ======== Count: 18995
+2023-03-25 16:51:43.4041 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:51:43.4041 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:51:43.4041 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:51:52.8775 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:51:52.8775 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 16:52:02.4917 
+GetLogsFromDevice_Lay du lieu xong, Count: 18995
+2023-03-25 16:52:02.4917 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18995 records ======== Count: 18995
+2023-03-25 16:54:10.8839 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 16:54:27.0985 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 16:54:30.4914 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:54:30.4914 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:54:30.4914 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:55:36.7623 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 16:55:50.8888 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 16:56:08.8611 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 16:56:11.9182 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:56:11.9182 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:56:11.9182 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:56:11.9182 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 16:56:31.8825 
+GetLogsFromDevice_Lay du lieu xong, Count: 18996
+2023-03-25 16:56:31.8825 
+GetLogsFromDevice: Ronald jack 5 get 18996 records ======== Count: 18996
+2023-03-25 16:57:20.1893 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 16:57:26.9934 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:57:26.9934 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:57:26.9934 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:59:33.1024 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 16:59:33.1024 
+GetLogsFromDevice_InitClient xong
+2023-03-25 16:59:33.1024 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 16:59:43.8229 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 16:59:43.8229 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:00:03.5380 
+GetLogsFromDevice_Lay du lieu xong, Count: 18998
+2023-03-25 17:00:03.5380 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 18998 records ======== Count: 18998
+2023-03-25 17:00:21.8050 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:00:35.8541 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:00:35.8541 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:00:35.8541 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:00:47.8556 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:00:47.8556 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:00:54.9643 
+GetLogsFromDevice_Lay du lieu xong, Count: 19001
+2023-03-25 17:00:54.9643 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19001 records ======== Count: 19001
+2023-03-25 17:00:57.3196 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:00:57.3196 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:00:57.3196 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:01:00.4570 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:01:00.4570 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:01:08.1984 
+GetLogsFromDevice_Lay du lieu xong, Count: 19001
+2023-03-25 17:01:08.1984 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19001 records ======== Count: 19001
+2023-03-25 17:01:12.2953 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:01:12.2953 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:01:12.2953 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:01:16.2980 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:01:16.2980 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:01:55.7228 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:01:55.7248 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:01:55.7248 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:02:00.0839 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:02:00.0839 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:02:10.4105 
+GetLogsFromDevice_Lay du lieu xong, Count: 19002
+2023-03-25 17:02:10.4105 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19002 records ======== Count: 19002
+2023-03-25 17:02:15.6788 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:04:27.8511 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:04:27.8511 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:04:27.8511 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:04:30.9604 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:04:30.9604 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:04:32.8289 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:04:32.8289 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:04:32.8289 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:04:35.2495 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:04:35.2495 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:04:51.5609 
+GetLogsFromDevice_Lay du lieu xong, Count: 19003
+2023-03-25 17:04:51.5609 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19003 records ======== Count: 19003
+2023-03-25 17:05:03.5820 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:05:10.3342 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:05:19.5302 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:05:26.7700 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:05:50.6085 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:05:56.6038 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:07:23.7870 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:07:27.7239 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:07:43.7423 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:07:57.2659 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:08:00.8081 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:08:07.0596 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:08:12.1599 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:08:15.8101 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:08:22.4208 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:08:25.8018 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:08:56.7940 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:09:02.0256 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:09:06.8808 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:09:10.4470 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:11:46.7065 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:12:04.0119 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:12:19.5214 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:12:39.6467 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:12:47.1305 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:14:17.1078 ConnectDevice Failed: Thread is not running; it cannot be resumed.
+2023-03-25 17:14:57.5178 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:04.3370 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:11.4040 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:19.0975 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:31.6950 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:45.8861 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:15:55.3321 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:16:42.2362 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:16:51.9047 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:17:13.6433 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:17:21.9634 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:17:52.0987 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:00.6818 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:05.8539 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:18.9577 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:25.6533 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:29.6753 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:32.7409 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:36.7666 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:18:54.5463 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:19:00.9097 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:04.9588 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:07.4746 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:11.9782 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:14.9018 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:17.0931 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:19.6622 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:47.4394 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:19:50.0436 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:52.2662 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:54.7766 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:57.2261 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:19:59.4787 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:20:09.2435 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:20:38.9589 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:20:41.7559 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:20:50.6912 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:20:54.7261 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:21:18.5705 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:25:22.9009 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:25:25.5771 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:25:27.7185 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:25:29.7512 ConnectDevice Failed: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown.
+2023-03-25 17:30:21.1434 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:30:30.0206 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:30:44.3255 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:04.4261 ConnectDevice Failed: Object reference not set to an instance of an object.
+2023-03-25 17:31:09.1870 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:14.0187 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:22.6273 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:25.4211 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:29.3539 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:31.9062 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:35.2957 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:37.8794 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:31:42.4179 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 17:43:19.2768 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:43:19.2768 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:43:19.2768 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:43:41.4998 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:43:41.4998 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:43:50.9511 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:43:50.9511 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:43:52.8549 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:43:52.8549 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:43:52.8549 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:44:06.7743 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:44:06.7743 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:44:15.7456 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:44:15.7456 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: True 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:46:01.9390 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:46:01.9390 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:46:01.9390 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:46:01.9390 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:46:03.8794 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:46:03.8794 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:46:05.9207 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:46:05.9207 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:46:05.9207 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:46:05.9207 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:46:08.4829 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:46:08.4829 
+GetLogsFromDevice: Object reference not set to an instance of an object.Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:46:10.1142 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:46:10.1142 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:46:10.1152 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:46:10.1152 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:46:12.4843 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:46:12.4843 
+GetLogsFromDevice: Object reference not set to an instance of an object.Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:46:44.5822 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:46:44.5852 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:46:44.5852 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:46:44.5852 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:46:46.3806 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:46:46.3806 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:46:47.7844 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:46:47.7844 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:46:47.7844 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:46:47.7844 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:47:00.9317 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:47:00.9317 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2Ronald Jack 4 can't read, failed with code: 2Ronald Jack 3 can't read, failed with code: 2Ronald Jack 2 can't read, failed with code: 2Ronald Jack 1 can't read, failed with code: 2Connect zkteco failed with code: -2Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:47:03.7221 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:47:03.7221 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:47:03.7221 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:47:03.7221 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:47:31.3912 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:47:31.3912 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2Ronald Jack 4 can't read, failed with code: 2Ronald Jack 3 can't read, failed with code: 2Ronald Jack 2 can't read, failed with code: 2Ronald Jack 1 can't read, failed with code: 2Connect zkteco failed with code: -2Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:48:28.0207 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:48:28.0207 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:48:28.0207 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:48:28.0207 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:48:30.4783 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:48:30.4783 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:48:32.6484 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:48:32.6484 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:48:32.6484 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:48:32.6484 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:48:56.3645 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:48:56.3645 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2Ronald Jack 4 can't read, failed with code: 2Ronald Jack 3 can't read, failed with code: 2Ronald Jack 2 can't read, failed with code: 2Ronald Jack 1 can't read, failed with code: 2Connect zkteco failed with code: -2Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:48:57.6419 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:48:57.6419 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:48:57.6419 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:48:57.6419 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:49:14.7698 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:49:14.7698 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2Ronald Jack 4 can't read, failed with code: 2Ronald Jack 3 can't read, failed with code: 2Ronald Jack 2 can't read, failed with code: 2Ronald Jack 1 can't read, failed with code: 2Connect zkteco failed with code: -2Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:49:28.0720 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:49:28.0720 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:49:28.0720 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:49:28.0720 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:49:37.0202 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:49:37.0202 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:49:39.3303 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:49:39.3303 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:49:39.3303 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:49:39.3303 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:50:53.4445 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:50:53.4445 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:50:53.4445 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:50:53.4445 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:51:04.8836 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:51:04.8836 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2 ======== Count: 0
+2023-03-25 17:51:07.1427 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:51:07.1427 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:51:07.1427 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:51:07.1427 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:51:19.3433 
+GetLogsFromDevice_Lay du lieu xong, Count: 0
+2023-03-25 17:51:19.3433 
+GetLogsFromDevice: Ronald Jack 5 can't read, failed with code: 2Ronald Jack 4 can't read, failed with code: 2Ronald Jack 3 can't read, failed with code: 2Ronald Jack 2 can't read, failed with code: 2Ronald Jack 1 can't read, failed with code: 2Connect zkteco failed with code: -2Connect failedZkteco get 0 records ======== Count: 0
+2023-03-25 17:53:36.4641 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:53:36.4641 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:53:36.4641 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:53:38.5331 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:53:38.5331 
+GetLogsFromDevice: Object reference not set to an instance of an object. ======== Count: 0
+2023-03-25 17:53:40.5036 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:53:40.5036 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:53:40.5036 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:53:40.6652 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:53:40.6652 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:53:49.6053 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:53:49.6053 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:54:28.7610 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:28.7610 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:28.7610 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:28.9306 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:54:28.9306 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:54:40.2643 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:54:40.2643 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:54:42.0898 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:42.0898 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:42.0898 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:44.5825 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:54:44.5825 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:54:46.4867 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:46.4867 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:46.4867 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:48.0069 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:54:48.0069 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:54:49.5866 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:49.5866 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:49.5866 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:50.4854 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:54:50.4854 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:54:51.9670 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:51.9670 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:51.9670 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:52.7383 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:54:52.7383 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:54:54.3087 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:54.3087 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:54.3087 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:54:55.0775 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:54:55.0775 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:54:56.7839 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:54:56.7839 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:54:56.7839 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:55:02.6512 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:55:02.6512 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:55:04.6961 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:55:04.6961 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:55:04.6961 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:55:05.7703 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:55:05.7703 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:55:07.4896 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:55:07.4896 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:55:07.4896 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:55:08.4520 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:55:08.4520 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:55:10.1329 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:55:10.1329 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:55:10.1329 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:55:10.8023 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:55:10.8023 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:55:12.3919 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:55:12.3919 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:55:12.3919 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:55:13.0644 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-25 17:55:13.0644 
+GetLogsFromDevice: Exception of type 'System.Windows.Forms.AxHost+InvalidActiveXStateException' was thrown. ======== Count: 0
+2023-03-25 17:56:01.4465 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:56:01.4465 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:56:01.4465 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:56:01.6087 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:56:01.6087 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:56:09.0662 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:56:09.0662 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:56:15.2951 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:56:15.2951 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:56:15.2951 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:56:15.4607 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:56:15.4607 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:59:08.5534 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:59:08.5534 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:59:08.5534 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:59:08.7179 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:59:08.7179 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:59:16.0644 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:59:16.0644 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:59:21.1546 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:59:21.1546 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:59:21.1546 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:59:21.3142 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:59:21.3142 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:59:28.9069 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:59:28.9069 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:59:33.8107 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:59:33.8107 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:59:33.8107 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:59:33.9754 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:59:33.9754 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:59:41.6210 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:59:41.6210 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 17:59:47.3621 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 17:59:47.3621 
+GetLogsFromDevice_InitClient xong
+2023-03-25 17:59:47.3621 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 17:59:48.5419 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 17:59:48.5419 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 17:59:55.2707 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 17:59:55.2707 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:00:30.6209 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:00:30.6209 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:00:30.6209 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:00:30.7817 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:00:30.7817 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:00:38.9368 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:00:38.9368 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:00:45.2698 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:00:45.2698 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:00:45.2698 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:00:45.4330 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:00:45.4330 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:00:53.3907 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:00:53.3907 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:00:58.0213 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:00:58.0213 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:00:58.0213 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:00:58.1848 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:00:58.1848 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:01:05.7938 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:01:05.7938 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:01:10.4385 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:01:10.4385 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:01:10.4385 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:01:11.6034 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:01:11.6034 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:01:18.7866 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:01:18.7866 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:01:24.2405 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:01:24.2405 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:01:24.2405 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:01:24.4042 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:01:24.4042 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:01:32.0230 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:01:32.0230 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:03:13.2045 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 18:03:26.3317 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 18:03:37.5003 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-03-25 18:03:49.0522 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:03:49.0522 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:03:49.0522 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:03:49.2170 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:03:49.2170 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:03:57.6251 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:03:57.6251 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:04:02.4958 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:04:02.4958 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:04:02.4958 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:04:03.6718 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:04:03.6718 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-03-25 18:04:11.3306 
+GetLogsFromDevice_Lay du lieu xong, Count: 19005
+2023-03-25 18:04:11.3306 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 19005 records ======== Count: 19005
+2023-03-25 18:04:29.0043 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-25 18:04:29.0043 
+GetLogsFromDevice_InitClient xong
+2023-03-25 18:04:29.0043 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-25 18:04:30.1865 
+GetLogsFromDevice_Ket noi xong: True
+2023-03-25 18:04:30.1865 
+GetLogsFromDevice_Bat dau lay du lieu

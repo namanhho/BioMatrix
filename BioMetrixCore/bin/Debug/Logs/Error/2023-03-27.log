@@ -1,0 +1,57 @@
+2023-03-27 10:10:04.6099 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:12:02.1445 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:12:10.3749 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:12:21.4671 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:14:13.7459 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:14:56.0956 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:15:07.0475 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:17:46.5673 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:19:52.6990 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:30:18.6474 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 10:30:29.0191 
+GetLogsFromDevice_Bat dau InitClient
+2023-03-27 10:30:29.0191 
+GetLogsFromDevice_InitClient xong
+2023-03-27 10:30:29.0191 
+GetLogsFromDevice_Bat dau ket noi
+2023-03-27 11:32:18.6342 
+GetLogsFromDevice_Ket noi xong: False
+2023-03-27 11:32:18.6342 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5 ======== Count: 0
+2023-03-27 11:32:29.0921 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 11:48:20.0101 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 12:07:21.2167 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 19:08:07.9587 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5
+2023-03-27 19:08:19.1176 ConnectDevice Failed: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+Connect ronald jack failed with code: 5

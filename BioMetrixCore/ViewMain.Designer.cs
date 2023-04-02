@@ -178,18 +178,18 @@
             this.textPathByAIKYO = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.txtTotalLogsByRonaldJack = new System.Windows.Forms.TextBox();
+            this.dgvLogsByRonaldJack = new System.Windows.Forms.DataGridView();
+            this.txtPassByRonaldJack = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.btnConnectByRonaldJack = new System.Windows.Forms.Button();
+            this.btnGetLogByRonaldJack = new System.Windows.Forms.Button();
+            this.dtToDateByRonaldJack = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByRonaldJack = new System.Windows.Forms.DateTimePicker();
             this.txtPortByRonaldJack = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.txtIPByRonaldJack = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
-            this.btnGetLogByRonaldJack = new System.Windows.Forms.Button();
-            this.dtToDateByRonaldJack = new System.Windows.Forms.DateTimePicker();
-            this.dtFromDateByRonaldJack = new System.Windows.Forms.DateTimePicker();
-            this.btnConnectByRonaldJack = new System.Windows.Forms.Button();
-            this.txtPassByRonaldJack = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtTotalLogsByRonaldJack = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -214,7 +214,7 @@
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByAIKYO)).BeginInit();
             this.tabPage10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1730,7 +1730,7 @@
             // tabPage10
             // 
             this.tabPage10.Controls.Add(this.txtTotalLogsByRonaldJack);
-            this.tabPage10.Controls.Add(this.dataGridView1);
+            this.tabPage10.Controls.Add(this.dgvLogsByRonaldJack);
             this.tabPage10.Controls.Add(this.txtPassByRonaldJack);
             this.tabPage10.Controls.Add(this.label45);
             this.tabPage10.Controls.Add(this.btnConnectByRonaldJack);
@@ -1747,6 +1747,73 @@
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Sunbeam";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // txtTotalLogsByRonaldJack
+            // 
+            this.txtTotalLogsByRonaldJack.Location = new System.Drawing.Point(38, 397);
+            this.txtTotalLogsByRonaldJack.Name = "txtTotalLogsByRonaldJack";
+            this.txtTotalLogsByRonaldJack.Size = new System.Drawing.Size(100, 20);
+            this.txtTotalLogsByRonaldJack.TabIndex = 15;
+            this.txtTotalLogsByRonaldJack.Text = "0";
+            // 
+            // dgvLogsByRonaldJack
+            // 
+            this.dgvLogsByRonaldJack.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByRonaldJack.Location = new System.Drawing.Point(38, 102);
+            this.dgvLogsByRonaldJack.Name = "dgvLogsByRonaldJack";
+            this.dgvLogsByRonaldJack.Size = new System.Drawing.Size(682, 276);
+            this.dgvLogsByRonaldJack.TabIndex = 14;
+            // 
+            // txtPassByRonaldJack
+            // 
+            this.txtPassByRonaldJack.Location = new System.Drawing.Point(103, 76);
+            this.txtPassByRonaldJack.Name = "txtPassByRonaldJack";
+            this.txtPassByRonaldJack.Size = new System.Drawing.Size(116, 20);
+            this.txtPassByRonaldJack.TabIndex = 13;
+            this.txtPassByRonaldJack.Text = "0";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(35, 83);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(57, 13);
+            this.label45.TabIndex = 12;
+            this.label45.Text = "Mã kết nối";
+            // 
+            // btnConnectByRonaldJack
+            // 
+            this.btnConnectByRonaldJack.Location = new System.Drawing.Point(247, 36);
+            this.btnConnectByRonaldJack.Name = "btnConnectByRonaldJack";
+            this.btnConnectByRonaldJack.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectByRonaldJack.TabIndex = 11;
+            this.btnConnectByRonaldJack.Text = "Kết nối";
+            this.btnConnectByRonaldJack.UseVisualStyleBackColor = true;
+            this.btnConnectByRonaldJack.Click += new System.EventHandler(this.btnConnectByRonaldJack_Click);
+            // 
+            // btnGetLogByRonaldJack
+            // 
+            this.btnGetLogByRonaldJack.Location = new System.Drawing.Point(596, 33);
+            this.btnGetLogByRonaldJack.Name = "btnGetLogByRonaldJack";
+            this.btnGetLogByRonaldJack.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogByRonaldJack.TabIndex = 10;
+            this.btnGetLogByRonaldJack.Text = "Lấy dữ liệu";
+            this.btnGetLogByRonaldJack.UseVisualStyleBackColor = true;
+            this.btnGetLogByRonaldJack.Click += new System.EventHandler(this.btnGetLogByRonaldJack_Click);
+            // 
+            // dtToDateByRonaldJack
+            // 
+            this.dtToDateByRonaldJack.Location = new System.Drawing.Point(363, 76);
+            this.dtToDateByRonaldJack.Name = "dtToDateByRonaldJack";
+            this.dtToDateByRonaldJack.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByRonaldJack.TabIndex = 9;
+            // 
+            // dtFromDateByRonaldJack
+            // 
+            this.dtFromDateByRonaldJack.Location = new System.Drawing.Point(363, 35);
+            this.dtFromDateByRonaldJack.Name = "dtFromDateByRonaldJack";
+            this.dtFromDateByRonaldJack.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByRonaldJack.TabIndex = 8;
             // 
             // txtPortByRonaldJack
             // 
@@ -1781,73 +1848,6 @@
             this.label44.Size = new System.Drawing.Size(17, 13);
             this.label44.TabIndex = 4;
             this.label44.Text = "IP";
-            // 
-            // btnGetLogByRonaldJack
-            // 
-            this.btnGetLogByRonaldJack.Location = new System.Drawing.Point(596, 33);
-            this.btnGetLogByRonaldJack.Name = "btnGetLogByRonaldJack";
-            this.btnGetLogByRonaldJack.Size = new System.Drawing.Size(75, 23);
-            this.btnGetLogByRonaldJack.TabIndex = 10;
-            this.btnGetLogByRonaldJack.Text = "Lấy dữ liệu";
-            this.btnGetLogByRonaldJack.UseVisualStyleBackColor = true;
-            this.btnGetLogByRonaldJack.Click += new System.EventHandler(this.btnGetLogByRonaldJack_Click);
-            // 
-            // dtToDateByRonaldJack
-            // 
-            this.dtToDateByRonaldJack.Location = new System.Drawing.Point(363, 76);
-            this.dtToDateByRonaldJack.Name = "dtToDateByRonaldJack";
-            this.dtToDateByRonaldJack.Size = new System.Drawing.Size(200, 20);
-            this.dtToDateByRonaldJack.TabIndex = 9;
-            // 
-            // dtFromDateByRonaldJack
-            // 
-            this.dtFromDateByRonaldJack.Location = new System.Drawing.Point(363, 35);
-            this.dtFromDateByRonaldJack.Name = "dtFromDateByRonaldJack";
-            this.dtFromDateByRonaldJack.Size = new System.Drawing.Size(200, 20);
-            this.dtFromDateByRonaldJack.TabIndex = 8;
-            // 
-            // btnConnectByRonaldJack
-            // 
-            this.btnConnectByRonaldJack.Location = new System.Drawing.Point(247, 36);
-            this.btnConnectByRonaldJack.Name = "btnConnectByRonaldJack";
-            this.btnConnectByRonaldJack.Size = new System.Drawing.Size(75, 23);
-            this.btnConnectByRonaldJack.TabIndex = 11;
-            this.btnConnectByRonaldJack.Text = "Kết nối";
-            this.btnConnectByRonaldJack.UseVisualStyleBackColor = true;
-            this.btnConnectByRonaldJack.Click += new System.EventHandler(this.btnConnectByRonaldJack_Click);
-            // 
-            // txtPassByRonaldJack
-            // 
-            this.txtPassByRonaldJack.Location = new System.Drawing.Point(103, 76);
-            this.txtPassByRonaldJack.Name = "txtPassByRonaldJack";
-            this.txtPassByRonaldJack.Size = new System.Drawing.Size(116, 20);
-            this.txtPassByRonaldJack.TabIndex = 13;
-            this.txtPassByRonaldJack.Text = "0";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(35, 83);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(57, 13);
-            this.label45.TabIndex = 12;
-            this.label45.Text = "Mã kết nối";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(38, 102);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(682, 276);
-            this.dataGridView1.TabIndex = 14;
-            // 
-            // txtTotalLogsByRonaldJack
-            // 
-            this.txtTotalLogsByRonaldJack.Location = new System.Drawing.Point(38, 397);
-            this.txtTotalLogsByRonaldJack.Name = "txtTotalLogsByRonaldJack";
-            this.txtTotalLogsByRonaldJack.Size = new System.Drawing.Size(100, 20);
-            this.txtTotalLogsByRonaldJack.TabIndex = 15;
-            this.txtTotalLogsByRonaldJack.Text = "0";
             // 
             // ViewMain
             // 
@@ -1893,7 +1893,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByAIKYO)).EndInit();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2060,7 +2060,7 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.TextBox txtIPByRonaldJack;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvLogsByRonaldJack;
         private System.Windows.Forms.TextBox txtTotalLogsByRonaldJack;
     }
 }

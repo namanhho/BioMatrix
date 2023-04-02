@@ -31,12 +31,27 @@ namespace BioMetrixCore
 {
     public partial class ViewMain : Form
     {
+        private AxFP_CLOCK axCLOCK;
+        private CZKEM axCZKEM;
+        private bool _isConnected;
+        private int[] ModeInArr = new int[3] { 0, 3, 4 };
+        private int[] ModeOutArr = new int[3] { 1, 2, 5 };
+        protected string[] formatDates = { "MM/dd/yyyy HH:mm", "MM/dd/yyyy H:mm", "MM/dd/yyyy HH:m", "MM/dd/yyyy HH:m", "M/dd/yyyy HH:mm", "M/dd/yyyy H:mm", "M/dd/yyyy HH:m", "M/dd/yyyy H:m", "M/d/yyyy HH:mm", "M/d/yyyy H:mm", "M/d/yyyy HH:m", "M/d/yyyy H:m", "MM/d/yyyy HH:mm", "MM/d/yyyy H:mm", "MM/d/yyyy HH:m", "MM/d/yyyy H:m" };
+
         public ViewMain()
         {
             InitializeComponent();
             ToggleControls(false);
             ShowStatusBar(string.Empty, true);
             DisplayEmpty();
+
+            //var thr = new Thread(() =>
+            //{
+            //    this.axCLOCK = new AxFP_CLOCK();
+            //});
+            //thr.SetApartmentState(ApartmentState.STA);
+            //thr.Start();
+            //this.axCZKEM = new CZKEM();
         }
 
         DeviceManipulator manipulator = new DeviceManipulator();
@@ -358,6 +373,15 @@ namespace BioMetrixCore
             dgvLogsByAIKYO.Controls.Clear();
             dgvLogsByAIKYO.Rows.Clear();
             dgvLogsByAIKYO.Columns.Clear();
+
+            if (dgvLogsByRonaldJack.Controls.Count > 2)
+            {
+                dgvLogsByRonaldJack.Controls.RemoveAt(2);
+            }
+            dgvLogsByRonaldJack.DataSource = null;
+            dgvLogsByRonaldJack.Controls.Clear();
+            dgvLogsByRonaldJack.Rows.Clear();
+            dgvLogsByRonaldJack.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -394,6 +418,10 @@ namespace BioMetrixCore
             dgvLogsByAIKYO.DataSource = list;
             dgvLogsByAIKYO.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvLogsByAIKYO);
+
+            dgvLogsByRonaldJack.DataSource = list;
+            dgvLogsByRonaldJack.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByRonaldJack);
         }
 
 
@@ -2667,6 +2695,11 @@ namespace BioMetrixCore
                         });
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
+                        Thread.Sleep(3000);
+                    }
+                    else
+                    {
+                        //thr.Abort();
                     }
                     if (!string.IsNullOrEmpty(txtIPByRonaldJack.Text))
                     {
@@ -2718,12 +2751,6 @@ namespace BioMetrixCore
             return success;
         }
 
-        private AxFP_CLOCK axCLOCK;
-        private CZKEM axCZKEM;
-        private bool _isConnected;
-        private int[] ModeInArr = new int[3] { 0, 3, 4 };
-        private int[] ModeOutArr = new int[3] { 1, 2, 5 };
-        protected string[] formatDates = { "MM/dd/yyyy HH:mm", "MM/dd/yyyy H:mm", "MM/dd/yyyy HH:m", "MM/dd/yyyy HH:m", "M/dd/yyyy HH:mm", "M/dd/yyyy H:mm", "M/dd/yyyy HH:m", "M/dd/yyyy H:m", "M/d/yyyy HH:mm", "M/d/yyyy H:mm", "M/d/yyyy HH:m", "M/d/yyyy H:m", "MM/d/yyyy HH:mm", "MM/d/yyyy H:mm", "MM/d/yyyy HH:m", "MM/d/yyyy H:m" };
         private List<LogData> GetLogsFromDevice(DeviceInfo config, DateTime? fromDate, DateTime? toDate)
         {
             List<LogData> logs = new List<LogData>();
@@ -3048,6 +3075,7 @@ namespace BioMetrixCore
                 });
                 thr.SetApartmentState(ApartmentState.STA);
                 thr.Start();
+                Thread.Sleep(3000);
             }
             // Tạo control
             bool fpClockCreateControl = true;
@@ -3137,6 +3165,7 @@ namespace BioMetrixCore
                 });
                 thr.SetApartmentState(ApartmentState.STA);
                 thr.Start();
+                Thread.Sleep(3000);
             }
             // Tạo control
             bool fpClockCreateControl = true;
@@ -3231,6 +3260,7 @@ namespace BioMetrixCore
                 });
                 thr.SetApartmentState(ApartmentState.STA);
                 thr.Start();
+                Thread.Sleep(3000);
             }
             // Tạo control
             bool fpClockCreateControl = true;
@@ -3325,6 +3355,7 @@ namespace BioMetrixCore
                 });
                 thr.SetApartmentState(ApartmentState.STA);
                 thr.Start();
+                Thread.Sleep(3000);
             }
             // Tạo control
             bool fpClockCreateControl = true;
@@ -3413,6 +3444,7 @@ namespace BioMetrixCore
                 });
                 thr.SetApartmentState(ApartmentState.STA);
                 thr.Start();
+                Thread.Sleep(3000);
             }
             // Tạo control
             bool fpClockCreateControl = true;
@@ -3498,6 +3530,15 @@ namespace BioMetrixCore
 
         private void btnConnectByRonaldJack_Click(object sender, EventArgs e)
         {
+            var thr = new Thread(() =>
+            {
+                this.axCLOCK = new AxFP_CLOCK();
+            });
+            thr.SetApartmentState(ApartmentState.STA);
+            thr.Start();
+            Thread.Sleep(3000);
+            this.axCZKEM = new CZKEM();
+
             var connect = ConnectDevice();
             if (connect)
             {
@@ -3511,9 +3552,22 @@ namespace BioMetrixCore
 
         private void btnGetLogByRonaldJack_Click(object sender, EventArgs e)
         {
+            var thr = new Thread(() =>
+            {
+                this.axCLOCK = new AxFP_CLOCK();
+            });
+            thr.SetApartmentState(ApartmentState.STA);
+            thr.Start();
+            Thread.Sleep(3000);
+            this.axCZKEM = new CZKEM();
+
             var logs = GetLogsFromDevice(new DeviceInfo(), dtFromDateByRonaldJack.Value, dtToDateByRonaldJack.Value);
-            logs = logs.OrderBy(x => x.CheckTime).ToList();
+            logs = logs.OrderByDescending(x => x.CheckTime).ToList();
             txtTotalLogsByRonaldJack.Text = logs.Count.ToString();
+            if (logs.Count > 0)
+            {
+                BindToGridView(logs);
+            }
         }
     }
 }
