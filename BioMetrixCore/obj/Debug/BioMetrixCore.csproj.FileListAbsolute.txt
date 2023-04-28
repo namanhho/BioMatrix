@@ -184,3 +184,7 @@ C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.cspro
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.CopyComplete
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Data.OleDb.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Data.OleDb.xml
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Data.Odbc.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Data.Odbc.xml

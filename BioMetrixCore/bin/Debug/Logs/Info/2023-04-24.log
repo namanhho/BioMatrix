@@ -1,0 +1,78 @@
+2023-04-24 14:25:36.6397 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 14:27:46.8792 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 14:28:07.5676 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 14:34:58.8088 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 14:45:54.9009 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 17:59:52.7205 
+==============GetTimeKeeperDataFromAccess : Exception: No data exists for the row/column.==============
+2023-04-24 18:01:02.6669 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [IM002] [Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified==============
+2023-04-24 18:25:30.1309 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [IM006] [Microsoft][ODBC Driver Manager] Driver's SQLSetConnectAttr failed
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x4f18 Thread 0x5568 DBC 0x654578c Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x4f18 Thread 0x5568 DBC 0x654578c Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source==============
+2023-04-24 18:26:51.8885 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [IM006] [Microsoft][ODBC Driver Manager] Driver's SQLSetConnectAttr failed
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x1f70 Thread 0x4354 DBC 0x645578c Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x1f70 Thread 0x4354 DBC 0x645578c Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Provider
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Data Source==============

@@ -51,421 +51,669 @@ namespace BioMetrixCore
 
         public ICollection<MachineInfo> GetLogData(ZkemClient objZkeeper, int machineNumber, ref string message)
         {
-            string dwEnrollNumber1 = "";
-            int dwVerifyMode = 0;
-            int dwInOutMode = 0;
-            int dwYear = 0;
-            int dwMonth = 0;
-            int dwDay = 0;
-            int dwHour = 0;
-            int dwMinute = 0;
-            int dwSecond = 0;
-            int dwWorkCode = 0;
-
-            int BYear = 0, BMonth = 0, BDay = 0, BHour = 0, BMinute = 0, EYear = 0, EMonth = 0, EDay = 0, EHour = 0, EMinute = 0;
-
             ICollection<MachineInfo> lstEnrollData = new List<MachineInfo>();
-
-            var a = Utility.GetAppSetting("ReadType");
-            int readType = 1;
-            int.TryParse(a, out readType);
-            switch (readType)
+            try
             {
-                case 1:
-                    objZkeeper.ReadAllGLogData(machineNumber);
-                    break;
-                case 2:
-                    objZkeeper.ReadGeneralLogData(machineNumber);
-                    break;
-                case 3:
-                    objZkeeper.ReadSuperLogData(machineNumber);
-                    break;
-                case 4:
-                    objZkeeper.ReadAllSLogData(machineNumber);
-                    break;
-                case 5:
-                    objZkeeper.ReadNewGLogData(machineNumber);
-                    break;
-                case 6:
-                    objZkeeper.ReadAllBellSchData(machineNumber);
-                    break;
-                default:
-                    break;
-            };
+                string dwEnrollNumber1 = "";
+                int dwVerifyMode = 0;
+                int dwInOutMode = 0;
+                int dwYear = 0;
+                int dwMonth = 0;
+                int dwDay = 0;
+                int dwHour = 0;
+                int dwMinute = 0;
+                int dwSecond = 0;
+                int dwWorkCode = 0;
 
-            int number = 0;
-            string str = string.Empty;
-            int dwEnrollNumber = 0;
+                int BYear = 0, BMonth = 0, BDay = 0, BHour = 0, BMinute = 0, EYear = 0, EMonth = 0, EDay = 0, EHour = 0, EMinute = 0;
 
-            a = Utility.GetAppSetting("type");
-            int type = 1;
-            int.TryParse(a, out type);
-            switch (type)
-            {
-                case 1:
-                    while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, ref dwWorkCode))
-
-
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type1 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(dwEnrollNumber1, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type1 - Count: {lstEnrollData.Count}";
-                    break;
-                case 2:
-                    while (objZkeeper.GetGeneralLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type2 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type2 - Count: {lstEnrollData.Count}";
-                    break;
-                case 3:
-                    while (objZkeeper.GetSuperLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type3 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type3 - Count: {lstEnrollData.Count}";
-                    break;
-                case 4:
-                    while (objZkeeper.GetAllSLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type4 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type4 - Count: {lstEnrollData.Count}";
-                    break;
-                case 5:
-                    while (objZkeeper.GetAllGLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type5 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type5 - Count: {lstEnrollData.Count}";
-                    break;
-                case 6:
-                    while (objZkeeper.GetGeneralExtLogData(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref dwWorkCode, ref number))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type6 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type6 - Count: {lstEnrollData.Count}";
-                    break;
-                case 7:
-                    while (objZkeeper.SSR_OutPutHTMLRep(machineNumber, dwEnrollNumber1, str, str, str, str, str, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, str, str, number, number, str))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type7 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(dwEnrollNumber1, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type7 - Count: {lstEnrollData.Count}";
-                    break;
-                case 8:
-                    while (objZkeeper.GetSuperLogData2(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type8 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type8 - Count: {lstEnrollData.Count}";
-                    break;
-                case 9:
-                    while (objZkeeper.ReadLastestLogData(machineNumber, number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type9 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type9 - Count: {lstEnrollData.Count}";
-                    break;
-                case 10:
-                    while (objZkeeper.ReadSuperLogDataEx(machineNumber, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type10 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type10 - Count: {lstEnrollData.Count}";
-                    break;
-                case 11:
-                    while (objZkeeper.GetSuperLogDataEx(machineNumber, ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type11 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(dwEnrollNumber1, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type11 - Count: {lstEnrollData.Count}";
-                    break;
-                case 12:
-                    while (objZkeeper.SSR_GetGeneralLogDataEx(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type12 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(dwEnrollNumber1, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type12 - Count: {lstEnrollData.Count}";
-                    break;
-                case 13:
-                    string TimeStr = string.Empty;
-                    while (objZkeeper.GetGeneralLogDataStr(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type13 - {TimeStr}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = dwEnrollNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type13 - Count: {lstEnrollData.Count}";
-                    break;
-                case 14:
-                    string time = string.Empty;
-                    while (objZkeeper.SSR_GetSuperLogData(machineNumber, out number, out str, out str, out number, out time, out number, out number, out number))
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type14 - {time}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type14 - Count: {lstEnrollData.Count}";
-                    break;
-                default:
-                    while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, ref dwWorkCode))
-
-
-                    {
-                        //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
-                        string inputDate = $"Type1 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(dwEnrollNumber1, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    message += $"Type1 - Count: {lstEnrollData.Count}";
-                    break;
-            };
-
-
-            if (type == 15)
-            {
-                int ret = 0;
-                int idwErrorCode = 0;
-                var fromTime = Utility.GetAppSetting("FromTime");
-                var toTime = Utility.GetAppSetting("ToTime");
-                objZkeeper.EnableDevice(machineNumber, false);//disable the device
-
-                string sdwEnrollNumber = "";
-                int idwVerifyMode = 0;
-                int idwInOutMode = 0;
-                int idwYear = 0;
-                int idwMonth = 0;
-                int idwDay = 0;
-                int idwHour = 0;
-                int idwMinute = 0;
-                int idwSecond = 0;
-                int idwWorkcode = 0;
-
-
-                if (objZkeeper.ReadTimeGLogData(machineNumber, fromTime, toTime))
+                var a = Utility.GetAppSetting("ReadType");
+                int readType = 1;
+                int.TryParse(a, out readType);
+                message += $"\nBat dau ReadType";
+                Logger.LogError($"\nBat dau ReadType");
+                var success = false;
+                switch (readType)
                 {
-                    while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
-                                out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
-                    {
-                        string inputDate = $"Type15 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+                    case 1:
+                        success = objZkeeper.ReadAllGLogData(machineNumber);
+                        break;
+                    case 2:
+                        success = objZkeeper.ReadGeneralLogData(machineNumber);
+                        break;
+                    case 3:
+                        success = objZkeeper.ReadSuperLogData(machineNumber);
+                        break;
+                    case 4:
+                        success = objZkeeper.ReadAllSLogData(machineNumber);
+                        break;
+                    case 5:
+                        success = objZkeeper.ReadNewGLogData(machineNumber);
+                        break;
+                    case 6:
+                        success = objZkeeper.ReadAllBellSchData(machineNumber);
+                        break;
+                    default:
+                        break;
+                };
 
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(sdwEnrollNumber, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
+                message += $"\nReadType_{readType} xong: success_{success}_ machineNumber: {machineNumber}===============";
+                Logger.LogError($"\nReadType_{readType} xong: success_{success}_ machineNumber: {machineNumber}===============");
 
-                        lstEnrollData.Add(objInfo);
-                    }
-                    ret = 1;
-                }
-                else
+
+                int number = 0;
+                string str = string.Empty;
+                int dwEnrollNumber = 0;
+
+                a = Utility.GetAppSetting("type");
+                int type = 1;
+                int.TryParse(a, out type);
+                Logger.LogError($"\nBat dau type");
+                switch (type)
                 {
-                    objZkeeper.GetLastError(ref idwErrorCode);
-                    ret = idwErrorCode;
+                    case 0:
+                        message += $"\nType1======";
+                        while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, ref dwWorkCode))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type1 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
 
-                    if (idwErrorCode != 0)
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType1 - Count: {lstEnrollData.Count}===========";
+
+                        message += $"\nType2==========";
+                        while (objZkeeper.GetGeneralLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type2 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType2 - Count: {lstEnrollData.Count}===========";
+
+                        message += $"\nType3======";
+                        while (objZkeeper.GetSuperLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type3 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType3 - Count: {lstEnrollData.Count}===========";
+
+                        message += $"\nType4==========";
+                        while (objZkeeper.GetAllSLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type4 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType4 - Count: {lstEnrollData.Count}==============";
+
+                        message += $"\nType5==========";
+                        while (objZkeeper.GetAllGLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type5 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType5 - Count: {lstEnrollData.Count}===============";
+
+                        message += $"\nType6==========";
+                        while (objZkeeper.GetGeneralExtLogData(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref dwWorkCode, ref number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type6 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType6 - Count: {lstEnrollData.Count}============";
+
+                        message += $"\nType7=========";
+                        while (objZkeeper.SSR_OutPutHTMLRep(machineNumber, dwEnrollNumber1, str, str, str, str, str, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, str, str, number, number, str))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type7 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType7 - Count: {lstEnrollData.Count}==========";
+
+                        message += $"\nType8 ================";
+                        while (objZkeeper.GetSuperLogData2(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type8 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType8 - Count: {lstEnrollData.Count}================";
+
+                        message += $"\nType9========";
+                        while (objZkeeper.ReadLastestLogData(machineNumber, number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type9 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType9 - Count: {lstEnrollData.Count}=============";
+
+                        message += $"\nType10========";
+                        while (objZkeeper.ReadSuperLogDataEx(machineNumber, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type10 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType10 - Count: {lstEnrollData.Count}=========";
+
+                        message += $"\nType11=========";
+                        while (objZkeeper.GetSuperLogDataEx(machineNumber, ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type11 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType11 - Count: {lstEnrollData.Count}==============";
+
+                        message += $"\nType12==============";
+                        while (objZkeeper.SSR_GetGeneralLogDataEx(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type12 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType12 - Count: {lstEnrollData.Count}================";
+
+                        message += $"\nType13=============";
+                        string TimeStr1 = string.Empty;
+                        while (objZkeeper.GetGeneralLogDataStr(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type13 - {TimeStr1}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType13 - Count: {lstEnrollData.Count}==============";
+
+                        message += $"\nType14==========";
+                        string time1 = string.Empty;
+                        while (objZkeeper.SSR_GetSuperLogData(machineNumber, out number, out str, out str, out number, out time1, out number, out number, out number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type14 - {time1}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType14 - Count: {lstEnrollData.Count}===============";
+
+                        break;
+                    case 1:
+                        Logger.LogError($"\nBat dau type: 1");
+                        while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, ref dwWorkCode))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type1 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType1 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType1 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 2:
+                        while (objZkeeper.GetGeneralLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type2 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType2 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType2 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 3:
+                        while (objZkeeper.GetSuperLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type3 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType3 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType3 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 4:
+                        while (objZkeeper.GetAllSLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type4 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType4 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType4 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 5:
+                        while (objZkeeper.GetAllGLogData(machineNumber, ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type5 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType5 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType5 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 6:
+                        while (objZkeeper.GetGeneralExtLogData(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref dwWorkCode, ref number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type6 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType6 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType6 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 7:
+                        while (objZkeeper.SSR_OutPutHTMLRep(machineNumber, dwEnrollNumber1, str, str, str, str, str, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, str, str, number, number, str))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type7 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType7 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType7 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 8:
+                        while (objZkeeper.GetSuperLogData2(machineNumber, ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type8 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType8 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType8 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 9:
+                        while (objZkeeper.ReadLastestLogData(machineNumber, number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type9 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType9 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType9 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 10:
+                        while (objZkeeper.ReadSuperLogDataEx(machineNumber, BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type10 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType10 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType10 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 11:
+                        while (objZkeeper.GetSuperLogDataEx(machineNumber, ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type11 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType11 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType11 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 12:
+                        while (objZkeeper.SSR_GetGeneralLogDataEx(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type12 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType12 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType12 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 13:
+                        string TimeStr = string.Empty;
+                        while (objZkeeper.GetGeneralLogDataStr(machineNumber, ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type13 - {TimeStr}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = dwEnrollNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType13 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType13 - Count: {lstEnrollData.Count}");
+                        break;
+                    case 14:
+                        string time = string.Empty;
+                        while (objZkeeper.SSR_GetSuperLogData(machineNumber, out number, out str, out str, out number, out time, out number, out number, out number))
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type14 - {time}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType14 - Count: {lstEnrollData.Count}";
+                        Logger.LogError($"\nType14 - Count: {lstEnrollData.Count}");
+                        break;
+                    default:
+                        while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, ref dwWorkCode))
+
+
+                        {
+                            //string inputDate = new DateTime(dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond).ToString();
+                            string inputDate = $"Type1 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(dwEnrollNumber1, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        message += $"\nType1 - Count: {lstEnrollData.Count}";
+                        break;
+                };
+
+
+                if (type == 15)
+                {
+                    int ret = 0;
+                    int idwErrorCode = 0;
+                    var fromTime = Utility.GetAppSetting("FromTime");
+                    var toTime = Utility.GetAppSetting("ToTime");
+                    objZkeeper.EnableDevice(machineNumber, false);//disable the device
+
+                    string sdwEnrollNumber = "";
+                    int idwVerifyMode = 0;
+                    int idwInOutMode = 0;
+                    int idwYear = 0;
+                    int idwMonth = 0;
+                    int idwDay = 0;
+                    int idwHour = 0;
+                    int idwMinute = 0;
+                    int idwSecond = 0;
+                    int idwWorkcode = 0;
+
+
+                    if (objZkeeper.ReadTimeGLogData(machineNumber, fromTime, toTime))
                     {
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = idwErrorCode;
-                        objInfo.DateTimeRecord = "*Read attlog by period failed,ErrorCode: " + idwErrorCode.ToString();
-                        lstEnrollData.Add(objInfo);
+                        while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                    out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                        {
+                            string inputDate = $"Type15 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(sdwEnrollNumber, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        ret = 1;
                     }
                     else
                     {
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = idwErrorCode;
-                        objInfo.DateTimeRecord = "No data from terminal returns!";
-                        lstEnrollData.Add(objInfo);
+                        objZkeeper.GetLastError(ref idwErrorCode);
+                        ret = idwErrorCode;
+
+                        if (idwErrorCode != 0)
+                        {
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = idwErrorCode;
+                            objInfo.DateTimeRecord = "*Read attlog by period failed,ErrorCode: " + idwErrorCode.ToString();
+                            lstEnrollData.Add(objInfo);
+                        }
+                        else
+                        {
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = idwErrorCode;
+                            objInfo.DateTimeRecord = "No data from terminal returns!";
+                            lstEnrollData.Add(objInfo);
+                        }
                     }
+                    objZkeeper.EnableDevice(machineNumber, true);//enable the device
                 }
-                objZkeeper.EnableDevice(machineNumber, true);//enable the device
+                else if (type == 16)
+                {
+                    int ret = 0;
+                    int idwErrorCode = 0;
+                    objZkeeper.EnableDevice(machineNumber, false);//disable the device
+
+                    string sdwEnrollNumber = "";
+                    int idwVerifyMode = 0;
+                    int idwInOutMode = 0;
+                    int idwYear = 0;
+                    int idwMonth = 0;
+                    int idwDay = 0;
+                    int idwHour = 0;
+                    int idwMinute = 0;
+                    int idwSecond = 0;
+                    int idwWorkcode = 0;
+
+                    if (objZkeeper.ReadGeneralLogData(machineNumber))
+                    {
+                        while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                    out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                        {
+                            string inputDate = $"Type16 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            int dwEnroll = 0;
+                            int.TryParse(sdwEnrollNumber, out dwEnroll);
+                            objInfo.IndRegID = dwEnroll;
+                            objInfo.DateTimeRecord = inputDate;
+
+                            lstEnrollData.Add(objInfo);
+                        }
+                        ret = 1;
+                    }
+                    else
+                    {
+                        objZkeeper.GetLastError(ref idwErrorCode);
+                        ret = idwErrorCode;
+
+                        if (idwErrorCode != 0)
+                        {
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = idwErrorCode;
+                            objInfo.DateTimeRecord = "*Read attlog failed,ErrorCode: " + idwErrorCode.ToString();
+                            lstEnrollData.Add(objInfo);
+                        }
+                        else
+                        {
+                            MachineInfo objInfo = new MachineInfo();
+                            objInfo.MachineNumber = machineNumber;
+                            objInfo.IndRegID = idwErrorCode;
+                            objInfo.DateTimeRecord = "No data from terminal returns!";
+                            lstEnrollData.Add(objInfo);
+                        }
+                    }
+
+                    objZkeeper.EnableDevice(machineNumber, true);//enable the device
+                }
             }
-            else if (type == 16)
+            catch (Exception ex)
             {
-                int ret = 0;
-                int idwErrorCode = 0;
-                objZkeeper.EnableDevice(machineNumber, false);//disable the device
-
-                string sdwEnrollNumber = "";
-                int idwVerifyMode = 0;
-                int idwInOutMode = 0;
-                int idwYear = 0;
-                int idwMonth = 0;
-                int idwDay = 0;
-                int idwHour = 0;
-                int idwMinute = 0;
-                int idwSecond = 0;
-                int idwWorkcode = 0;
-
-                if (objZkeeper.ReadGeneralLogData(machineNumber))
-                {
-                    while (objZkeeper.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
-                                out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
-                    {
-                        string inputDate = $"Type16 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
-
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        int dwEnroll = 0;
-                        int.TryParse(sdwEnrollNumber, out dwEnroll);
-                        objInfo.IndRegID = dwEnroll;
-                        objInfo.DateTimeRecord = inputDate;
-
-                        lstEnrollData.Add(objInfo);
-                    }
-                    ret = 1;
-                }
-                else
-                {
-                    objZkeeper.GetLastError(ref idwErrorCode);
-                    ret = idwErrorCode;
-
-                    if (idwErrorCode != 0)
-                    {
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = idwErrorCode;
-                        objInfo.DateTimeRecord = "*Read attlog failed,ErrorCode: " + idwErrorCode.ToString();
-                        lstEnrollData.Add(objInfo);
-                    }
-                    else
-                    {
-                        MachineInfo objInfo = new MachineInfo();
-                        objInfo.MachineNumber = machineNumber;
-                        objInfo.IndRegID = idwErrorCode;
-                        objInfo.DateTimeRecord = "No data from terminal returns!";
-                        lstEnrollData.Add(objInfo);
-                    }
-                }
-
-                objZkeeper.EnableDevice(machineNumber, true);//enable the device
+                message += $"\nLog Exception: {ex.Message}";
             }
             return lstEnrollData;
         }

@@ -103,3 +103,5 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.pdb
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\NLog.config
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.Core.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\AxInterop.FP_CLOCKLib.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\IPAddressControlLib.dll

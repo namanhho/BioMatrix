@@ -282,6 +282,7 @@ namespace BioMetrixCore
                 string message = string.Empty;
 
                 ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message);
+                Logger.LogError($"\btnPullData_Click: {message} ======== Count: {lstMachineInfo.Count}");
 
                 if (lstMachineInfo != null && lstMachineInfo.Count > 0)
                 {
@@ -2631,34 +2632,73 @@ namespace BioMetrixCore
             List<LogData> timeKeeperDatas = new List<LogData>();
             try
             {
-                var con = new OdbcConnection();
-                con.ConnectionString = connectionString;
-                var cmd = new OdbcCommand { Connection = con };
-                con.Open();
-                cmd.CommandText = "SELECT a.UserFullCode, a.UserEnrollNumber, a.TimeStr, a.MachineNo FROM InOutRun a WHERE a.TimeStr BETWEEN ? AND ?;";
-                cmd.Parameters.Add("?",OdbcType.DateTime).Value = fromDate;
-                cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate;
-                
-                using (var reader = cmd.ExecuteReader())
+                //var con = new OdbcConnection();
+                //con.ConnectionString = connectionString;
+                //var cmd = new OdbcCommand { Connection = con };
+                //con.Open();
+                //cmd.CommandText = "SELECT a.UserFullCode, a.UserEnrollNumber, a.TimeStr, a.MachineNo FROM InOutRun a WHERE a.TimeStr BETWEEN ? AND ?;";
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = fromDate;
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate;
+
+                //cmd.CommandText = "SELECT * FROM InOutRun;";
+
+                //System.Data.OleDb.OleDbConnection con = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\Fullshare\\Data\\RJData.mdb;");
+
+                ////cmd.CommandText = "SELECT * FROM InOutRun;";
+                //string query = "SELECT * FROM InOutRun;";
+                //System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(query, con);
+
+                //using (var reader = cmd.ExecuteReader())
+                //{
+                //    while (reader.Read())
+                //    {
+                //        LogData timeKeeperData = new LogData();
+                //        var userID = 1;
+                //        if (reader[0] != null && int.TryParse(reader[0].ToString(), out userID))
+                //        {
+                //            timeKeeperData.UserID = userID.ToString();
+                //            var time = DateTime.Now;
+                //            if(reader[2] != null && DateTime.TryParse(reader[2].ToString(), out time))
+                //            {
+                //                timeKeeperData.CheckTime = time;
+                //                timeKeeperData.DeviceID = reader[3] != null ? reader[3].ToString() : String.Empty;
+                //                timeKeeperDatas.Add(timeKeeperData);
+                //            }
+                //        }
+                //    }
+                //}
+                //con.Close();
+
+
+
+                string connectionString1 =
+                @"Provider=Microsoft.Jet.OLEDB.4.0;" +
+                @"Data Source=C:\Users\hnanh\Desktop\Data\RJData.mdb;" +
+                @"User Id=;Password=;";
+
+                string queryString = "SELECT * FROM InOutRun;";
+
+                using (System.Data.OleDb.OleDbConnection connection = new System.Data.OleDb.OleDbConnection(connectionString1))   //tạo lớp kết nối vào .mbd
+                using (System.Data.OleDb.OleDbCommand command = new System.Data.OleDb.OleDbCommand(queryString, connection))    //tạo lớp lệnh sql sử dụng lớp kết nối trên
                 {
-                    while (reader.Read())
+                    try
                     {
-                        LogData timeKeeperData = new LogData();
-                        var userID = 1;
-                        if (reader[0] != null && int.TryParse(reader[0].ToString(), out userID))
+                        connection.Open();  //bắt đầu kết nối
+                        System.Data.OleDb.OleDbDataReader reader = command.ExecuteReader();  //thực thi sql và trả về kết quả
+
+                        while (reader.Read())  //đọc kết quả
                         {
-                            timeKeeperData.UserID = userID.ToString();
-                            var time = DateTime.Now;
-                            if(reader[2] != null && DateTime.TryParse(reader[2].ToString(), out time))
-                            {
-                                timeKeeperData.CheckTime = time;
-                                timeKeeperData.DeviceID = reader[3] != null ? reader[3].ToString() : String.Empty;
-                                timeKeeperDatas.Add(timeKeeperData);
-                            }
+                            Console.Write(reader[0].ToString() + ",");
+                            Console.Write(reader[1].ToString() + ",");
+                            Console.WriteLine(reader[2].ToString());
                         }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
                 }
-                con.Close();
                 return timeKeeperDatas;
             }
             catch (Exception ex)
