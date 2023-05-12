@@ -26,6 +26,8 @@ using System.Data.SqlClient;
 using AxFP_CLOCKLib;
 using zkemkeeper;
 using System.Threading;
+using Newtonsoft.Json;
+using static BioMetrixCore.Dahahi;
 
 namespace BioMetrixCore
 {
@@ -44,6 +46,21 @@ namespace BioMetrixCore
             ToggleControls(false);
             ShowStatusBar(string.Empty, true);
             DisplayEmpty();
+
+
+            this.axCLOCK = new AxFP_CLOCK();
+
+            this.cmbInterface.SelectedIndex = 1;
+            this.cmbComPort.SelectedIndex = 0;
+
+            this.ipAddressControl1.Text = "115.79.213.137";
+            this.textPort.Text = "5005";
+            textPassword.Text = "0";
+
+            P2SPort.Text = "0";
+            P2STimeOut.Text = "0";
+
+            this.cmbMachineNumber.SelectedIndex = 0;
 
             //var thr = new Thread(() =>
             //{
@@ -383,6 +400,15 @@ namespace BioMetrixCore
             dgvLogsByRonaldJack.Controls.Clear();
             dgvLogsByRonaldJack.Rows.Clear();
             dgvLogsByRonaldJack.Columns.Clear();
+
+            if (dgvLogsByDahahi.Controls.Count > 2)
+            {
+                dgvLogsByDahahi.Controls.RemoveAt(2);
+            }
+            dgvLogsByDahahi.DataSource = null;
+            dgvLogsByDahahi.Controls.Clear();
+            dgvLogsByDahahi.Rows.Clear();
+            dgvLogsByDahahi.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -423,6 +449,10 @@ namespace BioMetrixCore
             dgvLogsByRonaldJack.DataSource = list;
             dgvLogsByRonaldJack.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvLogsByRonaldJack);
+
+            dgvLogsByDahahi.DataSource = list;
+            dgvLogsByDahahi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByDahahi);
         }
 
 
@@ -1535,7 +1565,7 @@ namespace BioMetrixCore
             //var a = "\"count\":47,\"next\":null,\"previous\":null,\"msg\":\"\",\"code\":0,\"data\":[{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:53\"},{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"07:01:08,17:02:09\"},{\"emp_code\":\"1\",\"first_name\":\"trieu chung tinh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:49\"},{\"emp_code\":\"104\",\"first_name\":\"pham viet hung\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"14:01:49\"},{\"emp_code\":\"104\",\"first_name\":\"pham viet hung\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:47:58\"},{\"emp_code\":\"108\",\"first_name\":\"ta ngoc tuan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"06:10:14,17:00:19\"},{\"emp_code\":\"108\",\"first_name\":\"ta ngoc tuan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:50:53,17:01:03\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"06:24:07,17:03:57\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:55:26\"},{\"emp_code\":\"11\",\"first_name\":\"ha phuong lam\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"07:25:31\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:38\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:35:28,17:03:49\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:51:55,17:00:58\"},{\"emp_code\":\"128\",\"first_name\":\"dang van nhi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:55\"},{\"emp_code\":\"139\",\"first_name\":\"do dinh huan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"08:31:49\"},{\"emp_code\":\"14\",\"first_name\":\"han duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"14:06:12\"},{\"emp_code\":\"16\",\"first_name\":\"hoang phuc duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:46:17,16:23:08\"},{\"emp_code\":\"16\",\"first_name\":\"hoang phuc duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:52:42\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:39:01\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:01:02\"},{\"emp_code\":\"24\",\"first_name\":\"le minh  man\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:55:31\"},{\"emp_code\":\"36\",\"first_name\":\"luong truong  son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:05\"},{\"emp_code\":\"36\",\"first_name\":\"luong truong  son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"17:04:03\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:15:02\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:35:07,17:00:08\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":2,\"punch_set\":\"06:52:13,17:00:45\"},{\"emp_code\":\"38\",\"first_name\":\"maid vancuong\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:51:54\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"14:04:11\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"06:06:50\"},{\"emp_code\":\"39\",\"first_name\":\"ngo quang ha\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":6,\"punch_set\":\"07:14:02,07:32:18,07:50:21,08:03:36,08:10:23,14:06:26\"},{\"emp_code\":\"4\",\"first_name\":\"cao thanh at\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:38:09\"},{\"emp_code\":\"49\",\"first_name\":\"nguyen hong duc\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"05:41:29\"},{\"emp_code\":\"55\",\"first_name\":\"nguyen ngoc sy\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":4,\"punch_set\":\"14:02:47,14:04:07,15:10:14,15:23:53\"},{\"emp_code\":\"56\",\"first_name\":\"nguyen quang son\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"06:10:07\"},{\"emp_code\":\"58\",\"first_name\":\"nguyen thanh mai\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:46:01,17:00:25\"},{\"emp_code\":\"75\",\"first_name\":\"nguyen van anh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:40:21,17:00:11\"},{\"emp_code\":\"75\",\"first_name\":\"nguyen van anh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"07:01:25\"},{\"emp_code\":\"79\",\"first_name\":\"nguyen van khoi\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"14:09:02\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:10:26\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":1,\"punch_set\":\"17:03:43\"},{\"emp_code\":\"80\",\"first_name\":\"nguyen van mau\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"13:01:35\"},{\"emp_code\":\"82\",\"first_name\":\"nguyen van tan\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:45:31\"},{\"emp_code\":\"87\",\"first_name\":\"nguyen  xuan quynh\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-10\",\"punch_times\":2,\"punch_set\":\"05:49:08,17:00:00\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-09\",\"punch_times\":1,\"punch_set\":\"15:44:22\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-11\",\"punch_times\":1,\"punch_set\":\"17:02:32\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-12\",\"punch_times\":1,\"punch_set\":\"06:24:58\"},{\"emp_code\":\"92\",\"first_name\":\"nguyen duc tho\",\"last_name\":null,\"nick_name\":null,\"gender\":null,\"dept_code\":\"1\",\"dept_name\":\"Department\",\"position_code\":null,\"position_name\":null,\"att_date\":\"2023-02-13\",\"punch_times\":1,\"punch_set\":\"06:18:54\"}]";
             //var content = Converter.JsonDeserialize<Dictionary<string, object>>(a);
             var logs = GetLogsByBioTime(dtFromDateByBioTime.Value, dtToDateByBioTime.Value, 1);
-            
+
             //var a = new Dictionary<string, object>()
             //{
             //    { "emp_code", "108" },
@@ -1643,7 +1673,7 @@ namespace BioMetrixCore
                     });
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogError($"\n==============GetDepartmentByBioTime Exception: Err: {ex.Message}==============");
             }
@@ -1724,7 +1754,7 @@ namespace BioMetrixCore
                     while (pageIndex * pageSize < count);
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogError($"\n==============GetLogsByBioTime Exception: Err: {ex.Message}==============");
             }
@@ -1772,7 +1802,7 @@ namespace BioMetrixCore
                     request.AddHeader("Content-Type", "application/json");
                     request.AddJsonBody("test1=2&test2=3&%40d1%23userId=Master&%40d1%23password=0000&%40d1%23userType=2&%40d%23=%40d1%23&%40d1%23=dmLoginReq&%40d1%23tp=dm&");
                 }
-                else if(typeLoginByUbioXFace == 2)
+                else if (typeLoginByUbioXFace == 2)
                 {
                     request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                     request.AddParameter("test1", 2);
@@ -1784,7 +1814,7 @@ namespace BioMetrixCore
                     request.AddParameter("%40d1%23", "dmLoginReq");
                     request.AddParameter("%40d1%23tp", "dm");
                 }
-                else if(typeLoginByUbioXFace == 3)
+                else if (typeLoginByUbioXFace == 3)
                 {
                     request.AddParameter("application/x-www-form-urlencoded", $"test1=2&test2=3&%40d1%23userId={txtUserNameByUbioXFace.Text}&%40d1%23password={txtPassByUbioXFace.Text}&%40d1%23userType=2&%40d%23=%40d1%23&%40d1%23=dmLoginReq&%40d1%23tp=dm&", ParameterType.RequestBody);
                 }
@@ -1807,7 +1837,7 @@ namespace BioMetrixCore
                         foreach (var c in response.Cookies)
                         {
                             cookies.Add(c.Name, c.Adapt<Cookie>());
-                            if(c.Name == "ucsinfo")
+                            if (c.Name == "ucsinfo")
                             {
                                 ucsinfo = c.Adapt<Cookie>().Value;
                             }
@@ -1902,7 +1932,7 @@ namespace BioMetrixCore
                 }
                 while (pageSize * pageIndex < count);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogInfo($"\n==============GetLogsByUbioXFace : Exception: {ex.Message}==============");
             }
@@ -1979,7 +2009,8 @@ namespace BioMetrixCore
         private void btnOpenDev_Click(object sender, EventArgs e)
         {
             bool bRet;
-
+            this.axFP_CLOCK = new AxFP_CLOCK();
+            this.axFP_CLOCK.CreateControl();
             if (m_bDeviceOpened)
             {
                 btnOpenDev.Text = "Open";
@@ -2054,7 +2085,7 @@ namespace BioMetrixCore
         private bool DisableDevice()
         {
             labelInfo.Text = "Working...";
-            bool bRet = pOcxObject.EnableDevice(m_nMachineNum, 0);
+            bool bRet = pOcxObject.EnableDevice(m_nCurSelID, 0);
             if (bRet)
             {
                 labelInfo.Text = "Disable Device Success!";
@@ -2081,12 +2112,12 @@ namespace BioMetrixCore
             pOcxObject.ReadMark = checkBox1.Checked;
 
             bool bRet;
-            bRet = pOcxObject.ReadSuperLogData(m_nMachineNum);
+            bRet = pOcxObject.ReadSuperLogData(m_nCurSelID);
             if (!bRet)
             {
                 ShowErrorInfo();
 
-                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                pOcxObject.EnableDevice(m_nCurSelID, 1);
 
                 return;
             }
@@ -2097,7 +2128,7 @@ namespace BioMetrixCore
             do
             {
                 bRet = pOcxObject.GetSuperLogData(
-                    m_nMachineNum,
+                    m_nCurSelID,
                     ref sLogInfo.dwTMachineNumber,
                     ref sLogInfo.dwSEnrollNumber,
                     ref sLogInfo.dwSEMachineNumber,
@@ -2173,7 +2204,7 @@ namespace BioMetrixCore
             labelTotal.Text = i.ToString("Total Read 0");
 
             labelInfo.Text = "GetSuperLogData Success...";
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
 
         }
         private void btnReadAllSLogData_Click(object sender, EventArgs e)
@@ -2183,12 +2214,12 @@ namespace BioMetrixCore
             DisableDevice();
 
             bool bRet;
-            bRet = pOcxObject.ReadSuperLogData(m_nMachineNum);
+            bRet = pOcxObject.ReadSuperLogData(m_nCurSelID);
             if (!bRet)
             {
                 ShowErrorInfo();
 
-                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                pOcxObject.EnableDevice(m_nCurSelID, 1);
 
                 return;
             }
@@ -2199,7 +2230,7 @@ namespace BioMetrixCore
             do
             {
                 bRet = pOcxObject.GetAllSLogData(
-                    m_nMachineNum,
+                    m_nCurSelID,
                     ref sLogInfo.dwTMachineNumber,
                     ref sLogInfo.dwSEnrollNumber,
                     ref sLogInfo.dwSEMachineNumber,
@@ -2276,7 +2307,7 @@ namespace BioMetrixCore
             labelTotal.Text = i.ToString("Total Read 0");
 
             labelInfo.Text = "GetAllSLogData Success...";
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
         }
         private void btnEmptySLogData_Click(object sender, EventArgs e)
         {
@@ -2284,7 +2315,7 @@ namespace BioMetrixCore
 
             DisableDevice();
 
-            bRet = pOcxObject.EmptySuperLogData(m_nMachineNum);
+            bRet = pOcxObject.EmptySuperLogData(m_nCurSelID);
             if (bRet)
             {
                 labelInfo.Text = "EmptySuperLogData OK";
@@ -2294,7 +2325,7 @@ namespace BioMetrixCore
                 ShowErrorInfo();
             }
 
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
         }
         private void InitGLogListView()
         {
@@ -2340,7 +2371,7 @@ namespace BioMetrixCore
 
             do
             {
-                bRet = pOcxObject.GetAllGLogData(m_nMachineNum,
+                bRet = pOcxObject.GetAllGLogData(m_nCurSelID,
                 ref gLogInfo.dwTMachineNumber,
                 ref gLogInfo.dwEnrollNumber,
                 ref gLogInfo.dwEMachineNumber,
@@ -2397,7 +2428,7 @@ namespace BioMetrixCore
             i -= 1;
             labelTotal.Text = i.ToString("Total Read 0");
 
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
         }
         private void btnReadGLogData_Click(object sender, EventArgs e)
         {
@@ -2413,18 +2444,18 @@ namespace BioMetrixCore
 
             DisableDevice();
 
-            bRet = pOcxObject.ReadGeneralLogData(m_nMachineNum);
+            bRet = pOcxObject.ReadGeneralLogData(m_nCurSelID);
             if (!bRet)
             {
                 ShowErrorInfo();
 
-                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                pOcxObject.EnableDevice(m_nCurSelID, 1);
                 return;
             }
 
             do
             {
-                bRet = pOcxObject.GetGeneralLogData(m_nMachineNum,
+                bRet = pOcxObject.GetGeneralLogData(m_nCurSelID,
                 ref gLogInfo.dwTMachineNumber,
                 ref gLogInfo.dwEnrollNumber,
                 ref gLogInfo.dwEMachineNumber,
@@ -2479,7 +2510,7 @@ namespace BioMetrixCore
             i -= 1;
             labelTotal.Text = i.ToString("Total Read 0");
 
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
         }
         private void btnEmptyGLogData_Click(object sender, EventArgs e)
         {
@@ -2487,7 +2518,7 @@ namespace BioMetrixCore
 
             DisableDevice();
 
-            bRet = pOcxObject.EmptyGeneralLogData(m_nMachineNum);
+            bRet = pOcxObject.EmptyGeneralLogData(m_nCurSelID);
             if (bRet)
             {
                 labelInfo.Text = "EmptyGeneralLogData OK";
@@ -2497,7 +2528,7 @@ namespace BioMetrixCore
                 ShowErrorInfo();
             }
 
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
 
         }
         private void btnReadAllGLogData_Click(object sender, EventArgs e)
@@ -2511,18 +2542,18 @@ namespace BioMetrixCore
 
 
             DisableDevice();
-            bRet = pOcxObject.ReadAllGLogData(m_nMachineNum);
+            bRet = pOcxObject.ReadAllGLogData(m_nCurSelID);
             if (!bRet)
             {
                 ShowErrorInfo();
 
-                pOcxObject.EnableDevice(m_nMachineNum, 1);
+                pOcxObject.EnableDevice(m_nCurSelID, 1);
                 return;
             }
 
             do
             {
-                bRet = pOcxObject.GetAllGLogData(m_nMachineNum,
+                bRet = pOcxObject.GetAllGLogData(m_nCurSelID,
                 ref gLogInfo.dwTMachineNumber,
                 ref gLogInfo.dwEnrollNumber,
                 ref gLogInfo.dwEMachineNumber,
@@ -2578,7 +2609,7 @@ namespace BioMetrixCore
             i -= 1;
             labelTotal.Text = i.ToString("Total Read 0");
 
-            pOcxObject.EnableDevice(m_nMachineNum, 1);
+            pOcxObject.EnableDevice(m_nCurSelID, 1);
         }
         #endregion
 
@@ -3609,5 +3640,228 @@ namespace BioMetrixCore
                 BindToGridView(logs);
             }
         }
+        #region
+        private static readonly HttpClient client = new HttpClient();
+        private void btnLoginByDahahi_Click(object sender, EventArgs e)
+        {
+            var message = "";
+            var success = ConnectByDahahi(ref message);
+            tbTotalLogByDahahi.Text = success ? "Đăng nhập thành công" : "Đăng nhập thất bại";
+        }
+
+        private void btnGetLogsByDahahi_Click(object sender, EventArgs e)
+        {
+            var message = "";
+            var logs = GetLogsByDahahi(dtFromDateByDahahi.Value, dtToDateByDahahi.Value, 1, ref message);
+            tbTotalLogByDahahi.Text = logs.Count.ToString();
+            BindToGridView(logs);
+        }
+        public bool ConnectByDahahi(ref string message)
+        {
+            bool success = false;
+
+            //if (Config != null)
+            //{
+            var domain = string.Empty;
+            if (!string.IsNullOrWhiteSpace(tbWebsiteByDahahi.Text))
+            {
+                if (tbWebsiteByDahahi.Text.StartsWith("http://"))
+                {
+                    domain = tbWebsiteByDahahi.Text.Replace("http://", "");
+                }
+                else if (tbWebsiteByDahahi.Text.StartsWith("https://"))
+                {
+                    domain = tbWebsiteByDahahi.Text.Replace("https://", "");
+                }
+                else
+                {
+                    domain = tbWebsiteByDahahi.Text;
+                }
+                if (domain.EndsWith("/"))
+                {
+                    domain = domain.Substring(0, domain.Length - 1);
+                }
+                if (!domain.EndsWith(".dahahi.vn"))
+                {
+                    domain = domain + ".dahahi.vn";
+                }
+            }
+            success = Utility.Ping(domain, ref message, 3);
+            if (success)
+            {
+                string url = $"{tbWebsiteByDahahi.Text}/api/faceid/getAllMachine";
+                try
+                {
+
+                    var httpRequestMessage = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Post,
+                        RequestUri = new Uri(url),
+                        Headers = {
+                                    {"AppKey", Utility.GetAppSetting("appKeyDahahi") },
+                                    {"SecretKey", tbSecretKeyByDahahi.Text }
+                                },
+                    };
+
+                    var response = client.SendAsync(httpRequestMessage).Result;
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        var responseContent = response.Content.ReadAsStringAsync().Result;
+                        var data = JsonConvert.DeserializeObject<ResponseDataMachine>(responseContent);
+                        message += $"\nLogin Mess: {data.ErrorMessage}---ErrorCode: {data.ErrorCode}---Total: {data.Total}";
+                        if (data.ErrorCode != "999999")
+                        {
+                            if (data.Data.Count > 0)
+                            {
+                                var machine = data.Data.Find(x => x.MachineBoxId == tbCodeByDahahi.Text);
+                                if (machine != null && !string.IsNullOrWhiteSpace(machine.MachineBoxId))
+                                {
+                                    success = true;
+                                }
+                                else
+                                {
+                                    success = false;
+                                    message += $"\nMachine don't exist";
+                                }
+                            }
+                            else
+                            {
+                                success = false;
+                                message += $"\nMachine don't exist";
+                            }
+                        }
+                        else
+                        {
+                            success = false;
+                            message += $"\nApi Secret Key wrong";
+                        }
+                    }
+                    else
+                    {
+                        success = false;
+                        message += $"\nCannot login to {domain} - " + response.StatusCode.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message += $"\nError " + ex.Message;
+                }
+
+            }
+            else
+            {
+                success = false;
+                message += $"\nCannot login to {domain}";
+            }
+            //}
+
+            return success;
+        }
+
+        public List<LogData> GetLogsByDahahi(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var listLogs = GetLogDatasByDahahi(fromDate, toDate, 1, 50, ref message);
+            return listLogs;
+        }
+        /// <summary>
+        /// Đệ quy lấy dữ liệu
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="page"></param>
+        /// <param name="limit"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private List<LogData> GetLogDatasByDahahi(DateTime? fromDate, DateTime? toDate, int page, int limit, ref string message)
+        {
+            var lstLog = new List<LogData>();
+            var domain = string.Empty;
+            if (tbWebsiteByDahahi.Text != null)
+            {
+                if (tbWebsiteByDahahi.Text.StartsWith("http://"))
+                {
+                    domain = tbWebsiteByDahahi.Text.Replace("http://", "");
+                }
+                else if (tbWebsiteByDahahi.Text.StartsWith("https://"))
+                {
+                    domain = tbWebsiteByDahahi.Text.Replace("https://", "");
+                }
+                else
+                {
+                    domain = tbWebsiteByDahahi.Text;
+                }
+                if (domain.EndsWith("/"))
+                {
+                    domain = domain.Substring(0, domain.Length - 1);
+                }
+                if (!domain.EndsWith(".dahahi.vn"))
+                {
+                    domain = domain + ".dahahi.vn";
+                }
+            }
+            string url = $"{tbWebsiteByDahahi.Text}/api/facereg/checkinhis";
+            var values = new Dictionary<string, string>
+              {
+                  { "MachineBoxId", tbCodeByDahahi.Text },
+                  { "pageIndex", page.ToString() },
+                  { "PageSize", limit.ToString() },
+                  { "FromTimeStr", fromDate.Value.Date.ToString("dd/MM/yyyy HH:mm") },
+                  { "ToTimeStr", toDate.Value.Date.AddDays(1).AddMilliseconds(-1).ToString("dd/MM/yyyy HH:mm") },
+              };
+            try
+            {
+
+                var httpRequestMessage = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri(url),
+                    Headers = {
+                        {"AppKey", Utility.GetAppSetting("appKeyDahahi") },
+                        {"SecretKey", tbSecretKeyByDahahi.Text }
+                    },
+                    Content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json")
+                };
+
+                var response = client.SendAsync(httpRequestMessage).Result;
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var responseContent = response.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<ResponseData>(responseContent);
+                    message += $"\nGetLog Mess: {data.ErrorMessage}---ErrorCode: {data.ErrorCode}---Total: {data.Total}";
+                    if (data.Data.Count > 0)
+                    {
+                        foreach (var item in data.Data)
+                        {
+                            if (!string.IsNullOrEmpty(item.CheckinTimeStr))
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.EmployeeCode))
+                                {
+                                    var log = new LogData()
+                                    {
+                                        FullName = item.EmployeeName,
+                                        UserID = item.EmployeeCode,
+                                        CheckTime = DateTime.ParseExact(item.CheckinTimeStr, "d/M/yyyy H:m:s", null)
+                                    };
+                                    lstLog.Add(log);
+                                }
+                            }
+                        }
+                        if (data.Total > limit * page)
+                        {
+                            var datas = GetLogDatasByDahahi(fromDate, toDate, page + 1, limit, ref message);
+                            lstLog.AddRange(datas);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message = $"\nGetData {JsonConvert.SerializeObject(values)} -- page: {page} -- limit: {limit}" + ex.Message;
+            }
+
+            return lstLog;
+        }
+        #endregion
+
     }
 }

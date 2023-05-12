@@ -38,9 +38,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\AxInterop.FP_CLOCKLib.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.FP_CLOCKLib">
-      <HintPath>..\..\..\..\Downloads\Interop.FP_CLOCKLib.dll</HintPath>
+    <Reference Include="Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\dll\Interop.FP_CLOCKLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.zkemkeeper">
       <HintPath>..\..\..\..\Downloads\Interop.zkemkeeper.dll</HintPath>
@@ -143,6 +144,7 @@
     <Compile Include="Controls\DataEmpty.Designer.cs">
       <DependentUpon>DataEmpty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Info\Dahahi.cs" />
     <Compile Include="Info\UserIDInfo.cs" />
     <Compile Include="Utilities\AccessPoint.cs" />
     <Compile Include="Utilities\common.cs" />

@@ -123,4 +123,10 @@
   <data name="tbAccessToken.Text" xml:space="preserve">
     <value>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjEyOTE4ODE2NjE3NjIxNzkiLCJlbWFpbCI6ImFkbWluQHRoZW1hbnNpb25zLnZuIiwiY2xpZW50X2lkIjoiOWFhMDNhYTg0OTQzYTlhYzVmZTQyMTFlNWIzMWRhODkiLCJ0eXBlIjoiYXV0aG9yaXphdGlvbl9jb2RlIiwiaWF0IjoxNjc1MzI1ODEzLCJleHAiOjE3MDY4NjE4MTN9.Y0uSTVTTypR7wiXH8iYZFi67nBMrenzJorJDY1PgzXI</value>
   </data>
+  <metadata name="sqliteCommand1.DesignTimeVisible" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="sqliteCommand1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

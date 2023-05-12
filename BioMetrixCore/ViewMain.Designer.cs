@@ -190,6 +190,22 @@
             this.label43 = new System.Windows.Forms.Label();
             this.txtIPByRonaldJack = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.btnGetLogsByDahahi = new System.Windows.Forms.Button();
+            this.tbCodeByDahahi = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.tbSecretKeyByDahahi = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.tbTotalLogByDahahi = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.dgvLogsByDahahi = new System.Windows.Forms.DataGridView();
+            this.dtToDateByDahahi = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByDahahi = new System.Windows.Forms.DateTimePicker();
+            this.btnLoginByDahahi = new System.Windows.Forms.Button();
+            this.tbWebsiteByDahahi = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            //this.axFP_CLOCK = new AxFP_CLOCKLib.AxFP_CLOCK();
+            this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -215,6 +231,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByAIKYO)).BeginInit();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).BeginInit();
+            this.tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.axFP_CLOCK)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -229,6 +248,7 @@
             this.tabControl.Controls.Add(this.tabPage8);
             this.tabControl.Controls.Add(this.tabPage9);
             this.tabControl.Controls.Add(this.tabPage10);
+            this.tabControl.Controls.Add(this.tabPage11);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1442,7 +1462,7 @@
             this.ipAddressControl1.ReadOnly = false;
             this.ipAddressControl1.Size = new System.Drawing.Size(100, 20);
             this.ipAddressControl1.TabIndex = 12;
-            this.ipAddressControl1.Text = "192.168.1.200";
+            this.ipAddressControl1.Text = "115.79.213.137";
             // 
             // label28
             // 
@@ -1524,7 +1544,7 @@
             this.textPort.Name = "textPort";
             this.textPort.Size = new System.Drawing.Size(103, 20);
             this.textPort.TabIndex = 8;
-            this.textPort.Text = "4370";
+            this.textPort.Text = "5005";
             // 
             // label33
             // 
@@ -1849,12 +1869,162 @@
             this.label44.TabIndex = 4;
             this.label44.Text = "IP";
             // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.btnGetLogsByDahahi);
+            this.tabPage11.Controls.Add(this.tbCodeByDahahi);
+            this.tabPage11.Controls.Add(this.label49);
+            this.tabPage11.Controls.Add(this.tbSecretKeyByDahahi);
+            this.tabPage11.Controls.Add(this.label48);
+            this.tabPage11.Controls.Add(this.tbTotalLogByDahahi);
+            this.tabPage11.Controls.Add(this.label46);
+            this.tabPage11.Controls.Add(this.dgvLogsByDahahi);
+            this.tabPage11.Controls.Add(this.dtToDateByDahahi);
+            this.tabPage11.Controls.Add(this.dtFromDateByDahahi);
+            this.tabPage11.Controls.Add(this.btnLoginByDahahi);
+            this.tabPage11.Controls.Add(this.tbWebsiteByDahahi);
+            this.tabPage11.Controls.Add(this.label47);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Size = new System.Drawing.Size(796, 428);
+            this.tabPage11.TabIndex = 10;
+            this.tabPage11.Text = "Dahahi";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // btnGetLogsByDahahi
+            // 
+            this.btnGetLogsByDahahi.Location = new System.Drawing.Point(655, 49);
+            this.btnGetLogsByDahahi.Name = "btnGetLogsByDahahi";
+            this.btnGetLogsByDahahi.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByDahahi.TabIndex = 29;
+            this.btnGetLogsByDahahi.Text = "Lấy dữ liệu";
+            this.btnGetLogsByDahahi.UseVisualStyleBackColor = true;
+            this.btnGetLogsByDahahi.Click += new System.EventHandler(this.btnGetLogsByDahahi_Click);
+            // 
+            // tbCodeByDahahi
+            // 
+            this.tbCodeByDahahi.Location = new System.Drawing.Point(145, 79);
+            this.tbCodeByDahahi.Name = "tbCodeByDahahi";
+            this.tbCodeByDahahi.Size = new System.Drawing.Size(231, 20);
+            this.tbCodeByDahahi.TabIndex = 28;
+            this.tbCodeByDahahi.Text = "2227679";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(69, 82);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(56, 13);
+            this.label49.TabIndex = 27;
+            this.label49.Text = "Mã thiết bị";
+            // 
+            // tbSecretKeyByDahahi
+            // 
+            this.tbSecretKeyByDahahi.Location = new System.Drawing.Point(145, 45);
+            this.tbSecretKeyByDahahi.Name = "tbSecretKeyByDahahi";
+            this.tbSecretKeyByDahahi.Size = new System.Drawing.Size(231, 20);
+            this.tbSecretKeyByDahahi.TabIndex = 26;
+            this.tbSecretKeyByDahahi.Text = "wczkenrzutbibiiyvpwj";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(69, 48);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(56, 13);
+            this.label48.TabIndex = 25;
+            this.label48.Text = "SecretKey";
+            // 
+            // tbTotalLogByDahahi
+            // 
+            this.tbTotalLogByDahahi.Location = new System.Drawing.Point(122, 392);
+            this.tbTotalLogByDahahi.Name = "tbTotalLogByDahahi";
+            this.tbTotalLogByDahahi.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalLogByDahahi.TabIndex = 24;
+            this.tbTotalLogByDahahi.Text = "0";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(66, 399);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(32, 13);
+            this.label46.TabIndex = 23;
+            this.label46.Text = "Tổng";
+            // 
+            // dgvLogsByDahahi
+            // 
+            this.dgvLogsByDahahi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByDahahi.Location = new System.Drawing.Point(66, 105);
+            this.dgvLogsByDahahi.Name = "dgvLogsByDahahi";
+            this.dgvLogsByDahahi.Size = new System.Drawing.Size(664, 271);
+            this.dgvLogsByDahahi.TabIndex = 22;
+            // 
+            // dtToDateByDahahi
+            // 
+            this.dtToDateByDahahi.Location = new System.Drawing.Point(413, 48);
+            this.dtToDateByDahahi.Name = "dtToDateByDahahi";
+            this.dtToDateByDahahi.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByDahahi.TabIndex = 21;
+            // 
+            // dtFromDateByDahahi
+            // 
+            this.dtFromDateByDahahi.Location = new System.Drawing.Point(413, 19);
+            this.dtFromDateByDahahi.Name = "dtFromDateByDahahi";
+            this.dtFromDateByDahahi.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByDahahi.TabIndex = 20;
+            // 
+            // btnLoginByDahahi
+            // 
+            this.btnLoginByDahahi.Location = new System.Drawing.Point(655, 17);
+            this.btnLoginByDahahi.Name = "btnLoginByDahahi";
+            this.btnLoginByDahahi.Size = new System.Drawing.Size(75, 23);
+            this.btnLoginByDahahi.TabIndex = 19;
+            this.btnLoginByDahahi.Text = "Đăng nhập";
+            this.btnLoginByDahahi.UseVisualStyleBackColor = true;
+            this.btnLoginByDahahi.Click += new System.EventHandler(this.btnLoginByDahahi_Click);
+            // 
+            // tbWebsiteByDahahi
+            // 
+            this.tbWebsiteByDahahi.Location = new System.Drawing.Point(145, 19);
+            this.tbWebsiteByDahahi.Name = "tbWebsiteByDahahi";
+            this.tbWebsiteByDahahi.Size = new System.Drawing.Size(231, 20);
+            this.tbWebsiteByDahahi.TabIndex = 18;
+            this.tbWebsiteByDahahi.Text = "https://demokh.dahahi.vn";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(69, 22);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(46, 13);
+            this.label47.TabIndex = 17;
+            this.label47.Text = "Website";
+            // 
+            // axFP_CLOCK
+            // 
+            //this.axFP_CLOCK.Enabled = true;
+            //this.axFP_CLOCK.Location = new System.Drawing.Point(476, 382);
+            //this.axFP_CLOCK.Name = "axFP_CLOCK";
+            //this.axFP_CLOCK.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFP_CLOCK.OcxState")));
+            //this.axFP_CLOCK.Size = new System.Drawing.Size(100, 50);
+            //this.axFP_CLOCK.TabIndex = 11;
+            //this.axFP_CLOCK.Visible = false;
+            // 
+            // sqliteCommand1
+            // 
+            this.sqliteCommand1.CommandTimeout = 30;
+            this.sqliteCommand1.Connection = null;
+            this.sqliteCommand1.Transaction = null;
+            this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
+            // 
             // ViewMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 448);
             this.Controls.Add(this.tabControl);
+            //this.Controls.Add(this.axFP_CLOCK);
             this.Name = "ViewMain";
             this.Text = "Main";
             this.tabControl.ResumeLayout(false);
@@ -1894,6 +2064,10 @@
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).EndInit();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.axFP_CLOCK)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2010,7 +2184,6 @@
         private System.Windows.Forms.Button btnEmptySLogData;
         private System.Windows.Forms.Button btnReadAllSLogData;
         private System.Windows.Forms.Button btnReadSLogData;
-        private AxFP_CLOCKLib.AxFP_CLOCK axFP_CLOCK;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -2062,5 +2235,21 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.DataGridView dgvLogsByRonaldJack;
         private System.Windows.Forms.TextBox txtTotalLogsByRonaldJack;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.TextBox tbCodeByDahahi;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox tbSecretKeyByDahahi;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox tbTotalLogByDahahi;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.DataGridView dgvLogsByDahahi;
+        private System.Windows.Forms.DateTimePicker dtToDateByDahahi;
+        private System.Windows.Forms.DateTimePicker dtFromDateByDahahi;
+        private System.Windows.Forms.Button btnLoginByDahahi;
+        private System.Windows.Forms.TextBox tbWebsiteByDahahi;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Button btnGetLogsByDahahi;
+        private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
+        private AxFP_CLOCKLib.AxFP_CLOCK axFP_CLOCK;
     }
 }
