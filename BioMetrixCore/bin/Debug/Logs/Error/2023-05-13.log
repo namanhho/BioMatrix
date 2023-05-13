@@ -1,0 +1,155 @@
+2023-05-13 18:36:27.2329 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-05-13 18:36:35.9830 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:36:35.9830 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:36:35.9830 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:36:40.0905 
+GetLogsFromDevice_Ket noi xong: True
+2023-05-13 18:36:40.0905 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-05-13 18:36:46.2589 
+GetLogsFromDevice_Lay du lieu xong, Count: 21414
+2023-05-13 18:36:46.2589 
+GetLogsFromDevice: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+Ronald jack 5 get 21414 records ======== Count: 21414
+2023-05-13 18:39:51.6912 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-05-13 18:39:57.4575 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:39:57.4575 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:39:57.4575 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:39:59.4723 
+GetLogsFromDevice_Ket noi xong: True
+2023-05-13 18:39:59.4723 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-05-13 18:42:03.9141 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:42:03.9141 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:42:03.9141 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:42:05.3768 
+GetLogsFromDevice_Ket noi xong: True
+2023-05-13 18:42:05.3768 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-05-13 18:43:16.2717 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:43:16.2717 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:43:16.2717 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:43:18.6168 
+GetLogsFromDevice_Ket noi xong: True
+2023-05-13 18:43:18.6168 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-05-13 18:43:54.9819 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:43:54.9819 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:43:54.9819 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:44:41.9122 
+GetLogsFromDevice_Bat dau InitClient
+2023-05-13 18:44:41.9122 
+GetLogsFromDevice_InitClient xong
+2023-05-13 18:44:41.9122 
+GetLogsFromDevice_Bat dau ket noi
+2023-05-13 18:44:43.4196 
+GetLogsFromDevice_Ket noi xong: True
+2023-05-13 18:44:43.4196 
+GetLogsFromDevice_Bat dau lay du lieu
+2023-05-13 19:04:40.6216 
+==========Bat dau btnReadSLogData_Click========
+2023-05-13 19:04:42.9041 
+==========Bat dau btnReadSLogData_Click -----ReadSuperLogData========
+2023-05-13 19:04:42.9410 
+==========ReadSuperLogData xong: True========
+2023-05-13 19:04:42.9410 
+==========Bat dau btnReadSLogData_Click -----GetSuperLogData========
+2023-05-13 19:04:42.9410 
+==========GetSuperLogData xong--- Count: 0========
+2023-05-13 19:04:49.3679 
+==========Bat dau btnReadSLogData_Click========
+2023-05-13 19:04:50.9573 
+==========Bat dau btnReadSLogData_Click -----ReadSuperLogData========
+2023-05-13 19:04:51.9684 
+==========ReadSuperLogData xong: True========
+2023-05-13 19:04:55.6761 
+==========Bat dau btnReadSLogData_Click -----GetSuperLogData========
+2023-05-13 19:05:03.6134 
+==========GetSuperLogData xong--- Count: 0========
+2023-05-13 19:05:06.0629 
+==========Bat dau btnReadAllSLogData_Click========
+2023-05-13 19:05:09.0377 
+==========Bat dau btnReadAllSLogData_Click------ReadSuperLogData========
+2023-05-13 19:05:10.0200 
+==========ReadSuperLogData xong: True========
+2023-05-13 19:05:12.6204 
+==========Bat dau btnReadAllSLogData_Click------GetAllSLogData========
+2023-05-13 19:05:15.7072 
+==========GetAllSLogData xong---Count: 0========
+2023-05-13 19:05:19.0974 
+==========Bat dau btnReadGLogData_Click========
+2023-05-13 19:05:22.1343 
+==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========
+2023-05-13 19:05:23.5210 
+==========ReadGeneralLogData xong: True========
+2023-05-13 19:05:24.7245 
+==========Bat dau btnReadGLogData_Click-----GetGeneralLogData========
+2023-05-13 19:05:29.4197 
+==========GetGeneralLogData xong-----Count: 0========
+2023-05-13 19:05:32.3760 
+==========Bat dau btnReadAllGLogData_Click========
+2023-05-13 19:05:32.4168 
+==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========
+2023-05-13 19:05:50.6886 
+==========ReadAllGLogData xong: True========
+2023-05-13 19:05:53.6731 
+==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========
+2023-05-13 19:05:57.0342 
+==========GetAllGLogData xong----Count: 21414========
+2023-05-13 19:15:44.6885 
+==========Bat dau btnReadAllGLogData_Click========
+2023-05-13 19:15:44.7334 
+==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========
+2023-05-13 19:15:52.2414 
+==========ReadAllGLogData xong: True========
+2023-05-13 19:15:52.2414 
+==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========
+2023-05-13 19:15:52.4279 
+==========GetAllGLogData xong----Count: 21414========
+2023-05-13 19:16:45.7138 
+==========Bat dau btnReadAllGLogData_Click========
+2023-05-13 19:16:45.7617 
+==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========
+2023-05-13 19:16:53.8199 
+==========ReadAllGLogData xong: True========
+2023-05-13 19:16:53.8199 
+==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========
+2023-05-13 19:16:54.0249 
+==========GetAllGLogData xong----Count: 21414========
+2023-05-13 19:19:50.5669 
+==========Bat dau btnOpenDev_Click========
+2023-05-13 19:19:50.5919 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-05-13 19:19:50.5919 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2023-05-13 19:19:50.5919 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2023-05-13 19:19:50.5919 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2023-05-13 19:19:50.5919 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-05-13 19:19:50.6587 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: True========

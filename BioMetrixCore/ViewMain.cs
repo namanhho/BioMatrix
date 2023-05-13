@@ -28,6 +28,8 @@ using zkemkeeper;
 using System.Threading;
 using Newtonsoft.Json;
 using static BioMetrixCore.Dahahi;
+using NLog.Fluent;
+using System.ServiceModel.Channels;
 
 namespace BioMetrixCore
 {
@@ -2008,6 +2010,7 @@ namespace BioMetrixCore
         }
         private void btnOpenDev_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnOpenDev_Click========");
             bool bRet;
             this.axFP_CLOCK = new AxFP_CLOCK();
             this.axFP_CLOCK.CreateControl();
@@ -2019,8 +2022,9 @@ namespace BioMetrixCore
                 axFP_CLOCK.CloseCommPort();
                 return;
             }
-
+            Logger.LogError($"\n==========Bat dau btnOpenDev_Click------OpenCommPort========");
             this.axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            Logger.LogError($"\n==========Bat dau btnOpenDev_Click------OpenCommPort xong========");
             int nConnecttype = this.cmbInterface.SelectedIndex;
 
             switch (nConnecttype)
@@ -2037,7 +2041,9 @@ namespace BioMetrixCore
                         int nPort = Convert.ToInt32(textPort.Text);
                         int nPassword = Convert.ToInt32(textPassword.Text);
                         string strIP = ipAddressControl1.IPAddress.ToString();
+                        Logger.LogError($"\n==========Bat dau btnOpenDev_Click------SetIPAddress========");
                         bRet = axFP_CLOCK.SetIPAddress(ref strIP, nPort, nPassword);
+                        Logger.LogError($"\n==========Bat dau btnOpenDev_Click------SetIPAddress xong: {bRet}========");
                         if (!bRet)
                         {
                             return;
@@ -2060,8 +2066,9 @@ namespace BioMetrixCore
                     }
                     break;
             }
-
+            Logger.LogError($"\n==========Bat dau btnOpenDev_Click------OpenCommPort========");
             bRet = axFP_CLOCK.OpenCommPort(m_nCurSelID);
+            Logger.LogError($"\n==========Bat dau btnOpenDev_Click------OpenCommPort xong: {bRet}========");
             if (bRet)
             {
                 m_bDeviceOpened = true;
@@ -2101,10 +2108,12 @@ namespace BioMetrixCore
         {
             int nErrorValue = 0;
             pOcxObject.GetLastError(ref nErrorValue);
+            Logger.LogError($"\n==========Error: {nErrorValue}========");
             labelInfo.Text = common.FormErrorStr(nErrorValue);
         }
         private void btnReadSLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnReadSLogData_Click========");
             InitSLogListView();
 
             DisableDevice();
@@ -2112,7 +2121,9 @@ namespace BioMetrixCore
             pOcxObject.ReadMark = checkBox1.Checked;
 
             bool bRet;
+            Logger.LogError($"\n==========Bat dau btnReadSLogData_Click -----ReadSuperLogData========");
             bRet = pOcxObject.ReadSuperLogData(m_nCurSelID);
+            Logger.LogError($"\n==========ReadSuperLogData xong: {bRet}========");
             if (!bRet)
             {
                 ShowErrorInfo();
@@ -2124,7 +2135,7 @@ namespace BioMetrixCore
 
             SuperLogInfo sLogInfo = new SuperLogInfo();
             List<SuperLogInfo> myArray = new List<SuperLogInfo>();
-
+            Logger.LogError($"\n==========Bat dau btnReadSLogData_Click -----GetSuperLogData========");
             do
             {
                 bRet = pOcxObject.GetSuperLogData(
@@ -2149,7 +2160,7 @@ namespace BioMetrixCore
                 }
 
             } while (bRet);
-
+            Logger.LogError($"\n==========GetSuperLogData xong--- Count: {myArray.Count}========");
             int i = 1;
             String str;
             foreach (SuperLogInfo sInfo in myArray)
@@ -2209,12 +2220,15 @@ namespace BioMetrixCore
         }
         private void btnReadAllSLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnReadAllSLogData_Click========");
             InitSLogListView();
 
             DisableDevice();
 
             bool bRet;
+            Logger.LogError($"\n==========Bat dau btnReadAllSLogData_Click------ReadSuperLogData========");
             bRet = pOcxObject.ReadSuperLogData(m_nCurSelID);
+            Logger.LogError($"\n==========ReadSuperLogData xong: {bRet}========");
             if (!bRet)
             {
                 ShowErrorInfo();
@@ -2226,7 +2240,7 @@ namespace BioMetrixCore
 
             SuperLogInfo sLogInfo = new SuperLogInfo();
             List<SuperLogInfo> myArray = new List<SuperLogInfo>();
-
+            Logger.LogError($"\n==========Bat dau btnReadAllSLogData_Click------GetAllSLogData========");
             do
             {
                 bRet = pOcxObject.GetAllSLogData(
@@ -2251,7 +2265,7 @@ namespace BioMetrixCore
                 }
 
             } while (bRet);
-
+            Logger.LogError($"\n==========GetAllSLogData xong---Count: {myArray.Count}========");
             int i = 1;
             String str;
             foreach (SuperLogInfo sInfo in myArray)
@@ -2311,11 +2325,13 @@ namespace BioMetrixCore
         }
         private void btnEmptySLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnEmptySLogData_Click========");
             bool bRet;
 
             DisableDevice();
-
+            Logger.LogError($"\n==========Bat dau btnEmptySLogData_Click-----EmptySuperLogData========");
             bRet = pOcxObject.EmptySuperLogData(m_nCurSelID);
+            Logger.LogError($"\n==========EmptySuperLogData xong; {bRet}========");
             if (bRet)
             {
                 labelInfo.Text = "EmptySuperLogData OK";
@@ -2340,6 +2356,7 @@ namespace BioMetrixCore
         }
         private void UDGLogRead_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau UDGLogRead_Click========");
             string strFilePath;
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -2359,7 +2376,9 @@ namespace BioMetrixCore
             }
 
             bool bRet;
+            Logger.LogError($"\n==========Bat dau UDGLogRead_Click-------USBReadGeneralLogData========");
             bRet = pOcxObject.USBReadGeneralLogData(strFilePath);
+            Logger.LogError($"\n==========USBReadGeneralLogData xong: {bRet}========");
             if (!bRet)
             {
                 ShowErrorInfo();
@@ -2368,7 +2387,7 @@ namespace BioMetrixCore
 
             GeneralLogInfo gLogInfo = new GeneralLogInfo();
             List<GeneralLogInfo> myArray = new List<GeneralLogInfo>();
-
+            Logger.LogError($"\n==========Bat dau UDGLogRead_Click-------GetAllGLogData========");
             do
             {
                 bRet = pOcxObject.GetAllGLogData(m_nCurSelID,
@@ -2389,7 +2408,7 @@ namespace BioMetrixCore
                 }
 
             } while (bRet);
-
+            Logger.LogError($"\n==========GetAllGLogData xong---Count: {myArray.Count}========");
             InitGLogListView();
 
             int i = 1;
@@ -2432,6 +2451,7 @@ namespace BioMetrixCore
         }
         private void btnReadGLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnReadGLogData_Click========");
             InitGLogListView();
 
             bool bRet;
@@ -2443,8 +2463,9 @@ namespace BioMetrixCore
             pOcxObject.ReadMark = checkBox1.Checked;
 
             DisableDevice();
-
+            Logger.LogError($"\n==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========");
             bRet = pOcxObject.ReadGeneralLogData(m_nCurSelID);
+            Logger.LogError($"\n==========ReadGeneralLogData xong: {bRet}========");
             if (!bRet)
             {
                 ShowErrorInfo();
@@ -2452,7 +2473,7 @@ namespace BioMetrixCore
                 pOcxObject.EnableDevice(m_nCurSelID, 1);
                 return;
             }
-
+            Logger.LogError($"\n==========Bat dau btnReadGLogData_Click-----GetGeneralLogData========");
             do
             {
                 bRet = pOcxObject.GetGeneralLogData(m_nCurSelID,
@@ -2473,7 +2494,7 @@ namespace BioMetrixCore
                 }
 
             } while (bRet);
-
+            Logger.LogError($"\n==========GetGeneralLogData xong-----Count: {myArray.Count}========");
             int i = 1;
             foreach (GeneralLogInfo gInfo in myArray)
             {
@@ -2514,11 +2535,13 @@ namespace BioMetrixCore
         }
         private void btnEmptyGLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnEmptyGLogData_Click========");
             bool bRet;
 
             DisableDevice();
-
+            Logger.LogError($"\n==========Bat dau btnEmptyGLogData_Click-----EmptyGeneralLogData========");
             bRet = pOcxObject.EmptyGeneralLogData(m_nCurSelID);
+            Logger.LogError($"\n==========Bat dau btnEmptyGLogData_Click-----EmptyGeneralLogData xong: {bRet}========");
             if (bRet)
             {
                 labelInfo.Text = "EmptyGeneralLogData OK";
@@ -2533,6 +2556,7 @@ namespace BioMetrixCore
         }
         private void btnReadAllGLogData_Click(object sender, EventArgs e)
         {
+            Logger.LogError($"\n==========Bat dau btnReadAllGLogData_Click========");
             InitGLogListView();
 
             bool bRet;
@@ -2542,7 +2566,9 @@ namespace BioMetrixCore
 
 
             DisableDevice();
+            Logger.LogError($"\n==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========");
             bRet = pOcxObject.ReadAllGLogData(m_nCurSelID);
+            Logger.LogError($"\n==========ReadAllGLogData xong: {bRet}========");
             if (!bRet)
             {
                 ShowErrorInfo();
@@ -2550,7 +2576,7 @@ namespace BioMetrixCore
                 pOcxObject.EnableDevice(m_nCurSelID, 1);
                 return;
             }
-
+            Logger.LogError($"\n==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========");
             do
             {
                 bRet = pOcxObject.GetAllGLogData(m_nCurSelID,
@@ -2571,7 +2597,7 @@ namespace BioMetrixCore
                 }
 
             } while (bRet);
-
+            Logger.LogError($"\n==========GetAllGLogData xong----Count: {myArray.Count}========");
             int i = 1;
             string str;
             foreach (GeneralLogInfo gInfo in myArray)
@@ -2740,6 +2766,7 @@ namespace BioMetrixCore
             }
         }
         #endregion
+        #region Sunbeam
         public bool ConnectByRonaldJack(ref string message)
         {
             bool success = false;
@@ -3129,7 +3156,7 @@ namespace BioMetrixCore
             }
             catch (Exception ex)
             {
-                message = ex.Message;
+                message += ex.Message;
             }
             message += $"Zkteco get {logs.Count} records";
             return logs;
@@ -3640,7 +3667,8 @@ namespace BioMetrixCore
                 BindToGridView(logs);
             }
         }
-        #region
+        #endregion
+        #region Dahahi
         private static readonly HttpClient client = new HttpClient();
         private void btnLoginByDahahi_Click(object sender, EventArgs e)
         {
