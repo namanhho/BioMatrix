@@ -204,7 +204,6 @@
             this.btnLoginByDahahi = new System.Windows.Forms.Button();
             this.tbWebsiteByDahahi = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
-            //this.axFP_CLOCK = new AxFP_CLOCKLib.AxFP_CLOCK();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -233,7 +232,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).BeginInit();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).BeginInit();
-            //((System.ComponentModel.ISupportInitialize)(this.axFP_CLOCK)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1270,9 +1268,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(472, 50);
+            this.button1.Location = new System.Drawing.Point(472, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 32);
+            this.button1.Size = new System.Drawing.Size(150, 25);
             this.button1.TabIndex = 25;
             this.button1.Text = "Udisk Read GLogData";
             this.button1.UseVisualStyleBackColor = true;
@@ -1281,18 +1279,18 @@
             // labelInfo
             // 
             this.labelInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelInfo.Location = new System.Drawing.Point(345, 114);
+            this.labelInfo.Location = new System.Drawing.Point(345, 68);
             this.labelInfo.Name = "labelInfo";
-            this.labelInfo.Size = new System.Drawing.Size(277, 38);
+            this.labelInfo.Size = new System.Drawing.Size(277, 29);
             this.labelInfo.TabIndex = 24;
             this.labelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(344, 159);
+            this.listView1.Location = new System.Drawing.Point(344, 123);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(438, 255);
+            this.listView1.Size = new System.Drawing.Size(438, 291);
             this.listView1.TabIndex = 23;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -1300,7 +1298,7 @@
             // labelTotal
             // 
             this.labelTotal.AutoSize = true;
-            this.labelTotal.Location = new System.Drawing.Point(629, 139);
+            this.labelTotal.Location = new System.Drawing.Point(470, 100);
             this.labelTotal.Name = "labelTotal";
             this.labelTotal.Size = new System.Drawing.Size(34, 13);
             this.labelTotal.TabIndex = 22;
@@ -1309,7 +1307,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(703, 136);
+            this.checkBox1.Location = new System.Drawing.Point(344, 100);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(102, 17);
             this.checkBox1.TabIndex = 21;
@@ -1323,14 +1321,14 @@
             this.groupBox2.Controls.Add(this.btnEmptyGLogData);
             this.groupBox2.Location = new System.Drawing.Point(628, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(177, 124);
+            this.groupBox2.Size = new System.Drawing.Size(177, 104);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " GLogData";
             // 
             // btnReadGLogData
             // 
-            this.btnReadGLogData.Location = new System.Drawing.Point(24, 23);
+            this.btnReadGLogData.Location = new System.Drawing.Point(24, 15);
             this.btnReadGLogData.Name = "btnReadGLogData";
             this.btnReadGLogData.Size = new System.Drawing.Size(130, 25);
             this.btnReadGLogData.TabIndex = 4;
@@ -1340,9 +1338,9 @@
             // 
             // btnReadAllGLogData
             // 
-            this.btnReadAllGLogData.Location = new System.Drawing.Point(24, 86);
+            this.btnReadAllGLogData.Location = new System.Drawing.Point(24, 70);
             this.btnReadAllGLogData.Name = "btnReadAllGLogData";
-            this.btnReadAllGLogData.Size = new System.Drawing.Size(130, 32);
+            this.btnReadAllGLogData.Size = new System.Drawing.Size(130, 29);
             this.btnReadAllGLogData.TabIndex = 5;
             this.btnReadAllGLogData.Text = "Read All";
             this.btnReadAllGLogData.UseVisualStyleBackColor = true;
@@ -1350,7 +1348,7 @@
             // 
             // btnEmptyGLogData
             // 
-            this.btnEmptyGLogData.Location = new System.Drawing.Point(24, 54);
+            this.btnEmptyGLogData.Location = new System.Drawing.Point(24, 42);
             this.btnEmptyGLogData.Name = "btnEmptyGLogData";
             this.btnEmptyGLogData.Size = new System.Drawing.Size(130, 25);
             this.btnEmptyGLogData.TabIndex = 4;
@@ -1360,7 +1358,7 @@
             // 
             // btnEmptySLogData
             // 
-            this.btnEmptySLogData.Location = new System.Drawing.Point(344, 86);
+            this.btnEmptySLogData.Location = new System.Drawing.Point(473, 40);
             this.btnEmptySLogData.Name = "btnEmptySLogData";
             this.btnEmptySLogData.Size = new System.Drawing.Size(122, 25);
             this.btnEmptySLogData.TabIndex = 15;
@@ -1370,7 +1368,7 @@
             // 
             // btnReadAllSLogData
             // 
-            this.btnReadAllSLogData.Location = new System.Drawing.Point(344, 54);
+            this.btnReadAllSLogData.Location = new System.Drawing.Point(345, 38);
             this.btnReadAllSLogData.Name = "btnReadAllSLogData";
             this.btnReadAllSLogData.Size = new System.Drawing.Size(122, 25);
             this.btnReadAllSLogData.TabIndex = 16;
@@ -1380,7 +1378,7 @@
             // 
             // btnReadSLogData
             // 
-            this.btnReadSLogData.Location = new System.Drawing.Point(344, 23);
+            this.btnReadSLogData.Location = new System.Drawing.Point(345, 12);
             this.btnReadSLogData.Name = "btnReadSLogData";
             this.btnReadSLogData.Size = new System.Drawing.Size(122, 25);
             this.btnReadSLogData.TabIndex = 17;
@@ -2001,16 +1999,6 @@
             this.label47.TabIndex = 17;
             this.label47.Text = "Website";
             // 
-            // axFP_CLOCK
-            // 
-            //this.axFP_CLOCK.Enabled = true;
-            //this.axFP_CLOCK.Location = new System.Drawing.Point(476, 382);
-            //this.axFP_CLOCK.Name = "axFP_CLOCK";
-            //this.axFP_CLOCK.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFP_CLOCK.OcxState")));
-            //this.axFP_CLOCK.Size = new System.Drawing.Size(100, 50);
-            //this.axFP_CLOCK.TabIndex = 11;
-            //this.axFP_CLOCK.Visible = false;
-            // 
             // sqliteCommand1
             // 
             this.sqliteCommand1.CommandTimeout = 30;
@@ -2024,7 +2012,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 448);
             this.Controls.Add(this.tabControl);
-            //this.Controls.Add(this.axFP_CLOCK);
             this.Name = "ViewMain";
             this.Text = "Main";
             this.tabControl.ResumeLayout(false);
@@ -2067,7 +2054,6 @@
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).EndInit();
-            //((System.ComponentModel.ISupportInitialize)(this.axFP_CLOCK)).EndInit();
             this.ResumeLayout(false);
 
         }
