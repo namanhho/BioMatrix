@@ -1,0 +1,6 @@
+2023-05-22 08:37:11.7874 =============btnLoginByHikvision_Click: 
+Bat dau ConnectByHikvision_V2
+Ket qua lay du lieu ConnectByHikvision_V2: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server================
+2023-05-22 08:41:27.0698 =============btnGetLogsByHikvision_Click: 
+Bat dau GetLogDatasByHikvision_V2
+Ket qua lay du lieu nGetLogDatasByHikvision_V2: success: False-----data: ""----ErrorMessage: Unable to connect to the remote server================

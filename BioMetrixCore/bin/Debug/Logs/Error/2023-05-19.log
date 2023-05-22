@@ -1,0 +1,22 @@
+2023-05-19 14:53:47.4305 =============btnLoginByHikvision_Click: 
+Bat dau ConnectByHikvision_GetResponse
+Cannot login to 123.16.55.50The operation has timed out================
+2023-05-19 15:03:17.1507 =============btnLoginByHikvision_Click: 
+Bat dau ConnectByHikvision_GetResponse
+Cannot login to 123.16.55.50The operation has timed out================
+2023-05-19 15:05:31.2455 =============btnLoginByHikvision_Click: 
+Bat dau ConnectByHikvision_GetResponse
+Cannot login to 123.16.55.50The operation has timed out================
+2023-05-19 15:17:47.2957 =============btnLoginByHikvision_Click: 
+Bat dau ConnectByHikvision_GetResponse
+Cannot login to 123.16.55.50The operation has timed out================
+2023-05-19 15:42:05.6232 =============btnGetLogsByHikvision_Click: 
+===========Bat dau khoi tao: Page: 1======Limit:50
+===========Bat dau kiem tra Credential: Page: 1======Limit:50
+===========Kiem tra Credential xong
+===========Bat dau gan request: Page: 1======Limit:50
+===========Bat dau Write: Page: 1======Limit:50
+===========Bat dau lay du lieu: Page: 1======Limit:50
+Error2: System.Net.ProtocolViolationException: You must provide a request body if you set ContentLength>0 or SendChunked==true.  Do this by calling [Begin]GetRequestStream before [Begin]GetResponse.
+   at System.Net.HttpWebRequest.GetResponse()
+   at BioMetrixCore.ViewMain.GetLogDatasByHikvision(Nullable`1 fromDate, Nullable`1 toDate, Int32 page, Int32 limit, String& message) in C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\ViewMain.cs:line 4055================

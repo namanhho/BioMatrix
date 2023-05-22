@@ -30,6 +30,7 @@ using Newtonsoft.Json;
 using static BioMetrixCore.Dahahi;
 using NLog.Fluent;
 using System.ServiceModel.Channels;
+using static BioMetrixCore.Hikvision;
 
 namespace BioMetrixCore
 {
@@ -411,6 +412,15 @@ namespace BioMetrixCore
             dgvLogsByDahahi.Controls.Clear();
             dgvLogsByDahahi.Rows.Clear();
             dgvLogsByDahahi.Columns.Clear();
+
+            if (dgvLogsByHikvision.Controls.Count > 2)
+            {
+                dgvLogsByHikvision.Controls.RemoveAt(2);
+            }
+            dgvLogsByHikvision.DataSource = null;
+            dgvLogsByHikvision.Controls.Clear();
+            dgvLogsByHikvision.Rows.Clear();
+            dgvLogsByHikvision.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -455,6 +465,10 @@ namespace BioMetrixCore
             dgvLogsByDahahi.DataSource = list;
             dgvLogsByDahahi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvLogsByDahahi);
+
+            dgvLogsByHikvision.DataSource = list;
+            dgvLogsByHikvision.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogsByHikvision);
         }
 
 
@@ -3890,6 +3904,380 @@ namespace BioMetrixCore
             return lstLog;
         }
         #endregion
+        #region Hikvision
+        private void btnLoginByHikvision_Click(object sender, EventArgs e)
+        {
+            var message = string.Empty;
+            int typeHikvision = 0;
+            int.TryParse(Utility.GetAppSetting("TypeHikvision"), out typeHikvision);
+            var success = false;
+            if (typeHikvision == 1)
+            {
+                success = ConnectByHikvision(ref message);
+            }
+            else
+            {
+                success = ConnectByHikvision_V2(ref message);
+            }
+            Logger.LogError($"=============btnLoginByHikvision_Click: {message}================");
+            tbTotalByHikvision.Text = success ? "Thành công" : "Thất bại";
+        }
+        private void btnGetLogsByHikvision_Click(object sender, EventArgs e)
+        {
+            var message = string.Empty;
+            int typeHikvision = 0;
+            int.TryParse(Utility.GetAppSetting("TypeHikvision"), out typeHikvision);
+            var logs = new List<LogData>();
+            if (typeHikvision == 1)
+            {
+                logs = GetLogsByHikvision(dtFromDateByHikvision.Value, dtToDateByHikvision.Value, 50, ref message);
+            }
+            else
+            {
+                logs = GetLogDatasByHikvision_V2(ref message);
+            }
+            Logger.LogError($"=============btnGetLogsByHikvision_Click: {message}================");
+            tbTotalByHikvision.Text = logs.Count.ToString();
+            BindToGridView(logs);
+        }
+        public bool ConnectByHikvision(ref string message)
+        {
+            bool success = true;
+            try
+            {
+                //if (Config != null)
+                //{
+                //success = Utility.Ping(tbIPByHikvision.Text, ref message, 3);
+                if (success)
+                {
+                    string url = "http://" + tbIPByHikvision.Text + (int.Parse(tbPortByHikvision.Text) > 0 ? ":" + tbPortByHikvision.Text : "") + "/ISAPI/Security/userCheck?format=json";
+                    string response = string.Empty;
 
+                    HttpClient http = new HttpClient();
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                    request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+                    request.Method = "GET";
+                    request.Timeout = 5000;
+                    string strRsp = string.Empty;
+                    try
+                    {
+                        message += $"\nBat dau ConnectByHikvision_GetResponse";
+                        WebResponse wr = request.GetResponse();
+                        message += $"\nBat dau ConnectByHikvision_GetResponse xong";
+                        strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                        message += $"\nBat dau ConnectByHikvision_GetResponseStream xong: {strRsp}";
+                        wr.Close();
+                        _isConnected = true;
+                        success = true;
+                    }
+                    catch (WebException ex)
+                    {
+                        WebResponse wenReq = (HttpWebResponse)ex.Response;
+                        if (wenReq != null)
+                        {
+                            strRsp = new StreamReader(wenReq.GetResponseStream()).ReadToEnd();
+                            wenReq.Close();
+                        }
+                        success = false;
+                        message += $"\nCannot login to {tbIPByHikvision.Text}" + ex.Message;
+                    }
+                }
+                else
+                {
+                    message += $"\nCannot connect to {tbIPByHikvision.Text}";
+                }
+                //}
+                //else
+                //{
+                //    message = "Invalid config";
+                //}
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                message += $"\n{ex.Message}";
+            }
+            return success;
+        }
+
+        public List<LogData> GetLogsByHikvision(DateTime? fromDate, DateTime? toDate, int? limit, ref string message)
+        {
+            var listLogs = GetLogDatasByHikvision(fromDate, toDate, 1, 50, ref message);
+            return listLogs;
+        }
+        /// <summary>
+        /// Đệ quy lấy dữ liệu
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="page"></param>
+        /// <param name="limit"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private List<LogData> GetLogDatasByHikvision(DateTime? fromDate, DateTime? toDate, int page, int limit, ref string message)
+        {
+            message += $"\n===========Bat dau khoi tao: Page: {page}======Limit:{limit}";
+            var lstLog = new List<LogData>();
+            string url = "http://" + tbIPByHikvision.Text + (int.Parse(tbPortByHikvision.Text) > 0 ? ":" + tbPortByHikvision.Text : "") + "/ISAPI/AccessControl/AcsEvent?format=json";
+            string response = string.Empty;
+
+            HttpClient http = new HttpClient();
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            message += $"\n===========Bat dau kiem tra Credential: Page: {page}======Limit:{limit}";
+            request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+            message += $"\n===========Kiem tra Credential xong";
+            request.Method = "POST";
+            request.Timeout = 100000;
+            // add request
+            var req = request;
+            bool customStrReq = false;
+            Boolean.TryParse(Utility.GetAppSetting("CustomStrReq"), out customStrReq);
+            string strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": "
+                + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \""
+                + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"major\": 0, \"minor\": 0, \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+            if (customStrReq)
+            {
+                int customMajor = 0;
+                int.TryParse(Utility.GetAppSetting("CustomMajor"), out customMajor);
+                bool customPicEnable = false;
+                Boolean.TryParse(Utility.GetAppSetting("CustomPicEnable"), out customPicEnable);
+                if (customPicEnable)
+                {
+                    strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": " + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": true" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+                }
+                else
+                {
+                    strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": " + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": false" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+                }
+            }
+            if (strReq.Length > 0)
+            {
+                message += $"\n===========Bat dau gan request: Page: {page}======Limit:{limit}";
+                byte[] bs = Encoding.ASCII.GetBytes(strReq);
+
+                request.ContentType = "application/json";
+                request.ContentLength = bs.Length;
+                message += $"\n===========Bat dau Write: Page: {page}======Limit:{limit}";
+                bool customWriteHikvision = false;
+                Boolean.TryParse(Utility.GetAppSetting("CustomWriteHikvision"), out customWriteHikvision);
+                if (!customWriteHikvision)
+                {
+                    using (Stream reqStream = request.GetRequestStream())
+                    {
+                        reqStream.Write(bs, 0, bs.Length);
+                    }
+                    message += $"\n===========WriteHikvision xong";
+                }
+            }
+            string strRsp = string.Empty;
+            bool getLogByHikvision = false;
+            Boolean.TryParse(Utility.GetAppSetting("GetLogByHikvision"), out getLogByHikvision);
+            try
+            {
+                message += $"\n===========Bat dau lay du lieu: Page: {page}======Limit:{limit}";
+                using (WebResponse wr = request.GetResponse())
+                {
+                    strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                }
+                if (getLogByHikvision)
+                {
+                    message += $"\n==============Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
+                }
+                else
+                {
+                    message += $"\n==============Page: {page}=============Limit: {limit}=========================";
+                }
+                GetDatasByHikvision(strRsp, fromDate, toDate, page, limit, ref lstLog, ref message);
+            }
+            catch (WebException ex)
+            {
+                message += $"\nError1.1: " + ex.ToString();
+                bool customGetResponseStream = false;
+                Boolean.TryParse(Utility.GetAppSetting("CustomGetResponseStream"), out customGetResponseStream);
+                if (!customGetResponseStream)
+                {
+                    WebResponse wenReq = (HttpWebResponse)ex.Response;
+                    message += $"\nError1.1: Khoi tao xong";
+                    if (wenReq != null)
+                    {
+                        message += $"\nError1.1: Bat dau doc du lieu";
+                        strRsp = new StreamReader(wenReq.GetResponseStream()).ReadToEnd();
+                        wenReq.Close();
+                        if (getLogByHikvision)
+                        {
+                            message += $"\n==============Error1.1=====Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
+                        }
+                        else
+                        {
+                            message += $"\n==============Error1.1=====Page: {page}=============Limit: {limit}=========================";
+                        }
+                        GetDatasByHikvision(strRsp, fromDate, toDate, page, limit, ref lstLog, ref message);
+                    }
+                }
+                else
+                {
+                    WebResponse wenReq = (HttpWebResponse)ex.Response;
+                    message += $"\nError1.2: Khoi tao xong";
+                    if (wenReq != null)
+                    {
+                        message += $"\nError1.2: Bat dau doc du lieu";
+                        using (WebResponse wr = request.GetResponse())
+                        {
+                            strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                        }
+                        if (getLogByHikvision)
+                        {
+                            message += $"\n==============Error1.2======Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
+                        }
+                        else
+                        {
+                            message += $"\n==============Error1.2======Page: {page}=============Limit: {limit}=========================";
+                        }
+                        GetDatasByHikvision(strRsp, fromDate, toDate, page, limit, ref lstLog, ref message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message += $"\nError2: " + ex.ToString();
+            }
+
+            return lstLog;
+        }
+
+        private void GetDatasByHikvision(string strRsp, DateTime? fromDate, DateTime? toDate, int page, int limit, ref List<LogData> lstLog, ref string message)
+        {
+            EventSearchRoot dr = JsonConvert.DeserializeObject<EventSearchRoot>(strRsp);
+            if (string.IsNullOrWhiteSpace(strRsp))
+            {
+                message += $"\n==========strRsp IS NULL=========";
+                var tmp = GetLogDatasByHikvision(fromDate, toDate, page, limit, ref message);
+                message += $"\n---strRsp IS NULL=======Count {tmp.Count} --- ";
+                if (tmp.Count > 0)
+                {
+                    lstLog.AddRange(tmp);
+                }
+            }
+            int num = dr != null ? Int32.Parse(dr.AcsEvent.numOfMatches) : 0;
+            int total = dr != null ? Int32.Parse(dr.AcsEvent.totalMatches) : 10000000;
+            string status = dr != null ? dr.AcsEvent.responseStatusStrg : "MORE";
+            if (num > 0 && dr != null)
+            {
+                for (int j = 0; j < dr.AcsEvent.InfoList.Count(); ++j)
+                {
+                    if (!string.IsNullOrWhiteSpace(dr.AcsEvent.InfoList[j].employeeNoString))
+                    {
+                        var log = new LogData()
+                        {
+                            CheckTime = DateTime.Parse(dr.AcsEvent.InfoList[j].time),
+                            FullName = dr.AcsEvent.InfoList[j].name,
+                            UserID = dr.AcsEvent.InfoList[j].employeeNoString,
+                        };
+                        lstLog.Add(log);
+                    }
+                }
+                message += $"Page {page}, size {num}, count {lstLog.Count}, status {status} --- ";
+            }
+            if ((page - 1) * limit + num < total)
+            {
+                int pa = page + 1;
+                var tmp = GetLogDatasByHikvision(fromDate, toDate, pa, num, ref message);
+                message += $"--- Count {tmp.Count} --- ";
+
+                if (tmp.Count > 0)
+                {
+                    lstLog.AddRange(tmp);
+                }
+            }
+        }
+        private CredentialCache GetCredentialCacheByHikvision(string sUrl, string strUserName, string strPassword)
+        {
+            var credentialCache = new CredentialCache();
+            credentialCache.Add(new Uri(sUrl), "Digest", new NetworkCredential(strUserName, strPassword));
+            return credentialCache;
+        }
+
+
+        public bool ConnectByHikvision_V2(ref string message)
+        {
+            var success = false;
+            try
+            {
+                message += $"\nBat dau ConnectByHikvision_V2";
+                var url = $"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/Security/userCheck?format=json";
+                var client = new RestClient($"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/Security/userCheck?format=json");
+                var request = new RestRequest("values", Method.GET);
+                request.AddHeader("Content-Type", "application/json");
+
+                request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+                var response = client.Execute(request);
+                message += $"\nKet qua lay du lieu ConnectByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
+            }
+            catch (Exception ex)
+            {
+                message += $"\nConnectByHikvision_V2 Exception: {ex.Message}";
+            }
+            return success;
+        }
+        public List<LogData> GetLogDatasByHikvision_V2(ref string message)
+        {
+            var lstLog = new List<LogData>();
+            try
+            {
+                message += $"\nBat dau GetLogDatasByHikvision_V2";
+                var url = $"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/AccessControl/AcsEvent?format=json";
+                var client = new RestClient($"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/AccessControl/AcsEvent?format=json");
+                var request = new RestRequest("values", Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                var param = new
+                {
+                    AcsEventCond = new
+                    {
+                        searchID = "1",
+                        searchResultPosition = 0,
+                        maxResults = 50,
+                        startTime = dtFromDateByHikvision.Value.ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
+                        endTime = dtToDateByHikvision.Value.ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
+                        major = 0,
+                        minor = 0,
+                        timeReverseOrder = true,
+                        eventAttribute = "attendance"
+                    }
+                };
+                request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
+                request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+                var response = client.Execute(request);
+                message += $"\nKet qua lay du lieu nGetLogDatasByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
+                var logs = JsonConvert.DeserializeObject<EventSearchRoot>(response.Content);
+                var infoList = new List<Hikvision.EventInfo>();
+                if(logs != null && logs.AcsEvent != null)
+                {
+                    infoList = logs.AcsEvent.InfoList;
+                }
+                message += $"\nGetLogDatasByHikvision_V2: infoList: {Converter.JsonSerialize(infoList)}";
+                foreach (var data in infoList)
+                {
+                    var checkTime = DateTime.Now;
+                    if (!string.IsNullOrWhiteSpace(data.employeeNoString) && DateTime.TryParse(data.time, out checkTime))
+                    {
+
+                    }
+                    var log = new LogData()
+                    {
+                        CheckTime = DateTime.Parse(data.time),
+                        FullName = data.name,
+                        UserID = data.employeeNoString,
+                    };
+                    lstLog.Add(log);
+                }
+                message += $"\nGetLogDatasByHikvision_V2: lstLog: {Converter.JsonSerialize(lstLog)}";
+            }
+            catch (Exception ex)
+            {
+                message += $"\nGetLogDatasByHikvision_V2 Exception: {ex.Message}";
+            }
+            return lstLog;
+        }
+        #endregion
     }
 }

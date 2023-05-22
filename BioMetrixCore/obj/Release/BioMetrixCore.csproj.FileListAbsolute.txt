@@ -48,11 +48,16 @@ C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Release\System.Text.Json.xml
 C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\bin\Release\System.ValueTuple.xml
 C:\Users\hnanh\Desktop\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.ViewMain.resources
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\NLog.config
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\BioMetrixCore.exe.config
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\BioMetrixCore.exe
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\BioMetrixCore.pdb
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\AxInterop.FP_CLOCKLib.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\IPAddressControlLib.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\ManagedNativeWifi.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\ManagedWifi.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.Core.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Microsoft.Data.Sqlite.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Microsoft.Exchange.WebServices.Auth.dll
@@ -62,6 +67,8 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\NLog.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\RestSharp.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\SQLitePCLRaw.core.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Buffers.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Data.Odbc.dll
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Data.OleDb.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Memory.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Numerics.Vectors.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
@@ -80,6 +87,8 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Newtonsoft.Json.x
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\NLog.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\RestSharp.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Buffers.xml
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Data.Odbc.xml
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Data.OleDb.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Memory.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Numerics.Vectors.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
@@ -100,8 +109,3 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.csp
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.csproj.CopyComplete
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.exe
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Release\BioMetrixCore.pdb
-C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\NLog.config
-C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.Core.dll
-C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\Mapster.dll
-C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\AxInterop.FP_CLOCKLib.dll
-C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Release\IPAddressControlLib.dll

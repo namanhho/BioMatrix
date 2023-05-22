@@ -204,6 +204,22 @@
             this.btnLoginByDahahi = new System.Windows.Forms.Button();
             this.tbWebsiteByDahahi = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.label54 = new System.Windows.Forms.Label();
+            this.btnLoginByHikvision = new System.Windows.Forms.Button();
+            this.tbTotalByHikvision = new System.Windows.Forms.TextBox();
+            this.dgvLogsByHikvision = new System.Windows.Forms.DataGridView();
+            this.dtToDateByHikvision = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByHikvision = new System.Windows.Forms.DateTimePicker();
+            this.btnGetLogsByHikvision = new System.Windows.Forms.Button();
+            this.tbPassByHikvision = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.tbUserNameByHikvision = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.tbPortByHikvision = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.tbIPByHikvision = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -232,6 +248,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByRonaldJack)).BeginInit();
             this.tabPage11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).BeginInit();
+            this.tabPage12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -247,6 +265,7 @@
             this.tabControl.Controls.Add(this.tabPage9);
             this.tabControl.Controls.Add(this.tabPage10);
             this.tabControl.Controls.Add(this.tabPage11);
+            this.tabControl.Controls.Add(this.tabPage12);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1999,6 +2018,157 @@
             this.label47.TabIndex = 17;
             this.label47.Text = "Website";
             // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.label54);
+            this.tabPage12.Controls.Add(this.btnLoginByHikvision);
+            this.tabPage12.Controls.Add(this.tbTotalByHikvision);
+            this.tabPage12.Controls.Add(this.dgvLogsByHikvision);
+            this.tabPage12.Controls.Add(this.dtToDateByHikvision);
+            this.tabPage12.Controls.Add(this.dtFromDateByHikvision);
+            this.tabPage12.Controls.Add(this.btnGetLogsByHikvision);
+            this.tabPage12.Controls.Add(this.tbPassByHikvision);
+            this.tabPage12.Controls.Add(this.label50);
+            this.tabPage12.Controls.Add(this.tbUserNameByHikvision);
+            this.tabPage12.Controls.Add(this.label51);
+            this.tabPage12.Controls.Add(this.tbPortByHikvision);
+            this.tabPage12.Controls.Add(this.label52);
+            this.tabPage12.Controls.Add(this.tbIPByHikvision);
+            this.tabPage12.Controls.Add(this.label53);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Size = new System.Drawing.Size(796, 428);
+            this.tabPage12.TabIndex = 11;
+            this.tabPage12.Text = "Hikvision";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(35, 401);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(32, 13);
+            this.label54.TabIndex = 28;
+            this.label54.Text = "Tổng";
+            // 
+            // btnLoginByHikvision
+            // 
+            this.btnLoginByHikvision.Location = new System.Drawing.Point(684, 14);
+            this.btnLoginByHikvision.Name = "btnLoginByHikvision";
+            this.btnLoginByHikvision.Size = new System.Drawing.Size(75, 23);
+            this.btnLoginByHikvision.TabIndex = 27;
+            this.btnLoginByHikvision.Text = "Đăng nhập";
+            this.btnLoginByHikvision.UseVisualStyleBackColor = true;
+            this.btnLoginByHikvision.Click += new System.EventHandler(this.btnLoginByHikvision_Click);
+            // 
+            // tbTotalByHikvision
+            // 
+            this.tbTotalByHikvision.Location = new System.Drawing.Point(73, 398);
+            this.tbTotalByHikvision.Name = "tbTotalByHikvision";
+            this.tbTotalByHikvision.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalByHikvision.TabIndex = 26;
+            this.tbTotalByHikvision.Text = "0";
+            // 
+            // dgvLogsByHikvision
+            // 
+            this.dgvLogsByHikvision.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogsByHikvision.Location = new System.Drawing.Point(38, 111);
+            this.dgvLogsByHikvision.Name = "dgvLogsByHikvision";
+            this.dgvLogsByHikvision.Size = new System.Drawing.Size(664, 271);
+            this.dgvLogsByHikvision.TabIndex = 25;
+            // 
+            // dtToDateByHikvision
+            // 
+            this.dtToDateByHikvision.Location = new System.Drawing.Point(458, 57);
+            this.dtToDateByHikvision.Name = "dtToDateByHikvision";
+            this.dtToDateByHikvision.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByHikvision.TabIndex = 24;
+            // 
+            // dtFromDateByHikvision
+            // 
+            this.dtFromDateByHikvision.Location = new System.Drawing.Point(458, 14);
+            this.dtFromDateByHikvision.Name = "dtFromDateByHikvision";
+            this.dtFromDateByHikvision.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByHikvision.TabIndex = 23;
+            // 
+            // btnGetLogsByHikvision
+            // 
+            this.btnGetLogsByHikvision.Location = new System.Drawing.Point(684, 54);
+            this.btnGetLogsByHikvision.Name = "btnGetLogsByHikvision";
+            this.btnGetLogsByHikvision.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogsByHikvision.TabIndex = 22;
+            this.btnGetLogsByHikvision.Text = "Lấy dữ liệu";
+            this.btnGetLogsByHikvision.UseVisualStyleBackColor = true;
+            this.btnGetLogsByHikvision.Click += new System.EventHandler(this.btnGetLogsByHikvision_Click);
+            // 
+            // tbPassByHikvision
+            // 
+            this.tbPassByHikvision.Location = new System.Drawing.Point(334, 57);
+            this.tbPassByHikvision.Name = "tbPassByHikvision";
+            this.tbPassByHikvision.Size = new System.Drawing.Size(100, 20);
+            this.tbPassByHikvision.TabIndex = 21;
+            this.tbPassByHikvision.Text = "a11223344@";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(247, 64);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(52, 13);
+            this.label50.TabIndex = 20;
+            this.label50.Text = "Mật khẩu";
+            // 
+            // tbUserNameByHikvision
+            // 
+            this.tbUserNameByHikvision.Location = new System.Drawing.Point(334, 14);
+            this.tbUserNameByHikvision.Name = "tbUserNameByHikvision";
+            this.tbUserNameByHikvision.Size = new System.Drawing.Size(100, 20);
+            this.tbUserNameByHikvision.TabIndex = 19;
+            this.tbUserNameByHikvision.Text = "admin";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(247, 21);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(81, 13);
+            this.label51.TabIndex = 18;
+            this.label51.Text = "Tên đăng nhập";
+            // 
+            // tbPortByHikvision
+            // 
+            this.tbPortByHikvision.Location = new System.Drawing.Point(103, 61);
+            this.tbPortByHikvision.Name = "tbPortByHikvision";
+            this.tbPortByHikvision.Size = new System.Drawing.Size(116, 20);
+            this.tbPortByHikvision.TabIndex = 17;
+            this.tbPortByHikvision.Text = "80";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(35, 64);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(32, 13);
+            this.label52.TabIndex = 16;
+            this.label52.Text = "Cổng";
+            // 
+            // tbIPByHikvision
+            // 
+            this.tbIPByHikvision.Location = new System.Drawing.Point(103, 18);
+            this.tbIPByHikvision.Name = "tbIPByHikvision";
+            this.tbIPByHikvision.Size = new System.Drawing.Size(116, 20);
+            this.tbIPByHikvision.TabIndex = 15;
+            this.tbIPByHikvision.Text = "123.16.55.50";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(35, 21);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(17, 13);
+            this.label53.TabIndex = 14;
+            this.label53.Text = "IP";
+            // 
             // sqliteCommand1
             // 
             this.sqliteCommand1.CommandTimeout = 30;
@@ -2054,6 +2224,9 @@
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).EndInit();
+            this.tabPage12.ResumeLayout(false);
+            this.tabPage12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2237,5 +2410,21 @@
         private System.Windows.Forms.Button btnGetLogsByDahahi;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
         private AxFP_CLOCKLib.AxFP_CLOCK axFP_CLOCK;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.Button btnLoginByHikvision;
+        private System.Windows.Forms.TextBox tbTotalByHikvision;
+        private System.Windows.Forms.DataGridView dgvLogsByHikvision;
+        private System.Windows.Forms.DateTimePicker dtToDateByHikvision;
+        private System.Windows.Forms.DateTimePicker dtFromDateByHikvision;
+        private System.Windows.Forms.Button btnGetLogsByHikvision;
+        private System.Windows.Forms.TextBox tbPassByHikvision;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox tbUserNameByHikvision;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox tbPortByHikvision;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox tbIPByHikvision;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
     }
 }

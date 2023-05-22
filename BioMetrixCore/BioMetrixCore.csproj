@@ -151,6 +151,7 @@
     <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\Converter.cs" />
     <Compile Include="Utilities\DeviceInfo.cs" />
+    <Compile Include="Info\Hikvision.cs" />
     <Compile Include="Utilities\LogData.cs" />
     <Compile Include="Utilities\Logger.cs" />
     <Compile Include="Utilities\ServiceResult.cs" />
