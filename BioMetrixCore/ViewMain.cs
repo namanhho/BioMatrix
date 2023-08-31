@@ -4229,48 +4229,59 @@ namespace BioMetrixCore
                 var client = new RestClient($"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/AccessControl/AcsEvent?format=json");
                 var request = new RestRequest("values", Method.POST);
                 request.AddHeader("Content-Type", "application/json");
-                var param = new
-                {
-                    AcsEventCond = new
-                    {
-                        searchID = "1",
-                        searchResultPosition = 0,
-                        maxResults = 50,
-                        startTime = dtFromDateByHikvision.Value.ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
-                        endTime = dtToDateByHikvision.Value.ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
-                        major = 0,
-                        minor = 0,
-                        timeReverseOrder = true,
-                        eventAttribute = "attendance"
-                    }
-                };
-                request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
                 request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
-                var response = client.Execute(request);
-                message += $"\nKet qua lay du lieu nGetLogDatasByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
-                var logs = JsonConvert.DeserializeObject<EventSearchRoot>(response.Content);
-                var infoList = new List<Hikvision.EventInfo>();
-                if(logs != null && logs.AcsEvent != null)
-                {
-                    infoList = logs.AcsEvent.InfoList;
-                }
-                message += $"\nGetLogDatasByHikvision_V2: infoList: {Converter.JsonSerialize(infoList)}";
-                foreach (var data in infoList)
-                {
-                    var checkTime = DateTime.Now;
-                    if (!string.IsNullOrWhiteSpace(data.employeeNoString) && DateTime.TryParse(data.time, out checkTime))
-                    {
 
-                    }
-                    var log = new LogData()
+                var total = 0;
+                var num = 0;
+                var page = 1;
+                var limit = 100;
+                int.TryParse(Utility.GetAppSetting("LimitHikvision"), out limit);
+                do
+                {
+                    var param = new
                     {
-                        CheckTime = DateTime.Parse(data.time),
-                        FullName = data.name,
-                        UserID = data.employeeNoString,
+                        AcsEventCond = new
+                        {
+                            searchID = "1",
+                            searchResultPosition = ((page - 1) * limit),
+                            maxResults = limit,
+                            startTime = dtFromDateByHikvision.Value.Date.ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
+                            endTime = dtToDateByHikvision.Value.Date.AddDays(1).AddMinutes(-1).ToString("yyyy-MM-dd'T'HH:mm:sszzz"),
+                            major = 0,
+                            minor = 0,
+                            timeReverseOrder = true,
+                            eventAttribute = "attendance"
+                        }
                     };
-                    lstLog.Add(log);
-                }
-                message += $"\nGetLogDatasByHikvision_V2: lstLog: {Converter.JsonSerialize(lstLog)}";
+                    request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
+                    var response = client.Execute(request);
+                    message += $"\nKet qua lay du lieu nGetLogDatasByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
+                    var logs = JsonConvert.DeserializeObject<EventSearchRoot>(response.Content);
+                    var infoList = new List<Hikvision.EventInfo>();
+                    if (logs != null && logs.AcsEvent != null)
+                    {
+                        infoList = logs.AcsEvent.InfoList;
+                        num = int.TryParse(logs.AcsEvent.numOfMatches, out num) ? int.Parse(logs.AcsEvent.numOfMatches) : 0;
+                        total = int.TryParse(logs.AcsEvent.totalMatches, out total) ? int.Parse(logs.AcsEvent.totalMatches) : 0;
+                    }
+                    message += $"\nGetLogDatasByHikvision_V2: infoList: {Converter.JsonSerialize(infoList)}";
+                    foreach (var data in infoList)
+                    {
+                        var checkTime = DateTime.Now;
+                        if (!string.IsNullOrWhiteSpace(data.employeeNoString) && DateTime.TryParse(data.time, out checkTime))
+                        {
+                            var log = new LogData()
+                            {
+                                CheckTime = DateTime.Parse(data.time),
+                                FullName = data.name,
+                                UserID = data.employeeNoString,
+                            };
+                            lstLog.Add(log);
+                        }
+                    }
+                    message += $"\nGetLogDatasByHikvision_V2: lstLog: {Converter.JsonSerialize(lstLog)}";
+                    page++;
+                } while ((page - 1) * limit + num < total);
             }
             catch (Exception ex)
             {
@@ -4279,5 +4290,141 @@ namespace BioMetrixCore
             return lstLog;
         }
         #endregion
+
+
+        #region SDK DEMO
+        public SDKHelper _SDKHelper = new SDKHelper();
+        private void btnTCPConnect_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            int ret = _SDKHelper.sta_ConnectTCP(lbSysOutputInfo, txtIP.Text.Trim(), txtPort.Text.Trim(), txtCommKey1.Text.Trim());
+
+            if (_SDKHelper.GetConnectState())
+            {
+                _SDKHelper.sta_getBiometricType();
+            }
+            if (ret == 1)
+            {
+                this.txtIP.ReadOnly = true;
+                this.txtPort.ReadOnly = true;
+                this.txtCommKey1.ReadOnly = true;
+
+                getCapacityInfo();
+                getDeviceInfo();
+
+                btnTCPConnect.Text = "DisConnect";
+                btnTCPConnect.Refresh();
+
+            }
+            else if (ret == -2)
+            {
+                btnTCPConnect.Text = "Connect";
+                btnTCPConnect.Refresh();
+                this.txtIP.ReadOnly = false;
+                this.txtPort.ReadOnly = false;
+                this.txtCommKey1.ReadOnly = false;
+            }
+            Cursor = Cursors.Default;
+        }
+        private void getDeviceInfo()
+        {
+            string sFirmver = "";
+            string sMac = "";
+            string sPlatform = "";
+            string sSN = "";
+            string sProductTime = "";
+            string sDeviceName = "";
+            int iFPAlg = 0;
+            int iFaceAlg = 0;
+            string sProducter = "";
+
+            _SDKHelper.sta_GetDeviceInfo(lbSysOutputInfo, out sFirmver, out sMac, out sPlatform, out sSN, out sProductTime, out sDeviceName, out iFPAlg, out iFaceAlg, out sProducter);
+
+            txtSerialNumber.Text = sSN;
+            txtPlatForm.Text = sPlatform;
+            txtDeviceName.Text = sDeviceName;
+            txtManufacturer.Text = sProducter;
+        }
+        private void getCapacityInfo()
+        {
+            int adminCnt = 0;
+            int userCount = 0;
+            int fpCnt = 0;
+            int recordCnt = 0;
+            int pwdCnt = 0;
+            int oplogCnt = 0;
+            int faceCnt = 0;
+            _SDKHelper.sta_GetCapacityInfo(lbSysOutputInfo, out adminCnt, out userCount, out fpCnt, out recordCnt, out pwdCnt, out oplogCnt, out faceCnt);
+        }
+        #endregion
+
+        private void btn_readAttLog_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            if (checkBox_timePeriod.Checked == true)
+            {
+                string fromTime = stime_log.Text.Trim().ToString();
+                string toTime = etime_log.Text.Trim().ToString();
+
+                DataTable dt_periodLog = new DataTable("dt_periodLog");
+                gv_Attlog.AutoGenerateColumns = true;
+                gv_Attlog.Columns.Clear();
+                dt_periodLog.Columns.Add("User ID", System.Type.GetType("System.String"));
+                dt_periodLog.Columns.Add("Verify Date", System.Type.GetType("System.String"));
+                dt_periodLog.Columns.Add("Verify Type", System.Type.GetType("System.Int32"));
+                dt_periodLog.Columns.Add("Verify State", System.Type.GetType("System.Int32"));
+                dt_periodLog.Columns.Add("WorkCode", System.Type.GetType("System.Int32"));
+                gv_Attlog.DataSource = dt_periodLog;
+
+                _SDKHelper.sta_readLogByPeriod(lbSysOutputInfo, dt_periodLog, fromTime, toTime);
+            }
+            else
+            {
+                DataTable dt_period = new DataTable("dt_period");
+                gv_Attlog.AutoGenerateColumns = true;
+                gv_Attlog.Columns.Clear();
+                dt_period.Columns.Add("User ID", System.Type.GetType("System.String"));
+                dt_period.Columns.Add("Verify Date", System.Type.GetType("System.String"));
+                dt_period.Columns.Add("Verify Type", System.Type.GetType("System.Int32"));
+                dt_period.Columns.Add("Verify State", System.Type.GetType("System.Int32"));
+                dt_period.Columns.Add("WorkCode", System.Type.GetType("System.Int32"));
+                gv_Attlog.DataSource = dt_period;
+
+                _SDKHelper.sta_readAttLog(lbSysOutputInfo, dt_period);
+            }
+            Cursor = Cursors.Default;
+        }
+
+        private void checkBox_timePeriod_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_timePeriod.Checked == true)
+            {
+                stime_log.Enabled = true;
+                etime_log.Enabled = true;
+            }
+            else
+            {
+                stime_log.Enabled = false;
+                etime_log.Enabled = false;
+
+            }
+        }
+        private void lbSysOutputInfo_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index >= 0)
+            {
+                e.DrawBackground();
+
+                if (lbSysOutputInfo.Items[e.Index].ToString().Substring(0, 1) == "*")//if begin with *, the font color is red   
+                {
+                    e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(Color.Red), e.Bounds);
+                }
+                else
+                {
+                    e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds);
+                }
+                e.DrawFocusRectangle();
+            }
+        }
     }
 }

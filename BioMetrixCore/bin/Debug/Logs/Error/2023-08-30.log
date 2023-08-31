@@ -1,0 +1,26 @@
+2023-08-30 10:56:50.2168 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-08-30 10:56:53.4131 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-08-30 10:56:56.5919 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-08-30 10:56:59.7781 ConnectDevice : True - Message: Start connecting using ronald jack sdk 
+OpenComPort 1st time: False 
+GetSerialNumber: NPP2020939 
+
+2023-08-30 10:57:02.8078 
+GetLogsFromDevice_Bat dau InitClient
+2023-08-30 10:57:02.8078 
+GetLogsFromDevice_InitClient xong
+2023-08-30 10:57:02.8078 
+GetLogsFromDevice_Bat dau ket noi
+2023-08-30 10:57:02.9656 
+GetLogsFromDevice_Ket noi xong: True
+2023-08-30 10:57:02.9656 
+GetLogsFromDevice_Bat dau lay du lieu

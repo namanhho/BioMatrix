@@ -179,6 +179,7 @@ C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Encodin
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Text.Json.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\System.ValueTuple.xml
+C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\bin\Debug\Interop.zkemkeeper.dll
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.AssemblyReference.cache
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.SuggestedBindingRedirects.cache
 C:\Users\hnanh\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\Interop.zkemkeeper.dll

@@ -220,7 +220,39 @@
             this.label52 = new System.Windows.Forms.Label();
             this.tbIPByHikvision = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.txtPlatForm = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.txtDeviceName = new System.Windows.Forms.TextBox();
+            this.txtSerialNumber = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.txtManufacturer = new System.Windows.Forms.TextBox();
+            this.gv_Attlog = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Workcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBox_timePeriod = new System.Windows.Forms.CheckBox();
+            this.btn_readAttLog = new System.Windows.Forms.Button();
+            this.stime_log = new System.Windows.Forms.DateTimePicker();
+            this.label56 = new System.Windows.Forms.Label();
+            this.etime_log = new System.Windows.Forms.DateTimePicker();
+            this.label57 = new System.Windows.Forms.Label();
+            this.txtCommKey1 = new System.Windows.Forms.TextBox();
+            this.btnTCPConnect = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.labPort = new System.Windows.Forms.Label();
+            this.txtIP = new System.Windows.Forms.TextBox();
+            this.labIP = new System.Windows.Forms.Label();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
+            this.PnlBottom = new System.Windows.Forms.Panel();
+            this.label63 = new System.Windows.Forms.Label();
+            this.PrgSTA = new System.Windows.Forms.ProgressBar();
+            this.lbSysOutputInfo = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -250,6 +282,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).BeginInit();
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).BeginInit();
+            this.tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
+            this.PnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -266,6 +301,7 @@
             this.tabControl.Controls.Add(this.tabPage10);
             this.tabControl.Controls.Add(this.tabPage11);
             this.tabControl.Controls.Add(this.tabPage12);
+            this.tabControl.Controls.Add(this.tabPage13);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -2107,7 +2143,7 @@
             this.tbPassByHikvision.Name = "tbPassByHikvision";
             this.tbPassByHikvision.Size = new System.Drawing.Size(100, 20);
             this.tbPassByHikvision.TabIndex = 21;
-            this.tbPassByHikvision.Text = "a11223344@";
+            this.tbPassByHikvision.Text = "Tt@dmin070922";
             // 
             // label50
             // 
@@ -2158,7 +2194,7 @@
             this.tbIPByHikvision.Name = "tbIPByHikvision";
             this.tbIPByHikvision.Size = new System.Drawing.Size(116, 20);
             this.tbIPByHikvision.TabIndex = 15;
-            this.tbIPByHikvision.Text = "123.16.55.50";
+            this.tbIPByHikvision.Text = "192.168.1.200";
             // 
             // label53
             // 
@@ -2169,6 +2205,295 @@
             this.label53.TabIndex = 14;
             this.label53.Text = "IP";
             // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.PnlBottom);
+            this.tabPage13.Controls.Add(this.label61);
+            this.tabPage13.Controls.Add(this.label62);
+            this.tabPage13.Controls.Add(this.txtPlatForm);
+            this.tabPage13.Controls.Add(this.label59);
+            this.tabPage13.Controls.Add(this.txtDeviceName);
+            this.tabPage13.Controls.Add(this.txtSerialNumber);
+            this.tabPage13.Controls.Add(this.label60);
+            this.tabPage13.Controls.Add(this.txtManufacturer);
+            this.tabPage13.Controls.Add(this.gv_Attlog);
+            this.tabPage13.Controls.Add(this.checkBox_timePeriod);
+            this.tabPage13.Controls.Add(this.btn_readAttLog);
+            this.tabPage13.Controls.Add(this.stime_log);
+            this.tabPage13.Controls.Add(this.label56);
+            this.tabPage13.Controls.Add(this.etime_log);
+            this.tabPage13.Controls.Add(this.label57);
+            this.tabPage13.Controls.Add(this.txtCommKey1);
+            this.tabPage13.Controls.Add(this.btnTCPConnect);
+            this.tabPage13.Controls.Add(this.label55);
+            this.tabPage13.Controls.Add(this.txtPort);
+            this.tabPage13.Controls.Add(this.labPort);
+            this.tabPage13.Controls.Add(this.txtIP);
+            this.tabPage13.Controls.Add(this.labIP);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Size = new System.Drawing.Size(796, 428);
+            this.tabPage13.TabIndex = 12;
+            this.tabPage13.Text = "SDK Demo";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(547, 382);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(51, 13);
+            this.label61.TabIndex = 122;
+            this.label61.Text = "Plat Form";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(528, 408);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(70, 13);
+            this.label62.TabIndex = 123;
+            this.label62.Text = "Manufacturer";
+            // 
+            // txtPlatForm
+            // 
+            this.txtPlatForm.Location = new System.Drawing.Point(620, 379);
+            this.txtPlatForm.Name = "txtPlatForm";
+            this.txtPlatForm.Size = new System.Drawing.Size(151, 20);
+            this.txtPlatForm.TabIndex = 118;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(245, 382);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(72, 13);
+            this.label59.TabIndex = 116;
+            this.label59.Text = "Device Name";
+            // 
+            // txtDeviceName
+            // 
+            this.txtDeviceName.Location = new System.Drawing.Point(334, 379);
+            this.txtDeviceName.Name = "txtDeviceName";
+            this.txtDeviceName.Size = new System.Drawing.Size(153, 20);
+            this.txtDeviceName.TabIndex = 117;
+            // 
+            // txtSerialNumber
+            // 
+            this.txtSerialNumber.Location = new System.Drawing.Point(334, 405);
+            this.txtSerialNumber.Name = "txtSerialNumber";
+            this.txtSerialNumber.Size = new System.Drawing.Size(153, 20);
+            this.txtSerialNumber.TabIndex = 121;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(247, 408);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(70, 13);
+            this.label60.TabIndex = 120;
+            this.label60.Text = "SerialNumber";
+            // 
+            // txtManufacturer
+            // 
+            this.txtManufacturer.Location = new System.Drawing.Point(620, 405);
+            this.txtManufacturer.Name = "txtManufacturer";
+            this.txtManufacturer.Size = new System.Drawing.Size(151, 20);
+            this.txtManufacturer.TabIndex = 119;
+            // 
+            // gv_Attlog
+            // 
+            this.gv_Attlog.AllowUserToAddRows = false;
+            this.gv_Attlog.AllowUserToOrderColumns = true;
+            this.gv_Attlog.AllowUserToResizeRows = false;
+            this.gv_Attlog.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gv_Attlog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gv_Attlog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_Attlog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Date,
+            this.VType,
+            this.VState,
+            this.Workcode});
+            this.gv_Attlog.Location = new System.Drawing.Point(236, 49);
+            this.gv_Attlog.MultiSelect = false;
+            this.gv_Attlog.Name = "gv_Attlog";
+            this.gv_Attlog.ReadOnly = true;
+            this.gv_Attlog.RowHeadersWidth = 20;
+            this.gv_Attlog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.gv_Attlog.RowTemplate.Height = 23;
+            this.gv_Attlog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gv_Attlog.Size = new System.Drawing.Size(543, 324);
+            this.gv_Attlog.TabIndex = 113;
+            // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID.DataPropertyName = "ID";
+            this.ID.FillWeight = 80F;
+            this.ID.HeaderText = "User ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Date.DataPropertyName = "Date";
+            this.Date.HeaderText = "Verify Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // VType
+            // 
+            this.VType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.VType.DataPropertyName = "VType";
+            this.VType.FillWeight = 80F;
+            this.VType.HeaderText = "Verify Type";
+            this.VType.Name = "VType";
+            this.VType.ReadOnly = true;
+            // 
+            // VState
+            // 
+            this.VState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.VState.DataPropertyName = "VState";
+            this.VState.FillWeight = 80F;
+            this.VState.HeaderText = "Verify State";
+            this.VState.Name = "VState";
+            this.VState.ReadOnly = true;
+            // 
+            // Workcode
+            // 
+            this.Workcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Workcode.DataPropertyName = "Workcode";
+            this.Workcode.FillWeight = 80F;
+            this.Workcode.HeaderText = "WorkCode";
+            this.Workcode.Name = "Workcode";
+            this.Workcode.ReadOnly = true;
+            // 
+            // checkBox_timePeriod
+            // 
+            this.checkBox_timePeriod.AutoSize = true;
+            this.checkBox_timePeriod.Location = new System.Drawing.Point(12, 62);
+            this.checkBox_timePeriod.Name = "checkBox_timePeriod";
+            this.checkBox_timePeriod.Size = new System.Drawing.Size(82, 17);
+            this.checkBox_timePeriod.TabIndex = 112;
+            this.checkBox_timePeriod.Text = "Time Period";
+            this.checkBox_timePeriod.UseVisualStyleBackColor = true;
+            this.checkBox_timePeriod.CheckedChanged += new System.EventHandler(this.checkBox_timePeriod_CheckedChanged);
+            // 
+            // btn_readAttLog
+            // 
+            this.btn_readAttLog.Location = new System.Drawing.Point(12, 147);
+            this.btn_readAttLog.Name = "btn_readAttLog";
+            this.btn_readAttLog.Size = new System.Drawing.Size(154, 23);
+            this.btn_readAttLog.TabIndex = 111;
+            this.btn_readAttLog.Text = "ReadAttLog";
+            this.btn_readAttLog.UseVisualStyleBackColor = true;
+            this.btn_readAttLog.Click += new System.EventHandler(this.btn_readAttLog_Click);
+            // 
+            // stime_log
+            // 
+            this.stime_log.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.stime_log.Enabled = false;
+            this.stime_log.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.stime_log.Location = new System.Drawing.Point(79, 91);
+            this.stime_log.Name = "stime_log";
+            this.stime_log.Size = new System.Drawing.Size(151, 20);
+            this.stime_log.TabIndex = 109;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(42, 94);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(30, 13);
+            this.label56.TabIndex = 107;
+            this.label56.Text = "From";
+            // 
+            // etime_log
+            // 
+            this.etime_log.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.etime_log.Enabled = false;
+            this.etime_log.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.etime_log.Location = new System.Drawing.Point(79, 121);
+            this.etime_log.Name = "etime_log";
+            this.etime_log.Size = new System.Drawing.Size(151, 20);
+            this.etime_log.TabIndex = 110;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(52, 125);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(20, 13);
+            this.label57.TabIndex = 108;
+            this.label57.Text = "To";
+            // 
+            // txtCommKey1
+            // 
+            this.txtCommKey1.Location = new System.Drawing.Point(454, 13);
+            this.txtCommKey1.MaxLength = 6;
+            this.txtCommKey1.Name = "txtCommKey1";
+            this.txtCommKey1.Size = new System.Drawing.Size(59, 20);
+            this.txtCommKey1.TabIndex = 24;
+            this.txtCommKey1.Text = "0";
+            // 
+            // btnTCPConnect
+            // 
+            this.btnTCPConnect.Location = new System.Drawing.Point(594, 10);
+            this.btnTCPConnect.Name = "btnTCPConnect";
+            this.btnTCPConnect.Size = new System.Drawing.Size(113, 23);
+            this.btnTCPConnect.TabIndex = 18;
+            this.btnTCPConnect.Text = "Connect";
+            this.btnTCPConnect.UseVisualStyleBackColor = true;
+            this.btnTCPConnect.Click += new System.EventHandler(this.btnTCPConnect_Click);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.ForeColor = System.Drawing.Color.Black;
+            this.label55.Location = new System.Drawing.Point(388, 16);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(54, 13);
+            this.label55.TabIndex = 23;
+            this.label55.Text = "CommKey";
+            // 
+            // txtPort
+            // 
+            this.txtPort.ImeMode = System.Windows.Forms.ImeMode.Close;
+            this.txtPort.Location = new System.Drawing.Point(261, 13);
+            this.txtPort.MaxLength = 5;
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(53, 20);
+            this.txtPort.TabIndex = 20;
+            this.txtPort.Text = "8888";
+            // 
+            // labPort
+            // 
+            this.labPort.AutoSize = true;
+            this.labPort.Location = new System.Drawing.Point(210, 16);
+            this.labPort.Name = "labPort";
+            this.labPort.Size = new System.Drawing.Size(26, 13);
+            this.labPort.TabIndex = 22;
+            this.labPort.Text = "Port";
+            // 
+            // txtIP
+            // 
+            this.txtIP.Location = new System.Drawing.Point(53, 13);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(95, 20);
+            this.txtIP.TabIndex = 19;
+            this.txtIP.Text = "113.161.32.212";
+            // 
+            // labIP
+            // 
+            this.labIP.AutoSize = true;
+            this.labIP.Location = new System.Drawing.Point(9, 16);
+            this.labIP.Name = "labIP";
+            this.labIP.Size = new System.Drawing.Size(17, 13);
+            this.labIP.TabIndex = 21;
+            this.labIP.Text = "IP";
+            // 
             // sqliteCommand1
             // 
             this.sqliteCommand1.CommandTimeout = 30;
@@ -2176,11 +2501,52 @@
             this.sqliteCommand1.Transaction = null;
             this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
+            // PnlBottom
+            // 
+            this.PnlBottom.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.PnlBottom.Controls.Add(this.label63);
+            this.PnlBottom.Controls.Add(this.PrgSTA);
+            this.PnlBottom.Controls.Add(this.lbSysOutputInfo);
+            this.PnlBottom.Font = new System.Drawing.Font("Verdana", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PnlBottom.Location = new System.Drawing.Point(12, 176);
+            this.PnlBottom.Name = "PnlBottom";
+            this.PnlBottom.Size = new System.Drawing.Size(224, 241);
+            this.PnlBottom.TabIndex = 85;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.Location = new System.Drawing.Point(5, 1);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(88, 14);
+            this.label63.TabIndex = 84;
+            this.label63.Text = "Demo Event:";
+            // 
+            // PrgSTA
+            // 
+            this.PrgSTA.Location = new System.Drawing.Point(0, 219);
+            this.PrgSTA.Name = "PrgSTA";
+            this.PrgSTA.Size = new System.Drawing.Size(186, 15);
+            this.PrgSTA.TabIndex = 82;
+            // 
+            // lbSysOutputInfo
+            // 
+            this.lbSysOutputInfo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lbSysOutputInfo.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSysOutputInfo.FormattingEnabled = true;
+            this.lbSysOutputInfo.ItemHeight = 12;
+            this.lbSysOutputInfo.Location = new System.Drawing.Point(2, 17);
+            this.lbSysOutputInfo.Name = "lbSysOutputInfo";
+            this.lbSysOutputInfo.Size = new System.Drawing.Size(219, 196);
+            this.lbSysOutputInfo.TabIndex = 77;
+            this.lbSysOutputInfo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbSysOutputInfo_DrawItem);
+            // 
             // ViewMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 448);
+            this.ClientSize = new System.Drawing.Size(818, 448);
             this.Controls.Add(this.tabControl);
             this.Name = "ViewMain";
             this.Text = "Main";
@@ -2227,6 +2593,11 @@
             this.tabPage12.ResumeLayout(false);
             this.tabPage12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).EndInit();
+            this.tabPage13.ResumeLayout(false);
+            this.tabPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).EndInit();
+            this.PnlBottom.ResumeLayout(false);
+            this.PnlBottom.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2426,5 +2797,37 @@
         private System.Windows.Forms.TextBox tbIPByHikvision;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TabPage tabPage13;
+        private System.Windows.Forms.DataGridView gv_Attlog;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Workcode;
+        private System.Windows.Forms.CheckBox checkBox_timePeriod;
+        private System.Windows.Forms.Button btn_readAttLog;
+        private System.Windows.Forms.DateTimePicker stime_log;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.DateTimePicker etime_log;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox txtCommKey1;
+        private System.Windows.Forms.Button btnTCPConnect;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Label labPort;
+        private System.Windows.Forms.TextBox txtIP;
+        private System.Windows.Forms.Label labIP;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.TextBox txtPlatForm;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox txtDeviceName;
+        private System.Windows.Forms.TextBox txtSerialNumber;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox txtManufacturer;
+        private System.Windows.Forms.Panel PnlBottom;
+        private System.Windows.Forms.Label label63;
+        public System.Windows.Forms.ProgressBar PrgSTA;
+        public System.Windows.Forms.ListBox lbSysOutputInfo;
     }
 }
