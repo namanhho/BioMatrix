@@ -31,6 +31,8 @@ using static BioMetrixCore.Dahahi;
 using NLog.Fluent;
 using System.ServiceModel.Channels;
 using static BioMetrixCore.Hikvision;
+using Microsoft.Win32;
+using ZaloDotNetSDK;
 
 namespace BioMetrixCore
 {
@@ -46,6 +48,7 @@ namespace BioMetrixCore
         public ViewMain()
         {
             InitializeComponent();
+            SetStartup();
             ToggleControls(false);
             ShowStatusBar(string.Empty, true);
             DisplayEmpty();
@@ -4356,8 +4359,6 @@ namespace BioMetrixCore
             int faceCnt = 0;
             _SDKHelper.sta_GetCapacityInfo(lbSysOutputInfo, out adminCnt, out userCount, out fpCnt, out recordCnt, out pwdCnt, out oplogCnt, out faceCnt);
         }
-        #endregion
-
         private void btn_readAttLog_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
@@ -4375,6 +4376,13 @@ namespace BioMetrixCore
                 dt_periodLog.Columns.Add("Verify State", System.Type.GetType("System.Int32"));
                 dt_periodLog.Columns.Add("WorkCode", System.Type.GetType("System.Int32"));
                 gv_Attlog.DataSource = dt_periodLog;
+
+
+                //var fromDate = DateTime.Now.AddDays(10).Date.ToString("yyyy-MM-dd HH:mm:ss");
+                //var toDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString("yyyy-MM-dd HH:mm:ss");
+
+                //var fromDate = DateTime.Now.AddDays(-10).Date.ToString();
+                //var toDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString();
 
                 _SDKHelper.sta_readLogByPeriod(lbSysOutputInfo, dt_periodLog, fromTime, toTime);
             }
@@ -4426,5 +4434,39 @@ namespace BioMetrixCore
                 e.DrawFocusRectangle();
             }
         }
+        #endregion
+
+
+        #region startup
+        public static void SetStartup(string arg = "-hidden")
+        {
+            try
+            {
+                RegistryKey keyApp = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+                var currentAssembly = Assembly.GetExecutingAssembly();
+                var dataValue = currentAssembly.Location;
+                if (!string.IsNullOrEmpty(arg))
+                {
+                    dataValue += " " + arg;
+                }
+                keyApp.SetValue(currentAssembly.GetName().Name, dataValue);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"SetStartup Exception: {ex.Message}");
+            }
+        }
+        #endregion
+        #region DB
+        private void InitDB()
+        {
+            var dbFile = DBManager.GetDBPath("hnanh");
+        }
+        #endregion
+
+
+        #region Zkteco Face
+        #endregion
     }
 }

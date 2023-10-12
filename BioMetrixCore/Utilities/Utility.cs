@@ -49,5 +49,10 @@ namespace BioMetrixCore.Utilities
             config.Save(ConfigurationSaveMode.Modified);
             System.Configuration.ConfigurationManager.RefreshSection("appSettings");
         }
+        public static string GetConnectionString(string name)
+        {
+            var value = System.Configuration.ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            return value;
+        }
     }
 }

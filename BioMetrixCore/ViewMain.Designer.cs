@@ -221,6 +221,10 @@
             this.tbIPByHikvision = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.PnlBottom = new System.Windows.Forms.Panel();
+            this.label63 = new System.Windows.Forms.Label();
+            this.PrgSTA = new System.Windows.Forms.ProgressBar();
+            this.lbSysOutputInfo = new System.Windows.Forms.ListBox();
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.txtPlatForm = new System.Windows.Forms.TextBox();
@@ -248,11 +252,11 @@
             this.labPort = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.labIP = new System.Windows.Forms.Label();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.label58 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
-            this.PnlBottom = new System.Windows.Forms.Panel();
-            this.label63 = new System.Windows.Forms.Label();
-            this.PrgSTA = new System.Windows.Forms.ProgressBar();
-            this.lbSysOutputInfo = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -283,8 +287,9 @@
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).BeginInit();
             this.tabPage13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
             this.PnlBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
+            this.tabPage14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -302,6 +307,8 @@
             this.tabControl.Controls.Add(this.tabPage11);
             this.tabControl.Controls.Add(this.tabPage12);
             this.tabControl.Controls.Add(this.tabPage13);
+            this.tabControl.Controls.Add(this.tabPage14);
+            this.tabControl.Controls.Add(this.tabPage15);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -2237,6 +2244,47 @@
             this.tabPage13.Text = "SDK Demo";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // PnlBottom
+            // 
+            this.PnlBottom.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.PnlBottom.Controls.Add(this.label63);
+            this.PnlBottom.Controls.Add(this.PrgSTA);
+            this.PnlBottom.Controls.Add(this.lbSysOutputInfo);
+            this.PnlBottom.Font = new System.Drawing.Font("Verdana", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PnlBottom.Location = new System.Drawing.Point(12, 176);
+            this.PnlBottom.Name = "PnlBottom";
+            this.PnlBottom.Size = new System.Drawing.Size(224, 241);
+            this.PnlBottom.TabIndex = 85;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.Location = new System.Drawing.Point(5, 1);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(88, 14);
+            this.label63.TabIndex = 84;
+            this.label63.Text = "Demo Event:";
+            // 
+            // PrgSTA
+            // 
+            this.PrgSTA.Location = new System.Drawing.Point(0, 219);
+            this.PrgSTA.Name = "PrgSTA";
+            this.PrgSTA.Size = new System.Drawing.Size(186, 15);
+            this.PrgSTA.TabIndex = 82;
+            // 
+            // lbSysOutputInfo
+            // 
+            this.lbSysOutputInfo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lbSysOutputInfo.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSysOutputInfo.FormattingEnabled = true;
+            this.lbSysOutputInfo.ItemHeight = 12;
+            this.lbSysOutputInfo.Location = new System.Drawing.Point(2, 17);
+            this.lbSysOutputInfo.Name = "lbSysOutputInfo";
+            this.lbSysOutputInfo.Size = new System.Drawing.Size(219, 196);
+            this.lbSysOutputInfo.TabIndex = 77;
+            this.lbSysOutputInfo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbSysOutputInfo_DrawItem);
+            // 
             // label61
             // 
             this.label61.AutoSize = true;
@@ -2494,53 +2542,51 @@
             this.labIP.TabIndex = 21;
             this.labIP.Text = "IP";
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.label58);
+            this.tabPage14.Controls.Add(this.dateTimePicker1);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Size = new System.Drawing.Size(796, 428);
+            this.tabPage14.TabIndex = 13;
+            this.tabPage14.Text = "Hẹn giờ";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(7, 20);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(44, 13);
+            this.label58.TabIndex = 111;
+            this.label58.Text = "Hẹn giờ";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(61, 14);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker1.TabIndex = 110;
+            // 
+            // tabPage15
+            // 
+            this.tabPage15.Location = new System.Drawing.Point(4, 22);
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.Size = new System.Drawing.Size(796, 428);
+            this.tabPage15.TabIndex = 14;
+            this.tabPage15.Text = "Zalo";
+            this.tabPage15.UseVisualStyleBackColor = true;
+            // 
             // sqliteCommand1
             // 
             this.sqliteCommand1.CommandTimeout = 30;
             this.sqliteCommand1.Connection = null;
             this.sqliteCommand1.Transaction = null;
             this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
-            // 
-            // PnlBottom
-            // 
-            this.PnlBottom.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.PnlBottom.Controls.Add(this.label63);
-            this.PnlBottom.Controls.Add(this.PrgSTA);
-            this.PnlBottom.Controls.Add(this.lbSysOutputInfo);
-            this.PnlBottom.Font = new System.Drawing.Font("Verdana", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PnlBottom.Location = new System.Drawing.Point(12, 176);
-            this.PnlBottom.Name = "PnlBottom";
-            this.PnlBottom.Size = new System.Drawing.Size(224, 241);
-            this.PnlBottom.TabIndex = 85;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label63.Location = new System.Drawing.Point(5, 1);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(88, 14);
-            this.label63.TabIndex = 84;
-            this.label63.Text = "Demo Event:";
-            // 
-            // PrgSTA
-            // 
-            this.PrgSTA.Location = new System.Drawing.Point(0, 219);
-            this.PrgSTA.Name = "PrgSTA";
-            this.PrgSTA.Size = new System.Drawing.Size(186, 15);
-            this.PrgSTA.TabIndex = 82;
-            // 
-            // lbSysOutputInfo
-            // 
-            this.lbSysOutputInfo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.lbSysOutputInfo.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSysOutputInfo.FormattingEnabled = true;
-            this.lbSysOutputInfo.ItemHeight = 12;
-            this.lbSysOutputInfo.Location = new System.Drawing.Point(2, 17);
-            this.lbSysOutputInfo.Name = "lbSysOutputInfo";
-            this.lbSysOutputInfo.Size = new System.Drawing.Size(219, 196);
-            this.lbSysOutputInfo.TabIndex = 77;
-            this.lbSysOutputInfo.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbSysOutputInfo_DrawItem);
             // 
             // ViewMain
             // 
@@ -2595,9 +2641,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).EndInit();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).EndInit();
             this.PnlBottom.ResumeLayout(false);
             this.PnlBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).EndInit();
+            this.tabPage14.ResumeLayout(false);
+            this.tabPage14.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2829,5 +2877,9 @@
         private System.Windows.Forms.Label label63;
         public System.Windows.Forms.ProgressBar PrgSTA;
         public System.Windows.Forms.ListBox lbSysOutputInfo;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TabPage tabPage15;
     }
 }
