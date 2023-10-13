@@ -33,6 +33,10 @@ using System.ServiceModel.Channels;
 using static BioMetrixCore.Hikvision;
 using Microsoft.Win32;
 using ZaloDotNetSDK;
+using BioMetrixCore.Access;
+using BioMetrixCore.Model;
+using BioMetrixCore.BLL;
+using BioMetrixCore.Utils;
 
 namespace BioMetrixCore
 {
@@ -77,6 +81,14 @@ namespace BioMetrixCore
             //this.axCZKEM = new CZKEM();
         }
 
+        /// <summary>Load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmViewMain_Load(object sender, EventArgs e)
+        {
+            GetServerIP();
+        }
         DeviceManipulator manipulator = new DeviceManipulator();
         public ZkemClient objZkeeper;
         private bool isDeviceConnected = false;
@@ -4467,6 +4479,174 @@ namespace BioMetrixCore
 
 
         #region Zkteco Face
+        private ListenClient listenClient = null;
+        private Thread listenClientThread = null;
+        private RealTimeLogBll _realTimeLogBll = new RealTimeLogBll();
+        DataTable _dt = null;
+        /// <summary>
+        /// get locale IP
+        /// </summary>
+        /// <returns></returns>
+        private void GetServerIP()
+        {
+            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            cmbIPByZktecoFace.Text = "";
+
+            //获取服务器地址，且只保留IPV4地址
+            foreach (IPAddress ip in ipHost.AddressList)
+            {
+                if (!Regex.IsMatch(ip.ToString(), @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$"))
+                {
+                    continue;
+                }
+
+                cmbIPByZktecoFace.Items.Add(ip.ToString());
+            }
+            cmbIPByZktecoFace.SelectedIndex = 0;
+        }
+
+
+        /// <summary>
+        /// start to listening
+        /// </summary>
+        /// <param name="serverIP"></param>
+        /// <param name="Port"></param>
+        private void StartListenling(string serverIP, string Port)
+        {
+            int port = string.IsNullOrEmpty(Port) ? 8080 : Int32.Parse(Port);
+            listenClient = new ListenClient();
+            listenClient.ServerIP = serverIP;
+            listenClient.Port = port;
+            listenClientThread = new Thread(new ThreadStart(listenClient.StartListening));
+            listenClient.OnNewRealTimeLog += listenClient_OnNewRealTimeLog;
+            listenClient.OnSendDataEvent += listenClient_OnSendDataEvent;
+            listenClient.OnReceiveDataEvent += listenClient_OnReceiveDataEvent;
+            listenClientThread.IsBackground = true;
+            listenClientThread.Start();
+        }
+
+        /// <summary>
+        /// stop listenling
+        /// </summary>
+        private void StopListenling()
+        {
+            if (listenClient != null && ListenClient.Listening)
+            {
+                listenClient.StopListening();
+            }
+        }
+
+        private void listenClient_OnNewRealTimeLog(RealTimeLogModel realTimeLog)
+        {
+            Logger.LogError($"\n ===============================listenClient_OnNewRealTimeLog: NewRealTimeLog=================================================");
+            AddNewRow(realTimeLog);
+        }
+
+        public void AddNewRow(RealTimeLogModel realTimeLogModel)
+        {
+            Logger.LogError($"\nAddNewRow: Bat dau");
+            Logger.LogError($"\nAddNewRow: Du lieu--CardNo: {realTimeLogModel.CardNo}--Time: {realTimeLogModel.Time}--RealTimeLogModel: {realTimeLogModel?.ToString()}");
+            Application.DoEvents();
+            DataRow dr = _dt.NewRow();
+            dr["PIN"] = realTimeLogModel.Pin;
+            dr["CardNo"] = realTimeLogModel.CardNo;
+            dr["Time"] = realTimeLogModel.Time;
+            dr["DevSN"] = realTimeLogModel.DevSN;
+            dr["Event"] = realTimeLogModel.Event;
+            dr["EventAddr"] = realTimeLogModel.EventAddr;
+            dr["InOutStatus"] = realTimeLogModel.InOutStatus;
+            dr["VerifyType"] = realTimeLogModel.VerifyType;
+            _dt.Rows.InsertAt(dr, 0);
+            this.dgvLogByZktecoFace.DataSource = _dt;
+            this.dgvLogByZktecoFace.Update();
+            Logger.LogError($"\nAddNewRow: Xong");
+        }
+
+        private void LoadRealTimeLogData()
+        {
+            string userID = txtUserIDByZktecoFace.Text.Trim();
+            string devSN = cmbSeriNumberByZktecoFace.Text.Trim();
+
+            //显示数据库中数据
+            try
+            {
+                var logs = _realTimeLogBll.GetByTime(fromDateByZktecoFace.Value, toDateByZktecoFace.Value, userID, devSN);
+                this.dgvLogByZktecoFace.DataSource = logs;
+                this.dgvLogByZktecoFace.Update();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"LoadRealTimeLogData: {ex.ToString()}");
+                MessageBox.Show("Load attlog info error:" + ex.ToString());
+            }
+        }
+        /// <summary>Server start flag
+        /// </summary>
+        private bool _isStart = false;
+
+        private void btnOpenHostByZktecoFace_Click(object sender, EventArgs e)
+        {
+            Logger.LogError($"\n btnOpenHostByZktecoFace_Click: Bat dau");
+            if (_isStart)
+            {//Stop Server
+                StopListenling();
+                btnOpenHostByZktecoFace.Text = "Start";
+                btnOpenHostByZktecoFace.ForeColor = Color.FromArgb(37, 190, 167);
+                AddCommInfo("", 4);
+            }
+            else
+            {//Start Server
+                StartListenling(cmbIPByZktecoFace.Text, txtPortByZktecoFace.Text);
+                btnOpenHostByZktecoFace.Text = "Stop";
+                btnOpenHostByZktecoFace.ForeColor = Color.Red;
+                AddCommInfo("", 3);
+            }
+            _isStart = !_isStart;
+
+        }
+
+        /// <summary>
+        /// 增加交互信息
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="Mode"></param>
+        public void AddCommInfo(string info, int Mode)
+        {
+            Logger.LogError($"\n AddCommInfo: Bat dau");
+            string strNow = Tools.GetDateTimeNow().ToString("yyyy-MM-dd HH:mm:ss:fff");
+
+            if (0 == Mode)
+            {
+                info = string.Format("Sever Receive Data:  {0}\r\n{1}\r\n", strNow, info.TrimEnd('\x00'));
+            }
+            else if (1 == Mode)
+            {
+                info = string.Format("Sever Send Data:  {0}\r\n{1}\r\n", strNow, info);
+            }
+            else if (3 == Mode)
+            {
+                info = string.Format("Sever Start:  {0}\r\n{1}\r\n", strNow, info);
+            }
+            else if (4 == Mode)
+            {
+                info = string.Format("Sever Stop:  {0}\r\n{1}\r\n", strNow, info);
+            }
+            Logger.LogError($"AddCommInfo: {info}");
+            this.rtxtCommInfo.AppendText(info);
+        }
+
+        //add Send data
+        private void listenClient_OnSendDataEvent(string Data)
+        {
+            AddCommInfo(Data, 1);
+        }
+
+        //add receive data
+        private void listenClient_OnReceiveDataEvent(string Data)
+        {
+            AddCommInfo(Data, 0);
+        }
+
         #endregion
     }
 }

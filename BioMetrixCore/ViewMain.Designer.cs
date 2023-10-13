@@ -256,7 +256,21 @@
             this.label58 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.dgvLogByZktecoFace = new System.Windows.Forms.DataGridView();
+            this.txtUserIDByZktecoFace = new System.Windows.Forms.TextBox();
+            this.lblUserID = new System.Windows.Forms.Label();
+            this.toDateByZktecoFace = new System.Windows.Forms.DateTimePicker();
+            this.fromDateByZktecoFace = new System.Windows.Forms.DateTimePicker();
+            this.cmbSeriNumberByZktecoFace = new System.Windows.Forms.ComboBox();
+            this.lblDevSN = new System.Windows.Forms.Label();
+            this.lblStartTime = new System.Windows.Forms.Label();
+            this.btnOpenHostByZktecoFace = new System.Windows.Forms.Button();
+            this.txtPortByZktecoFace = new System.Windows.Forms.TextBox();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.cmbIPByZktecoFace = new System.Windows.Forms.ComboBox();
+            this.lblIP = new System.Windows.Forms.Label();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
+            this.rtxtCommInfo = new System.Windows.Forms.RichTextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -290,6 +304,8 @@
             this.PnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
             this.tabPage14.SuspendLayout();
+            this.tabPage15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogByZktecoFace)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -307,8 +323,8 @@
             this.tabControl.Controls.Add(this.tabPage11);
             this.tabControl.Controls.Add(this.tabPage12);
             this.tabControl.Controls.Add(this.tabPage13);
-            this.tabControl.Controls.Add(this.tabPage14);
             this.tabControl.Controls.Add(this.tabPage15);
+            this.tabControl.Controls.Add(this.tabPage14);
             this.tabControl.Location = new System.Drawing.Point(0, -3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -2574,12 +2590,161 @@
             // 
             // tabPage15
             // 
+            this.tabPage15.Controls.Add(this.rtxtCommInfo);
+            this.tabPage15.Controls.Add(this.dgvLogByZktecoFace);
+            this.tabPage15.Controls.Add(this.txtUserIDByZktecoFace);
+            this.tabPage15.Controls.Add(this.lblUserID);
+            this.tabPage15.Controls.Add(this.toDateByZktecoFace);
+            this.tabPage15.Controls.Add(this.fromDateByZktecoFace);
+            this.tabPage15.Controls.Add(this.cmbSeriNumberByZktecoFace);
+            this.tabPage15.Controls.Add(this.lblDevSN);
+            this.tabPage15.Controls.Add(this.lblStartTime);
+            this.tabPage15.Controls.Add(this.btnOpenHostByZktecoFace);
+            this.tabPage15.Controls.Add(this.txtPortByZktecoFace);
+            this.tabPage15.Controls.Add(this.lblPort);
+            this.tabPage15.Controls.Add(this.cmbIPByZktecoFace);
+            this.tabPage15.Controls.Add(this.lblIP);
             this.tabPage15.Location = new System.Drawing.Point(4, 22);
             this.tabPage15.Name = "tabPage15";
             this.tabPage15.Size = new System.Drawing.Size(796, 428);
             this.tabPage15.TabIndex = 14;
-            this.tabPage15.Text = "Zalo";
+            this.tabPage15.Text = "Zkteco Face";
             this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // dgvLogByZktecoFace
+            // 
+            this.dgvLogByZktecoFace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogByZktecoFace.Location = new System.Drawing.Point(8, 118);
+            this.dgvLogByZktecoFace.Name = "dgvLogByZktecoFace";
+            this.dgvLogByZktecoFace.Size = new System.Drawing.Size(461, 299);
+            this.dgvLogByZktecoFace.TabIndex = 73;
+            // 
+            // txtUserIDByZktecoFace
+            // 
+            this.txtUserIDByZktecoFace.Location = new System.Drawing.Point(262, 74);
+            this.txtUserIDByZktecoFace.Name = "txtUserIDByZktecoFace";
+            this.txtUserIDByZktecoFace.Size = new System.Drawing.Size(121, 20);
+            this.txtUserIDByZktecoFace.TabIndex = 68;
+            // 
+            // lblUserID
+            // 
+            this.lblUserID.AutoSize = true;
+            this.lblUserID.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblUserID.Location = new System.Drawing.Point(202, 73);
+            this.lblUserID.Name = "lblUserID";
+            this.lblUserID.Size = new System.Drawing.Size(56, 18);
+            this.lblUserID.TabIndex = 67;
+            this.lblUserID.Text = "UserID";
+            // 
+            // toDateByZktecoFace
+            // 
+            this.toDateByZktecoFace.CalendarFont = new System.Drawing.Font("SimSun", 10F);
+            this.toDateByZktecoFace.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.toDateByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
+            this.toDateByZktecoFace.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.toDateByZktecoFace.Location = new System.Drawing.Point(434, 14);
+            this.toDateByZktecoFace.Name = "toDateByZktecoFace";
+            this.toDateByZktecoFace.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toDateByZktecoFace.ShowUpDown = true;
+            this.toDateByZktecoFace.Size = new System.Drawing.Size(136, 21);
+            this.toDateByZktecoFace.TabIndex = 72;
+            // 
+            // fromDateByZktecoFace
+            // 
+            this.fromDateByZktecoFace.CalendarFont = new System.Drawing.Font("SimSun", 10F);
+            this.fromDateByZktecoFace.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.fromDateByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
+            this.fromDateByZktecoFace.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.fromDateByZktecoFace.Location = new System.Drawing.Point(264, 14);
+            this.fromDateByZktecoFace.Name = "fromDateByZktecoFace";
+            this.fromDateByZktecoFace.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fromDateByZktecoFace.ShowUpDown = true;
+            this.fromDateByZktecoFace.Size = new System.Drawing.Size(136, 21);
+            this.fromDateByZktecoFace.TabIndex = 71;
+            // 
+            // cmbSeriNumberByZktecoFace
+            // 
+            this.cmbSeriNumberByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
+            this.cmbSeriNumberByZktecoFace.FormattingEnabled = true;
+            this.cmbSeriNumberByZktecoFace.Location = new System.Drawing.Point(262, 44);
+            this.cmbSeriNumberByZktecoFace.Name = "cmbSeriNumberByZktecoFace";
+            this.cmbSeriNumberByZktecoFace.Size = new System.Drawing.Size(121, 23);
+            this.cmbSeriNumberByZktecoFace.TabIndex = 70;
+            // 
+            // lblDevSN
+            // 
+            this.lblDevSN.AutoSize = true;
+            this.lblDevSN.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblDevSN.Location = new System.Drawing.Point(228, 46);
+            this.lblDevSN.Name = "lblDevSN";
+            this.lblDevSN.Size = new System.Drawing.Size(30, 18);
+            this.lblDevSN.TabIndex = 69;
+            this.lblDevSN.Text = "SN";
+            // 
+            // lblStartTime
+            // 
+            this.lblStartTime.AutoSize = true;
+            this.lblStartTime.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblStartTime.Location = new System.Drawing.Point(184, 14);
+            this.lblStartTime.Name = "lblStartTime";
+            this.lblStartTime.Size = new System.Drawing.Size(74, 18);
+            this.lblStartTime.TabIndex = 66;
+            this.lblStartTime.Text = "Thời gian";
+            // 
+            // btnOpenHostByZktecoFace
+            // 
+            this.btnOpenHostByZktecoFace.BackColor = System.Drawing.Color.White;
+            this.btnOpenHostByZktecoFace.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOpenHostByZktecoFace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenHostByZktecoFace.Font = new System.Drawing.Font("Arial", 12F);
+            this.btnOpenHostByZktecoFace.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
+            this.btnOpenHostByZktecoFace.Location = new System.Drawing.Point(48, 73);
+            this.btnOpenHostByZktecoFace.Name = "btnOpenHostByZktecoFace";
+            this.btnOpenHostByZktecoFace.Size = new System.Drawing.Size(120, 28);
+            this.btnOpenHostByZktecoFace.TabIndex = 9;
+            this.btnOpenHostByZktecoFace.Text = "Start";
+            this.btnOpenHostByZktecoFace.UseVisualStyleBackColor = false;
+            this.btnOpenHostByZktecoFace.Click += new System.EventHandler(this.btnOpenHostByZktecoFace_Click);
+            // 
+            // txtPortByZktecoFace
+            // 
+            this.txtPortByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtPortByZktecoFace.Location = new System.Drawing.Point(48, 42);
+            this.txtPortByZktecoFace.Name = "txtPortByZktecoFace";
+            this.txtPortByZktecoFace.Size = new System.Drawing.Size(121, 21);
+            this.txtPortByZktecoFace.TabIndex = 8;
+            this.txtPortByZktecoFace.Text = "8080";
+            // 
+            // lblPort
+            // 
+            this.lblPort.AutoSize = true;
+            this.lblPort.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblPort.ForeColor = System.Drawing.Color.Black;
+            this.lblPort.Location = new System.Drawing.Point(12, 44);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(33, 16);
+            this.lblPort.TabIndex = 7;
+            this.lblPort.Text = "Port";
+            // 
+            // cmbIPByZktecoFace
+            // 
+            this.cmbIPByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
+            this.cmbIPByZktecoFace.FormattingEnabled = true;
+            this.cmbIPByZktecoFace.Location = new System.Drawing.Point(48, 15);
+            this.cmbIPByZktecoFace.Name = "cmbIPByZktecoFace";
+            this.cmbIPByZktecoFace.Size = new System.Drawing.Size(121, 23);
+            this.cmbIPByZktecoFace.TabIndex = 6;
+            // 
+            // lblIP
+            // 
+            this.lblIP.AutoSize = true;
+            this.lblIP.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblIP.ForeColor = System.Drawing.Color.Black;
+            this.lblIP.Location = new System.Drawing.Point(12, 18);
+            this.lblIP.Name = "lblIP";
+            this.lblIP.Size = new System.Drawing.Size(19, 16);
+            this.lblIP.TabIndex = 5;
+            this.lblIP.Text = "IP";
             // 
             // sqliteCommand1
             // 
@@ -2587,6 +2752,14 @@
             this.sqliteCommand1.Connection = null;
             this.sqliteCommand1.Transaction = null;
             this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
+            // 
+            // rtxtCommInfo
+            // 
+            this.rtxtCommInfo.Location = new System.Drawing.Point(487, 118);
+            this.rtxtCommInfo.Name = "rtxtCommInfo";
+            this.rtxtCommInfo.Size = new System.Drawing.Size(297, 299);
+            this.rtxtCommInfo.TabIndex = 74;
+            this.rtxtCommInfo.Text = "";
             // 
             // ViewMain
             // 
@@ -2596,6 +2769,7 @@
             this.Controls.Add(this.tabControl);
             this.Name = "ViewMain";
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.FrmViewMain_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -2646,6 +2820,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).EndInit();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
+            this.tabPage15.ResumeLayout(false);
+            this.tabPage15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogByZktecoFace)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2881,5 +3058,19 @@
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TabPage tabPage15;
+        private System.Windows.Forms.DataGridView dgvLogByZktecoFace;
+        private System.Windows.Forms.TextBox txtUserIDByZktecoFace;
+        private System.Windows.Forms.Label lblUserID;
+        private System.Windows.Forms.DateTimePicker toDateByZktecoFace;
+        private System.Windows.Forms.DateTimePicker fromDateByZktecoFace;
+        private System.Windows.Forms.ComboBox cmbSeriNumberByZktecoFace;
+        private System.Windows.Forms.Label lblDevSN;
+        private System.Windows.Forms.Label lblStartTime;
+        private System.Windows.Forms.Button btnOpenHostByZktecoFace;
+        private System.Windows.Forms.TextBox txtPortByZktecoFace;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.ComboBox cmbIPByZktecoFace;
+        private System.Windows.Forms.Label lblIP;
+        private System.Windows.Forms.RichTextBox rtxtCommInfo;
     }
 }

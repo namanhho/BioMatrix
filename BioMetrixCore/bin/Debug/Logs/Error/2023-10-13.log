@@ -1,0 +1,135 @@
+2023-10-13 10:20:39.6951 AddCommInfo: Sever Start:  2023-10-13 10:20:39:350
+
+
+2023-10-13 10:20:41.8233 AddCommInfo: Sever Stop:  2023-10-13 10:20:41:823
+
+
+2023-10-13 10:21:24.7352 AddCommInfo: Sever Start:  2023-10-13 10:21:24:735
+
+
+2023-10-13 10:27:50.9763 
+StartListening: AcceptSocket-Bat dau
+2023-10-13 14:32:10.5784 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:32:10.5894 
+StartListening: Bat dau
+2023-10-13 14:32:12.2986 AddCommInfo: Sever Start:  2023-10-13 14:32:10:589
+
+
+2023-10-13 14:32:15.3707 
+StartListening: Start-Bat dau
+2023-10-13 14:32:19.7713 
+StartListening: AcceptSocket-Bat dau
+2023-10-13 14:33:40.3968 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:33:40.4078 AddCommInfo: Sever Start:  2023-10-13 14:33:40:407
+
+
+2023-10-13 14:33:40.4078 
+StartListening: Bat dau
+2023-10-13 14:33:48.9690 
+StartListening: Start-Bat dau
+2023-10-13 14:33:51.5714 
+StartListening: AcceptSocket-Bat dau
+2023-10-13 14:34:08.8308 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:34:08.8308 
+ StopListening: Bat dau
+2023-10-13 14:34:08.8308 AddCommInfo: Sever Stop:  2023-10-13 14:34:08:831
+
+
+2023-10-13 14:34:18.9969 
+StartListening Exception1: A blocking operation was interrupted by a call to WSACancelBlockingCall
+2023-10-13 14:34:24.5131 
+StartListening Exception2: Object reference not set to an instance of an object.
+2023-10-13 14:34:24.5131 
+StartListening Exception2: Please be sure that you are listening to the port number of your own PC.And 8080 port is not occupied by other application or stopped by firewall.
+2023-10-13 14:36:07.1287 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:36:07.1357 
+StartListening: Bat dau
+2023-10-13 14:36:08.1888 AddCommInfo: Sever Start:  2023-10-13 14:36:08:188
+
+
+2023-10-13 14:36:12.4412 
+StartListening: Start-Bat dau
+2023-10-13 14:36:17.4842 
+StartListening Exception2: An attempt was made to access a socket in a way forbidden by its access permissions
+2023-10-13 14:36:17.4842 
+StartListening Exception2: Please be sure that you are listening to the port number of your own PC.And 49714 port is not occupied by other application or stopped by firewall.
+2023-10-13 14:36:19.7746 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:36:19.7746 AddCommInfo: Sever Stop:  2023-10-13 14:36:19:774
+
+
+2023-10-13 14:36:20.6829 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:36:20.6829 
+StartListening: Bat dau
+2023-10-13 14:36:21.8762 AddCommInfo: Sever Start:  2023-10-13 14:36:21:876
+
+
+2023-10-13 14:36:23.7872 
+StartListening: Start-Bat dau
+2023-10-13 14:36:34.0553 
+StartListening Exception2: An attempt was made to access a socket in a way forbidden by its access permissions
+2023-10-13 14:36:34.0553 
+StartListening Exception2: Please be sure that you are listening to the port number of your own PC.And 49714 port is not occupied by other application or stopped by firewall.
+2023-10-13 14:36:57.4710 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:36:57.4710 AddCommInfo: Sever Stop:  2023-10-13 14:36:57:471
+
+
+2023-10-13 14:36:58.3780 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:36:58.3879 
+StartListening: Bat dau
+2023-10-13 14:36:59.4429 AddCommInfo: Sever Start:  2023-10-13 14:36:59:442
+
+
+2023-10-13 14:37:00.6716 
+StartListening: Start-Bat dau
+2023-10-13 14:37:04.8305 
+StartListening Exception2: An attempt was made to access a socket in a way forbidden by its access permissions
+2023-10-13 14:37:04.8305 
+StartListening Exception2: Please be sure that you are listening to the port number of your own PC.And 49746 port is not occupied by other application or stopped by firewall.
+2023-10-13 14:37:35.3490 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:37:35.3490 AddCommInfo: Sever Stop:  2023-10-13 14:37:35:350
+
+
+2023-10-13 14:37:39.6443 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:37:39.6509 
+StartListening: Bat dau
+2023-10-13 14:37:39.6509 AddCommInfo: Sever Start:  2023-10-13 14:37:39:650
+
+
+2023-10-13 14:37:41.6287 
+StartListening: Start-Bat dau
+2023-10-13 14:37:47.5394 
+StartListening: AcceptSocket-Bat dau
+2023-10-13 14:37:51.4664 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:37:51.4664 
+ StopListening: Bat dau
+2023-10-13 14:41:36.9440 
+StartListening Exception1: A blocking operation was interrupted by a call to WSACancelBlockingCall
+2023-10-13 14:41:37.5703 
+StartListening Exception2: Object reference not set to an instance of an object.
+2023-10-13 14:41:37.5703 
+StartListening Exception2: Please be sure that you are listening to the port number of your own PC.And 53371 port is not occupied by other application or stopped by firewall.
+2023-10-13 14:41:37.5703 AddCommInfo: Sever Stop:  2023-10-13 14:41:37:573
+
+
+2023-10-13 14:45:49.0697 
+ btnOpenHostByZktecoFace_Click: Bat dau
+2023-10-13 14:45:49.0792 
+StartListening: Bat dau
+2023-10-13 14:45:50.5648 AddCommInfo: Sever Start:  2023-10-13 14:45:50:564
+
+
+2023-10-13 14:45:54.4109 
+StartListening: Start-Bat dau
+2023-10-13 14:45:57.1008 
+StartListening: AcceptSocket-Bat dau
