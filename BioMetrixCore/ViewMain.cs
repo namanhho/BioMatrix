@@ -2759,7 +2759,7 @@ namespace BioMetrixCore
 
                 string connectionString1 =
                 @"Provider=Microsoft.Jet.OLEDB.4.0;" +
-                @"Data Source=C:\Users\hnanh\Desktop\Data\RJData.mdb;" +
+                @"Data Source=C:\Users\ADMIN\Downloads\WiseEyeMix3\WiseEyeMix3.mdb;" +
                 @"User Id=;Password=;";
 
                 string queryString = "SELECT * FROM InOutRun;";
@@ -4518,7 +4518,17 @@ namespace BioMetrixCore
             listenClient.ServerIP = serverIP;
             listenClient.Port = port;
             listenClientThread = new Thread(new ThreadStart(listenClient.StartListening));
+            listenClient.OnError += listenClient_OnError;
             listenClient.OnNewRealTimeLog += listenClient_OnNewRealTimeLog;
+            listenClient.OnNewRealTimeState += listenClient_OnNewRealTimeState;
+            listenClient.OnNewUser += listenClient_OnNewUser;
+            listenClient.OnNewFP += listenClient_OnNewFP;
+            listenClient.OnNewFace += listenClient_OnNewFace;
+            listenClient.OnNewPalm += listenClient_OnNewPalm;
+            listenClient.OnNewBioPhoto += listenClient_OnNewBioPhoto;
+            listenClient.OnNewErrorLog += listenClient_OnNewErrorLog;
+            listenClient.OnDeviceSync += listenClient_OnDeviceSync;
+            listenClient.OnNewMachine += listenClient_OnNewMachine;
             listenClient.OnSendDataEvent += listenClient_OnSendDataEvent;
             listenClient.OnReceiveDataEvent += listenClient_OnReceiveDataEvent;
             listenClientThread.IsBackground = true;
@@ -4634,19 +4644,195 @@ namespace BioMetrixCore
             Logger.LogError($"AddCommInfo: {info}");
             this.rtxtCommInfo.AppendText(info);
         }
+        //Error Infor shows 
+        private void listenClient_OnError(string errMessage)
+        {
+            Logger.LogError($"\n listenClient_OnError----errMessage: {errMessage}");
+        }
+
+        private void listenClient_OnNewRealTimeState(RealTimeStateModel realTimeState)
+        {
+            Logger.LogError($"\n listenClient_OnNewRealTimeState: Bat dau");
+        }
+        //UserInfo copy to Database
+        private void listenClient_OnNewUser(UserInfoModel user)
+        {
+            Logger.LogError($"\n listenClient_OnNewUser: Bat dau");
+        }
+
+        private void listenClient_OnNewFP(List<TmpFPModel> fpList)
+        {
+            Logger.LogError($"\n listenClient_OnNewFP: Bat dau");
+        }
+        //Face tmplate copy to Database
+        private void listenClient_OnNewFace(List<TmpFaceModel> faceList)
+        {
+            Logger.LogError($"\n listenClient_OnNewFace: Bat dau");
+
+        }
+
+        //palm tmplate copy to Database
+        private void listenClient_OnNewPalm(TmpBioDataModel palm)
+        {
+            Logger.LogError($"\n listenClient_OnNewPalm: Bat dau");
+
+        }
+        private void listenClient_OnNewBioPhoto(List<TmpBioPhotoModel> bioPhotoList)
+        {
+            Logger.LogError($"\n listenClient_OnNewBioPhoto: Bat dau");
+
+
+        }
+        //Error copy to Database 
+        private void listenClient_OnNewErrorLog(ErrorLogModel erlog)
+        {
+            Logger.LogError($"\n listenClient_OnNewErrorLog: Bat dau");
+        }
+        //sync time
+        private void listenClient_OnDeviceSync(DeviceModel device)
+        {
+            //Update device
+            Logger.LogError($"\n listenClient_OnDeviceSync: Bat dau");
+        }
+        //autoMatic to add Device and copy Device to Database 
+        private void listenClient_OnNewMachine(DeviceModel device)
+        {
+            Logger.LogError($"\n listenClient_OnNewMachine: Bat dau");
+        }
 
         //add Send data
         private void listenClient_OnSendDataEvent(string Data)
         {
+            Logger.LogError($"\n listenClient_OnSendDataEvent----Data: {Data}");
             AddCommInfo(Data, 1);
         }
 
         //add receive data
         private void listenClient_OnReceiveDataEvent(string Data)
         {
+            Logger.LogError($"\n listenClient_OnReceiveDataEvent----Data: {Data}");
             AddCommInfo(Data, 0);
         }
 
         #endregion
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            this.lblMsg.Visible = false;
+            this.txtDevSN.Enabled = true;
+            DeviceModel device = new DeviceModel();
+            txtDevSN.Text = device.DeviceSN;
+            txtDevName.Text = device.DeviceName;
+            tb_RegistryCode.Text = GetRegistryCode();
+            tb_TransTables.Text = device.TransTables;
+        }
+
+        //Device number and device polling time dictionary
+        private Dictionary<String, int> _dicDevInterval = new Dictionary<String, int>();
+        DeviceBll _bll = new DeviceBll();
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtDevSN.Text))
+            {
+                lblMsg.Visible = true;
+                lblMsg.Text = "Please input Device SN";
+                return;
+            }
+
+            lblMsg.Visible = false;
+            txtDevSN.Enabled = false;
+            //Device Exsit,Update
+            DeviceModel device;
+            if (null != (device = _bll.Get(txtDevSN.Text.Trim())))
+            {
+                device.DeviceName = txtDevName.Text;
+                device.TransTables = tb_TransTables.Text.Trim();
+                device.RegistryCode = tb_RegistryCode.Text.Trim();
+                try
+                {
+                    if (_bll.Update(device) > 0)
+                    {
+                        lblMsg.Visible = true;
+                        lblMsg.Text = "Update device success";
+                    }
+                    else
+                    {
+                        lblMsg.Visible = true;
+                        lblMsg.Text = "Update device fail";
+                    }
+                    return;
+                }
+                catch { }
+            }
+
+            //Device No Exsit,Add
+            lblMsg.Visible = false;
+            device = new DeviceModel();
+            device.DeviceSN = txtDevSN.Text.Trim();
+            device.DeviceName = txtDevName.Text;
+            device.TransTables = tb_TransTables.Text.Trim();
+            device.RegistryCode = tb_RegistryCode.Text.Trim();
+            device.SessionID = Tools.GetSessionID();
+            try
+            {
+                if (_bll.Add(device) > 0)
+                {
+                    if (!_dicDevInterval.ContainsKey(device.DeviceSN))
+                    {
+                        _dicDevInterval.Add(device.DeviceSN, 0);
+                    }
+
+                    lblMsg.Visible = true;
+                    lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Success";
+                }
+                else
+                {
+                    lblMsg.Visible = true;
+                    lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n btnSave_Click Exception: {ex.Message}");
+                lblMsg.Visible = true;
+                lblMsg.Text = ex.ToString();
+            }
+        }
+        private string GetRegistryCode()
+        {
+            string registryCode = null;
+
+            List<string> strList = new List<string>();
+
+            for (int i = 65; i <= 90; i++)
+            {
+                char aa = (char)i;
+                strList.Add(aa.ToString());
+            }
+
+            char[] number = new char[10];
+            for (int i = 48; i <= 57; i++)
+            {
+                char aa = (char)i;
+                strList.Add(aa.ToString());
+                number[i - 48] = aa;
+            }
+
+            for (int i = 97; i <= 122; i++)
+            {
+                char aa = (char)i;
+                strList.Add(aa.ToString());
+            }
+
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int index = random.Next(strList.Count);
+                registryCode = registryCode + strList[index];
+            }
+
+            return registryCode;
+        }
     }
 }

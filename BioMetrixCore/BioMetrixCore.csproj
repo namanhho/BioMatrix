@@ -200,7 +200,11 @@
     <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\ErrorLogModel.cs" />
     <Compile Include="Model\RealTimeLogModel.cs" />
+    <Compile Include="Model\RealTimeStateModel.cs" />
     <Compile Include="Model\TmpBioDataModel.cs" />
+    <Compile Include="Model\TmpBioPhotoModel.cs" />
+    <Compile Include="Model\TmpFaceModel.cs" />
+    <Compile Include="Model\TmpFPModel.cs" />
     <Compile Include="Model\UserInfoModel.cs" />
     <Compile Include="Utilities\AccessPoint.cs" />
     <Compile Include="Utilities\AnalyseVersion.cs" />

@@ -252,10 +252,8 @@
             this.labPort = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.labIP = new System.Windows.Forms.Label();
-            this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.label58 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.rtxtCommInfo = new System.Windows.Forms.RichTextBox();
             this.dgvLogByZktecoFace = new System.Windows.Forms.DataGridView();
             this.txtUserIDByZktecoFace = new System.Windows.Forms.TextBox();
             this.lblUserID = new System.Windows.Forms.Label();
@@ -263,14 +261,26 @@
             this.fromDateByZktecoFace = new System.Windows.Forms.DateTimePicker();
             this.cmbSeriNumberByZktecoFace = new System.Windows.Forms.ComboBox();
             this.lblDevSN = new System.Windows.Forms.Label();
-            this.lblStartTime = new System.Windows.Forms.Label();
             this.btnOpenHostByZktecoFace = new System.Windows.Forms.Button();
             this.txtPortByZktecoFace = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.cmbIPByZktecoFace = new System.Windows.Forms.ComboBox();
             this.lblIP = new System.Windows.Forms.Label();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.label58 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
-            this.rtxtCommInfo = new System.Windows.Forms.RichTextBox();
+            this.tb_RegistryCode = new System.Windows.Forms.TextBox();
+            this.label_RegistryCode = new System.Windows.Forms.Label();
+            this.lblMsg = new System.Windows.Forms.Label();
+            this.tb_TransTables = new System.Windows.Forms.TextBox();
+            this.label_TransTables = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.txtDevName = new System.Windows.Forms.TextBox();
+            this.lblDevName = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.txtDevSN = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -303,9 +313,9 @@
             this.tabPage13.SuspendLayout();
             this.PnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
-            this.tabPage14.SuspendLayout();
             this.tabPage15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogByZktecoFace)).BeginInit();
+            this.tabPage14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -2558,38 +2568,19 @@
             this.labIP.TabIndex = 21;
             this.labIP.Text = "IP";
             // 
-            // tabPage14
-            // 
-            this.tabPage14.Controls.Add(this.label58);
-            this.tabPage14.Controls.Add(this.dateTimePicker1);
-            this.tabPage14.Location = new System.Drawing.Point(4, 22);
-            this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(796, 428);
-            this.tabPage14.TabIndex = 13;
-            this.tabPage14.Text = "Hẹn giờ";
-            this.tabPage14.UseVisualStyleBackColor = true;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(7, 20);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(44, 13);
-            this.label58.TabIndex = 111;
-            this.label58.Text = "Hẹn giờ";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(61, 14);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
-            this.dateTimePicker1.TabIndex = 110;
-            // 
             // tabPage15
             // 
+            this.tabPage15.Controls.Add(this.tb_RegistryCode);
+            this.tabPage15.Controls.Add(this.label_RegistryCode);
+            this.tabPage15.Controls.Add(this.lblMsg);
+            this.tabPage15.Controls.Add(this.tb_TransTables);
+            this.tabPage15.Controls.Add(this.label_TransTables);
+            this.tabPage15.Controls.Add(this.btnAdd);
+            this.tabPage15.Controls.Add(this.btnSave);
+            this.tabPage15.Controls.Add(this.txtDevName);
+            this.tabPage15.Controls.Add(this.lblDevName);
+            this.tabPage15.Controls.Add(this.label64);
+            this.tabPage15.Controls.Add(this.txtDevSN);
             this.tabPage15.Controls.Add(this.rtxtCommInfo);
             this.tabPage15.Controls.Add(this.dgvLogByZktecoFace);
             this.tabPage15.Controls.Add(this.txtUserIDByZktecoFace);
@@ -2598,7 +2589,6 @@
             this.tabPage15.Controls.Add(this.fromDateByZktecoFace);
             this.tabPage15.Controls.Add(this.cmbSeriNumberByZktecoFace);
             this.tabPage15.Controls.Add(this.lblDevSN);
-            this.tabPage15.Controls.Add(this.lblStartTime);
             this.tabPage15.Controls.Add(this.btnOpenHostByZktecoFace);
             this.tabPage15.Controls.Add(this.txtPortByZktecoFace);
             this.tabPage15.Controls.Add(this.lblPort);
@@ -2611,6 +2601,14 @@
             this.tabPage15.Text = "Zkteco Face";
             this.tabPage15.UseVisualStyleBackColor = true;
             // 
+            // rtxtCommInfo
+            // 
+            this.rtxtCommInfo.Location = new System.Drawing.Point(487, 118);
+            this.rtxtCommInfo.Name = "rtxtCommInfo";
+            this.rtxtCommInfo.Size = new System.Drawing.Size(297, 299);
+            this.rtxtCommInfo.TabIndex = 74;
+            this.rtxtCommInfo.Text = "";
+            // 
             // dgvLogByZktecoFace
             // 
             this.dgvLogByZktecoFace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2621,7 +2619,7 @@
             // 
             // txtUserIDByZktecoFace
             // 
-            this.txtUserIDByZktecoFace.Location = new System.Drawing.Point(262, 74);
+            this.txtUserIDByZktecoFace.Location = new System.Drawing.Point(234, 97);
             this.txtUserIDByZktecoFace.Name = "txtUserIDByZktecoFace";
             this.txtUserIDByZktecoFace.Size = new System.Drawing.Size(121, 20);
             this.txtUserIDByZktecoFace.TabIndex = 68;
@@ -2630,7 +2628,7 @@
             // 
             this.lblUserID.AutoSize = true;
             this.lblUserID.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblUserID.Location = new System.Drawing.Point(202, 73);
+            this.lblUserID.Location = new System.Drawing.Point(174, 97);
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.Size = new System.Drawing.Size(56, 18);
             this.lblUserID.TabIndex = 67;
@@ -2642,7 +2640,7 @@
             this.toDateByZktecoFace.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.toDateByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
             this.toDateByZktecoFace.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.toDateByZktecoFace.Location = new System.Drawing.Point(434, 14);
+            this.toDateByZktecoFace.Location = new System.Drawing.Point(219, 40);
             this.toDateByZktecoFace.Name = "toDateByZktecoFace";
             this.toDateByZktecoFace.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toDateByZktecoFace.ShowUpDown = true;
@@ -2655,7 +2653,7 @@
             this.fromDateByZktecoFace.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.fromDateByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
             this.fromDateByZktecoFace.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.fromDateByZktecoFace.Location = new System.Drawing.Point(264, 14);
+            this.fromDateByZktecoFace.Location = new System.Drawing.Point(219, 13);
             this.fromDateByZktecoFace.Name = "fromDateByZktecoFace";
             this.fromDateByZktecoFace.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fromDateByZktecoFace.ShowUpDown = true;
@@ -2666,7 +2664,7 @@
             // 
             this.cmbSeriNumberByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
             this.cmbSeriNumberByZktecoFace.FormattingEnabled = true;
-            this.cmbSeriNumberByZktecoFace.Location = new System.Drawing.Point(262, 44);
+            this.cmbSeriNumberByZktecoFace.Location = new System.Drawing.Point(234, 68);
             this.cmbSeriNumberByZktecoFace.Name = "cmbSeriNumberByZktecoFace";
             this.cmbSeriNumberByZktecoFace.Size = new System.Drawing.Size(121, 23);
             this.cmbSeriNumberByZktecoFace.TabIndex = 70;
@@ -2675,21 +2673,11 @@
             // 
             this.lblDevSN.AutoSize = true;
             this.lblDevSN.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblDevSN.Location = new System.Drawing.Point(228, 46);
+            this.lblDevSN.Location = new System.Drawing.Point(174, 78);
             this.lblDevSN.Name = "lblDevSN";
             this.lblDevSN.Size = new System.Drawing.Size(30, 18);
             this.lblDevSN.TabIndex = 69;
             this.lblDevSN.Text = "SN";
-            // 
-            // lblStartTime
-            // 
-            this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblStartTime.Location = new System.Drawing.Point(184, 14);
-            this.lblStartTime.Name = "lblStartTime";
-            this.lblStartTime.Size = new System.Drawing.Size(74, 18);
-            this.lblStartTime.TabIndex = 66;
-            this.lblStartTime.Text = "Thời gian";
             // 
             // btnOpenHostByZktecoFace
             // 
@@ -2746,6 +2734,36 @@
             this.lblIP.TabIndex = 5;
             this.lblIP.Text = "IP";
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.label58);
+            this.tabPage14.Controls.Add(this.dateTimePicker1);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Size = new System.Drawing.Size(796, 428);
+            this.tabPage14.TabIndex = 13;
+            this.tabPage14.Text = "Hẹn giờ";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(7, 20);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(44, 13);
+            this.label58.TabIndex = 111;
+            this.label58.Text = "Hẹn giờ";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(61, 14);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker1.TabIndex = 110;
+            // 
             // sqliteCommand1
             // 
             this.sqliteCommand1.CommandTimeout = 30;
@@ -2753,13 +2771,123 @@
             this.sqliteCommand1.Transaction = null;
             this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
-            // rtxtCommInfo
+            // tb_RegistryCode
             // 
-            this.rtxtCommInfo.Location = new System.Drawing.Point(487, 118);
-            this.rtxtCommInfo.Name = "rtxtCommInfo";
-            this.rtxtCommInfo.Size = new System.Drawing.Size(297, 299);
-            this.rtxtCommInfo.TabIndex = 74;
-            this.rtxtCommInfo.Text = "";
+            this.tb_RegistryCode.Enabled = false;
+            this.tb_RegistryCode.Font = new System.Drawing.Font("Arial", 9F);
+            this.tb_RegistryCode.Location = new System.Drawing.Point(469, 57);
+            this.tb_RegistryCode.Name = "tb_RegistryCode";
+            this.tb_RegistryCode.Size = new System.Drawing.Size(216, 21);
+            this.tb_RegistryCode.TabIndex = 86;
+            // 
+            // label_RegistryCode
+            // 
+            this.label_RegistryCode.AutoSize = true;
+            this.label_RegistryCode.Font = new System.Drawing.Font("Arial", 10F);
+            this.label_RegistryCode.Location = new System.Drawing.Point(377, 59);
+            this.label_RegistryCode.Name = "label_RegistryCode";
+            this.label_RegistryCode.Size = new System.Drawing.Size(93, 16);
+            this.label_RegistryCode.TabIndex = 85;
+            this.label_RegistryCode.Text = "RegistryCode";
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblMsg.Location = new System.Drawing.Point(376, 102);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(23, 12);
+            this.lblMsg.TabIndex = 84;
+            this.lblMsg.Text = "msg";
+            this.lblMsg.Visible = false;
+            // 
+            // tb_TransTables
+            // 
+            this.tb_TransTables.Font = new System.Drawing.Font("Arial", 9F);
+            this.tb_TransTables.Location = new System.Drawing.Point(469, 81);
+            this.tb_TransTables.Name = "tb_TransTables";
+            this.tb_TransTables.Size = new System.Drawing.Size(216, 21);
+            this.tb_TransTables.TabIndex = 83;
+            // 
+            // label_TransTables
+            // 
+            this.label_TransTables.AutoSize = true;
+            this.label_TransTables.Font = new System.Drawing.Font("Arial", 10F);
+            this.label_TransTables.Location = new System.Drawing.Point(377, 81);
+            this.label_TransTables.Name = "label_TransTables";
+            this.label_TransTables.Size = new System.Drawing.Size(84, 16);
+            this.label_TransTables.TabIndex = 82;
+            this.label_TransTables.Text = "TransTables";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Arial", 12F);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.ImageIndex = 2;
+            this.btnAdd.Location = new System.Drawing.Point(703, 9);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(70, 32);
+            this.btnAdd.TabIndex = 81;
+            this.btnAdd.Text = "New";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Arial", 12F);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.ImageIndex = 4;
+            this.btnSave.Location = new System.Drawing.Point(703, 47);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(70, 32);
+            this.btnSave.TabIndex = 79;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtDevName
+            // 
+            this.txtDevName.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtDevName.Location = new System.Drawing.Point(469, 30);
+            this.txtDevName.Name = "txtDevName";
+            this.txtDevName.Size = new System.Drawing.Size(216, 21);
+            this.txtDevName.TabIndex = 78;
+            // 
+            // lblDevName
+            // 
+            this.lblDevName.AutoSize = true;
+            this.lblDevName.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblDevName.Location = new System.Drawing.Point(377, 32);
+            this.lblDevName.Name = "lblDevName";
+            this.lblDevName.Size = new System.Drawing.Size(43, 16);
+            this.lblDevName.TabIndex = 77;
+            this.lblDevName.Text = "Name";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Arial", 10F);
+            this.label64.Location = new System.Drawing.Point(377, 5);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(25, 16);
+            this.label64.TabIndex = 76;
+            this.label64.Text = "SN";
+            // 
+            // txtDevSN
+            // 
+            this.txtDevSN.Enabled = false;
+            this.txtDevSN.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtDevSN.Location = new System.Drawing.Point(469, 3);
+            this.txtDevSN.Name = "txtDevSN";
+            this.txtDevSN.Size = new System.Drawing.Size(216, 21);
+            this.txtDevSN.TabIndex = 75;
             // 
             // ViewMain
             // 
@@ -2818,11 +2946,11 @@
             this.PnlBottom.ResumeLayout(false);
             this.PnlBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).EndInit();
-            this.tabPage14.ResumeLayout(false);
-            this.tabPage14.PerformLayout();
             this.tabPage15.ResumeLayout(false);
             this.tabPage15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogByZktecoFace)).EndInit();
+            this.tabPage14.ResumeLayout(false);
+            this.tabPage14.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3065,12 +3193,22 @@
         private System.Windows.Forms.DateTimePicker fromDateByZktecoFace;
         private System.Windows.Forms.ComboBox cmbSeriNumberByZktecoFace;
         private System.Windows.Forms.Label lblDevSN;
-        private System.Windows.Forms.Label lblStartTime;
         private System.Windows.Forms.Button btnOpenHostByZktecoFace;
         private System.Windows.Forms.TextBox txtPortByZktecoFace;
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.ComboBox cmbIPByZktecoFace;
         private System.Windows.Forms.Label lblIP;
         private System.Windows.Forms.RichTextBox rtxtCommInfo;
+        private System.Windows.Forms.TextBox tb_RegistryCode;
+        private System.Windows.Forms.Label label_RegistryCode;
+        private System.Windows.Forms.Label lblMsg;
+        private System.Windows.Forms.TextBox tb_TransTables;
+        private System.Windows.Forms.Label label_TransTables;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtDevName;
+        private System.Windows.Forms.Label lblDevName;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox txtDevSN;
     }
 }

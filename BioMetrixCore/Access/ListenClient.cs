@@ -105,6 +105,13 @@ namespace BioMetrixCore.Access
         public event Action<RealTimeLogModel> OnNewRealTimeLog;
 
         /// <summary>
+        /// new punch event
+        /// </summary>
+        public event Action<RealTimeStateModel> OnNewRealTimeState;
+
+
+
+        /// <summary>
         /// new oplog event
         /// </summary>
         public event Action<ErrorLogModel> OnNewErrorLog;
@@ -114,6 +121,28 @@ namespace BioMetrixCore.Access
         /// </summary>
         /// <param name="user"></param>
         public event Action<UserInfoModel> OnNewUser;
+
+        /// <summary>
+        /// new bio fp template
+        /// </summary>
+
+        public event Action<List<TmpFPModel>> OnNewFP;
+
+        /// <summary>
+        /// new face template
+        /// </summary>
+
+        public event Action<List<TmpFaceModel>> OnNewFace;
+        /// <summary>
+        /// new Palm template
+        /// </summary>
+
+        public event Action<TmpBioDataModel> OnNewPalm;
+        /// <summary>
+        /// new biophoto
+        /// </summary>
+
+        public event Action<List<TmpBioPhotoModel>> OnNewBioPhoto;
 
 
 
@@ -357,7 +386,7 @@ namespace BioMetrixCore.Access
         /// <param name="remoteSocket"></param>
         private void DevFirstRequest(string strReceive, Socket remoteSocket)
         {
-            Logger.LogError($"\n DevFirstRequest: Bat dau");
+            Logger.LogError($"\n DevFirstRequest: Bat dau---strReceive: {strReceive}");
             string devSN = GetValueByNameInPushHeader(strReceive, "SN");
 
             string strReply = InitDeviceConnect(devSN);
@@ -394,7 +423,7 @@ namespace BioMetrixCore.Access
         /// <returns></returns>
         private string InitDeviceConnect(string devSN)
         {
-            Logger.LogError($"\n InitDeviceConnect: Bat dau");
+            Logger.LogError($"\n InitDeviceConnect: Bat dau--devSN: {devSN}");
             string strReply = "OK";
 
             DeviceModel device = DeviceBll.Get(devSN);
@@ -654,8 +683,8 @@ namespace BioMetrixCore.Access
         /// <param name="remoteSocket"></param>
         private void DevSendData(byte[] bReceive, Socket remoteSocket)
         {
-            Logger.LogError($"\n DevSendData: Bat dau");
             string strReceive = Encoding.ASCII.GetString(bReceive).TrimEnd().TrimEnd('\0');
+            Logger.LogError($"\n DevSendData: Bat dau---strReceive: {strReceive}");
 
             string strReply = "OK";
 
@@ -669,17 +698,63 @@ namespace BioMetrixCore.Access
                 int count = 0;
                 RealTimeLog(strReceive, ref count);
             }
+            else if (strReceive.IndexOfEx("table=rtstate", 1) > 0)
+            {//上传实时状态
+                RealTimeState(strReceive);
+            }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=userpic", 1) > 0)
+            {//上传用户照片
+                string count = GetValueByNameInPushHeader(strReceive, "count");
+                strReply = "userpic=" + count;
+                UserPicLog(strReceive);
+            }
             else if (strReceive.IndexOfEx("table=tabledata&tablename=user", 1) > 0)
             {//上传用户信息
                 string count = GetValueByNameInPushHeader(strReceive, "count");
                 strReply = "user=" + count;
                 UserInfo(strReceive);
             }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=face", 1) > 0)
+            {//上传人脸模板
+                string count = GetValueByNameInPushHeader(strReceive, "count");
+                string tableName = GetValueByNameInPushHeader(strReceive, "tablename");
+                strReply = tableName + "=" + count;
+                FacePrint(strReceive);
+            }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=template", 1) > 0)
+            {//上传指纹模板
+                string count = GetValueByNameInPushHeader(strReceive, "count");
+                string tableName = GetValueByNameInPushHeader(strReceive, "tablename");
+                strReply = tableName + "=" + count;
+                FingerPrint(strReceive);
+            }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=biophoto", 1) > 0)
+            {//上传比对照片
+                string count = GetValueByNameInPushHeader(strReceive, "count");
+                strReply = "biophoto=" + count;
+                BioPhoto(strReceive);
+            }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=ATTPHOTO", 1) > 0)
+            {//上传抓拍照片
+                string count = GetValueByNameInPushHeader(strReceive, "count");
+                strReply = "ATTPHOTO=" + count;
+                AttPhoto(bReceive);
+            }
+
             else if (strReceive.IndexOfEx("table=tabledata&tablename=biodata", 1) > 0)
             {//上传一体化模板
                 string count = GetValueByNameInPushHeader(strReceive, "count");
                 strReply = "biodata=" + count;
                 BioData(strReceive);
+            }
+            else if (strReceive.IndexOfEx("table=tabledata&tablename=errorlog", 1) > 0)
+            {//上传异常日志
+                Errorlog(strReceive);
+            }
+            else if (strReceive.IndexOfEx("AuthType=device", 1) > 0)
+            {//后台验证
+                RemoteVerify(strReceive, ref strReply);
+
             }
             else if (strReceive.IndexOfEx("type=tabledata&cmdid", 1) > 0)
             {
@@ -721,6 +796,10 @@ namespace BioMetrixCore.Access
             SendDataToDevice("200 OK", "OK", ref remoteSocket);
             index = strContent.IndexOfEx("ID=");
             _deviceCmdBll.Update(strContent.Substring(index));
+
+
+
+
 
         }
 
@@ -978,7 +1057,7 @@ namespace BioMetrixCore.Access
         /// Date, Format: Thu, 19 Feb 2020 15:52:10 GMT+08:00
         private void SendDataToDevice(string sStatusCode, string sDataStr, ref Socket mySocket)
         {
-            Logger.LogError($"\n SendDataToDevice: Bat dau");
+            Logger.LogError($"\n SendDataToDevice: Bat dau---sStatusCode: {sStatusCode}---sDataStr:{sDataStr}");
             byte[] bData = _encoding.GetBytes(sDataStr);
             string sHeader = "HTTP/1.1 " + sStatusCode + "\r\n";
             sHeader = sHeader + "Content-Type:application/push;charset=UTF-8\r\n";
@@ -1007,6 +1086,7 @@ namespace BioMetrixCore.Access
             {
                 if (mySocket.Connected)
                 {
+                    Logger.LogError($"\n SendToBrowser-----OnSendDataEvent: Bat dau---bSendData: {bSendData}");
                     if (null != OnSendDataEvent)
                     {
                         OnSendDataEvent(Encoding.UTF8.GetString(bSendData));
@@ -1040,11 +1120,323 @@ namespace BioMetrixCore.Access
             }
         }
         #endregion
+
+        #region resolve data of table=biophoto
+        private void BioPhoto(string bioPhoto)
+        {
+            Logger.LogError($"\n BioPhoto: Bat dau");
+            string machineSN = bioPhoto.Substring(bioPhoto.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+            string token = GetValueByNameInPushHeader(bioPhoto, "token");
+            DeviceModel device = DeviceBll.Get(SN);
+            if (device == null)
+                return;
+            try
+            {
+
+                if (0 != MD5Verify(token, new List<string>() { device.RegistryCode, device.DeviceSN, device.SessionID }))
+                {
+                    //MD5 check failed
+                    //MessageBox.Show("MD5 check failed!");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"\n BioPhoto Exception:{e.Message}");
+                MessageBox.Show("MD5 call failed:" + e.Message + e.Source + "\n" + e.StackTrace);
+                return;
+            }
+            SaveBioPhoto(bioPhoto);
+        }
+        private void SaveBioPhoto(string bioPhoto)
+        {
+            Logger.LogError($"\n SaveBioPhoto: Bat dau");
+            if (bioPhoto.IndexOfEx("PIN") >= 0)
+            {
+                if (OnNewBioPhoto != null)
+                {
+                    OnNewBioPhoto(CreatBioPhoto(bioPhoto));
+                }
+            }
+        }
+        //封装比对照片
+        private List<TmpBioPhotoModel> CreatBioPhoto(string bioPhotoString)
+        {
+            Logger.LogError($"\n CreatBioPhoto: Bat dau");
+            List<TmpBioPhotoModel> modelList = new List<TmpBioPhotoModel>();
+
+            int index = bioPhotoString.IndexOfEx("\r\n\r\n", 1);
+            string template = bioPhotoString.Substring(index + 4);
+            template = Tools.Replace(template, "biophoto", "");
+            string[] arr = template.Split('\n');
+            Dictionary<string, string> dic = null;
+            foreach (var item in arr)
+            {
+                if (string.IsNullOrEmpty(item))
+                    continue;
+                dic = Tools.GetKeyValues(item);
+
+                TmpBioPhotoModel biophoto = new TmpBioPhotoModel();
+                biophoto.Pin = Tools.GetValueFromDic(dic, "PIN");
+                biophoto.FileName = Tools.GetValueFromDic(dic, "FileName");
+                biophoto.Type = Tools.GetValueFromDic(dic, "Type");
+                biophoto.Size = Tools.TryConvertToInt32(Tools.GetValueFromDic(dic, "Size"));
+                biophoto.Content = Tools.GetValueFromDic(dic, "Content");
+                modelList.Add(biophoto);
+            }
+            return modelList;
+        }
+        #endregion
+        #region resolve data of table=templatev10
+        private void FingerPrint(string fingerPrint)
+        {
+            Logger.LogError($"\n FingerPrint: Bat dau");
+            string machineSN = fingerPrint.Substring(fingerPrint.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+            string token = GetValueByNameInPushHeader(fingerPrint, "token");
+            DeviceModel device = DeviceBll.Get(SN);
+            if (device == null)
+                return;
+            try
+            {
+
+                if (0 != MD5Verify(token, new List<string>() { device.RegistryCode, device.DeviceSN, device.SessionID }))
+                {
+                    //MD5 check failed
+                    //MessageBox.Show("MD5 check failed!");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"\n FingerPrint Exception:{e.Message}");
+                MessageBox.Show("MD5 call failed:" + e.Message + e.Source + "\n" + e.StackTrace);
+                return;
+            }
+            SaveFP(fingerPrint, SN, false);
+        }
+        /// <summary>
+        /// save  FP
+        /// </summary>
+        /// <param name="enfplog">指纹数据</param>
+        /// <param name="SN">设备序列号</param>
+        /// <param name="isBioData">是否一体化模板</param>
+        private void SaveFP(string enfplog, string SN, bool isBioData)
+        {
+            Logger.LogError($"\n SaveFP: Bat dau");
+            if (enfplog.IndexOfEx("PIN", 0, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (OnNewFP != null)
+                {
+                    OnNewFP(CreatFP(enfplog, SN, isBioData));
+                }
+            }
+        }
+        //封装通用指纹信息
+        private List<TmpFPModel> CreatFP(string enfplog, string SN, bool isBioData)
+        {
+            Logger.LogError($"\n CreatFP: Bat dau");
+            List<TmpFPModel> templateModelList = new List<TmpFPModel>();
+            int index = enfplog.IndexOfEx("\r\n\r\n", 1);
+            TmpFPModel templateModel;
+
+            string template = enfplog.Substring(index + 4);
+            Dictionary<string, string> dic = null;
+            if (isBioData)
+            {
+                string[] arr = template.Split('\n');
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(arr[i]))
+                        continue;
+                    arr[i] = Tools.Replace(arr[i], "BIODATA", "");
+                    dic = Tools.GetKeyValues(arr[i]);
+                    templateModel = new TmpFPModel();
+                    templateModel.Pin = Tools.GetValueFromDic(dic, "PIN");
+                    templateModel.Fid = Tools.GetValueFromDic(dic, "No");
+                    templateModel.Valid = Tools.GetValueFromDic(dic, "Valid");
+                    templateModel.Duress = Tools.GetValueFromDic(dic, "Duress");
+                    string MajorVer = Tools.GetValueFromDic(dic, "MajorVer");
+
+                    //从数据库中获取此设备支持的指纹版本号
+                    if (string.IsNullOrEmpty(MajorVer))
+                    {
+                        DeviceModel model = _deviceBll.Get(SN);
+                        if (null != model)
+                        {
+                            MajorVer = model.GetBioVersion(BioType.FingerPrint).Split('.')[0];
+                        }
+                    }
+                    templateModel.MajorVer = MajorVer;
+                    templateModel.Tmp = Tools.GetValueFromDic(dic, "TMP");
+                    templateModelList.Add(templateModel);
+                }
+
+            }
+            else
+            {
+                string Ver = string.Empty;
+                string[] arr = template.Split('\n');
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(arr[i]))
+                        continue;
+                    templateModel = new TmpFPModel();
+                    if (arr[i].IndexOfEx("templatev10") >= 0)
+                    {
+                        arr[i] = Tools.Replace(arr[i], "templatev10", "");
+                        Ver = "10";
+                    }
+                    else
+                    {
+                        arr[i] = Tools.Replace(arr[i], "templatev09", "");
+                        Ver = "9";
+                    }
+                    if (string.IsNullOrEmpty(arr[i]))
+                        continue;
+                    dic = Tools.GetKeyValues(arr[i]);
+                    templateModel.Pin = Tools.GetValueFromDic(dic, "pin");
+                    templateModel.Fid = Tools.GetValueFromDic(dic, "fingerid");
+                    templateModel.Size = Tools.TryConvertToInt32(Tools.GetValueFromDic(dic, "size"));
+                    templateModel.Valid = Tools.GetValueFromDic(dic, "valid");
+                    templateModel.Tmp = Tools.GetValueFromDic(dic, "template");
+                    templateModel.Duress = Tools.TryConvertToInt32(Tools.GetValueFromDic(dic, "valid")) > 15 ? "1" : "0";
+                    templateModel.MajorVer = Ver;
+                    templateModelList.Add(templateModel);
+                }
+            }
+
+            return templateModelList;
+        }
+        #endregion
+        #region resolve data of face
+        private void FacePrint(string facePrint)
+        {
+            Logger.LogError($"\n FacePrint: Bat dau");
+            string machineSN = facePrint.Substring(facePrint.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+            string token = GetValueByNameInPushHeader(facePrint, "token");
+            DeviceModel device = DeviceBll.Get(SN);
+            if (device == null)
+                return;
+            try
+            {
+
+                if (0 != MD5Verify(token, new List<string>() { device.RegistryCode, device.DeviceSN, device.SessionID }))
+                {
+                    //MD5 check failed
+                    MessageBox.Show("MD5 check failed!");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"\n FacePrint Exception: {e.Message}");
+                MessageBox.Show("MD5 call failed:" + e.Message + e.Source + "\n" + e.StackTrace);
+                return;
+            }
+            SaveFace(facePrint, false);
+        }
+        /// <summary>
+        /// save face
+        /// </summary>
+        /// <param name="enfacelog">面部数据</param>
+        /// <param name="isBioData">是否一体化模板</param>
+        private void SaveFace(string enfacelog, bool isBioData)
+        {
+            Logger.LogError($"\n SaveFace: Bat dau");
+            if (enfacelog.IndexOfEx("PIN", 0, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (OnNewFace != null)
+                {
+                    OnNewFace(CreatFace(enfacelog, isBioData));
+                }
+            }
+        }
+        //封装Face模板信息
+        private List<TmpFaceModel> CreatFace(string template, bool isBioData)
+        {
+            Logger.LogError($"\n CreatFace: Bat dau");
+            List<TmpFaceModel> tmpFaceList = new List<TmpFaceModel>();
+            int index = template.IndexOfEx("\r\n\r\n", 1);
+            template = template.Substring(index + 4);
+            Dictionary<string, string> dic = null;
+            TmpFaceModel tmpFaceModel;
+            if (isBioData)
+            {
+                string[] arr = template.Split('\n');
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(arr[i]))
+                        continue;
+                    arr[i] = Tools.Replace(arr[i], "BIODATA", "");
+                    dic = Tools.GetKeyValues(arr[i]);
+                    tmpFaceModel = new TmpFaceModel();
+                    tmpFaceModel.Pin = Tools.GetValueFromDic(dic, "PIN");
+                    tmpFaceModel.Fid = Tools.GetValueFromDic(dic, "No");
+                    tmpFaceModel.Valid = Tools.GetValueFromDic(dic, "Valid");
+                    string MajorVer = Tools.GetValueFromDic(dic, "MajorVer");
+                    string MinorVer = Tools.GetValueFromDic(dic, "MinorVer");
+                    tmpFaceModel.Ver = $"{MajorVer}.{MinorVer}";
+                    tmpFaceModel.Tmp = Tools.GetValueFromDic(dic, "TMP");
+                    tmpFaceList.Add(tmpFaceModel);
+                }
+
+            }
+            else
+            {
+                string[] arr = template.Split('\n');
+                string[] arrTmp;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(arr[i]))
+                        continue;
+                    arrTmp = arr[i].Split(' ');
+
+                    dic = Tools.GetKeyValues(arrTmp[1]);
+                    tmpFaceModel = new TmpFaceModel
+                    {
+                        Pin = Tools.GetValueFromDic(dic, "PIN"),
+                        Fid = Tools.GetValueFromDic(dic, "FaceID"),
+                        Size = Tools.TryConvertToInt32(Tools.GetValueFromDic(dic, "SIZE")),
+                        Valid = Tools.GetValueFromDic(dic, "VALID"),
+                        Tmp = Tools.GetValueFromDic(dic, "face"),
+                        Ver = arrTmp[0]
+                    };
+                    tmpFaceList.Add(tmpFaceModel);
+                }
+
+            }
+
+            return tmpFaceList;
+        }
+        #endregion
+        #region resolve data of palm
+        /// <summary>
+        /// save Palm
+        /// </summary>
+        /// <param name="enfacelog">面部数据</param>
+        /// <param name="isBioData">是否一体化模板</param>
+        private void SavePalm(string enPalmlog)
+        {
+            Logger.LogError($"\n SavePalm: Bat dau---enPalmlog: {enPalmlog}");
+            if (enPalmlog.IndexOfEx("PIN", 0, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (OnNewPalm != null)
+                {
+                    OnNewPalm(CreateBioTmp(enPalmlog));
+                }
+            }
+        }
+
+
+        #endregion
         #region resolve data of table=biodata
         TmpBioDataBll _tmpBioDataBll = new TmpBioDataBll();
         private void SaveBioData(string biodataTmp)
         {
-            Logger.LogError($"\n SaveBioData: Bat dau");
+            Logger.LogError($"\n SaveBioData: Bat dau---biodataTmp: {biodataTmp}");
             //可见光面部模板，本程序使用比对照片用作下发模板
             TmpBioDataModel tmpBioDataModel = CreateBioTmp(biodataTmp);
             _tmpBioDataBll.Add(tmpBioDataModel);
@@ -1052,7 +1444,7 @@ namespace BioMetrixCore.Access
         //封装掌一体化模板信息
         private TmpBioDataModel CreateBioTmp(string template)
         {
-            Logger.LogError($"\n CreateBioTmp: Bat dau");
+            Logger.LogError($"\n CreateBioTmp: Bat dau---template: {template}");
             template = Tools.Replace(template, "BIODATA", "");
             Dictionary<string, string> dic = Tools.GetKeyValues(template);
 
@@ -1078,7 +1470,7 @@ namespace BioMetrixCore.Access
         /// <param name="sBuffer"></param>
         private void UserInfo(string sBuffer)
         {
-            Logger.LogError($"\n UserInfo: Bat dau");
+            Logger.LogError($"\n UserInfo: Bat dau---sBuffer: {sBuffer}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
 
@@ -1109,7 +1501,7 @@ namespace BioMetrixCore.Access
         }
         private void UserInfoProcess(string attstr)
         {
-            Logger.LogError($"\n UserInfoProcess: Bat dau");
+            Logger.LogError($"\n UserInfoProcess: Bat dau---attstr: {attstr}");
             try
             {
                 string[] strlist = attstr.Split('\n');
@@ -1136,7 +1528,7 @@ namespace BioMetrixCore.Access
         /// <param name="stamp"></param>
         private void SaveUserinfo(string usinlog)
         {
-            Logger.LogError($"\n SaveUserinfo: Bat dau");
+            Logger.LogError($"\n SaveUserinfo: Bat dau---usinlog: {usinlog}");
             if (usinlog.IndexOfEx("PIN") >= 0)
             {
                 if (OnNewUser != null)
@@ -1148,7 +1540,7 @@ namespace BioMetrixCore.Access
         //封装用户信息
         private UserInfoModel CreatUserInfo(string userstring)
         {
-            Logger.LogError($"\n CreatUserInfo: Bat dau");
+            Logger.LogError($"\n CreatUserInfo: Bat dau---userstring: {userstring}");
             userstring = Tools.Replace(userstring, "USER", "");
             Dictionary<string, string> dic = Tools.GetKeyValues(userstring);
 
@@ -1200,7 +1592,7 @@ namespace BioMetrixCore.Access
         //处理table=BIODATA的数据
         private void BioData(string sBuffer)
         {
-            Logger.LogError($"\n BioData: Bat dau");
+            Logger.LogError($"\n BioData: Bat dau--sBuffer: {sBuffer}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
 
@@ -1212,7 +1604,7 @@ namespace BioMetrixCore.Access
         //将table=BIODATA后面的数据进行分解
         private void SeparateBioData(string datastr, string SN)
         {
-            Logger.LogError($"\n SeparateBioData: Bat dau");
+            Logger.LogError($"\n SeparateBioData: Bat dau---datastr: {datastr}");
             try
             {
                 string[] strlist = datastr.Split('\n');
@@ -1227,6 +1619,12 @@ namespace BioMetrixCore.Access
                     {
                         case BioType.Comm://通用
                             break;
+                        case BioType.FingerPrint://指纹
+                            SaveFP(tmpstr, SN, true);
+                            break;
+                        case BioType.Face://面部
+                            SaveFace(tmpstr, true);
+                            break;
                         case BioType.VocalPrint://声纹
                             break;
                         case BioType.Iris://虹膜
@@ -1236,6 +1634,9 @@ namespace BioMetrixCore.Access
                         case BioType.PalmPrint://掌纹
                             break;
                         case BioType.FingerVein://指静脉
+                            break;
+                        case BioType.Palm://手掌
+                            SavePalm(tmpstr);
                             break;
                         case BioType.VisilightFace://可见光面部
                             SaveBioData(tmpstr);
@@ -1259,7 +1660,7 @@ namespace BioMetrixCore.Access
         //处理table=ERRORLOG的数据
         private void Errorlog(string sBuffer)
         {
-            Logger.LogError($"\n Errorlog: Bat dau");
+            Logger.LogError($"\n Errorlog: Bat dau---sBuffer: {sBuffer}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
 
@@ -1271,7 +1672,7 @@ namespace BioMetrixCore.Access
 
         private void ErrorLogProcess(string datastr, string SN)
         {
-            Logger.LogError($"\n ErrorLogProcess: Bat dau");
+            Logger.LogError($"\n ErrorLogProcess: Bat dau---datastr: {datastr}---SN: {SN}");
             try
             {
                 string[] strlist = datastr.Split('\n');
@@ -1297,7 +1698,7 @@ namespace BioMetrixCore.Access
         /// <param name="erlog"></param>
         private void SaveErrorLog(string erlog, string machineSN)
         {
-            Logger.LogError($"\n SaveErrorLog: Bat dau");
+            Logger.LogError($"\n SaveErrorLog: Bat dau---erlog: {erlog}---machineSN: {machineSN}");
             if (OnNewErrorLog != null)
             {
                 OnNewErrorLog(CreateErrorlog(erlog, machineSN));
@@ -1306,7 +1707,7 @@ namespace BioMetrixCore.Access
         //将设备传来的字符串分割为各个字段之后再封装为一个操作记录的对象
         private ErrorLogModel CreateErrorlog(string erlog, string machineSN)
         {
-            Logger.LogError($"\n CreateErrorlog: Bat dau");
+            Logger.LogError($"\n CreateErrorlog: Bat dau---erlog: {erlog}---machineSN: {machineSN}");
             erlog = Tools.Replace(erlog, "ERRORLOG", "");
             Dictionary<string, string> dic = Tools.GetKeyValues(erlog);
 
@@ -1322,7 +1723,7 @@ namespace BioMetrixCore.Access
         }
         private void RemoteVerify(string sBuffer, ref string strReply)
         {
-            Logger.LogError($"\n RemoteVerify: Bat dau");
+            Logger.LogError($"\n RemoteVerify: Bat dau---sBuffer: {sBuffer}---strReply: {strReply}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
 
@@ -1364,14 +1765,20 @@ namespace BioMetrixCore.Access
         }
         private void GetQueryData(string sBuffer, string tableName, ref string strReply, ref int count)
         {
-            Logger.LogError($"\n GetQueryData: Bat dau");
+            Logger.LogError($"\n GetQueryData: Bat dau---tableName: {tableName}");
             switch (tableName)
             {
                 case "user":
                     UserInfo(sBuffer);
                     break;
+                case "templatev10":
+                    FingerPrint(sBuffer);
+                    break;
                 case "transaction":
                     RealTimeLog(sBuffer, ref count);
+                    break;
+                case "biophoto":
+                    BioPhoto(sBuffer);
                     break;
                 case "biodata":
                     BioData(sBuffer);
@@ -1422,7 +1829,7 @@ namespace BioMetrixCore.Access
         /// <param name="sBuffer"></param>
         private void RealTimeLog(string sBuffer, ref int count)
         {
-            Logger.LogError($"\n RealTimeLog: Bat dau");
+            Logger.LogError($"\n RealTimeLog: Bat dau---sBuffer: {sBuffer}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
 
@@ -1455,7 +1862,7 @@ namespace BioMetrixCore.Access
 
         private void RealTimeLogProcess(string attstr, string machineSN, ref int count)
         {
-            Logger.LogError($"\n RealTimeLogProcess: Bat dau");
+            Logger.LogError($"\n RealTimeLogProcess: Bat dau---attstr: {attstr}");
             try
             {
                 string[] strlist = attstr.Split('\n', '\r');
@@ -1483,7 +1890,7 @@ namespace BioMetrixCore.Access
         /// <param name="realtimelog"></param>
         private void SaveRealTimeLog(string realtimelog, string machineSN)
         {
-            Logger.LogError($"\n SaveRealTimeLog: Bat dau");
+            Logger.LogError($"\n SaveRealTimeLog: Bat dau---realtimelog: {realtimelog}");
             if (OnNewRealTimeLog != null)
             {
                 bool isTanrsaction = realtimelog.Contains("transaction");
@@ -1494,7 +1901,7 @@ namespace BioMetrixCore.Access
         //封装实时事件信息
         private RealTimeLogModel CreateRealTimelog(string realtimelog, string machineSN)
         {
-            Logger.LogError($"\n CreateRealTimelog: Bat dau");
+            Logger.LogError($"\n CreateRealTimelog: Bat dau---realtimelog: {realtimelog}");
             realtimelog = realtimelog.TrimEnd('\t');
             string[] realtimelogstr = realtimelog.Split('\t');
             for (int i = 0; i < realtimelogstr.Length; i++)
@@ -1547,6 +1954,265 @@ namespace BioMetrixCore.Access
             return realTimeLog;
         }
         #endregion
+
+        #region resolve data of table=rtstate
+        /// <summary>
+        /// Parse RealTimeState for acc Device
+        /// </summary>
+        /// <param name="sBuffer"></param>
+        private void RealTimeState(string sBuffer)
+        {
+            Logger.LogError($"\n RealTimeState: Bat dau---sBuffer: {sBuffer}");
+            string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+
+            int attindex = sBuffer.IndexOfEx("\r\n\r\n", 1);
+            string attstr = sBuffer.Substring(attindex + 4);
+            string token = GetValueByNameInPushHeader(sBuffer, "token");
+            DeviceModel device = DeviceBll.Get(SN);
+            if (device == null)
+                return;
+            try
+            {
+
+                if (0 != MD5Verify(token, new List<string>() { device.RegistryCode, device.DeviceSN, device.SessionID }))
+                {
+                    //MD5 check failed
+                    //MessageBox.Show("MD5 check failed!");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"\n RealTimeState Exception: {e.Message}");
+                MessageBox.Show("MD5 call failed:" + e.Message + e.Source + "\n" + e.StackTrace);
+                return;
+            }
+
+            RealTimeStateProcess(attstr, SN);
+        }
+
+
+        private void RealTimeStateProcess(string attstr, string machineSN)
+        {
+            Logger.LogError($"\n RealTimeStateProcess: Bat dau---attstr: {attstr}");
+            try
+            {
+                string[] strlist = attstr.Split('\n', '\r');
+                foreach (string i in strlist)
+                {
+                    if (string.IsNullOrEmpty(i))
+                        continue;
+                    SaveRealTimeState(i.ToString(), machineSN);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n RealTimeStateProcess Exception: {ex.Message}");
+                if (OnError != null)
+                {
+                    OnError(ex.Message);
+                }
+            }
+        }
+
+        //封装实时状态信息
+        private RealTimeStateModel CreateRealTimeState(string realStateLog, string machineSN)
+        {
+            Logger.LogError($"\n CreateRealTimeState: Bat dau---realStateLog: {realStateLog}");
+            realStateLog = realStateLog.TrimEnd('\t');
+            string[] realtimestatestr = realStateLog.Split('\t');
+            for (int i = 0; i < realtimestatestr.Length; i++)
+            {
+                realtimestatestr[i] = realtimestatestr[i].Split('=')[1];
+            }
+            RealTimeStateModel realTimeState = new RealTimeStateModel();
+            realTimeState.DeviceSN = machineSN;
+            realTimeState.Time = realtimestatestr[0];
+            realTimeState.Sensor = realtimestatestr[1];
+            realTimeState.Relay = realtimestatestr[2];
+            realTimeState.Alarm = realtimestatestr[3];
+
+            return realTimeState;
+        }
+
+        /// <summary>
+        /// save RealTimeState
+        /// </summary>
+        /// <param name="realtimelog"></param>
+        private void SaveRealTimeState(string realtimelog, string machineSN)
+        {
+            Logger.LogError($"\n SaveRealTimeState: Bat dau---realtimelog: {realtimelog}");
+            if (OnNewRealTimeState != null)
+            {
+                OnNewRealTimeState(CreateRealTimeState(realtimelog, machineSN));
+            }
+        }
+        #endregion
+
+        #region resolve data of table=ATTPHOTO
+        /* save AttPhoto */
+        private void AttPhoto(byte[] bReceive)
+        {
+            Logger.LogError($"\n AttPhoto: Bat dau");
+            string strReceive = Encoding.UTF8.GetString(bReceive);
+            int index = strReceive.IndexOfEx("\r\n\r\n", 1);
+            string photoStr = strReceive.Substring(index + 4);
+            string[] arrPhoto = photoStr.Split('\n');
+            foreach (var item in arrPhoto)
+            {
+                string[] tmpstr = item.Split('\t');
+                string strImageNumber = "";
+                if (tmpstr.Length < 2)
+                    continue;
+                foreach (string str in tmpstr)
+                {
+                    if (str.IndexOfEx("PIN=") >= 0)
+                    {
+                        strImageNumber = str;
+                        break;
+                    }
+                }
+
+                string photo = tmpstr[3].Split('=')[1];
+                string dummyData = photo.Trim().Replace("%", "").Replace(",", "").Replace(" ", "+");
+                if (dummyData.Length % 4 > 0)
+                {
+                    dummyData = dummyData.PadRight(dummyData.Length + 4 - dummyData.Length % 4, '=');
+                }
+                byte[] imgReceive = Convert.FromBase64String(dummyData);
+                string path = System.Environment.CurrentDirectory + "\\Capture";
+                path += "\\" + strImageNumber.Replace("pin=", "");
+                System.IO.File.WriteAllBytes(path, imgReceive);
+            }
+
+
+        }
+        #endregion
+
+        #region resolve data of table=USERPIC
+        public void UserPicLog(string sBuffer)
+        {
+            Logger.LogError($"\n UserPicLog: Bat dau--sBuffer: {sBuffer}");
+            string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+
+            int usinindex = sBuffer.IndexOfEx("\r\n\r\n", 1);
+            string usinstr = sBuffer.Substring(usinindex + 4);
+            string token = GetValueByNameInPushHeader(sBuffer, "token");
+            DeviceModel device = DeviceBll.Get(SN);
+            if (device == null)
+                return;
+            try
+            {
+
+                if (0 != MD5Verify(token, new List<string>() { device.RegistryCode, device.DeviceSN, device.SessionID }))
+                {
+                    //MD5 check failed
+                    MessageBox.Show("MD5 check failed!");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"\n UserPicLog Exception: {e.Message}");
+                MessageBox.Show("MD5 call failed:" + e.Message + e.Source + "\n" + e.StackTrace);
+                return;
+            }
+
+            userpiclogprocess(usinstr);
+        }
+
+        public void userpiclogprocess(string sBuffer)
+        {
+            Logger.LogError($"\n userpiclogprocess: Bat dau--sBuffer: {sBuffer}");
+            try
+            {
+                int usinindex = sBuffer.IndexOfEx("\n", 1);
+                string usinstr = "";
+
+                if (usinindex > 0)
+                {
+                    usinstr = sBuffer.Substring(0, usinindex);
+                }
+                saveuserpic(usinstr);
+                string endop = sBuffer.Substring(usinindex + 1);
+                if (endop != "")
+                {
+                    userpiclogprocess(endop);
+                }
+            }
+            catch
+            {
+            }
+
+        }
+
+        private void Base64StringToImage(string txtFileName)
+        {
+            Logger.LogError($"\n Base64StringToImage: Bat dau--txtFileName: {txtFileName}");
+            try
+            {
+                FileStream ifs = new FileStream(txtFileName, FileMode.Open, FileAccess.Read);
+                //System.IO.FileStream ifs = new System.IO.FileStream(txtFileName, System.IO.FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite);
+                StreamReader sr = new StreamReader(ifs);
+
+                String inputStr = sr.ReadToEnd();
+
+                byte[] arr = Convert.FromBase64String(inputStr);
+                MemoryStream ms = new MemoryStream(arr);
+                Bitmap bmp = new Bitmap(ms);
+
+                string temp = txtFileName.Substring(0, txtFileName.Length - 4);
+                bmp.Save(temp + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                ms.Close();
+                sr.Close();
+                ifs.Close();
+                //this.picUser.Image = bmp;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n Base64StringToImage Exception:{ex.Message}");
+                MessageBox.Show("Base64StringToImage 转换失败/nException：" + ex.Message);
+            }
+        }
+        public void saveuserpic(string usinlog)
+        {
+            Logger.LogError($"\n saveuserpic: Bat dau");
+            if (usinlog.IndexOfEx("PIN", 0) > 0 && usinlog.IndexOfEx("FileName", 0) > 0)
+            {
+                string UsInid = usinlog.Substring(0, usinlog.IndexOfEx("\t", 0));
+                string stillusin1 = usinlog.Substring(usinlog.IndexOfEx("\t", 0) + 1);
+                string usinnum1 = stillusin1.Substring(0, stillusin1.IndexOfEx("\t", 0));
+                string stillusin2 = stillusin1.Substring(stillusin1.IndexOfEx("\t", 0) + 1);
+                string usinnum2 = stillusin2.Substring(0, stillusin2.IndexOfEx("\t", 0));
+                string stillusin3 = stillusin2.Substring(stillusin2.IndexOfEx("\t", 0) + 1);
+                string stillusin4 = stillusin3.Substring(8);
+                string path = System.Environment.CurrentDirectory + "\\Photo";
+                string name = usinnum1.Replace("filename=", "");
+                string name1 = name.Substring(0, name.Length - 4);
+                path += "\\" + name1 + ".txt";  //Photo\\
+                StreamWriter sw = new StreamWriter(path);
+                sw.WriteLine(stillusin4);
+                sw.Close();
+                Base64StringToImage("Photo\\" + name1 + ".txt");
+                //this.WriteUserPic(UsInid.Replace("USER PIN=", ""), usinnum1.Replace("FileName=", ""), usinnum2.Replace("Size=", ""));
+
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                /* if (tabOptions.SelectedIndex == 10) // User Info Logs Count
+                 {
+                     lblRecords.Text = "UserPic Count:";
+                     lblCount.Text = lvUserPic.Items.Count.ToString();
+                 }*/
+                // MessageBox.Show("转换成功！");
+            }
+        }
+        #endregion
+
         #region table=options
         /// <summary>
         /// Parse Options for Device
@@ -1554,7 +2220,7 @@ namespace BioMetrixCore.Access
         /// <param name="sBuffer"></param>
         private void Options(string sBuffer)
         {
-            Logger.LogError($"\n Options: Bat dau");
+            Logger.LogError($"\n Options: Bat dau---sBuffer: {sBuffer}");
             string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
             string SN = machineSN.Split('&')[0];
             if (string.IsNullOrEmpty(SN))
