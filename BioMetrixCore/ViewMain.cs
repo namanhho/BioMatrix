@@ -3930,9 +3930,13 @@ namespace BioMetrixCore
             {
                 success = ConnectByHikvision(ref message);
             }
-            else
+            else if(typeHikvision == 2)
             {
                 success = ConnectByHikvision_V2(ref message);
+            }
+            else
+            {
+                success = ConnectByHikvision(ref message);
             }
             Logger.LogError($"=============btnLoginByHikvision_Click: {message}================");
             tbTotalByHikvision.Text = success ? "Thành công" : "Thất bại";
@@ -3943,16 +3947,22 @@ namespace BioMetrixCore
             int typeHikvision = 0;
             int.TryParse(Utility.GetAppSetting("TypeHikvision"), out typeHikvision);
             var logs = new List<LogData>();
+            var limit = 100;
+            int.TryParse(Utility.GetAppSetting("LimitHikvision"), out limit);
             if (typeHikvision == 1)
             {
-                logs = GetLogsByHikvision(dtFromDateByHikvision.Value, dtToDateByHikvision.Value, 50, ref message);
+                logs = GetLogsByHikvision(dtFromDateByHikvision.Value.Date, dtToDateByHikvision.Value.Date.AddDays(1).AddSeconds(-1), limit, ref message);
             }
-            else
+            else if(typeHikvision == 2)
             {
                 logs = GetLogDatasByHikvision_V2(ref message);
             }
-            Logger.LogError($"=============btnGetLogsByHikvision_Click: {message}================");
+            else
+            {
+                logs = GetLogDatas_V2(dtFromDateByHikvision.Value.Date, dtToDateByHikvision.Value.Date.AddDays(1).AddSeconds(-1), 1, limit, ref message);
+            }
             tbTotalByHikvision.Text = logs.Count.ToString();
+            Logger.LogError($"=============btnGetLogsByHikvision_Click: {message}================");
             BindToGridView(logs);
         }
         public bool ConnectByHikvision(ref string message)
@@ -3976,10 +3986,13 @@ namespace BioMetrixCore
                     string strRsp = string.Empty;
                     try
                     {
+                        Logger.LogError($"\nBat dau ConnectByHikvision_GetResponse----request: {JsonConvert.SerializeObject(request)}");
                         message += $"\nBat dau ConnectByHikvision_GetResponse";
                         WebResponse wr = request.GetResponse();
+                        Logger.LogError($"\nBat dau ConnectByHikvision_GetResponse xong");
                         message += $"\nBat dau ConnectByHikvision_GetResponse xong";
                         strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                        Logger.LogError($"\nBat dau ConnectByHikvision_GetResponseStream xong: {strRsp}");
                         message += $"\nBat dau ConnectByHikvision_GetResponseStream xong: {strRsp}";
                         wr.Close();
                         _isConnected = true;
@@ -3994,11 +4007,13 @@ namespace BioMetrixCore
                             wenReq.Close();
                         }
                         success = false;
+                        Logger.LogError($"\nCannot login to {tbIPByHikvision.Text}" + ex.Message);
                         message += $"\nCannot login to {tbIPByHikvision.Text}" + ex.Message;
                     }
                 }
                 else
                 {
+                    Logger.LogError("\nCannot connect to {tbIPByHikvision.Text}");
                     message += $"\nCannot connect to {tbIPByHikvision.Text}";
                 }
                 //}
@@ -4010,6 +4025,7 @@ namespace BioMetrixCore
             catch (Exception ex)
             {
                 success = false;
+                Logger.LogError($"\n{ex.Message}");
                 message += $"\n{ex.Message}";
             }
             return success;
@@ -4031,25 +4047,26 @@ namespace BioMetrixCore
         /// <returns></returns>
         private List<LogData> GetLogDatasByHikvision(DateTime? fromDate, DateTime? toDate, int page, int limit, ref string message)
         {
-            message += $"\n===========Bat dau khoi tao: Page: {page}======Limit:{limit}";
+            Logger.LogError($"\n===========GetLogDatasByHikvision: Page: {page}======Limit:{limit}===fromDate: {fromDate}===toDate: {toDate}");
+            message += $"\n===========GetLogDatasByHikvision: Page: {page}======Limit:{limit}";
             var lstLog = new List<LogData>();
             string url = "http://" + tbIPByHikvision.Text + (int.Parse(tbPortByHikvision.Text) > 0 ? ":" + tbPortByHikvision.Text : "") + "/ISAPI/AccessControl/AcsEvent?format=json";
             string response = string.Empty;
 
             HttpClient http = new HttpClient();
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            message += $"\n===========Bat dau kiem tra Credential: Page: {page}======Limit:{limit}";
+            Logger.LogError($"\n===========GetLogDatasByHikvision Credential: Page: {page}======Limit:{limit}===url: {url}");
+            message += $"\n===========GetLogDatasByHikvision Credential: Page: {page}======Limit:{limit}";
             request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
-            message += $"\n===========Kiem tra Credential xong";
+            Logger.LogError($"\n===========GetLogDatasByHikvision Credential xong");
+            message += $"\n===========GetLogDatasByHikvision Credential xong";
             request.Method = "POST";
             request.Timeout = 100000;
             // add request
             var req = request;
             bool customStrReq = false;
             Boolean.TryParse(Utility.GetAppSetting("CustomStrReq"), out customStrReq);
-            string strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": "
-                + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \""
-                + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"major\": 0, \"minor\": 0, \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+            string strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": " + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"major\": 0, \"minor\": 0, \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
             if (customStrReq)
             {
                 int customMajor = 0;
@@ -4067,11 +4084,13 @@ namespace BioMetrixCore
             }
             if (strReq.Length > 0)
             {
-                message += $"\n===========Bat dau gan request: Page: {page}======Limit:{limit}";
+                Logger.LogError($"\n===========GetLogDatasByHikvision request: Page: {page}======Limit:{limit}");
+                message += $"\n===========GetLogDatasByHikvisionn request: Page: {page}======Limit:{limit}";
                 byte[] bs = Encoding.ASCII.GetBytes(strReq);
 
                 request.ContentType = "application/json";
                 request.ContentLength = bs.Length;
+                Logger.LogError($"\n===========Bat dau Write: Page: {page}======Limit:{limit}===request: {JsonConvert.SerializeObject(request)}");
                 message += $"\n===========Bat dau Write: Page: {page}======Limit:{limit}";
                 bool customWriteHikvision = false;
                 Boolean.TryParse(Utility.GetAppSetting("CustomWriteHikvision"), out customWriteHikvision);
@@ -4089,11 +4108,13 @@ namespace BioMetrixCore
             Boolean.TryParse(Utility.GetAppSetting("GetLogByHikvision"), out getLogByHikvision);
             try
             {
+                Logger.LogError($"\n===========Bat dau lay du lieu: Page: {page}======Limit:{limit}===request: {JsonConvert.SerializeObject(request)}");
                 message += $"\n===========Bat dau lay du lieu: Page: {page}======Limit:{limit}";
                 using (WebResponse wr = request.GetResponse())
                 {
                     strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
                 }
+                Logger.LogError($"\n==============Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============");
                 if (getLogByHikvision)
                 {
                     message += $"\n==============Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
@@ -4106,18 +4127,21 @@ namespace BioMetrixCore
             }
             catch (WebException ex)
             {
+                Logger.LogError($"\nError1.1: " + ex.ToString());
                 message += $"\nError1.1: " + ex.ToString();
                 bool customGetResponseStream = false;
                 Boolean.TryParse(Utility.GetAppSetting("CustomGetResponseStream"), out customGetResponseStream);
                 if (!customGetResponseStream)
                 {
                     WebResponse wenReq = (HttpWebResponse)ex.Response;
+                    Logger.LogError($"\nError1.1: Khoi tao xong");
                     message += $"\nError1.1: Khoi tao xong";
                     if (wenReq != null)
                     {
                         message += $"\nError1.1: Bat dau doc du lieu";
                         strRsp = new StreamReader(wenReq.GetResponseStream()).ReadToEnd();
                         wenReq.Close();
+                        Logger.LogError($"\n==============Error1.1=====Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============");
                         if (getLogByHikvision)
                         {
                             message += $"\n==============Error1.1=====Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
@@ -4132,6 +4156,7 @@ namespace BioMetrixCore
                 else
                 {
                     WebResponse wenReq = (HttpWebResponse)ex.Response;
+                    Logger.LogError($"\nError1.2: Khoi tao xong");
                     message += $"\nError1.2: Khoi tao xong";
                     if (wenReq != null)
                     {
@@ -4140,6 +4165,7 @@ namespace BioMetrixCore
                         {
                             strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
                         }
+                        Logger.LogError($"\n==============Error1.2======Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============");
                         if (getLogByHikvision)
                         {
                             message += $"\n==============Error1.2======Page: {page}=============Limit: {limit}=========================Data: {strRsp} ==============";
@@ -4154,6 +4180,7 @@ namespace BioMetrixCore
             }
             catch (Exception ex)
             {
+                Logger.LogError($"\nError2: " + ex.ToString());
                 message += $"\nError2: " + ex.ToString();
             }
 
@@ -4176,6 +4203,7 @@ namespace BioMetrixCore
             int num = dr != null ? Int32.Parse(dr.AcsEvent.numOfMatches) : 0;
             int total = dr != null ? Int32.Parse(dr.AcsEvent.totalMatches) : 10000000;
             string status = dr != null ? dr.AcsEvent.responseStatusStrg : "MORE";
+            Logger.LogError($"\nGetDatasByHikvision---num: {num}---total: {total}---status: {status}");
             if (num > 0 && dr != null)
             {
                 for (int j = 0; j < dr.AcsEvent.InfoList.Count(); ++j)
@@ -4191,12 +4219,20 @@ namespace BioMetrixCore
                         lstLog.Add(log);
                     }
                 }
-                message += $"Page {page}, size {num}, count {lstLog.Count}, status {status} --- ";
+                message += $"Page {page}, size {num}, count {lstLog.Count}, status {status} ---total: {total}----- ";
             }
             if ((page - 1) * limit + num < total)
             {
                 int pa = page + 1;
-                var tmp = GetLogDatasByHikvision(fromDate, toDate, pa, num, ref message);
+                bool reloadPageSize = false;
+                var pageSize = limit;
+                Boolean.TryParse(Utility.GetAppSetting("ReloadPageSize"), out reloadPageSize);
+                if (reloadPageSize)
+                {
+                    pageSize = num;
+                }
+                Logger.LogError($"\n Goi lai GetLogDatasByHikvision---pa: {pa}---num:{pageSize}");
+                var tmp = GetLogDatasByHikvision(fromDate, toDate, pa, pageSize, ref message);
                 message += $"--- Count {tmp.Count} --- ";
 
                 if (tmp.Count > 0)
@@ -4207,6 +4243,7 @@ namespace BioMetrixCore
         }
         private CredentialCache GetCredentialCacheByHikvision(string sUrl, string strUserName, string strPassword)
         {
+            Logger.LogError($"\n GetCredentialCacheByHikvision---sUrl: {sUrl}---strUserName:{strUserName}---strPassword: {strPassword}");
             var credentialCache = new CredentialCache();
             credentialCache.Add(new Uri(sUrl), "Digest", new NetworkCredential(strUserName, strPassword));
             return credentialCache;
@@ -4222,9 +4259,11 @@ namespace BioMetrixCore
                 var url = $"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/Security/userCheck?format=json";
                 var client = new RestClient($"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/Security/userCheck?format=json");
                 var request = new RestRequest("values", Method.GET);
+                request.Timeout = 5000;
                 request.AddHeader("Content-Type", "application/json");
 
                 request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+                message += $"\nConnectByHikvision_V2----Du lieu truyen len: {Converter.JsonSerialize(request)}";
                 var response = client.Execute(request);
                 message += $"\nKet qua lay du lieu ConnectByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
             }
@@ -4243,6 +4282,7 @@ namespace BioMetrixCore
                 var url = $"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/AccessControl/AcsEvent?format=json";
                 var client = new RestClient($"http://{tbIPByHikvision.Text}:{tbPortByHikvision.Text}/ISAPI/AccessControl/AcsEvent?format=json");
                 var request = new RestRequest("values", Method.POST);
+                request.Timeout = 100000;
                 request.AddHeader("Content-Type", "application/json");
                 request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
 
@@ -4269,6 +4309,7 @@ namespace BioMetrixCore
                         }
                     };
                     request.AddParameter("application/json", Converter.JsonSerialize(param), ParameterType.RequestBody);
+                    message += $"\n GetLogDatasByHikvision_V2----Du lieu truyen len: {Converter.JsonSerialize(request)}";
                     var response = client.Execute(request);
                     message += $"\nKet qua lay du lieu nGetLogDatasByHikvision_V2: success: {response.IsSuccessful}-----data: {Converter.JsonSerialize(response.Content)}----ErrorMessage: {response.ErrorMessage}";
                     var logs = JsonConvert.DeserializeObject<EventSearchRoot>(response.Content);
@@ -4303,6 +4344,398 @@ namespace BioMetrixCore
                 message += $"\nGetLogDatasByHikvision_V2 Exception: {ex.Message}";
             }
             return lstLog;
+        }
+
+
+
+        //private List<LogData> GetLogDatas_V2(DateTime? fromDate, DateTime? toDate, int page, int limit, ref string message)
+        //{
+        //    var lstLog = new List<LogData>();
+        //    var total = 0;
+        //    var pageIndex = page;
+        //    var pageSize = limit;
+        //    Logger.LogError($"\n===========GetLogDatas_V2: Page: {pageIndex}======Limit:{pageSize}");
+        //    message += $"\n===========GetLogDatas_V2: Page: {pageIndex}======Limit:{pageSize}";
+        //    do
+        //    {
+        //        string url = "http://" + tbIPByHikvision.Text + (int.Parse(tbPortByHikvision.Text) > 0 ? ":" + tbPortByHikvision.Text : "") + "/ISAPI/AccessControl/AcsEvent?format=json";
+        //        string response = string.Empty;
+
+        //        HttpClient http = new HttpClient();
+        //        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+        //        Logger.LogError($"\n===========GetLogDatas_V2 Credential: Page: {pageIndex}======Limit:{pageSize}===url: {url}");
+        //        message += $"\n===========GetLogDatas_V2 Credential: Page: {pageIndex}======Limit:{pageSize}";
+        //        request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+        //        request.Method = "POST";
+        //        request.Timeout = 100000;
+        //        // add request
+        //        bool customStrReq = false;
+        //        Boolean.TryParse(Utility.GetAppSetting("CustomStrReq"), out customStrReq);
+        //        string strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((page - 1) * limit) + ", \"maxResults\": " + limit + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"major\": 0, \"minor\": 0, \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+        //        if (customStrReq)
+        //        {
+        //            int customMajor = 0;
+        //            int.TryParse(Utility.GetAppSetting("CustomMajor"), out customMajor);
+        //            bool customPicEnable = false;
+        //            Boolean.TryParse(Utility.GetAppSetting("CustomPicEnable"), out customPicEnable);
+        //            if (customPicEnable)
+        //            {
+        //                strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((pageIndex - 1) * pageSize) 
+        //                    + ", \"maxResults\": " + pageSize 
+        //                    + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") 
+        //                    + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": true" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+        //            }
+        //            else
+        //            {
+        //                strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((pageIndex - 1) * pageSize) 
+        //                    + ", \"maxResults\": " + pageSize 
+        //                    + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") 
+        //                    + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": false" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+        //            }
+        //        }
+        //        if (strReq.Length > 0)
+        //        {
+        //            Logger.LogError($"\n===========GetLogDatas_V2 request: Page: {pageIndex}======Limit:{pageSize}");
+        //            message += $"\n===========GetLogDatas_V2 request: Page: {pageIndex}======Limit:{pageSize}";
+        //            byte[] bs = Encoding.ASCII.GetBytes(strReq);
+
+        //            request.ContentType = "application/json";
+        //            request.ContentLength = bs.Length;
+        //            Logger.LogError($"\n===========GetLogDatas_V2 Write: Page: {pageIndex}======Limit:{pageSize}===request: {JsonConvert.SerializeObject(request)}");
+        //            message += $"\n===========GetLogDatas_V2 Write: Page: {pageIndex}======Limit:{pageSize}";
+        //            bool customWriteHikvision = false;
+        //            Boolean.TryParse(Utility.GetAppSetting("CustomWriteHikvision"), out customWriteHikvision);
+        //            if (!customWriteHikvision)
+        //            {
+        //                using (Stream reqStream = request.GetRequestStream())
+        //                {
+        //                    reqStream.Write(bs, 0, bs.Length);
+        //                }
+        //            }
+        //        }
+        //        string strRsp = string.Empty;
+        //        bool getLogByHikvision = false;
+        //        Boolean.TryParse(Utility.GetAppSetting("GetLogByHikvision"), out getLogByHikvision);
+        //        try
+        //        {
+        //            Logger.LogError($"\n===========GetLogDatas_V2 Bat dau lay du lieu: Page: {pageIndex}======Limit:{pageSize}===request: {JsonConvert.SerializeObject(request)}");
+        //            message += $"\n===========GetLogDatas_V2 Bat dau lay du lieu: Page: {pageIndex}======Limit:{pageSize}";
+        //            using (WebResponse wr = request.GetResponse())
+        //            {
+        //                strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+        //            }
+        //            Logger.LogError($"\n==============GetLogDatas_V2 Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+        //            if (getLogByHikvision)
+        //            {
+        //                message += $"\n==============Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+        //            }
+        //            else
+        //            {
+        //                message += $"\n==============Page: {pageIndex}=============Limit: {pageSize}=========================";
+        //            }
+        //            GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+        //        }
+        //        catch (WebException ex)
+        //        {
+        //            Logger.LogError($"\nError1.1: " + ex.ToString());
+        //            message += $"\nError1.1: " + ex.ToString();
+        //            bool customGetResponseStream = false;
+        //            Boolean.TryParse(Utility.GetAppSetting("CustomGetResponseStream"), out customGetResponseStream);
+        //            if (!customGetResponseStream)
+        //            {
+        //                WebResponse wenReq = (HttpWebResponse)ex.Response;
+        //                Logger.LogError($"\nError1.1: Khoi tao xong");
+        //                message += $"\nError1.1: Khoi tao xong";
+        //                if (wenReq != null)
+        //                {
+        //                    Logger.LogError($"\nError1.1: Bat dau doc du lieu");
+        //                    message += $"\nError1.1: Bat dau doc du lieu";
+        //                    strRsp = new StreamReader(wenReq.GetResponseStream()).ReadToEnd();
+        //                    wenReq.Close();
+        //                    Logger.LogError($"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+        //                    if (getLogByHikvision)
+        //                    {
+        //                        message += $"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+        //                    }
+        //                    else
+        //                    {
+        //                        message += $"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================";
+        //                    }
+        //                    GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                WebResponse wenReq = (HttpWebResponse)ex.Response;
+        //                Logger.LogError($"\nError1.2: Khoi tao xong");
+        //                message += $"\nError1.2: Khoi tao xong";
+        //                if (wenReq != null)
+        //                {
+        //                    Logger.LogError($"\nError1.2: Bat dau doc du lieu");
+        //                    message += $"\nError1.2: Bat dau doc du lieu";
+        //                    using (WebResponse wr = request.GetResponse())
+        //                    {
+        //                        strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+        //                    }
+        //                    Logger.LogError($"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+        //                    if (getLogByHikvision)
+        //                    {
+        //                        message += $"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+        //                    }
+        //                    else
+        //                    {
+        //                        message += $"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================";
+        //                    }
+        //                    GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Logger.LogError($"\nError2: " + ex.ToString());
+        //            message += $"\nError2: " + ex.ToString();
+        //        }
+
+        //    }
+        //    while ((pageIndex - 1) * pageSize < total);
+
+        //    return lstLog;
+        //}
+        //private void GetDatas_V2(string strRsp, ref List<LogData> lstLog, ref string message, ref int total, ref int pageIndex, ref int pageSize)
+        //{
+        //    Logger.LogError($"\nGetDatas_V2: Bat dau");
+        //    if (string.IsNullOrWhiteSpace(strRsp))
+        //    {
+        //        return;
+        //    }
+        //    EventSearchRoot dr = JsonConvert.DeserializeObject<EventSearchRoot>(strRsp);
+        //    int num = dr != null ? Int32.Parse(dr.AcsEvent.numOfMatches) : 0;
+        //    total = dr != null ? Int32.Parse(dr.AcsEvent.totalMatches) : 10000000;
+        //    string status = dr != null ? dr.AcsEvent.responseStatusStrg : "MORE";
+        //    Logger.LogError($"\nGetDatas_V2---num: {num}---total: {total}---status: {status}");
+        //    if (num > 0 && dr != null)
+        //    {
+        //        for (int j = 0; j < dr.AcsEvent.InfoList.Count(); ++j)
+        //        {
+        //            if (!string.IsNullOrWhiteSpace(dr.AcsEvent.InfoList[j].employeeNoString))
+        //            {
+        //                var log = new LogData()
+        //                {
+        //                    CheckTime = DateTime.Parse(dr.AcsEvent.InfoList[j].time),
+        //                    FullName = dr.AcsEvent.InfoList[j].name,
+        //                    UserID = dr.AcsEvent.InfoList[j].employeeNoString,
+        //                    //EventType = EventType.IN
+        //                };
+        //                lstLog.Add(log);
+        //            }
+        //        }
+        //        Logger.LogError($"\n Size numOfMatches: {num}, Count lstLog: {lstLog.Count}, status {status}, total totalMatches: {total} --- ");
+        //        message += $"\n Size numOfMatches: {num}, Count lstLog: {lstLog.Count}, status {status}, total totalMatches: {total} --- ";
+        //    }
+
+        //    if ((pageIndex - 1) * pageSize + num < total)
+        //    {
+        //        pageIndex = pageIndex + 1;
+        //        bool reloadPageSize = false;
+        //        Boolean.TryParse(Utility.GetAppSetting("ReloadPageSize"), out reloadPageSize);
+        //        if (reloadPageSize)
+        //        {
+        //            pageSize = num;
+        //        }
+        //        Logger.LogError($"\nGetDatas_V2---pageIndex: {pageIndex}---pageSize: {pageSize}");
+        //    }
+        //}
+
+
+        private List<LogData> GetLogDatas_V2(DateTime? fromDate, DateTime? toDate, int page, int limit, ref string message)
+        {
+            var lstLog = new List<LogData>();
+            var total = 0;
+            var pageIndex = page;
+            var pageSize = limit;
+            message += $"\n===========GetLogDatas_V2: Page: {page}======Limit:{limit}===fromDate: {fromDate}===toDate: {toDate}";
+            Logger.LogError($"\n===========GetLogDatas_V2: Page: {page}======Limit:{limit}===fromDate: {fromDate}===toDate: {toDate}");
+            do
+            {
+                string url = "http://" + tbIPByHikvision.Text + (int.Parse(tbPortByHikvision.Text) > 0 ? ":" + tbPortByHikvision.Text : "") + "/ISAPI/AccessControl/AcsEvent?format=json";
+                string response = string.Empty;
+
+                HttpClient http = new HttpClient();
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                message += $"\n===========Bat dau kiem tra Credential: Page: {pageIndex}======Limit:{pageSize}";
+                Logger.LogError($"\n===========Bat dau kiem tra Credential: Page: {pageIndex}======Limit:{pageSize}");
+                request.Credentials = GetCredentialCacheByHikvision(url, tbUserNameByHikvision.Text, tbPassByHikvision.Text);
+                request.Method = "POST";
+                request.Timeout = 100000;
+                // add request
+                var req = request;
+                bool customStrReq = false;
+                Boolean.TryParse(Utility.GetAppSetting("CustomStrReq"), out customStrReq);
+                string strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((pageIndex - 1) * pageSize) + ", \"maxResults\": " + pageSize + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"major\": 0, \"minor\": 0, \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+                if (customStrReq)
+                {
+                    int customMajor = 0;
+                    int.TryParse(Utility.GetAppSetting("CustomMajor"), out customMajor);
+                    bool customPicEnable = false;
+                    Boolean.TryParse(Utility.GetAppSetting("CustomPicEnable"), out customPicEnable);
+                    if (customPicEnable)
+                    {
+                        strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((pageIndex - 1) * pageSize) + ", \"maxResults\": " + pageSize + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": true" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+                    }
+                    else
+                    {
+                        strReq = "{ \"AcsEventCond\": { \"searchID\": \"1\", \"searchResultPosition\": " + ((pageIndex - 1) * pageSize) + ", \"maxResults\": " + pageSize + ", \"startTime\": \"" + fromDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"endTime\": \"" + toDate.Value.ToString("yyyy-M-d'T'HH:mm:sszzz") + "\", \"minor\": 0, \"major\": " + customMajor + ", \"picEnable\": false" + ", \"timeReverseOrder\": true, \"eventAttribute\": \"attendance\" } }";
+                    }
+                }
+                if (strReq.Length > 0)
+                {
+                    message += $"\n===========Bat dau gan request: Page: {pageIndex}======Limit:{pageSize}";
+                    Logger.LogError($"\n===========Bat dau gan request: Page: {pageIndex}======Limit:{pageSize}");
+                    byte[] bs = Encoding.ASCII.GetBytes(strReq);
+
+                    request.ContentType = "application/json";
+                    request.ContentLength = bs.Length;
+                    message += $"\n===========Bat dau Write: Page: {pageIndex}======Limit:{pageSize}";
+                    Logger.LogError($"\n===========Bat dau Write: Page: {pageIndex}======Limit:{pageSize}");
+                    bool customWriteHikvision = false;
+                    Boolean.TryParse(Utility.GetAppSetting("CustomWriteHikvision"), out customWriteHikvision);
+                    if (!customWriteHikvision)
+                    {
+                        using (Stream reqStream = request.GetRequestStream())
+                        {
+                            reqStream.Write(bs, 0, bs.Length);
+                        }
+                    }
+                }
+                string strRsp = string.Empty;
+                bool getLogByHikvision = false;
+                Boolean.TryParse(Utility.GetAppSetting("GetLogByHikvision"), out getLogByHikvision);
+                try
+                {
+                    message += $"\n===========Bat dau lay du lieu: Page: {pageIndex}======Limit:{pageSize}";
+                    Logger.LogError($"\n===========Bat dau lay du lieu: Page: {pageIndex}======Limit:{pageSize}");
+                    using (WebResponse wr = request.GetResponse())
+                    {
+                        strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                    }
+                    Logger.LogError($"\n==============Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+                    if (getLogByHikvision)
+                    {
+                        message += $"\n==============Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+                    }
+                    else
+                    {
+                        message += $"\n==============Page: {pageIndex}=============Limit: {pageSize}=========================";
+                    }
+                    GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+                }
+                catch (WebException ex)
+                {
+                    message += $"\nError1.1: " + ex.ToString();
+                    Logger.LogError($"\nError1.1: " + ex.ToString());
+                    bool customGetResponseStream = false;
+                    Boolean.TryParse(Utility.GetAppSetting("CustomGetResponseStream"), out customGetResponseStream);
+                    if (!customGetResponseStream)
+                    {
+                        WebResponse wenReq = (HttpWebResponse)ex.Response;
+                        message += $"\nError1.1: Khoi tao xong";
+                        Logger.LogError($"\nError1.1: Khoi tao xong");
+                        if (wenReq != null)
+                        {
+                            message += $"\nError1.1: Bat dau doc du lieu";
+                            Logger.LogError($"\nError1.1: Bat dau doc du lieu");
+                            strRsp = new StreamReader(wenReq.GetResponseStream()).ReadToEnd();
+                            wenReq.Close();
+                            Logger.LogError($"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+                            if (getLogByHikvision)
+                            {
+                                message += $"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+                            }
+                            else
+                            {
+                                message += $"\n==============Error1.1=====Page: {pageIndex}=============Limit: {pageSize}=========================";
+                            }
+                            GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+                        }
+                    }
+                    else
+                    {
+                        WebResponse wenReq = (HttpWebResponse)ex.Response;
+                        message += $"\nError1.2: Khoi tao xong";
+                        Logger.LogError($"\nError1.2: Khoi tao xong");
+                        if (wenReq != null)
+                        {
+                            message += $"\nError1.2: Bat dau doc du lieu";
+                            Logger.LogError($"\nError1.2: Bat dau doc du lieu");
+                            using (WebResponse wr = request.GetResponse())
+                            {
+                                strRsp = new StreamReader(wr.GetResponseStream()).ReadToEnd();
+                            }
+                            Logger.LogError($"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============");
+                            if (getLogByHikvision)
+                            {
+                                message += $"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================Data: {strRsp} ==============";
+                            }
+                            else
+                            {
+                                message += $"\n==============Error1.2======Page: {pageIndex}=============Limit: {pageSize}=========================";
+                            }
+                            GetDatas_V2(strRsp, ref lstLog, ref message, ref total, ref pageIndex, ref pageSize);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    message += $"\nError2: " + ex.ToString();
+                    Logger.LogError($"\nError2: " + ex.ToString());
+                }
+
+            }
+            while ((pageIndex - 1) * pageSize < total);
+
+            return lstLog;
+        }
+        private void GetDatas_V2(string strRsp, ref List<LogData> lstLog, ref string message, ref int total, ref int pageIndex, ref int pageSize)
+        {
+            Logger.LogError($"\nGetDatas_V2==strRsp: {strRsp}");
+            if (string.IsNullOrWhiteSpace(strRsp))
+            {
+                return;
+            }
+            EventSearchRoot dr = JsonConvert.DeserializeObject<EventSearchRoot>(strRsp);
+            int num = dr != null ? Int32.Parse(dr.AcsEvent.numOfMatches) : 0;
+            total = dr != null ? Int32.Parse(dr.AcsEvent.totalMatches) : 10000000;
+            string status = dr != null ? dr.AcsEvent.responseStatusStrg : "MORE";
+            Logger.LogError($"\n num: {num}===total: {total}===status: {status}");
+            if (num > 0 && dr != null)
+            {
+                for (int j = 0; j < dr.AcsEvent.InfoList.Count(); ++j)
+                {
+                    if (!string.IsNullOrWhiteSpace(dr.AcsEvent.InfoList[j].employeeNoString))
+                    {
+                        var log = new LogData()
+                        {
+                            CheckTime = DateTime.Parse(dr.AcsEvent.InfoList[j].time),
+                            FullName = dr.AcsEvent.InfoList[j].name,
+                            UserID = dr.AcsEvent.InfoList[j].employeeNoString,
+                            //EventType = EventType.IN
+                        };
+                        lstLog.Add(log);
+                    }
+                }
+                message += $"\n Size numOfMatches: {num}, Count lstLog: {lstLog.Count}, status {status}, total totalMatches: {total} --- ";
+            }
+
+            if ((pageIndex - 1) * pageSize + num < total)
+            {
+                pageIndex = pageIndex + 1;
+                bool reloadPageSize = false;
+                Boolean.TryParse(Utility.GetAppSetting("ReloadPageSize"), out reloadPageSize);
+                if (reloadPageSize)
+                {
+                    pageSize = num;
+                }
+            }
         }
         #endregion
 
@@ -4481,7 +4914,6 @@ namespace BioMetrixCore
         #region Zkteco Face
         private ListenClient listenClient = null;
         private Thread listenClientThread = null;
-        private RealTimeLogBll _realTimeLogBll = new RealTimeLogBll();
         DataTable _dt = null;
         /// <summary>
         /// get locale IP
@@ -4572,24 +5004,6 @@ namespace BioMetrixCore
             Logger.LogError($"\nAddNewRow: Xong");
         }
 
-        private void LoadRealTimeLogData()
-        {
-            string userID = txtUserIDByZktecoFace.Text.Trim();
-            string devSN = cmbSeriNumberByZktecoFace.Text.Trim();
-
-            //显示数据库中数据
-            try
-            {
-                var logs = _realTimeLogBll.GetByTime(fromDateByZktecoFace.Value, toDateByZktecoFace.Value, userID, devSN);
-                this.dgvLogByZktecoFace.DataSource = logs;
-                this.dgvLogByZktecoFace.Update();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError($"LoadRealTimeLogData: {ex.ToString()}");
-                MessageBox.Show("Load attlog info error:" + ex.ToString());
-            }
-        }
         /// <summary>Server start flag
         /// </summary>
         private bool _isStart = false;
@@ -4609,6 +5023,7 @@ namespace BioMetrixCore
                 StartListenling(cmbIPByZktecoFace.Text, txtPortByZktecoFace.Text);
                 btnOpenHostByZktecoFace.Text = "Stop";
                 btnOpenHostByZktecoFace.ForeColor = Color.Red;
+                StartListenling(cmbIPByZktecoFace.Text, txtPortByZktecoFace.Text);
                 AddCommInfo("", 3);
             }
             _isStart = !_isStart;
@@ -4711,14 +5126,31 @@ namespace BioMetrixCore
         private void listenClient_OnReceiveDataEvent(string Data)
         {
             Logger.LogError($"\n listenClient_OnReceiveDataEvent----Data: {Data}");
+            var logData = Regex.Replace(Regex.Replace(Data, "\r", @"\r"), "\n", @"\n");
+            Logger.LogError($"\n listenClient_OnReceiveDataEvent----logData: {logData}");
             AddCommInfo(Data, 0);
-        }
 
-        #endregion
+            // Lưu lại thông tin log
+            try
+            {
+                //string strReceive = $"POST /iclock/cdata?SN=0782232260009&table=ATTLOG&Stamp=9999 HTTP/1.1\nHost: 192.168.1.240:8080\nUser - Agent: iClock Proxy/ 1.09\nConnection: close\nAccept: */*\nContent-Type: text/plain \nContent-Length: 44\r\n\r\n3	2023-10-16 08:38:16	255	15	0	0	0	255	0	0	\n";
+                if (Data.Substring(0, 4).ToUpper() == "POST" && Data.IndexOfEx("SN=") > 0 && Data.IndexOfEx("cdata?") > 0 && Data.IndexOfEx("table=ATTLOG", 1) > 0)
+                {
+                    var lstLog = new List<LogData>();
+                    onRealTimeLog(Data, ref lstLog);
+                    this.dgvLogByZktecoFace.DataSource = lstLog;
+                    this.dgvLogByZktecoFace.Update();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n listenClient_OnReceiveDataEvent Exception: {ex.Message}");
+            }
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            this.lblMsg.Visible = false;
+            //this.lblMsg.Visible = false;
             this.txtDevSN.Enabled = true;
             DeviceModel device = new DeviceModel();
             txtDevSN.Text = device.DeviceSN;
@@ -4735,12 +5167,12 @@ namespace BioMetrixCore
         {
             if (string.IsNullOrEmpty(txtDevSN.Text))
             {
-                lblMsg.Visible = true;
-                lblMsg.Text = "Please input Device SN";
+                //lblMsg.Visible = true;
+                //lblMsg.Text = "Please input Device SN";
                 return;
             }
 
-            lblMsg.Visible = false;
+            //lblMsg.Visible = false;
             txtDevSN.Enabled = false;
             //Device Exsit,Update
             DeviceModel device;
@@ -4753,13 +5185,13 @@ namespace BioMetrixCore
                 {
                     if (_bll.Update(device) > 0)
                     {
-                        lblMsg.Visible = true;
-                        lblMsg.Text = "Update device success";
+                        //lblMsg.Visible = true;
+                        //lblMsg.Text = "Update device success";
                     }
                     else
                     {
-                        lblMsg.Visible = true;
-                        lblMsg.Text = "Update device fail";
+                        //lblMsg.Visible = true;
+                        //lblMsg.Text = "Update device fail";
                     }
                     return;
                 }
@@ -4767,7 +5199,6 @@ namespace BioMetrixCore
             }
 
             //Device No Exsit,Add
-            lblMsg.Visible = false;
             device = new DeviceModel();
             device.DeviceSN = txtDevSN.Text.Trim();
             device.DeviceName = txtDevName.Text;
@@ -4783,20 +5214,18 @@ namespace BioMetrixCore
                         _dicDevInterval.Add(device.DeviceSN, 0);
                     }
 
-                    lblMsg.Visible = true;
-                    lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Success";
+                    //lblMsg.Visible = true;
+                    //lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Success";
                 }
                 else
                 {
-                    lblMsg.Visible = true;
-                    lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Fail";
+                    //lblMsg.Visible = true;
+                    //lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Fail";
                 }
             }
             catch (Exception ex)
             {
                 Logger.LogError($"\n btnSave_Click Exception: {ex.Message}");
-                lblMsg.Visible = true;
-                lblMsg.Text = ex.ToString();
             }
         }
         private string GetRegistryCode()
@@ -4834,5 +5263,186 @@ namespace BioMetrixCore
 
             return registryCode;
         }
+
+        /// <summary>
+        /// Parse RealTimeLog for acc Device
+        /// </summary>
+        /// <param name="sBuffer"></param>
+        private void onRealTimeLog(string sBuffer, ref List<LogData> lstLog)
+        {
+            Logger.LogError($"\n onRealTimeLog: Bat dau---sBuffer: {sBuffer}");
+            string machineSN = sBuffer.Substring(sBuffer.IndexOfEx("SN=") + 3);
+            string SN = machineSN.Split('&')[0];
+
+            int attindex = sBuffer.IndexOfEx("\r\n\r\n", 1);
+            string attstr = sBuffer.Substring(attindex + 4);
+
+            onRealTimeLogProcess(attstr, SN, ref lstLog);
+        }
+
+        private void onRealTimeLogProcess(string attstr, string machineSN, ref List<LogData> lstLog)
+        {
+            Logger.LogError($"\n onRealTimeLogProcess: Bat dau---attstr: {attstr}");
+            try
+            {
+                string[] strlist = attstr.Split('\n', '\r');
+                Logger.LogError($"\n onRealTimeLogProcess: Split xong---strlist: {Converter.JsonSerialize(strlist)}");
+                foreach (string i in strlist)
+                {
+                    if (string.IsNullOrEmpty(i))
+                        continue;
+                    var log = onCreateRealTimelog(i.ToString(), machineSN);
+                    lstLog.Add(log);
+
+                    var realTimeLog = new RealTimeLogModel();
+                    realTimeLog.DevSN = txtNameByZkFace.Text;
+                    realTimeLog.CardNo = log.UserID;
+                    realTimeLog.Time = log.CheckTime;
+                    AddNewRow(realTimeLog);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n onRealTimeLogProcess Exception: {ex.Message}");
+            }
+        }
+        private LogData onCreateRealTimelog(string realtimelog, string machineSN)
+        {
+            Logger.LogError($"\n onCreateRealTimelog: Bat dau---realtimelog: {realtimelog}");
+            realtimelog = realtimelog.TrimEnd('\t');
+            string[] realtimelogstr = realtimelog.Split('\t');
+            Logger.LogError($"\n onCreateRealTimelog: Split xong---realtimelogstr: {Converter.JsonSerialize(realtimelogstr)}");
+            LogData realTimeLog = new LogData();
+
+            int cardNo = 0;
+            var time = DateTime.Now;
+            if (int.TryParse(realtimelogstr[0], out cardNo) && DateTime.TryParse(realtimelogstr[1], out time))
+            {
+                realTimeLog.UserID = realtimelogstr[0];
+                realTimeLog.CheckTime = Convert.ToDateTime(realtimelogstr[1]);
+                realTimeLog.DeviceID = machineSN;
+            }
+            return realTimeLog;
+        }
+
+        private void btnConnectByZkFace_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                ShowStatusBar(string.Empty, true);
+
+                if (IsDeviceConnected)
+                {
+                    IsDeviceConnected = false;
+                    this.Cursor = Cursors.Default;
+
+                    return;
+                }
+
+                string ipAddress = txtIPByZkFace.Text.Trim();
+                string port = txtPortByZkFace.Text.Trim();
+                if (ipAddress == string.Empty || port == string.Empty)
+                    throw new Exception("The Device IP Address and Port is mandotory !!");
+
+                int portNumber = 4370;
+                if (!int.TryParse(port, out portNumber))
+                    throw new Exception("Not a valid port number");
+
+                bool isValidIpA = UniversalStatic.ValidateIP(ipAddress);
+                if (!isValidIpA)
+                    throw new Exception("The Device IP is invalid !!");
+
+                isValidIpA = UniversalStatic.PingTheDevice(ipAddress);
+                if (!isValidIpA)
+                    throw new Exception("The device at " + ipAddress + ":" + port + " did not respond!!");
+
+                string pw = txtPassByZkFace.Text.Trim();
+                int password = 0;
+                if (!int.TryParse(pw, out password))
+                    throw new Exception("Not a valid password number");
+
+                objZkeeper = new ZkemClient(RaiseDeviceEvent);
+                objZkeeper.Beep(5000);
+                objZkeeper.SetCommPassword(password);
+                IsDeviceConnected = objZkeeper.Connect_Net(ipAddress, portNumber);
+
+                if (IsDeviceConnected)
+                {
+                    var serialNo = "";
+                    if(objZkeeper.GetSerialNumber(int.Parse(tbxMachineNumber.Text.Trim()), out serialNo))
+                    {
+                        if (string.IsNullOrWhiteSpace(serialNo))
+                        {
+                            return;
+                        }
+                        txtDevSN.Text = serialNo;
+                        DeviceModel device;
+                        if (null != (device = _bll.Get(serialNo.Trim())))
+                        {
+                            device.DeviceSN = serialNo.Trim();
+                            device.DeviceName = txtNameByZkFace.Text;
+                            device.IPAddress = txtIPByZkFace.Text;
+                            device.TransTables = device.TransTables;
+                            device.RegistryCode = GetRegistryCode();
+                            try
+                            {
+                                if (_bll.Update(device) > 0)
+                                {
+                                    //lblMsg.Visible = true;
+                                    //lblMsg.Text = "Update device success";
+                                }
+                                else
+                                {
+                                    //lblMsg.Visible = true;
+                                    //lblMsg.Text = "Update device fail";
+                                }
+                                return;
+                            }
+                            catch { }
+                        }
+
+                        //Device No Exsit,Add
+                        device = new DeviceModel();
+                        device.DeviceSN = serialNo.Trim();
+                        device.DeviceName = txtNameByZkFace.Text;
+                        device.IPAddress = txtIPByZkFace.Text;
+                        device.TransTables = device.TransTables;
+                        device.RegistryCode = GetRegistryCode();
+                        device.SessionID = Tools.GetSessionID();
+                        try
+                        {
+                            if (_bll.Add(device) > 0)
+                            {
+                                if (!_dicDevInterval.ContainsKey(device.DeviceSN))
+                                {
+                                    _dicDevInterval.Add(device.DeviceSN, 0);
+                                }
+
+                                //lblMsg.Visible = true;
+                                //lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Success";
+                            }
+                            else
+                            {
+                                //lblMsg.Visible = true;
+                                //lblMsg.Text = "Add Device SN " + txtDevSN.Text.Trim() + " Fail";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogError($"\n btnSave_Click Exception: {ex.Message}");
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ShowStatusBar(ex.Message, false);
+            }
+            this.Cursor = Cursors.Default;
+        }
+        #endregion
+
     }
 }

@@ -253,14 +253,29 @@
             this.txtIP = new System.Windows.Forms.TextBox();
             this.labIP = new System.Windows.Forms.Label();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.label68 = new System.Windows.Forms.Label();
+            this.txtNameByZkFace = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.txtPassByZkFace = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.txtIPByZkFace = new System.Windows.Forms.TextBox();
+            this.txtPortByZkFace = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.btnConnectByZkFace = new System.Windows.Forms.Button();
+            this.tb_RegistryCode = new System.Windows.Forms.TextBox();
+            this.label_RegistryCode = new System.Windows.Forms.Label();
+            this.tb_TransTables = new System.Windows.Forms.TextBox();
+            this.label_TransTables = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.txtDevName = new System.Windows.Forms.TextBox();
+            this.lblDevName = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.txtDevSN = new System.Windows.Forms.TextBox();
             this.rtxtCommInfo = new System.Windows.Forms.RichTextBox();
             this.dgvLogByZktecoFace = new System.Windows.Forms.DataGridView();
-            this.txtUserIDByZktecoFace = new System.Windows.Forms.TextBox();
-            this.lblUserID = new System.Windows.Forms.Label();
             this.toDateByZktecoFace = new System.Windows.Forms.DateTimePicker();
             this.fromDateByZktecoFace = new System.Windows.Forms.DateTimePicker();
-            this.cmbSeriNumberByZktecoFace = new System.Windows.Forms.ComboBox();
-            this.lblDevSN = new System.Windows.Forms.Label();
             this.btnOpenHostByZktecoFace = new System.Windows.Forms.Button();
             this.txtPortByZktecoFace = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
@@ -270,17 +285,6 @@
             this.label58 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
-            this.tb_RegistryCode = new System.Windows.Forms.TextBox();
-            this.label_RegistryCode = new System.Windows.Forms.Label();
-            this.lblMsg = new System.Windows.Forms.Label();
-            this.tb_TransTables = new System.Windows.Forms.TextBox();
-            this.label_TransTables = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.txtDevName = new System.Windows.Forms.TextBox();
-            this.lblDevName = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
-            this.txtDevSN = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -566,7 +570,7 @@
             this.tbxDeviceIP.Name = "tbxDeviceIP";
             this.tbxDeviceIP.Size = new System.Drawing.Size(99, 20);
             this.tbxDeviceIP.TabIndex = 0;
-            this.tbxDeviceIP.Text = "172.18.12.222";
+            this.tbxDeviceIP.Text = "113.161.32.212";
             // 
             // tbxPort
             // 
@@ -576,7 +580,7 @@
             this.tbxPort.Name = "tbxPort";
             this.tbxPort.Size = new System.Drawing.Size(56, 20);
             this.tbxPort.TabIndex = 2;
-            this.tbxPort.Text = "4370";
+            this.tbxPort.Text = "8888";
             // 
             // btnPingDevice
             // 
@@ -2176,7 +2180,7 @@
             this.tbPassByHikvision.Name = "tbPassByHikvision";
             this.tbPassByHikvision.Size = new System.Drawing.Size(100, 20);
             this.tbPassByHikvision.TabIndex = 21;
-            this.tbPassByHikvision.Text = "Tt@dmin070922";
+            this.tbPassByHikvision.Text = "VietNga123";
             // 
             // label50
             // 
@@ -2210,7 +2214,7 @@
             this.tbPortByHikvision.Name = "tbPortByHikvision";
             this.tbPortByHikvision.Size = new System.Drawing.Size(116, 20);
             this.tbPortByHikvision.TabIndex = 17;
-            this.tbPortByHikvision.Text = "80";
+            this.tbPortByHikvision.Text = "83";
             // 
             // label52
             // 
@@ -2227,7 +2231,7 @@
             this.tbIPByHikvision.Name = "tbIPByHikvision";
             this.tbIPByHikvision.Size = new System.Drawing.Size(116, 20);
             this.tbIPByHikvision.TabIndex = 15;
-            this.tbIPByHikvision.Text = "192.168.1.200";
+            this.tbIPByHikvision.Text = "192.168.100.72";
             // 
             // label53
             // 
@@ -2570,9 +2574,17 @@
             // 
             // tabPage15
             // 
+            this.tabPage15.Controls.Add(this.label68);
+            this.tabPage15.Controls.Add(this.txtNameByZkFace);
+            this.tabPage15.Controls.Add(this.label65);
+            this.tabPage15.Controls.Add(this.txtPassByZkFace);
+            this.tabPage15.Controls.Add(this.label66);
+            this.tabPage15.Controls.Add(this.txtIPByZkFace);
+            this.tabPage15.Controls.Add(this.txtPortByZkFace);
+            this.tabPage15.Controls.Add(this.label67);
+            this.tabPage15.Controls.Add(this.btnConnectByZkFace);
             this.tabPage15.Controls.Add(this.tb_RegistryCode);
             this.tabPage15.Controls.Add(this.label_RegistryCode);
-            this.tabPage15.Controls.Add(this.lblMsg);
             this.tabPage15.Controls.Add(this.tb_TransTables);
             this.tabPage15.Controls.Add(this.label_TransTables);
             this.tabPage15.Controls.Add(this.btnAdd);
@@ -2583,12 +2595,8 @@
             this.tabPage15.Controls.Add(this.txtDevSN);
             this.tabPage15.Controls.Add(this.rtxtCommInfo);
             this.tabPage15.Controls.Add(this.dgvLogByZktecoFace);
-            this.tabPage15.Controls.Add(this.txtUserIDByZktecoFace);
-            this.tabPage15.Controls.Add(this.lblUserID);
             this.tabPage15.Controls.Add(this.toDateByZktecoFace);
             this.tabPage15.Controls.Add(this.fromDateByZktecoFace);
-            this.tabPage15.Controls.Add(this.cmbSeriNumberByZktecoFace);
-            this.tabPage15.Controls.Add(this.lblDevSN);
             this.tabPage15.Controls.Add(this.btnOpenHostByZktecoFace);
             this.tabPage15.Controls.Add(this.txtPortByZktecoFace);
             this.tabPage15.Controls.Add(this.lblPort);
@@ -2600,6 +2608,198 @@
             this.tabPage15.TabIndex = 14;
             this.tabPage15.Text = "Zkteco Face";
             this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // label68
+            // 
+            this.label68.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(144, 96);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(26, 13);
+            this.label68.TabIndex = 95;
+            this.label68.Text = "Tên";
+            // 
+            // txtNameByZkFace
+            // 
+            this.txtNameByZkFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNameByZkFace.Location = new System.Drawing.Point(203, 90);
+            this.txtNameByZkFace.Name = "txtNameByZkFace";
+            this.txtNameByZkFace.Size = new System.Drawing.Size(99, 20);
+            this.txtNameByZkFace.TabIndex = 94;
+            this.txtNameByZkFace.Text = "MCC";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(559, 94);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(57, 13);
+            this.label65.TabIndex = 93;
+            this.label65.Text = "Mã kết nối";
+            // 
+            // txtPassByZkFace
+            // 
+            this.txtPassByZkFace.Location = new System.Drawing.Point(627, 88);
+            this.txtPassByZkFace.Name = "txtPassByZkFace";
+            this.txtPassByZkFace.Size = new System.Drawing.Size(56, 20);
+            this.txtPassByZkFace.TabIndex = 92;
+            this.txtPassByZkFace.Text = "0";
+            // 
+            // label66
+            // 
+            this.label66.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(299, 94);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(54, 13);
+            this.label66.TabIndex = 88;
+            this.label66.Text = "Device IP";
+            // 
+            // txtIPByZkFace
+            // 
+            this.txtIPByZkFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIPByZkFace.Location = new System.Drawing.Point(358, 88);
+            this.txtIPByZkFace.Name = "txtIPByZkFace";
+            this.txtIPByZkFace.Size = new System.Drawing.Size(99, 20);
+            this.txtIPByZkFace.TabIndex = 87;
+            this.txtIPByZkFace.Text = "113.161.32.212";
+            // 
+            // txtPortByZkFace
+            // 
+            this.txtPortByZkFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPortByZkFace.Location = new System.Drawing.Point(495, 87);
+            this.txtPortByZkFace.MaxLength = 6;
+            this.txtPortByZkFace.Name = "txtPortByZkFace";
+            this.txtPortByZkFace.Size = new System.Drawing.Size(56, 20);
+            this.txtPortByZkFace.TabIndex = 89;
+            this.txtPortByZkFace.Text = "8888";
+            // 
+            // label67
+            // 
+            this.label67.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(463, 93);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(26, 13);
+            this.label67.TabIndex = 90;
+            this.label67.Text = "Port";
+            // 
+            // btnConnectByZkFace
+            // 
+            this.btnConnectByZkFace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConnectByZkFace.Location = new System.Drawing.Point(703, 86);
+            this.btnConnectByZkFace.Name = "btnConnectByZkFace";
+            this.btnConnectByZkFace.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectByZkFace.TabIndex = 91;
+            this.btnConnectByZkFace.Text = "Connect";
+            this.btnConnectByZkFace.UseVisualStyleBackColor = true;
+            this.btnConnectByZkFace.Click += new System.EventHandler(this.btnConnectByZkFace_Click);
+            // 
+            // tb_RegistryCode
+            // 
+            this.tb_RegistryCode.Enabled = false;
+            this.tb_RegistryCode.Font = new System.Drawing.Font("Arial", 9F);
+            this.tb_RegistryCode.Location = new System.Drawing.Point(467, 34);
+            this.tb_RegistryCode.Name = "tb_RegistryCode";
+            this.tb_RegistryCode.Size = new System.Drawing.Size(140, 21);
+            this.tb_RegistryCode.TabIndex = 86;
+            // 
+            // label_RegistryCode
+            // 
+            this.label_RegistryCode.AutoSize = true;
+            this.label_RegistryCode.Font = new System.Drawing.Font("Arial", 10F);
+            this.label_RegistryCode.Location = new System.Drawing.Point(375, 36);
+            this.label_RegistryCode.Name = "label_RegistryCode";
+            this.label_RegistryCode.Size = new System.Drawing.Size(93, 16);
+            this.label_RegistryCode.TabIndex = 85;
+            this.label_RegistryCode.Text = "RegistryCode";
+            // 
+            // tb_TransTables
+            // 
+            this.tb_TransTables.Font = new System.Drawing.Font("Arial", 9F);
+            this.tb_TransTables.Location = new System.Drawing.Point(467, 58);
+            this.tb_TransTables.Name = "tb_TransTables";
+            this.tb_TransTables.Size = new System.Drawing.Size(140, 21);
+            this.tb_TransTables.TabIndex = 83;
+            // 
+            // label_TransTables
+            // 
+            this.label_TransTables.AutoSize = true;
+            this.label_TransTables.Font = new System.Drawing.Font("Arial", 10F);
+            this.label_TransTables.Location = new System.Drawing.Point(375, 58);
+            this.label_TransTables.Name = "label_TransTables";
+            this.label_TransTables.Size = new System.Drawing.Size(84, 16);
+            this.label_TransTables.TabIndex = 82;
+            this.label_TransTables.Text = "TransTables";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Arial", 12F);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.ImageIndex = 2;
+            this.btnAdd.Location = new System.Drawing.Point(627, 40);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(70, 32);
+            this.btnAdd.TabIndex = 81;
+            this.btnAdd.Text = "New";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Arial", 12F);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.ImageIndex = 4;
+            this.btnSave.Location = new System.Drawing.Point(703, 40);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(70, 32);
+            this.btnSave.TabIndex = 79;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtDevName
+            // 
+            this.txtDevName.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtDevName.Location = new System.Drawing.Point(656, 5);
+            this.txtDevName.Name = "txtDevName";
+            this.txtDevName.Size = new System.Drawing.Size(140, 21);
+            this.txtDevName.TabIndex = 78;
+            // 
+            // lblDevName
+            // 
+            this.lblDevName.AutoSize = true;
+            this.lblDevName.Font = new System.Drawing.Font("Arial", 10F);
+            this.lblDevName.Location = new System.Drawing.Point(564, 7);
+            this.lblDevName.Name = "lblDevName";
+            this.lblDevName.Size = new System.Drawing.Size(43, 16);
+            this.lblDevName.TabIndex = 77;
+            this.lblDevName.Text = "Name";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Arial", 10F);
+            this.label64.Location = new System.Drawing.Point(377, 5);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(25, 16);
+            this.label64.TabIndex = 76;
+            this.label64.Text = "SN";
+            // 
+            // txtDevSN
+            // 
+            this.txtDevSN.Enabled = false;
+            this.txtDevSN.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtDevSN.Location = new System.Drawing.Point(418, 5);
+            this.txtDevSN.Name = "txtDevSN";
+            this.txtDevSN.Size = new System.Drawing.Size(140, 21);
+            this.txtDevSN.TabIndex = 75;
             // 
             // rtxtCommInfo
             // 
@@ -2616,23 +2816,6 @@
             this.dgvLogByZktecoFace.Name = "dgvLogByZktecoFace";
             this.dgvLogByZktecoFace.Size = new System.Drawing.Size(461, 299);
             this.dgvLogByZktecoFace.TabIndex = 73;
-            // 
-            // txtUserIDByZktecoFace
-            // 
-            this.txtUserIDByZktecoFace.Location = new System.Drawing.Point(234, 97);
-            this.txtUserIDByZktecoFace.Name = "txtUserIDByZktecoFace";
-            this.txtUserIDByZktecoFace.Size = new System.Drawing.Size(121, 20);
-            this.txtUserIDByZktecoFace.TabIndex = 68;
-            // 
-            // lblUserID
-            // 
-            this.lblUserID.AutoSize = true;
-            this.lblUserID.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblUserID.Location = new System.Drawing.Point(174, 97);
-            this.lblUserID.Name = "lblUserID";
-            this.lblUserID.Size = new System.Drawing.Size(56, 18);
-            this.lblUserID.TabIndex = 67;
-            this.lblUserID.Text = "UserID";
             // 
             // toDateByZktecoFace
             // 
@@ -2660,25 +2843,6 @@
             this.fromDateByZktecoFace.Size = new System.Drawing.Size(136, 21);
             this.fromDateByZktecoFace.TabIndex = 71;
             // 
-            // cmbSeriNumberByZktecoFace
-            // 
-            this.cmbSeriNumberByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
-            this.cmbSeriNumberByZktecoFace.FormattingEnabled = true;
-            this.cmbSeriNumberByZktecoFace.Location = new System.Drawing.Point(234, 68);
-            this.cmbSeriNumberByZktecoFace.Name = "cmbSeriNumberByZktecoFace";
-            this.cmbSeriNumberByZktecoFace.Size = new System.Drawing.Size(121, 23);
-            this.cmbSeriNumberByZktecoFace.TabIndex = 70;
-            // 
-            // lblDevSN
-            // 
-            this.lblDevSN.AutoSize = true;
-            this.lblDevSN.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblDevSN.Location = new System.Drawing.Point(174, 78);
-            this.lblDevSN.Name = "lblDevSN";
-            this.lblDevSN.Size = new System.Drawing.Size(30, 18);
-            this.lblDevSN.TabIndex = 69;
-            this.lblDevSN.Text = "SN";
-            // 
             // btnOpenHostByZktecoFace
             // 
             this.btnOpenHostByZktecoFace.BackColor = System.Drawing.Color.White;
@@ -2686,7 +2850,7 @@
             this.btnOpenHostByZktecoFace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenHostByZktecoFace.Font = new System.Drawing.Font("Arial", 12F);
             this.btnOpenHostByZktecoFace.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
-            this.btnOpenHostByZktecoFace.Location = new System.Drawing.Point(48, 73);
+            this.btnOpenHostByZktecoFace.Location = new System.Drawing.Point(43, 65);
             this.btnOpenHostByZktecoFace.Name = "btnOpenHostByZktecoFace";
             this.btnOpenHostByZktecoFace.Size = new System.Drawing.Size(120, 28);
             this.btnOpenHostByZktecoFace.TabIndex = 9;
@@ -2697,7 +2861,7 @@
             // txtPortByZktecoFace
             // 
             this.txtPortByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
-            this.txtPortByZktecoFace.Location = new System.Drawing.Point(48, 42);
+            this.txtPortByZktecoFace.Location = new System.Drawing.Point(43, 34);
             this.txtPortByZktecoFace.Name = "txtPortByZktecoFace";
             this.txtPortByZktecoFace.Size = new System.Drawing.Size(121, 21);
             this.txtPortByZktecoFace.TabIndex = 8;
@@ -2708,7 +2872,7 @@
             this.lblPort.AutoSize = true;
             this.lblPort.Font = new System.Drawing.Font("Arial", 10F);
             this.lblPort.ForeColor = System.Drawing.Color.Black;
-            this.lblPort.Location = new System.Drawing.Point(12, 44);
+            this.lblPort.Location = new System.Drawing.Point(7, 36);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(33, 16);
             this.lblPort.TabIndex = 7;
@@ -2718,7 +2882,7 @@
             // 
             this.cmbIPByZktecoFace.Font = new System.Drawing.Font("Arial", 9F);
             this.cmbIPByZktecoFace.FormattingEnabled = true;
-            this.cmbIPByZktecoFace.Location = new System.Drawing.Point(48, 15);
+            this.cmbIPByZktecoFace.Location = new System.Drawing.Point(43, 7);
             this.cmbIPByZktecoFace.Name = "cmbIPByZktecoFace";
             this.cmbIPByZktecoFace.Size = new System.Drawing.Size(121, 23);
             this.cmbIPByZktecoFace.TabIndex = 6;
@@ -2728,7 +2892,7 @@
             this.lblIP.AutoSize = true;
             this.lblIP.Font = new System.Drawing.Font("Arial", 10F);
             this.lblIP.ForeColor = System.Drawing.Color.Black;
-            this.lblIP.Location = new System.Drawing.Point(12, 18);
+            this.lblIP.Location = new System.Drawing.Point(7, 10);
             this.lblIP.Name = "lblIP";
             this.lblIP.Size = new System.Drawing.Size(19, 16);
             this.lblIP.TabIndex = 5;
@@ -2770,124 +2934,6 @@
             this.sqliteCommand1.Connection = null;
             this.sqliteCommand1.Transaction = null;
             this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
-            // 
-            // tb_RegistryCode
-            // 
-            this.tb_RegistryCode.Enabled = false;
-            this.tb_RegistryCode.Font = new System.Drawing.Font("Arial", 9F);
-            this.tb_RegistryCode.Location = new System.Drawing.Point(469, 57);
-            this.tb_RegistryCode.Name = "tb_RegistryCode";
-            this.tb_RegistryCode.Size = new System.Drawing.Size(216, 21);
-            this.tb_RegistryCode.TabIndex = 86;
-            // 
-            // label_RegistryCode
-            // 
-            this.label_RegistryCode.AutoSize = true;
-            this.label_RegistryCode.Font = new System.Drawing.Font("Arial", 10F);
-            this.label_RegistryCode.Location = new System.Drawing.Point(377, 59);
-            this.label_RegistryCode.Name = "label_RegistryCode";
-            this.label_RegistryCode.Size = new System.Drawing.Size(93, 16);
-            this.label_RegistryCode.TabIndex = 85;
-            this.label_RegistryCode.Text = "RegistryCode";
-            // 
-            // lblMsg
-            // 
-            this.lblMsg.AutoSize = true;
-            this.lblMsg.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblMsg.Location = new System.Drawing.Point(376, 102);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(23, 12);
-            this.lblMsg.TabIndex = 84;
-            this.lblMsg.Text = "msg";
-            this.lblMsg.Visible = false;
-            // 
-            // tb_TransTables
-            // 
-            this.tb_TransTables.Font = new System.Drawing.Font("Arial", 9F);
-            this.tb_TransTables.Location = new System.Drawing.Point(469, 81);
-            this.tb_TransTables.Name = "tb_TransTables";
-            this.tb_TransTables.Size = new System.Drawing.Size(216, 21);
-            this.tb_TransTables.TabIndex = 83;
-            // 
-            // label_TransTables
-            // 
-            this.label_TransTables.AutoSize = true;
-            this.label_TransTables.Font = new System.Drawing.Font("Arial", 10F);
-            this.label_TransTables.Location = new System.Drawing.Point(377, 81);
-            this.label_TransTables.Name = "label_TransTables";
-            this.label_TransTables.Size = new System.Drawing.Size(84, 16);
-            this.label_TransTables.TabIndex = 82;
-            this.label_TransTables.Text = "TransTables";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.ImageIndex = 2;
-            this.btnAdd.Location = new System.Drawing.Point(703, 9);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(70, 32);
-            this.btnAdd.TabIndex = 81;
-            this.btnAdd.Text = "New";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(190)))), ((int)(((byte)(167)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Arial", 12F);
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.ImageIndex = 4;
-            this.btnSave.Location = new System.Drawing.Point(703, 47);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(70, 32);
-            this.btnSave.TabIndex = 79;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // txtDevName
-            // 
-            this.txtDevName.Font = new System.Drawing.Font("Arial", 9F);
-            this.txtDevName.Location = new System.Drawing.Point(469, 30);
-            this.txtDevName.Name = "txtDevName";
-            this.txtDevName.Size = new System.Drawing.Size(216, 21);
-            this.txtDevName.TabIndex = 78;
-            // 
-            // lblDevName
-            // 
-            this.lblDevName.AutoSize = true;
-            this.lblDevName.Font = new System.Drawing.Font("Arial", 10F);
-            this.lblDevName.Location = new System.Drawing.Point(377, 32);
-            this.lblDevName.Name = "lblDevName";
-            this.lblDevName.Size = new System.Drawing.Size(43, 16);
-            this.lblDevName.TabIndex = 77;
-            this.lblDevName.Text = "Name";
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Font = new System.Drawing.Font("Arial", 10F);
-            this.label64.Location = new System.Drawing.Point(377, 5);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(25, 16);
-            this.label64.TabIndex = 76;
-            this.label64.Text = "SN";
-            // 
-            // txtDevSN
-            // 
-            this.txtDevSN.Enabled = false;
-            this.txtDevSN.Font = new System.Drawing.Font("Arial", 9F);
-            this.txtDevSN.Location = new System.Drawing.Point(469, 3);
-            this.txtDevSN.Name = "txtDevSN";
-            this.txtDevSN.Size = new System.Drawing.Size(216, 21);
-            this.txtDevSN.TabIndex = 75;
             // 
             // ViewMain
             // 
@@ -3187,12 +3233,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TabPage tabPage15;
         private System.Windows.Forms.DataGridView dgvLogByZktecoFace;
-        private System.Windows.Forms.TextBox txtUserIDByZktecoFace;
-        private System.Windows.Forms.Label lblUserID;
         private System.Windows.Forms.DateTimePicker toDateByZktecoFace;
         private System.Windows.Forms.DateTimePicker fromDateByZktecoFace;
-        private System.Windows.Forms.ComboBox cmbSeriNumberByZktecoFace;
-        private System.Windows.Forms.Label lblDevSN;
         private System.Windows.Forms.Button btnOpenHostByZktecoFace;
         private System.Windows.Forms.TextBox txtPortByZktecoFace;
         private System.Windows.Forms.Label lblPort;
@@ -3201,7 +3243,6 @@
         private System.Windows.Forms.RichTextBox rtxtCommInfo;
         private System.Windows.Forms.TextBox tb_RegistryCode;
         private System.Windows.Forms.Label label_RegistryCode;
-        private System.Windows.Forms.Label lblMsg;
         private System.Windows.Forms.TextBox tb_TransTables;
         private System.Windows.Forms.Label label_TransTables;
         private System.Windows.Forms.Button btnAdd;
@@ -3210,5 +3251,14 @@
         private System.Windows.Forms.Label lblDevName;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.TextBox txtDevSN;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TextBox txtPassByZkFace;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox txtIPByZkFace;
+        private System.Windows.Forms.TextBox txtPortByZkFace;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Button btnConnectByZkFace;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox txtNameByZkFace;
     }
 }

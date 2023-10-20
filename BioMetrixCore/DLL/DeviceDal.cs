@@ -22,8 +22,7 @@ namespace BioMetrixCore.DLL
         public DataTable GetAll(string sqlWhere)
         {
             sqlWhere = string.IsNullOrEmpty(sqlWhere) ? "" : "where " + sqlWhere;
-            string sql = string.Format(@"
-select * from Device {0};", sqlWhere);
+            string sql = string.Format(@"select * from Device {0};", sqlWhere);
 
             return SqliteHelper.GetDataTable(sql);
         }
@@ -79,16 +78,7 @@ select * from Device {0};", sqlWhere);
         /// <returns></returns>
         public int Add(DeviceModel device)
         {
-            string sql = string.Format(@"
-insert into Device(
-        DevSN,RegistryCode,TransInterval,TransTimes,Encrypt,LastRequestTime,DevIP,DevMac,FirmVer
-        ,UserCount,AccCount,DevName,Timeout,SyncTime,PushVersion,MachineType,AccSupportFunList
-        ,ErrorDelay,Delay,TransTables,Realtime,VendorName,DateFmtFunOn,IRTempDetectionFunOn,MaskDetectionFunOn
-   ) values (
-        @DevSN,@RegistryCode,@TransInterval,@TransTimes,@Encrypt,@LastRequestTime,@DevIP,@DevMac,@FirmVer
-        ,@UserCount,@AccCount,@DevName,@Timeout,@SyncTime,@PushVersion,@MachineType,@AccSupportFunList
-        ,@ErrorDelay,@Delay,@TransTables,@Realtime,@VendorName,@DateFmtFunOn,@IRTempDetectionFunOn,@MaskDetectionFunOn
-);");
+            string sql = string.Format(@"insert into Device(DevSN,RegistryCode,TransInterval,TransTimes,Encrypt,LastRequestTime,DevIP,DevMac,FirmVer,UserCount,AccCount,DevName,Timeout,SyncTime,PushVersion,MachineType,AccSupportFunList,ErrorDelay,Delay,TransTables,Realtime,VendorName,DateFmtFunOn,IRTempDetectionFunOn,MaskDetectionFunOn) values (@DevSN,@RegistryCode,@TransInterval,@TransTimes,@Encrypt,@LastRequestTime,@DevIP,@DevMac,@FirmVer,@UserCount,@AccCount,@DevName,@Timeout,@SyncTime,@PushVersion,@MachineType,@AccSupportFunList,@ErrorDelay,@Delay,@TransTables,@Realtime,@VendorName,@DateFmtFunOn,@IRTempDetectionFunOn,@MaskDetectionFunOn);");
 
             SQLiteParameter[] parameters = {
                         new SQLiteParameter("@DevSN", device.DeviceSN) ,
@@ -126,8 +116,7 @@ insert into Device(
         /// <returns></returns>
         public int Delete(string devSN)
         {
-            string sql = string.Format(@"
-delete from Device where DevSN='{0}';", devSN);
+            string sql = string.Format(@"delete from Device where DevSN='{0}';", devSN);
 
             return SqliteHelper.ExecuteNonQuery(sql);
         }
@@ -138,37 +127,37 @@ delete from Device where DevSN='{0}';", devSN);
         public int Update(DeviceModel device)
         {
             string sql = string.Format(@"
-update Device set     
-    TransInterval = @TransInterval , 
-    TransTimes = @TransTimes , 
-    Encrypt = @Encrypt , 
-    LastRequestTime = @LastRequestTime , 
-    DevIP = @DevIP , 
-    DevMac = @DevMac , 
-    FirmVer = @FirmVer , 
-    PushVersion= @PushVersion , 
-    UserCount = @UserCount , 
-    AccCount = @AccCount , 
-    DevName = @DevName , 
-    Timeout = @Timeout , 
-    SyncTime = @SyncTime , 
-    ErrorDelay = @ErrorDelay , 
-    Delay = @Delay , 
-    TransTables = @TransTables , 
-    Realtime = @Realtime,  
-    VendorName = @VendorName,
-    DateFmtFunOn=@DateFmtFunOn,
-    MachineType=@MachineType,
-    IRTempDetectionFunOn = @IRTempDetectionFunOn,  
-    MaskDetectionFunOn = @MaskDetectionFunOn,  
-    MultiBioDataSupport = @MultiBioDataSupport,  
-    MultiBioPhotoSupport = @MultiBioPhotoSupport,  
-    MultiBioVersion = @MultiBioVersion,  
-    MultiBioCount = @MultiBioCount,  
-    MaxMultiBioDataCount = @MaxMultiBioDataCount,  
-    MaxMultiBioPhotoCount = @MaxMultiBioPhotoCount  
-where DevSN=@DevSN 
-");
+            update Device set     
+                TransInterval = @TransInterval , 
+                TransTimes = @TransTimes , 
+                Encrypt = @Encrypt , 
+                LastRequestTime = @LastRequestTime , 
+                DevIP = @DevIP , 
+                DevMac = @DevMac , 
+                FirmVer = @FirmVer , 
+                PushVersion= @PushVersion , 
+                UserCount = @UserCount , 
+                AccCount = @AccCount , 
+                DevName = @DevName , 
+                Timeout = @Timeout , 
+                SyncTime = @SyncTime , 
+                ErrorDelay = @ErrorDelay , 
+                Delay = @Delay , 
+                TransTables = @TransTables , 
+                Realtime = @Realtime,  
+                VendorName = @VendorName,
+                DateFmtFunOn=@DateFmtFunOn,
+                MachineType=@MachineType,
+                IRTempDetectionFunOn = @IRTempDetectionFunOn,  
+                MaskDetectionFunOn = @MaskDetectionFunOn,  
+                MultiBioDataSupport = @MultiBioDataSupport,  
+                MultiBioPhotoSupport = @MultiBioPhotoSupport,  
+                MultiBioVersion = @MultiBioVersion,  
+                MultiBioCount = @MultiBioCount,  
+                MaxMultiBioDataCount = @MaxMultiBioDataCount,  
+                MaxMultiBioPhotoCount = @MaxMultiBioPhotoCount  
+            where DevSN=@DevSN 
+            ");
 
             SQLiteParameter[] parameters = {
                         new SQLiteParameter("@DevSN",  device.DeviceSN) ,
@@ -209,11 +198,7 @@ where DevSN=@DevSN
         /// <param name="devSN"></param>
         public int UpdateSession(string sessinoID, string devSN)
         {
-            string sql = string.Format(@"
-update Device set 
-      SessionID = @SessionID 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set SessionID = @SessionID where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@SessionID", sessinoID),
@@ -227,11 +212,7 @@ update Device set
         /// <param name="listDevSn"></param>
         public void SetZeroAttLogStamp(List<string> listDevSn)
         {
-            string sql = string.Format(@"
-update Device set    
-    ATTLOGStamp = '0', 
- where DevSN in ({0})
-", Tools.UnionString(listDevSn));
+            string sql = string.Format(@"update Device set ATTLOGStamp = '0', where DevSN in ({0})", Tools.UnionString(listDevSn));
 
             SqliteHelper.ExecuteNonQuery(sql);
         }
@@ -242,11 +223,7 @@ update Device set
         /// <param name="devSN"></param>
         public void UpdateOperLogStamp(string stamp, string devSN)
         {
-            string sql = string.Format(@"
-update Device set 
-      OPERLOGStamp = @OPERLOGStamp 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set OPERLOGStamp = @OPERLOGStamp where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@OPERLOGStamp",stamp ),
@@ -261,11 +238,7 @@ update Device set
         /// <param name="devSN"></param>
         public void UpdateErrorLogStamp(string stamp, string devSN)
         {
-            string sql = string.Format(@"
-update Device set 
-      ERRORLOGStamp = @ERRORLOGStamp 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set ERRORLOGStamp = @ERRORLOGStamp where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@ERRORLOGStamp",stamp ),
@@ -280,11 +253,7 @@ update Device set
         /// <param name="devSN"></param>
         public void UpdateAttPhotoStamp(string stamp, string devSN)
         {
-            string sql = string.Format(@"
-update Device set 
-      ATTPHOTOStamp = @ATTPHOTOStamp 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set ATTPHOTOStamp = @ATTPHOTOStamp where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@ATTPHOTOStamp",stamp ),
@@ -298,13 +267,7 @@ update Device set
         /// <param name="listDevSn"></param>
         public void SetZeroStamp(List<string> listDevSn)
         {
-            string sql = string.Format(@"
-update Device set 
-    OPERLOGStamp = '0', 
-    ATTLOGStamp = '0', 
-    ATTPHOTOStamp = '0' 
- where DevSN in ({0})
-", Tools.UnionString(listDevSn));
+            string sql = string.Format(@"update Device set OPERLOGStamp = '0', ATTLOGStamp = '0', ATTPHOTOStamp = '0' where DevSN in ({0})", Tools.UnionString(listDevSn));
 
             SqliteHelper.ExecuteNonQuery(sql);
         }
@@ -314,11 +277,7 @@ update Device set
         /// <param name="DevSN"></param>
         public void SetLastRequestTime(string DevSN)
         {
-            string sql = string.Format(@"
-update Device set 
-      LastRequestTime = @LastRequestTime 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set LastRequestTime = @LastRequestTime where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@LastRequestTime",Tools.GetDateTimeNowString() ),
@@ -333,11 +292,7 @@ update Device set
         /// <param name="vendorName"></param>
         public void UpdateVendorName(string sn, string vendorName)
         {
-            string sql = string.Format(@"
-update Device set 
-      VendorName = @VendorName 
- where DevSN=@DevSN;
-");
+            string sql = string.Format(@"update Device set VendorName = @VendorName where DevSN=@DevSN;");
 
             SQLiteParameter[] parameters = {
                 new SQLiteParameter("@VendorName",vendorName ),

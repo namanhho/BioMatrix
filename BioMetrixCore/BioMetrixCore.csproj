@@ -170,24 +170,14 @@
     <Compile Include="Access\ListenClient.cs" />
     <Compile Include="Access\ServerInfo.cs" />
     <Compile Include="BLL\DeviceBll.cs" />
-    <Compile Include="BLL\DeviceCmdBll.cs" />
-    <Compile Include="BLL\ErrorLogBll.cs" />
-    <Compile Include="BLL\RealTimeLogBll.cs" />
-    <Compile Include="BLL\TmpBioDataBll.cs" />
-    <Compile Include="BLL\UserInfoBll.cs" />
     <Compile Include="Controls\DataEmpty.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DataEmpty.Designer.cs">
       <DependentUpon>DataEmpty.cs</DependentUpon>
     </Compile>
-    <Compile Include="DLL\DeviceCmdDal.cs" />
     <Compile Include="DLL\DeviceDal.cs" />
-    <Compile Include="DLL\ErrorLogDal.cs" />
-    <Compile Include="DLL\RealTimeLogDal.cs" />
     <Compile Include="DLL\SqliteHelper.cs" />
-    <Compile Include="DLL\TmpBioDataDal.cs" />
-    <Compile Include="DLL\UserInfoDal.cs" />
     <Compile Include="Info\CommonKey.cs" />
     <Compile Include="Info\CommonPath.cs" />
     <Compile Include="Info\ConnectionStringName.cs" />
