@@ -245,7 +245,7 @@ namespace BioMetrixCore
                 ShowStatusBar(string.Empty, true);
                 string message = string.Empty;
 
-                ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message);
+                ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message, DateTime.Now.AddMonths(-1), DateTime.Now, 2, 1);
 
                 if (lstMachineInfo != null && lstMachineInfo.Count > 0)
                 {

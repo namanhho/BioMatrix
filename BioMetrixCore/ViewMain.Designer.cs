@@ -58,6 +58,29 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbxMachineNumber = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.btnConnect_V2ByZkSDKNew = new System.Windows.Forms.Button();
+            this.dtToDateByZkSDKNew = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByZkSDKNew = new System.Windows.Forms.DateTimePicker();
+            this.richtbByZkSDKNew = new System.Windows.Forms.RichTextBox();
+            this.btnGetData_V2ByZkSDKNew = new System.Windows.Forms.Button();
+            this.tbTotalByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.btnGetDataByZkSDKNew = new System.Windows.Forms.Button();
+            this.dgvLogDataByZkSDKNew = new System.Windows.Forms.DataGridView();
+            this.tbReadLogByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.label74 = new System.Windows.Forms.Label();
+            this.tbReadTypeByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.tbPassByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.tbIPByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.tbPortByZkSDKNew = new System.Windows.Forms.TextBox();
+            this.btnPingByZkSDKNew = new System.Windows.Forms.Button();
+            this.label71 = new System.Windows.Forms.Label();
+            this.btnConnectByZkSDKNew = new System.Windows.Forms.Button();
+            this.label72 = new System.Windows.Forms.Label();
+            this.tbMachineNumberByZkSDKNew = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvLogData = new System.Windows.Forms.DataGridView();
             this.tbxURL = new System.Windows.Forms.TextBox();
@@ -291,6 +314,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecords)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
+            this.tabPage16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogDataByZkSDKNew)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogData)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -325,6 +350,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage16);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Controls.Add(this.tabPage4);
@@ -645,6 +671,246 @@
             this.lblStatus.Size = new System.Drawing.Size(790, 30);
             this.lblStatus.TabIndex = 893;
             this.lblStatus.Text = "label3";
+            // 
+            // tabPage16
+            // 
+            this.tabPage16.Controls.Add(this.btnConnect_V2ByZkSDKNew);
+            this.tabPage16.Controls.Add(this.dtToDateByZkSDKNew);
+            this.tabPage16.Controls.Add(this.dtFromDateByZkSDKNew);
+            this.tabPage16.Controls.Add(this.richtbByZkSDKNew);
+            this.tabPage16.Controls.Add(this.btnGetData_V2ByZkSDKNew);
+            this.tabPage16.Controls.Add(this.tbTotalByZkSDKNew);
+            this.tabPage16.Controls.Add(this.btnGetDataByZkSDKNew);
+            this.tabPage16.Controls.Add(this.dgvLogDataByZkSDKNew);
+            this.tabPage16.Controls.Add(this.tbReadLogByZkSDKNew);
+            this.tabPage16.Controls.Add(this.label74);
+            this.tabPage16.Controls.Add(this.tbReadTypeByZkSDKNew);
+            this.tabPage16.Controls.Add(this.label73);
+            this.tabPage16.Controls.Add(this.label69);
+            this.tabPage16.Controls.Add(this.tbPassByZkSDKNew);
+            this.tabPage16.Controls.Add(this.label70);
+            this.tabPage16.Controls.Add(this.tbIPByZkSDKNew);
+            this.tabPage16.Controls.Add(this.tbPortByZkSDKNew);
+            this.tabPage16.Controls.Add(this.btnPingByZkSDKNew);
+            this.tabPage16.Controls.Add(this.label71);
+            this.tabPage16.Controls.Add(this.btnConnectByZkSDKNew);
+            this.tabPage16.Controls.Add(this.label72);
+            this.tabPage16.Controls.Add(this.tbMachineNumberByZkSDKNew);
+            this.tabPage16.Location = new System.Drawing.Point(4, 22);
+            this.tabPage16.Name = "tabPage16";
+            this.tabPage16.Size = new System.Drawing.Size(796, 428);
+            this.tabPage16.TabIndex = 15;
+            this.tabPage16.Text = "Zk_SDK";
+            this.tabPage16.UseVisualStyleBackColor = true;
+            // 
+            // btnConnect_V2ByZkSDKNew
+            // 
+            this.btnConnect_V2ByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConnect_V2ByZkSDKNew.Location = new System.Drawing.Point(718, 25);
+            this.btnConnect_V2ByZkSDKNew.Name = "btnConnect_V2ByZkSDKNew";
+            this.btnConnect_V2ByZkSDKNew.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect_V2ByZkSDKNew.TabIndex = 78;
+            this.btnConnect_V2ByZkSDKNew.Text = "Connect_V2";
+            this.btnConnect_V2ByZkSDKNew.UseVisualStyleBackColor = true;
+            this.btnConnect_V2ByZkSDKNew.Click += new System.EventHandler(this.btnConnect_V2ByZkSDKNew_Click);
+            // 
+            // dtToDateByZkSDKNew
+            // 
+            this.dtToDateByZkSDKNew.Location = new System.Drawing.Point(487, 38);
+            this.dtToDateByZkSDKNew.Name = "dtToDateByZkSDKNew";
+            this.dtToDateByZkSDKNew.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByZkSDKNew.TabIndex = 77;
+            // 
+            // dtFromDateByZkSDKNew
+            // 
+            this.dtFromDateByZkSDKNew.Location = new System.Drawing.Point(281, 38);
+            this.dtFromDateByZkSDKNew.Name = "dtFromDateByZkSDKNew";
+            this.dtFromDateByZkSDKNew.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByZkSDKNew.TabIndex = 76;
+            // 
+            // richtbByZkSDKNew
+            // 
+            this.richtbByZkSDKNew.Location = new System.Drawing.Point(513, 74);
+            this.richtbByZkSDKNew.Name = "richtbByZkSDKNew";
+            this.richtbByZkSDKNew.Size = new System.Drawing.Size(274, 330);
+            this.richtbByZkSDKNew.TabIndex = 75;
+            this.richtbByZkSDKNew.Text = "";
+            // 
+            // btnGetData_V2ByZkSDKNew
+            // 
+            this.btnGetData_V2ByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetData_V2ByZkSDKNew.Location = new System.Drawing.Point(696, 54);
+            this.btnGetData_V2ByZkSDKNew.Name = "btnGetData_V2ByZkSDKNew";
+            this.btnGetData_V2ByZkSDKNew.Size = new System.Drawing.Size(97, 23);
+            this.btnGetData_V2ByZkSDKNew.TabIndex = 28;
+            this.btnGetData_V2ByZkSDKNew.Text = "GetData V2";
+            this.btnGetData_V2ByZkSDKNew.UseVisualStyleBackColor = true;
+            this.btnGetData_V2ByZkSDKNew.Click += new System.EventHandler(this.btnGetData_V2ByZkSDKNew_Click);
+            // 
+            // tbTotalByZkSDKNew
+            // 
+            this.tbTotalByZkSDKNew.Location = new System.Drawing.Point(11, 402);
+            this.tbTotalByZkSDKNew.Name = "tbTotalByZkSDKNew";
+            this.tbTotalByZkSDKNew.Size = new System.Drawing.Size(56, 20);
+            this.tbTotalByZkSDKNew.TabIndex = 27;
+            this.tbTotalByZkSDKNew.Text = "0";
+            // 
+            // btnGetDataByZkSDKNew
+            // 
+            this.btnGetDataByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetDataByZkSDKNew.Location = new System.Drawing.Point(675, 3);
+            this.btnGetDataByZkSDKNew.Name = "btnGetDataByZkSDKNew";
+            this.btnGetDataByZkSDKNew.Size = new System.Drawing.Size(75, 23);
+            this.btnGetDataByZkSDKNew.TabIndex = 26;
+            this.btnGetDataByZkSDKNew.Text = "GetData";
+            this.btnGetDataByZkSDKNew.UseVisualStyleBackColor = true;
+            this.btnGetDataByZkSDKNew.Click += new System.EventHandler(this.btnGetDataByZkSDKNew_Click);
+            // 
+            // dgvLogDataByZkSDKNew
+            // 
+            this.dgvLogDataByZkSDKNew.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLogDataByZkSDKNew.Location = new System.Drawing.Point(0, 74);
+            this.dgvLogDataByZkSDKNew.Name = "dgvLogDataByZkSDKNew";
+            this.dgvLogDataByZkSDKNew.Size = new System.Drawing.Size(507, 326);
+            this.dgvLogDataByZkSDKNew.TabIndex = 25;
+            // 
+            // tbReadLogByZkSDKNew
+            // 
+            this.tbReadLogByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbReadLogByZkSDKNew.Location = new System.Drawing.Point(204, 37);
+            this.tbReadLogByZkSDKNew.MaxLength = 6;
+            this.tbReadLogByZkSDKNew.Name = "tbReadLogByZkSDKNew";
+            this.tbReadLogByZkSDKNew.Size = new System.Drawing.Size(56, 20);
+            this.tbReadLogByZkSDKNew.TabIndex = 23;
+            this.tbReadLogByZkSDKNew.Text = "1";
+            // 
+            // label74
+            // 
+            this.label74.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(149, 41);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(51, 13);
+            this.label74.TabIndex = 24;
+            this.label74.Text = "ReadLog";
+            // 
+            // tbReadTypeByZkSDKNew
+            // 
+            this.tbReadTypeByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbReadTypeByZkSDKNew.Location = new System.Drawing.Point(67, 38);
+            this.tbReadTypeByZkSDKNew.MaxLength = 6;
+            this.tbReadTypeByZkSDKNew.Name = "tbReadTypeByZkSDKNew";
+            this.tbReadTypeByZkSDKNew.Size = new System.Drawing.Size(56, 20);
+            this.tbReadTypeByZkSDKNew.TabIndex = 21;
+            this.tbReadTypeByZkSDKNew.Text = "2";
+            // 
+            // label73
+            // 
+            this.label73.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(12, 44);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(57, 13);
+            this.label73.TabIndex = 22;
+            this.label73.Text = "ReadType";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(278, 18);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(30, 13);
+            this.label69.TabIndex = 20;
+            this.label69.Text = "Pass";
+            // 
+            // tbPassByZkSDKNew
+            // 
+            this.tbPassByZkSDKNew.Location = new System.Drawing.Point(314, 11);
+            this.tbPassByZkSDKNew.Name = "tbPassByZkSDKNew";
+            this.tbPassByZkSDKNew.Size = new System.Drawing.Size(56, 20);
+            this.tbPassByZkSDKNew.TabIndex = 19;
+            this.tbPassByZkSDKNew.Text = "0";
+            // 
+            // label70
+            // 
+            this.label70.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(8, 18);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(54, 13);
+            this.label70.TabIndex = 12;
+            this.label70.Text = "Device IP";
+            // 
+            // tbIPByZkSDKNew
+            // 
+            this.tbIPByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbIPByZkSDKNew.Location = new System.Drawing.Point(67, 12);
+            this.tbIPByZkSDKNew.Name = "tbIPByZkSDKNew";
+            this.tbIPByZkSDKNew.Size = new System.Drawing.Size(99, 20);
+            this.tbIPByZkSDKNew.TabIndex = 11;
+            this.tbIPByZkSDKNew.Text = "172.27.1.200";
+            // 
+            // tbPortByZkSDKNew
+            // 
+            this.tbPortByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPortByZkSDKNew.Location = new System.Drawing.Point(204, 11);
+            this.tbPortByZkSDKNew.MaxLength = 6;
+            this.tbPortByZkSDKNew.Name = "tbPortByZkSDKNew";
+            this.tbPortByZkSDKNew.Size = new System.Drawing.Size(56, 20);
+            this.tbPortByZkSDKNew.TabIndex = 13;
+            this.tbPortByZkSDKNew.Text = "4370";
+            // 
+            // btnPingByZkSDKNew
+            // 
+            this.btnPingByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPingByZkSDKNew.Location = new System.Drawing.Point(594, 3);
+            this.btnPingByZkSDKNew.Name = "btnPingByZkSDKNew";
+            this.btnPingByZkSDKNew.Size = new System.Drawing.Size(75, 23);
+            this.btnPingByZkSDKNew.TabIndex = 16;
+            this.btnPingByZkSDKNew.Text = "Ping Device";
+            this.btnPingByZkSDKNew.UseVisualStyleBackColor = true;
+            this.btnPingByZkSDKNew.Click += new System.EventHandler(this.btnPingByZkSDKNew_Click);
+            // 
+            // label71
+            // 
+            this.label71.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(172, 17);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(26, 13);
+            this.label71.TabIndex = 14;
+            this.label71.Text = "Port";
+            // 
+            // btnConnectByZkSDKNew
+            // 
+            this.btnConnectByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConnectByZkSDKNew.Location = new System.Drawing.Point(513, 3);
+            this.btnConnectByZkSDKNew.Name = "btnConnectByZkSDKNew";
+            this.btnConnectByZkSDKNew.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectByZkSDKNew.TabIndex = 15;
+            this.btnConnectByZkSDKNew.Text = "Connect";
+            this.btnConnectByZkSDKNew.UseVisualStyleBackColor = true;
+            this.btnConnectByZkSDKNew.Click += new System.EventHandler(this.btnConnectByZkSDKNew_Click);
+            // 
+            // label72
+            // 
+            this.label72.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(376, 17);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(88, 13);
+            this.label72.TabIndex = 17;
+            this.label72.Text = "Machine Number";
+            // 
+            // tbMachineNumberByZkSDKNew
+            // 
+            this.tbMachineNumberByZkSDKNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbMachineNumberByZkSDKNew.Location = new System.Drawing.Point(470, 10);
+            this.tbMachineNumberByZkSDKNew.MaxLength = 3;
+            this.tbMachineNumberByZkSDKNew.Name = "tbMachineNumberByZkSDKNew";
+            this.tbMachineNumberByZkSDKNew.Size = new System.Drawing.Size(37, 20);
+            this.tbMachineNumberByZkSDKNew.TabIndex = 18;
+            this.tbMachineNumberByZkSDKNew.Text = "1";
             // 
             // tabPage2
             // 
@@ -2952,6 +3218,9 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.tabPage16.ResumeLayout(false);
+            this.tabPage16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLogDataByZkSDKNew)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogData)).EndInit();
@@ -3260,5 +3529,28 @@
         private System.Windows.Forms.Button btnConnectByZkFace;
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.TextBox txtNameByZkFace;
+        private System.Windows.Forms.TabPage tabPage16;
+        private System.Windows.Forms.TextBox tbTotalByZkSDKNew;
+        private System.Windows.Forms.Button btnGetDataByZkSDKNew;
+        private System.Windows.Forms.DataGridView dgvLogDataByZkSDKNew;
+        private System.Windows.Forms.TextBox tbReadLogByZkSDKNew;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.TextBox tbReadTypeByZkSDKNew;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox tbPassByZkSDKNew;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox tbIPByZkSDKNew;
+        private System.Windows.Forms.TextBox tbPortByZkSDKNew;
+        private System.Windows.Forms.Button btnPingByZkSDKNew;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Button btnConnectByZkSDKNew;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TextBox tbMachineNumberByZkSDKNew;
+        private System.Windows.Forms.Button btnGetData_V2ByZkSDKNew;
+        private System.Windows.Forms.RichTextBox richtbByZkSDKNew;
+        private System.Windows.Forms.DateTimePicker dtToDateByZkSDKNew;
+        private System.Windows.Forms.DateTimePicker dtFromDateByZkSDKNew;
+        private System.Windows.Forms.Button btnConnect_V2ByZkSDKNew;
     }
 }

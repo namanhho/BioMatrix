@@ -1,0 +1,2027 @@
+2023-11-12 11:27:11.1414 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:27:43.7185 
+Bat dau ReadType
+2023-11-12 11:28:04.0679 
+ReadType_2 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:28:04.0679 
+Bat dau ReadLog
+2023-11-12 11:28:04.0679 
+Bat dau ReadLog: 1
+2023-11-12 11:28:04.2345 
+ ReadLog1 xong - Count: 41893
+2023-11-12 11:28:04.2345 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_2 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 41893 ======== Count: 41893
+2023-11-12 11:28:28.3036 
+Bat dau ReadType
+2023-11-12 11:28:28.3036 
+ReadType_0 xong: success_False_ machineNumber: 1===============
+2023-11-12 11:28:28.3036 
+Bat dau ReadLog
+2023-11-12 11:28:28.3036 
+ Bat dau ReadLog 1
+2023-11-12 11:28:28.3036 
+ ReadLog1 xong - Count: 0===========
+2023-11-12 11:28:28.3036 
+ Bat dau ReadLog 2
+2023-11-12 11:28:28.3036 
+ ReadLog2 xong - Count: 0===========
+2023-11-12 11:28:28.3036 
+ Bat dau ReadLog 3
+2023-11-12 11:28:28.3498 
+ ReadLog3 xong - Count: 0===========
+2023-11-12 11:28:28.3498 
+ Bat dau ReadLog 4
+2023-11-12 11:28:28.5389 
+ ReadLog4 xong - Count: 0===========
+2023-11-12 11:28:28.5389 
+ Bat dau ReadLog 5
+2023-11-12 11:28:28.5389 
+ ReadLog5 xong - Count: 0===========
+2023-11-12 11:28:28.5389 
+ Bat dau ReadLog 6
+2023-11-12 11:28:28.5389 
+ ReadLog6 xong - Count: 0===========
+2023-11-12 11:28:28.5389 
+ Bat dau ReadLog 7
+2023-11-12 11:28:28.5389 
+ ReadLog7 xong - Count: 0===========
+2023-11-12 11:28:28.5389 
+ Bat dau ReadLog 8
+2023-11-12 11:28:28.7295 
+ ReadLog8 xong - Count: 0===========
+2023-11-12 11:28:28.7295 
+ Bat dau ReadLog 9
+2023-11-12 11:28:28.9224 
+ ReadLog9 xong - Count: 0===========
+2023-11-12 11:28:28.9224 
+ Bat dau ReadLog 10
+2023-11-12 11:28:30.0084 
+ ReadLog10 xong - Count: 0===========
+2023-11-12 11:28:30.0084 
+ Bat dau ReadLog 11
+2023-11-12 11:28:30.0084 
+ ReadLog11 xong - Count: 0===========
+2023-11-12 11:28:30.0084 
+ Bat dau ReadLog 12
+2023-11-12 11:28:30.0084 
+ ReadLog12 xong - Count: 0===========
+2023-11-12 11:28:30.0084 
+ Bat dau ReadLog 13
+2023-11-12 11:28:30.0084 
+ ReadLog13 xong - Count: 0===========
+2023-11-12 11:28:30.0084 
+ Bat dau ReadLog 14
+2023-11-12 11:28:30.1931 
+ ReadLog14 xong - Count: 0===========
+2023-11-12 11:28:30.1931 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_0 xong: success_False_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 0===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 0===========
+ ReadLog3======
+ ReadLog3 xong - Count: 0===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 0==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 0===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 0============
+ ReadLog7=========
+ ReadLog7 xong - Count: 0==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 0================
+ ReadLog9========
+ ReadLog9 xong - Count: 0=============
+ ReadLog10========
+ ReadLog10 xong - Count: 0=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 0==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 0================
+ ReadLog13=============
+ ReadLog13 xong - Count: 0==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 0=============== ======== Count: 0
+2023-11-12 11:29:03.6355 
+Bat dau ReadType
+2023-11-12 11:29:06.2634 
+ReadType_0 xong: success_False_ machineNumber: 1===============
+2023-11-12 11:29:06.2634 
+Bat dau ReadLog
+2023-11-12 11:29:06.2634 
+ Bat dau ReadLog 1
+2023-11-12 11:29:06.2634 
+ ReadLog1 xong - Count: 0===========
+2023-11-12 11:29:06.2634 
+ Bat dau ReadLog 2
+2023-11-12 11:29:06.2634 
+ ReadLog2 xong - Count: 0===========
+2023-11-12 11:29:06.2634 
+ Bat dau ReadLog 3
+2023-11-12 11:29:06.3626 
+ ReadLog3 xong - Count: 0===========
+2023-11-12 11:29:06.3626 
+ Bat dau ReadLog 4
+2023-11-12 11:29:06.5483 
+ ReadLog4 xong - Count: 0===========
+2023-11-12 11:29:06.5483 
+ Bat dau ReadLog 5
+2023-11-12 11:29:06.5483 
+ ReadLog5 xong - Count: 0===========
+2023-11-12 11:29:06.5483 
+ Bat dau ReadLog 6
+2023-11-12 11:29:06.5483 
+ ReadLog6 xong - Count: 0===========
+2023-11-12 11:29:06.5483 
+ Bat dau ReadLog 7
+2023-11-12 11:29:06.5483 
+ ReadLog7 xong - Count: 0===========
+2023-11-12 11:29:06.5483 
+ Bat dau ReadLog 8
+2023-11-12 11:29:06.7316 
+ ReadLog8 xong - Count: 0===========
+2023-11-12 11:29:06.7316 
+ Bat dau ReadLog 9
+2023-11-12 11:29:06.9170 
+ ReadLog9 xong - Count: 0===========
+2023-11-12 11:29:06.9170 
+ Bat dau ReadLog 10
+2023-11-12 11:29:08.0254 
+ ReadLog10 xong - Count: 0===========
+2023-11-12 11:29:08.0254 
+ Bat dau ReadLog 11
+2023-11-12 11:29:08.0254 
+ ReadLog11 xong - Count: 0===========
+2023-11-12 11:29:08.0254 
+ Bat dau ReadLog 12
+2023-11-12 11:29:08.0254 
+ ReadLog12 xong - Count: 0===========
+2023-11-12 11:29:08.0254 
+ Bat dau ReadLog 13
+2023-11-12 11:29:08.0254 
+ ReadLog13 xong - Count: 0===========
+2023-11-12 11:29:08.0254 
+ Bat dau ReadLog 14
+2023-11-12 11:29:08.1701 
+ ReadLog14 xong - Count: 0===========
+2023-11-12 11:29:08.1701 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_0 xong: success_False_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 0===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 0===========
+ ReadLog3======
+ ReadLog3 xong - Count: 0===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 0==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 0===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 0============
+ ReadLog7=========
+ ReadLog7 xong - Count: 0==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 0================
+ ReadLog9========
+ ReadLog9 xong - Count: 0=============
+ ReadLog10========
+ ReadLog10 xong - Count: 0=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 0==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 0================
+ ReadLog13=============
+ ReadLog13 xong - Count: 0==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 0=============== ======== Count: 0
+2023-11-12 11:29:17.5623 
+Bat dau ReadType
+2023-11-12 11:29:37.9914 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:29:37.9914 
+Bat dau ReadLog
+2023-11-12 11:29:37.9914 
+ Bat dau ReadLog 1
+2023-11-12 11:29:38.1688 
+ ReadLog1 xong - Count: 41893===========
+2023-11-12 11:29:38.1688 
+ Bat dau ReadLog 2
+2023-11-12 11:29:38.1688 
+ ReadLog2 xong - Count: 41893===========
+2023-11-12 11:29:38.1688 
+ Bat dau ReadLog 3
+2023-11-12 11:29:38.3493 
+ ReadLog3 xong - Count: 41893===========
+2023-11-12 11:29:38.3493 
+ Bat dau ReadLog 4
+2023-11-12 11:29:38.5342 
+ ReadLog4 xong - Count: 41893===========
+2023-11-12 11:29:38.5342 
+ Bat dau ReadLog 5
+2023-11-12 11:29:38.5342 
+ ReadLog5 xong - Count: 41893===========
+2023-11-12 11:29:38.5342 
+ Bat dau ReadLog 6
+2023-11-12 11:29:38.5342 
+ ReadLog6 xong - Count: 41893===========
+2023-11-12 11:29:38.5342 
+ Bat dau ReadLog 7
+2023-11-12 11:29:38.5342 
+ ReadLog7 xong - Count: 41893===========
+2023-11-12 11:29:38.5342 
+ Bat dau ReadLog 8
+2023-11-12 11:29:38.7194 
+ ReadLog8 xong - Count: 41893===========
+2023-11-12 11:29:38.7194 
+ Bat dau ReadLog 9
+2023-11-12 11:29:38.9107 
+ ReadLog9 xong - Count: 41893===========
+2023-11-12 11:29:38.9107 
+ Bat dau ReadLog 10
+2023-11-12 11:29:40.0276 
+ ReadLog10 xong - Count: 41893===========
+2023-11-12 11:29:40.0276 
+ Bat dau ReadLog 11
+2023-11-12 11:29:40.0276 
+ ReadLog11 xong - Count: 41893===========
+2023-11-12 11:29:40.0276 
+ Bat dau ReadLog 12
+2023-11-12 11:29:40.0276 
+ ReadLog12 xong - Count: 41893===========
+2023-11-12 11:29:40.0276 
+ Bat dau ReadLog 13
+2023-11-12 11:29:40.0276 
+ ReadLog13 xong - Count: 41893===========
+2023-11-12 11:29:40.0276 
+ Bat dau ReadLog 14
+2023-11-12 11:29:40.1747 
+ ReadLog14 xong - Count: 41893===========
+2023-11-12 11:29:40.1747 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 41893===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 41893===========
+ ReadLog3======
+ ReadLog3 xong - Count: 41893===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 41893==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 41893===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 41893============
+ ReadLog7=========
+ ReadLog7 xong - Count: 41893==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 41893================
+ ReadLog9========
+ ReadLog9 xong - Count: 41893=============
+ ReadLog10========
+ ReadLog10 xong - Count: 41893=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 41893==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 41893================
+ ReadLog13=============
+ ReadLog13 xong - Count: 41893==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 41893=============== ======== Count: 41893
+2023-11-12 11:31:05.4955 
+Bat dau ReadType
+2023-11-12 11:31:26.0546 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:31:26.0546 
+Bat dau ReadLog
+2023-11-12 11:31:26.0546 
+ Bat dau ReadLog 1
+2023-11-12 11:31:26.2358 
+ ReadLog1 xong - Count: 41893===========
+2023-11-12 11:31:26.2358 
+ Bat dau ReadLog 2
+2023-11-12 11:31:26.2358 
+ ReadLog2 xong - Count: 41893===========
+2023-11-12 11:31:26.2358 
+ Bat dau ReadLog 3
+2023-11-12 11:31:26.4214 
+ ReadLog3 xong - Count: 41893===========
+2023-11-12 11:31:26.4214 
+ Bat dau ReadLog 4
+2023-11-12 11:31:26.6063 
+ ReadLog4 xong - Count: 41893===========
+2023-11-12 11:31:26.6063 
+ Bat dau ReadLog 5
+2023-11-12 11:31:26.6063 
+ ReadLog5 xong - Count: 41893===========
+2023-11-12 11:31:26.6063 
+ Bat dau ReadLog 6
+2023-11-12 11:31:26.6063 
+ ReadLog6 xong - Count: 41893===========
+2023-11-12 11:31:26.6063 
+ Bat dau ReadLog 7
+2023-11-12 11:31:26.6063 
+ ReadLog7 xong - Count: 41893===========
+2023-11-12 11:31:26.6063 
+ Bat dau ReadLog 8
+2023-11-12 11:31:26.7909 
+ ReadLog8 xong - Count: 41893===========
+2023-11-12 11:31:26.7909 
+ Bat dau ReadLog 9
+2023-11-12 11:31:26.9733 
+ ReadLog9 xong - Count: 41893===========
+2023-11-12 11:31:26.9733 
+ Bat dau ReadLog 10
+2023-11-12 11:31:28.0514 
+ ReadLog10 xong - Count: 41893===========
+2023-11-12 11:31:28.0514 
+ Bat dau ReadLog 11
+2023-11-12 11:31:28.0514 
+ ReadLog11 xong - Count: 41893===========
+2023-11-12 11:31:28.0514 
+ Bat dau ReadLog 12
+2023-11-12 11:31:28.0514 
+ ReadLog12 xong - Count: 41893===========
+2023-11-12 11:31:28.0514 
+ Bat dau ReadLog 13
+2023-11-12 11:31:28.0514 
+ ReadLog13 xong - Count: 41893===========
+2023-11-12 11:31:28.0514 
+ Bat dau ReadLog 14
+2023-11-12 11:31:28.2346 
+ ReadLog14 xong - Count: 41893===========
+2023-11-12 11:31:28.2346 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 41893===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 41893===========
+ ReadLog3======
+ ReadLog3 xong - Count: 41893===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 41893==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 41893===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 41893============
+ ReadLog7=========
+ ReadLog7 xong - Count: 41893==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 41893================
+ ReadLog9========
+ ReadLog9 xong - Count: 41893=============
+ ReadLog10========
+ ReadLog10 xong - Count: 41893=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 41893==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 41893================
+ ReadLog13=============
+ ReadLog13 xong - Count: 41893==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 41893=============== ======== Count: 41893
+2023-11-12 11:36:00.9853 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:36:04.8046 
+Bat dau ReadType
+2023-11-12 11:36:25.2824 
+ReadType_2 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:36:25.2824 
+Bat dau ReadLog
+2023-11-12 11:36:25.2824 
+Bat dau ReadLog: 1
+2023-11-12 11:36:25.4494 
+ ReadLog1 xong - Count: 41893
+2023-11-12 11:36:25.4494 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_2 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 41893 ======== Count: 41893
+2023-11-12 11:36:42.8363 
+Bat dau ReadType
+2023-11-12 11:37:03.3078 
+ReadType_2 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:37:03.3078 
+Bat dau ReadLog
+2023-11-12 11:37:03.3078 
+Bat dau ReadLog: 1
+2023-11-12 11:37:03.4854 
+ ReadLog1 xong - Count: 41893
+2023-11-12 11:37:03.4854 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_2 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 41893 ======== Count: 41893
+2023-11-12 11:38:25.9081 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:38:33.9914 
+Bat dau ReadType
+2023-11-12 11:38:54.6274 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-12 11:38:54.6274 
+Bat dau ReadLog
+2023-11-12 11:38:57.2591 
+ Bat dau ReadLog 1
+2023-11-12 11:39:05.9216 
+ ReadLog1 xong - Count: 41893===========
+2023-11-12 11:39:05.9216 
+ Bat dau ReadLog 2
+2023-11-12 11:39:09.8210 
+ ReadLog2 xong - Count: 41893===========
+2023-11-12 11:39:10.2722 
+ Bat dau ReadLog 3
+2023-11-12 11:39:45.8241 
+ ReadLog3 xong - Count: 41893===========
+2023-11-12 11:39:45.8241 
+ Bat dau ReadLog 4
+2023-11-12 11:39:46.0062 
+ ReadLog4 xong - Count: 41893===========
+2023-11-12 11:39:46.0062 
+ Bat dau ReadLog 5
+2023-11-12 11:39:46.0062 
+ ReadLog5 xong - Count: 41893===========
+2023-11-12 11:39:46.0062 
+ Bat dau ReadLog 6
+2023-11-12 11:39:46.0062 
+ ReadLog6 xong - Count: 41893===========
+2023-11-12 11:39:46.0062 
+ Bat dau ReadLog 7
+2023-11-12 11:39:46.0062 
+ ReadLog7 xong - Count: 41893===========
+2023-11-12 11:39:46.0062 
+ Bat dau ReadLog 8
+2023-11-12 11:39:46.1582 
+ ReadLog8 xong - Count: 41893===========
+2023-11-12 11:39:46.1582 
+ Bat dau ReadLog 9
+2023-11-12 11:39:46.3944 
+ ReadLog9 xong - Count: 41893===========
+2023-11-12 11:39:46.3944 
+ Bat dau ReadLog 10
+2023-11-12 11:39:47.4258 
+ ReadLog10 xong - Count: 41893===========
+2023-11-12 11:39:47.4258 
+ Bat dau ReadLog 11
+2023-11-12 11:39:47.4258 
+ ReadLog11 xong - Count: 41893===========
+2023-11-12 11:39:47.4258 
+ Bat dau ReadLog 12
+2023-11-12 11:39:47.4258 
+ ReadLog12 xong - Count: 41893===========
+2023-11-12 11:39:47.4258 
+ Bat dau ReadLog 13
+2023-11-12 11:39:47.4258 
+ ReadLog13 xong - Count: 41893===========
+2023-11-12 11:39:47.4258 
+ Bat dau ReadLog 14
+2023-11-12 11:39:47.6124 
+ ReadLog14 xong - Count: 41893===========
+2023-11-12 11:39:47.6124 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 41893===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 41893===========
+ ReadLog3======
+ ReadLog3 xong - Count: 41893===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 41893==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 41893===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 41893============
+ ReadLog7=========
+ ReadLog7 xong - Count: 41893==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 41893================
+ ReadLog9========
+ ReadLog9 xong - Count: 41893=============
+ ReadLog10========
+ ReadLog10 xong - Count: 41893=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 41893==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 41893================
+ ReadLog13=============
+ ReadLog13 xong - Count: 41893==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 41893=============== ======== Count: 41893
+2023-11-12 11:48:38.1124 
+Bat dau GetLogData_V2
+2023-11-12 11:48:38.1124 
+Bat dau ReadLog
+2023-11-12 11:48:38.1124 
+Bat dau ReadLog: 1
+2023-11-12 11:48:39.8931 
+ ReadLog: 15====GetLastError: ErrorCode -100
+2023-11-12 11:48:41.4614 
+Bat dau ReadLog2
+2023-11-12 11:48:44.6040 
+ ReadLog2====GetLastError: ErrorCode -2
+2023-11-12 11:48:46.1766 
+Bat dau ReadLog3
+2023-11-12 11:48:49.3144 
+ ReadLog3====GetLastError: ErrorCode -2
+2023-11-12 11:48:50.9145 
+Bat dau ReadLog4
+2023-11-12 11:48:54.0529 
+ ReadLog4====GetLastError: ErrorCode -2
+2023-11-12 11:48:55.6245 
+Bat dau ReadLog5
+2023-11-12 11:48:58.7964 
+ ReadLog5====GetLastError: ErrorCode -2
+2023-11-12 11:49:00.3757 
+Bat dau ReadLog6
+2023-11-12 11:49:03.5038 
+ ReadLog6====GetLastError: ErrorCode -2
+2023-11-12 11:49:05.0695 
+Bat dau ReadLog7
+2023-11-12 11:49:08.2445 
+ ReadLog7====GetLastError: ErrorCode -2
+2023-11-12 11:49:09.8196 
+Bat dau ReadLog8
+2023-11-12 11:49:12.9563 
+ ReadLog8====GetLastError: ErrorCode -2
+2023-11-12 11:49:14.5324 
+Bat dau ReadLog9
+2023-11-12 11:49:17.6794 
+ ReadLog9====GetLastError: ErrorCode -2
+2023-11-12 11:49:19.2476 
+Bat dau ReadLog10
+2023-11-12 11:49:22.4190 
+ ReadLog10====GetLastError: ErrorCode -2
+2023-11-12 11:49:24.0235 
+Bat dau ReadLog11
+2023-11-12 11:49:27.1205 
+ ReadLog11====GetLastError: ErrorCode -2
+2023-11-12 11:49:28.6755 
+Bat dau ReadLog12
+2023-11-12 11:49:31.8203 
+ ReadLog12====GetLastError: ErrorCode -2
+2023-11-12 11:49:33.3856 
+Bat dau ReadLog13
+2023-11-12 11:49:36.5271 
+ ReadLog13====GetLastError: ErrorCode -2
+2023-11-12 11:49:38.0903 
+Bat dau ReadLog14
+2023-11-12 11:49:41.2339 
+ ReadLog14====GetLastError: ErrorCode -2
+2023-11-12 11:49:42.8016 
+Bat dau ReadLog15
+2023-11-12 11:49:45.9424 
+ ReadLog15====GetLastError: ErrorCode -2
+2023-11-12 11:49:47.5083 
+Bat dau ReadLog16
+2023-11-12 11:49:50.6511 
+ ReadLog16====GetLastError: ErrorCode -2
+2023-11-12 11:49:52.2196 
+Bat dau ReadLog17
+2023-11-12 11:49:55.3656 
+ ReadLog17====GetLastError: ErrorCode -2
+2023-11-12 11:49:56.9252 
+Bat dau ReadLog18
+2023-11-12 11:50:00.0672 
+ ReadLog18====GetLastError: ErrorCode -2
+2023-11-12 11:50:01.6404 
+Bat dau ReadLog19
+2023-11-12 11:51:17.6362 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:51:29.1324 
+Bat dau GetLogData_V2
+2023-11-12 11:51:29.1324 
+Bat dau ReadLog
+2023-11-12 11:51:30.9543 
+Bat dau ReadLog: 1
+2023-11-12 11:51:39.2910 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 11:51:43.2050 
+Bat dau ReadLog2
+2023-11-12 11:51:52.3231 
+ ReadLog2====GetLastError: ErrorCode -2
+2023-11-12 11:51:56.8879 
+Bat dau ReadLog3
+2023-11-12 11:52:54.8533 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:53:01.0944 
+Bat dau GetLogData_V2
+2023-11-12 11:53:01.0944 
+Bat dau ReadLog
+2023-11-12 11:53:02.5785 
+Bat dau ReadLog: 1
+2023-11-12 11:53:11.1934 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 11:53:12.7519 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 11:53:16.4554 
+Bat dau GetLogData_V2
+2023-11-12 11:53:16.4554 
+Bat dau ReadLog
+2023-11-12 11:53:17.9124 
+Bat dau ReadLog2
+2023-11-12 11:54:06.4807 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:54:13.3316 
+Bat dau GetLogData_V2
+2023-11-12 11:54:13.3316 
+Bat dau ReadLog
+2023-11-12 11:54:14.9795 
+Bat dau ReadLog: 1
+2023-11-12 11:54:18.3264 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 11:54:18.3264 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 11:54:22.8541 
+Bat dau GetLogData_V2
+2023-11-12 11:54:22.8541 
+Bat dau ReadLog
+2023-11-12 11:54:24.2614 
+Bat dau ReadLog2
+2023-11-12 11:58:45.5543 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 11:58:55.2683 
+Bat dau GetLogData_V2
+2023-11-12 11:58:55.2683 
+Bat dau ReadLog
+2023-11-12 11:58:57.2063 
+Bat dau ReadLog2
+2023-11-12 12:00:26.3614 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 12:00:28.0255 
+Bat dau GetLogData_V2
+2023-11-12 12:00:28.0255 
+Bat dau ReadLog
+2023-11-12 12:00:29.6777 
+Bat dau ReadLog2
+2023-11-12 12:13:00.0711 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 12:13:08.8374 
+Bat dau GetLogData_V2
+2023-11-12 12:13:08.8374 
+Bat dau ReadLog
+2023-11-12 12:13:10.9044 
+Bat dau ReadLog2
+2023-11-12 12:13:30.5598 
+ ReadLog2====GetLastError: ErrorCode -2
+2023-11-12 12:13:30.5598 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 12:13:39.0957 
+Bat dau GetLogData_V2
+2023-11-12 12:13:39.0957 
+Bat dau ReadLog
+2023-11-12 12:13:40.8605 
+Bat dau ReadLog: 1
+2023-11-12 12:13:50.9865 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 12:13:50.9865 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 12:14:24.6918 
+Bat dau GetLogData_V2
+2023-11-12 12:14:24.6918 
+Bat dau ReadLog
+2023-11-12 12:14:25.9818 
+Bat dau ReadLog: 1
+2023-11-12 12:14:32.1814 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 12:14:32.1814 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 12:20:06.7307 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 12:20:30.0573 
+Bat dau GetLogData_V2
+2023-11-12 12:20:30.0573 
+Bat dau ReadLog
+2023-11-12 12:20:33.5983 
+Bat dau ReadLog3
+2023-11-12 12:31:35.4166 
+Bat dau GetLogData_V2
+2023-11-12 12:31:35.4196 
+Bat dau ReadLog
+2023-11-12 12:31:36.6058 
+Bat dau ReadLog: 1
+2023-11-12 12:32:20.7957 
+ ReadLog1====GetLastError: ErrorCode 0
+2023-11-12 12:32:21.0362 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 12:36:41.4657 
+Bat dau GetLogData_V2
+2023-11-12 12:36:41.4657 
+Bat dau ReadLog
+2023-11-12 12:36:43.4674 
+Bat dau ReadLog: 1
+2023-11-12 12:37:11.3564 
+ ReadLog1====GetLastError: ErrorCode 0
+2023-11-12 12:37:11.5514 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 12:42:41.5858 
+Bat dau GetLogData_V2
+2023-11-12 12:42:41.5858 
+Bat dau ReadLog
+2023-11-12 12:42:43.6986 
+Bat dau ReadLog: 1
+2023-11-12 12:45:51.2633 
+Bat dau ReadLog3
+2023-11-12 12:47:05.4647 
+ ReadLog3 xong - Count: 200290
+2023-11-12 12:47:05.7010 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 200290 ======== Count: 200290
+2023-11-12 12:47:20.9107 
+Bat dau GetLogData_V2
+2023-11-12 12:47:20.9107 
+Bat dau ReadLog
+2023-11-12 12:47:22.8829 
+Bat dau ReadLog3
+2023-11-12 12:48:35.1175 
+ ReadLog3 xong - Count: 100145
+2023-11-12 12:48:35.3122 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 100145 ======== Count: 100145
+2023-11-12 12:49:21.1903 
+Bat dau GetLogData_V2
+2023-11-12 12:49:21.1903 
+Bat dau ReadLog
+2023-11-12 12:49:23.2016 
+Bat dau ReadLog2
+2023-11-12 12:50:33.7944 
+ ReadLog2 xong - Count: 100145
+2023-11-12 12:50:33.9423 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 100145 ======== Count: 100145
+2023-11-12 12:50:38.6725 
+Bat dau GetLogData_V2
+2023-11-12 12:50:38.6725 
+Bat dau ReadLog
+2023-11-12 12:50:40.8865 
+Bat dau ReadLog3
+2023-11-12 12:51:48.4455 
+ ReadLog3 xong - Count: 100145
+2023-11-12 12:51:48.5378 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 100145 ======== Count: 100145
+2023-11-12 12:57:36.3791 
+Bat dau GetLogData_V2
+2023-11-12 12:57:52.0874 
+Bat dau ReadLog
+2023-11-12 12:57:54.1310 
+Bat dau ReadLog: 1
+2023-11-12 12:59:45.8105 
+Bat dau GetLogData_V2
+2023-11-12 12:59:53.0576 
+Bat dau ReadLog
+2023-11-12 12:59:54.3182 
+Bat dau ReadLog: 1
+2023-11-12 13:00:02.3695 
+ ReadLog1 xong - Count: 1706
+2023-11-12 13:00:02.5175 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1706 ======== Count: 1706
+2023-11-12 13:00:59.0367 
+Bat dau GetLogData_V2
+2023-11-12 13:00:59.0367 
+Bat dau ReadLog
+2023-11-12 13:00:59.0367 
+Bat dau ReadLog: 1
+2023-11-12 13:01:00.9478 
+ ReadLog1 xong - Count: 1706
+2023-11-12 13:01:00.9478 
+Bat dau ReadLog2
+2023-11-12 13:02:06.2465 
+ ReadLog2 xong - Count: 101851
+2023-11-12 13:02:06.2465 
+Bat dau ReadLog3
+2023-11-12 13:03:10.5575 
+ ReadLog3 xong - Count: 201996
+2023-11-12 13:03:10.5575 
+Bat dau ReadLog4
+2023-11-12 13:04:15.1559 
+ ReadLog4 xong - Count: 452359
+2023-11-12 13:04:15.3355 
+Bat dau ReadLog5
+2023-11-12 13:05:19.7991 
+ ReadLog5 xong - Count: 702722
+2023-11-12 13:05:19.9504 
+Bat dau ReadLog6
+2023-11-12 13:06:25.5737 
+ ReadLog6 xong - Count: 953085
+2023-11-12 13:06:25.7146 
+Bat dau ReadLog7
+2023-11-12 13:07:30.1178 
+ ReadLog7 xong - Count: 1203448
+2023-11-12 13:07:30.2186 
+Bat dau ReadLog8
+2023-11-12 13:08:34.5020 
+ ReadLog8 xong - Count: 1453811
+2023-11-12 13:08:34.6432 
+Bat dau ReadLog9
+2023-11-12 13:09:39.0042 
+ ReadLog9 xong - Count: 1704174
+2023-11-12 13:09:39.1837 
+Bat dau ReadLog10
+2023-11-12 13:10:43.5201 
+ ReadLog10 xong - Count: 1954537
+2023-11-12 13:10:43.6298 
+Bat dau ReadLog11
+2023-11-12 13:11:48.2719 
+ ReadLog11 xong - Count: 2204900
+2023-11-12 13:11:48.3148 
+Bat dau ReadLog12
+2023-11-12 13:12:52.8473 
+ ReadLog12 xong - Count: 2455263
+2023-11-12 13:12:52.9920 
+Bat dau ReadLog13
+2023-11-12 13:13:57.7529 
+ ReadLog13 xong - Count: 2705626
+2023-11-12 13:13:57.8526 
+Bat dau ReadLog14
+2023-11-12 13:15:03.1989 
+ ReadLog14 xong - Count: 2955989
+2023-11-12 13:15:03.3326 
+Bat dau ReadLog15
+2023-11-12 13:16:07.5597 
+ ReadLog15 xong - Count: 3206352
+2023-11-12 13:16:07.6963 
+Bat dau ReadLog16
+2023-11-12 13:16:28.6399 
+ ReadLog16 xong - Count: 3294467
+2023-11-12 13:16:28.7377 
+Bat dau ReadLog17
+2023-11-12 13:16:48.8170 
+ ReadLog17 xong - Count: 3382582
+2023-11-12 13:16:48.9178 
+Bat dau ReadLog18
+2023-11-12 13:17:09.4618 
+ ReadLog18 xong - Count: 3470697
+2023-11-12 13:17:09.6164 
+Bat dau ReadLog19
+2023-11-12 13:18:12.3158 
+ ReadLog19 xong - Count: 3721060
+2023-11-12 13:18:12.4225 
+Bat dau ReadLog20
+2023-11-12 13:19:15.0022 
+ ReadLog20 xong - Count: 3971423
+2023-11-12 13:19:15.1039 
+Bat dau ReadLog21
+2023-11-12 13:20:17.8572 
+ ReadLog21 xong - Count: 3971423
+2023-11-12 13:20:18.0487 
+Bat dau ReadLog22
+2023-11-12 13:21:20.6633 
+ ReadLog22 xong - Count: 3971423
+2023-11-12 13:21:20.9026 
+Bat dau ReadLog23
+2023-11-12 13:22:23.8743 
+ ReadLog23 xong - Count: 4071568
+2023-11-12 13:22:24.1196 
+Bat dau ReadLog24
+2023-11-12 13:22:44.0563 
+ ReadLog24 xong - Count: 4095066
+2023-11-12 13:22:44.2538 
+Bat dau ReadLog25
+2023-11-12 13:23:04.3784 
+ ReadLog25 xong - Count: 4183181
+2023-11-12 13:23:04.5190 
+Bat dau ReadLog26
+2023-11-12 13:23:24.4398 
+ ReadLog26 xong - Count: 4183181
+2023-11-12 13:23:24.6366 
+Bat dau ReadLog27
+2023-11-12 13:24:26.9483 
+ ReadLog27 xong - Count: 4248850
+2023-11-12 13:24:27.0514 
+Bat dau ReadLog28
+2023-11-12 13:24:48.2995 
+ ReadLog28 xong - Count: 4248850
+2023-11-12 13:24:48.5306 
+Bat dau ReadLog29
+2023-11-12 13:36:04.6186 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1706
+ ReadLog2 xong - Count: 101851
+ ReadLog3 xong - Count: 201996
+ ReadLog4 xong - Count: 452359
+ ReadLog5 xong - Count: 702722
+ ReadLog6 xong - Count: 953085
+ ReadLog7 xong - Count: 1203448
+ ReadLog8 xong - Count: 1453811
+ ReadLog9 xong - Count: 1704174
+ ReadLog10 xong - Count: 1954537
+ ReadLog11 xong - Count: 2204900
+ ReadLog12 xong - Count: 2455263
+ ReadLog13 xong - Count: 2705626
+ ReadLog14 xong - Count: 2955989
+ ReadLog15 xong - Count: 3206352
+ ReadLog16 xong - Count: 3294467
+ ReadLog17 xong - Count: 3382582
+ ReadLog18 xong - Count: 3470697
+ ReadLog19 xong - Count: 3721060
+ ReadLog20 xong - Count: 3971423
+ ReadLog21 xong - Count: 3971423
+ ReadLog22 xong - Count: 3971423
+ ReadLog23 xong - Count: 4071568
+ ReadLog24 xong - Count: 4095066
+ ReadLog25 xong - Count: 4183181
+ ReadLog26 xong - Count: 4183181
+ ReadLog27 xong - Count: 4248850
+ ReadLog28 xong - Count: 4248850 ======== Count: 4248857
+2023-11-12 13:42:07.4830 
+Bat dau GetLogData_V2
+2023-11-12 13:42:07.4830 
+Bat dau ReadLog
+2023-11-12 13:42:07.4830 
+Bat dau ReadLog16
+2023-11-12 13:42:29.0950 
+ ReadLog16====GetLastError: ErrorCode 0
+2023-11-12 13:42:29.0950 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 13:43:07.7875 
+Bat dau GetLogData_V2
+2023-11-12 13:43:07.7875 
+Bat dau ReadLog
+2023-11-12 13:43:07.7875 
+Bat dau ReadLog16
+2023-11-12 13:43:29.9405 
+ ReadLog16 xong - Count: 88115
+2023-11-12 13:43:30.0830 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog16 xong - Count: 88115 ======== Count: 88115
+2023-11-12 13:57:46.3334 
+Bat dau GetLogData_V2
+2023-11-12 13:57:46.3334 
+Bat dau ReadLog
+2023-11-12 13:57:46.3334 
+Bat dau ReadLog16
+2023-11-12 13:58:20.9283 
+ ReadLog16 xong - Count: 88115
+2023-11-12 13:58:20.9722 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog16 xong - Count: 88115 ======== Count: 88115
+2023-11-12 13:59:52.7280 
+Bat dau GetLogData_V2
+2023-11-12 13:59:52.7310 
+Bat dau ReadLog
+2023-11-12 13:59:52.7310 
+Bat dau ReadLog16
+2023-11-12 14:00:37.7702 
+ ReadLog16 xong - Count: 88115
+2023-11-12 14:00:38.0566 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog16 xong - Count: 88115 ======== Count: 88115
+2023-11-12 14:00:48.0340 
+Bat dau GetLogData_V2
+2023-11-12 14:00:48.0340 
+Bat dau ReadLog
+2023-11-12 14:00:48.0340 
+Bat dau ReadLog17
+2023-11-12 14:01:08.9366 
+ ReadLog17 xong - Count: 88115
+2023-11-12 14:01:09.0752 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog17 xong - Count: 88115 ======== Count: 88115
+2023-11-12 14:03:35.2939 
+Bat dau GetLogData_V2
+2023-11-12 14:03:35.2939 
+Bat dau ReadLog
+2023-11-12 14:03:35.2939 
+Bat dau ReadLog: 1
+2023-11-12 14:03:37.4518 
+ ReadLog1 xong - Count: 1688
+2023-11-12 14:03:37.4518 
+Bat dau ReadLog2
+2023-11-12 14:04:44.8022 
+ ReadLog2 xong - Count: 101833
+2023-11-12 14:04:44.8022 
+Bat dau ReadLog3
+2023-11-12 14:05:52.3106 
+ ReadLog3 xong - Count: 201978
+2023-11-12 14:05:52.3106 
+Bat dau ReadLog4
+2023-11-12 14:07:00.0469 
+ ReadLog4 xong - Count: 452341
+2023-11-12 14:07:00.2362 
+Bat dau ReadLog5
+2023-11-12 14:08:07.9435 
+ ReadLog5 xong - Count: 702704
+2023-11-12 14:08:08.0940 
+Bat dau ReadLog6
+2023-11-12 14:09:15.5442 
+ ReadLog6 xong - Count: 953067
+2023-11-12 14:09:15.7353 
+Bat dau ReadLog7
+2023-11-12 14:10:23.4034 
+ ReadLog7 xong - Count: 1203430
+2023-11-12 14:10:23.5062 
+Bat dau ReadLog8
+2023-11-12 14:11:31.1714 
+ ReadLog8 xong - Count: 1453793
+2023-11-12 14:11:31.3629 
+Bat dau ReadLog9
+2023-11-12 14:12:40.9709 
+ ReadLog9 xong - Count: 1704156
+2023-11-12 14:12:41.1545 
+Bat dau ReadLog10
+2023-11-12 14:13:48.6291 
+ ReadLog10 xong - Count: 1954519
+2023-11-12 14:13:48.8186 
+Bat dau ReadLog11
+2023-11-12 14:14:57.1590 
+ ReadLog11 xong - Count: 2204882
+2023-11-12 14:14:57.2119 
+Bat dau ReadLog12
+2023-11-12 14:16:04.9368 
+ ReadLog12 xong - Count: 2455245
+2023-11-12 14:16:05.1273 
+Bat dau ReadLog13
+2023-11-12 14:17:13.0048 
+ ReadLog13 xong - Count: 2705608
+2023-11-12 14:17:13.1444 
+Bat dau ReadLog14
+2023-11-12 14:18:21.4857 
+ ReadLog14 xong - Count: 2955971
+2023-11-12 14:18:21.6782 
+Bat dau ReadLog15
+2023-11-12 14:19:29.5867 
+ ReadLog15 xong - Count: 3206334
+2023-11-12 14:19:29.7722 
+Bat dau ReadLog16
+2023-11-12 14:19:51.9389 
+ ReadLog16 xong - Count: 3294449
+2023-11-12 14:19:52.0765 
+Bat dau ReadLog17
+2023-11-12 14:20:13.6868 
+ ReadLog17 xong - Count: 3382564
+2023-11-12 14:20:13.8284 
+Bat dau ReadLog18
+2023-11-12 14:20:34.7305 
+ ReadLog18 xong - Count: 3470679
+2023-11-12 14:20:34.8781 
+Bat dau ReadLog19
+2023-11-12 14:21:41.3444 
+ ReadLog19 xong - Count: 3721042
+2023-11-12 14:21:41.5828 
+Bat dau ReadLog20
+2023-11-12 14:22:48.1518 
+ ReadLog20 xong - Count: 3971405
+2023-11-12 14:22:48.3423 
+Bat dau ReadLog21
+2023-11-12 14:23:54.9642 
+ ReadLog21 xong - Count: 3971405
+2023-11-12 14:23:55.1497 
+Bat dau ReadLog22
+2023-11-12 14:25:01.4724 
+ ReadLog22 xong - Count: 3971405
+2023-11-12 14:25:01.5173 
+Bat dau ReadLog23
+2023-11-12 14:26:08.2110 
+ ReadLog23 xong - Count: 4071550
+2023-11-12 14:26:08.4962 
+Bat dau ReadLog24
+2023-11-12 14:26:32.1446 
+ ReadLog24 xong - Count: 4095048
+2023-11-12 14:26:32.3780 
+Bat dau ReadLog25
+2023-11-12 14:26:53.8717 
+ ReadLog25 xong - Count: 4183163
+2023-11-12 14:26:54.0123 
+Bat dau ReadLog26
+2023-11-12 14:27:15.0650 
+ ReadLog26 xong - Count: 4183163
+2023-11-12 14:27:15.2954 
+Bat dau ReadLog27
+2023-11-12 14:28:21.8814 
+ ReadLog27 xong - Count: 4248832
+2023-11-12 14:28:22.0320 
+Bat dau ReadLog28
+2023-11-12 14:28:46.0168 
+ ReadLog28 xong - Count: 4248832
+2023-11-12 14:28:46.2522 
+Bat dau ReadLog29
+2023-11-12 15:50:47.6610 
+ ReadLog29 xong - Count: 4248836
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog30
+2023-11-12 15:50:47.6610 
+ ReadLog30====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog31
+2023-11-12 15:50:47.6610 
+ ReadLog31====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog32
+2023-11-12 15:50:47.6610 
+ ReadLog32====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog32
+2023-11-12 15:50:47.6610 
+ ReadLog32====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog34
+2023-11-12 15:50:47.6610 
+ ReadLog34====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog35
+2023-11-12 15:50:47.6610 
+ ReadLog35====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog36
+2023-11-12 15:50:47.6610 
+ ReadLog36====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog37
+2023-11-12 15:50:47.6610 
+ ReadLog37====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog38
+2023-11-12 15:50:47.6610 
+ ReadLog38====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog39
+2023-11-12 15:50:47.6610 
+ ReadLog39====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog40
+2023-11-12 15:50:47.6610 
+ ReadLog40====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog41
+2023-11-12 15:50:47.6610 
+ ReadLog41====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog42
+2023-11-12 15:50:47.6610 
+ ReadLog42====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog43
+2023-11-12 15:50:47.6610 
+ ReadLog43====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6610 
+Bat dau ReadLog44
+2023-11-12 15:50:47.6690 
+ ReadLog44====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6690 
+Bat dau ReadLog45
+2023-11-12 15:50:47.6690 
+ ReadLog45====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6690 
+Bat dau ReadLog46
+2023-11-12 15:50:47.6919 
+ ReadLog46====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog47
+2023-11-12 15:50:47.6919 
+ ReadLog47====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog48
+2023-11-12 15:50:47.6919 
+ ReadLog48====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog49
+2023-11-12 15:50:47.6919 
+ ReadLog49====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog50
+2023-11-12 15:50:47.6919 
+ ReadLog50====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog51
+2023-11-12 15:50:47.6919 
+ ReadLog51====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog52
+2023-11-12 15:50:47.6919 
+ ReadLog52====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog53
+2023-11-12 15:50:47.6919 
+ ReadLog53====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog54
+2023-11-12 15:50:47.6919 
+ ReadLog54====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog55
+2023-11-12 15:50:47.6919 
+ ReadLog55====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog56
+2023-11-12 15:50:47.6919 
+ ReadLog56====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog57
+2023-11-12 15:50:47.6919 
+ ReadLog57====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6919 
+Bat dau ReadLog58
+2023-11-12 15:50:47.6919 
+ ReadLog58====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog59
+2023-11-12 15:50:47.6999 
+ ReadLog59====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog60
+2023-11-12 15:50:47.6999 
+ ReadLog60====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog61
+2023-11-12 15:50:47.6999 
+ ReadLog61====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog62
+2023-11-12 15:50:47.6999 
+ ReadLog62====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog63
+2023-11-12 15:50:47.6999 
+ ReadLog63====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog64
+2023-11-12 15:50:47.6999 
+ ReadLog64====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog65
+2023-11-12 15:50:47.6999 
+ ReadLog65====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog66
+2023-11-12 15:50:47.6999 
+ ReadLog66====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog67
+2023-11-12 15:50:47.6999 
+ ReadLog67====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog68
+2023-11-12 15:50:47.6999 
+ ReadLog68====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog69
+2023-11-12 15:50:47.6999 
+ ReadLog69====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog70
+2023-11-12 15:50:47.6999 
+ ReadLog70====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog71
+2023-11-12 15:50:47.6999 
+ ReadLog71====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog72
+2023-11-12 15:50:47.6999 
+ ReadLog72====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog73
+2023-11-12 15:50:47.6999 
+ ReadLog73====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog74
+2023-11-12 15:50:47.6999 
+ ReadLog74====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog75
+2023-11-12 15:50:47.6999 
+ ReadLog75====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog76
+2023-11-12 15:50:47.6999 
+ ReadLog76====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog77
+2023-11-12 15:50:47.6999 
+ ReadLog77====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog78
+2023-11-12 15:50:47.6999 
+ ReadLog78====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog79
+2023-11-12 15:50:47.6999 
+ ReadLog79====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog80
+2023-11-12 15:50:47.6999 
+ ReadLog80====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog81
+2023-11-12 15:50:47.6999 
+ ReadLog81====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog82
+2023-11-12 15:50:47.6999 
+ ReadLog82====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog83
+2023-11-12 15:50:47.6999 
+ ReadLog83====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog84
+2023-11-12 15:50:47.6999 
+ ReadLog84====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog85
+2023-11-12 15:50:47.6999 
+ ReadLog85====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog86
+2023-11-12 15:50:47.6999 
+ ReadLog86====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog87
+2023-11-12 15:50:47.6999 
+ ReadLog87====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog88
+2023-11-12 15:50:47.6999 
+ ReadLog88====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog89
+2023-11-12 15:50:47.6999 
+ ReadLog89====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.6999 
+Bat dau ReadLog90
+2023-11-12 15:50:47.7159 
+ ReadLog90====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog91
+2023-11-12 15:50:47.7159 
+ ReadLog91====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog92
+2023-11-12 15:50:47.7159 
+ ReadLog92====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog93
+2023-11-12 15:50:47.7159 
+ ReadLog93====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog94
+2023-11-12 15:50:47.7159 
+ ReadLog94====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog95
+2023-11-12 15:50:47.7159 
+ ReadLog95====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog96
+2023-11-12 15:50:47.7159 
+ ReadLog96====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog97
+2023-11-12 15:50:47.7159 
+ ReadLog97====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog98
+2023-11-12 15:50:47.7159 
+ ReadLog98====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog99
+2023-11-12 15:50:47.7159 
+ ReadLog99====GetLastError: ErrorCode -1
+2023-11-12 15:50:47.7159 
+Bat dau ReadLog100
+2023-11-12 15:50:47.7528 
+ ReadLog100====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.7528 
+Bat dau ReadLog101
+2023-11-12 15:50:47.8166 
+ ReadLog101====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.8166 
+Bat dau ReadLog102
+2023-11-12 15:50:47.8485 
+ ReadLog102====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.8485 
+Bat dau ReadLog103
+2023-11-12 15:50:47.8485 
+ ReadLog103====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.8485 
+Bat dau ReadLog104
+2023-11-12 15:50:47.8814 
+ ReadLog104====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.8814 
+Bat dau ReadLog105
+2023-11-12 15:50:47.9433 
+ ReadLog105====GetLastError: ErrorCode 0
+2023-11-12 15:50:47.9433 
+Bat dau ReadLog106
+2023-11-12 15:50:48.0361 
+ ReadLog106====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.0361 
+Bat dau ReadLog107
+2023-11-12 15:50:48.0680 
+ ReadLog107====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.0680 
+Bat dau ReadLog108
+2023-11-12 15:50:48.1318 
+ ReadLog108====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.1318 
+Bat dau ReadLog109
+2023-11-12 15:50:48.1936 
+ ReadLog109====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.1936 
+Bat dau ReadLog110
+2023-11-12 15:50:48.2565 
+ ReadLog110====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.2565 
+Bat dau ReadLog111
+2023-11-12 15:50:48.3512 
+ ReadLog111====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.3512 
+Bat dau ReadLog112
+2023-11-12 15:50:48.4152 
+ ReadLog112====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.4152 
+Bat dau ReadLog113
+2023-11-12 15:50:48.4750 
+ ReadLog113====GetLastError: ErrorCode 0
+2023-11-12 15:50:48.4750 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1688
+ ReadLog2 xong - Count: 101833
+ ReadLog3 xong - Count: 201978
+ ReadLog4 xong - Count: 452341
+ ReadLog5 xong - Count: 702704
+ ReadLog6 xong - Count: 953067
+ ReadLog7 xong - Count: 1203430
+ ReadLog8 xong - Count: 1453793
+ ReadLog9 xong - Count: 1704156
+ ReadLog10 xong - Count: 1954519
+ ReadLog11 xong - Count: 2204882
+ ReadLog12 xong - Count: 2455245
+ ReadLog13 xong - Count: 2705608
+ ReadLog14 xong - Count: 2955971
+ ReadLog15 xong - Count: 3206334
+ ReadLog16 xong - Count: 3294449
+ ReadLog17 xong - Count: 3382564
+ ReadLog18 xong - Count: 3470679
+ ReadLog19 xong - Count: 3721042
+ ReadLog20 xong - Count: 3971405
+ ReadLog21 xong - Count: 3971405
+ ReadLog22 xong - Count: 3971405
+ ReadLog23 xong - Count: 4071550
+ ReadLog24 xong - Count: 4095048
+ ReadLog25 xong - Count: 4183163
+ ReadLog26 xong - Count: 4183163
+ ReadLog27 xong - Count: 4248832
+ ReadLog28 xong - Count: 4248832
+ ReadLog29 xong - Count: 4248836 ======== Count: 4248836
+2023-11-12 15:52:01.0833 
+Bat dau GetLogData_V2
+2023-11-12 15:52:01.0833 
+Bat dau ReadLog
+2023-11-12 15:52:01.0833 
+Bat dau ReadLog30
+2023-11-12 15:52:01.0833 
+ ReadLog30====GetLastError: ErrorCode 0
+2023-11-12 15:52:01.0833 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 15:52:25.0683 
+Bat dau GetLogData_V2
+2023-11-12 15:52:25.0683 
+Bat dau ReadLog
+2023-11-12 15:52:25.0683 
+Bat dau ReadLog30
+2023-11-12 15:52:52.1032 
+ ReadLog30 xong - Count: 88115
+2023-11-12 15:52:52.1936 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog30 xong - Count: 88115 ======== Count: 88115
+2023-11-12 16:01:01.5530 
+Bat dau GetLogData_V2
+2023-11-12 16:01:01.5530 
+Bat dau ReadLog
+2023-11-12 16:01:01.5530 
+Bat dau ReadLog: 1
+2023-11-12 16:01:04.6542 
+ ReadLog1 xong - Count: 1658
+2023-11-12 16:01:04.9012 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1658 ======== Count: 1658
+2023-11-12 16:01:16.3014 
+Bat dau GetLogData_V2
+2023-11-12 16:01:16.3014 
+Bat dau ReadLog
+2023-11-12 16:01:16.3014 
+Bat dau ReadLog30
+2023-11-12 16:02:35.0257 
+ ReadLog30 xong - Count: 88115
+2023-11-12 16:02:35.1614 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog30 xong - Count: 88115 ======== Count: 88115
+2023-11-12 16:03:21.4736 
+Bat dau GetLogData_V2
+2023-11-12 16:03:21.4736 
+Bat dau ReadLog
+2023-11-12 16:03:21.4736 
+Bat dau ReadLog30
+2023-11-12 16:04:51.5054 
+Bat dau GetLogData_V2
+2023-11-12 16:04:51.5054 
+Bat dau ReadLog
+2023-11-12 16:04:51.5054 
+Bat dau ReadLog30
+2023-11-12 16:05:26.0233 
+ ReadLog30 xong - Count: 88115
+2023-11-12 16:05:26.1550 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog30 xong - Count: 88115 ======== Count: 88115
+2023-11-12 16:08:49.7207 
+Bat dau GetLogData_V2
+2023-11-12 16:08:49.7207 
+Bat dau ReadLog
+2023-11-12 16:08:49.7207 
+Bat dau ReadLog: 1
+2023-11-12 16:08:52.9312 
+ ReadLog1 xong - Count: 1657
+2023-11-12 16:08:53.1776 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1657 ======== Count: 1657
+2023-11-12 16:09:13.9600 
+Bat dau GetLogData_V2
+2023-11-12 16:09:13.9600 
+Bat dau ReadLog
+2023-11-12 16:09:13.9600 
+Bat dau ReadLog2
+2023-11-12 16:10:29.1596 
+ ReadLog2 xong - Count: 100145
+2023-11-12 16:10:29.2555 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 100145 ======== Count: 100145
+2023-11-12 16:12:11.2983 
+Bat dau GetLogData_V2
+2023-11-12 16:12:11.2983 
+Bat dau ReadLog
+2023-11-12 16:12:11.2983 
+Bat dau ReadLog3
+2023-11-12 16:13:23.9958 
+ ReadLog3 xong - Count: 100145
+2023-11-12 16:13:24.0522 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 100145 ======== Count: 100145
+2023-11-12 16:15:26.8913 
+Bat dau GetLogData_V2
+2023-11-12 16:15:26.8913 
+Bat dau ReadLog
+2023-11-12 16:15:26.8913 
+Bat dau ReadLog4
+2023-11-12 16:16:40.9251 
+ ReadLog4 xong - Count: 250363
+2023-11-12 16:16:41.0293 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog4 xong - Count: 250363 ======== Count: 250363
+2023-11-12 16:18:51.3742 
+Bat dau GetLogData_V2
+2023-11-12 16:18:51.3742 
+Bat dau ReadLog
+2023-11-12 16:18:51.3742 
+Bat dau ReadLog4
+2023-11-12 16:20:43.0852 
+ ReadLog4 xong - Count: 250363
+2023-11-12 16:20:43.1802 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog4 xong - Count: 250363 ======== Count: 250363
+2023-11-12 16:20:56.6620 
+Bat dau GetLogData_V2
+2023-11-12 16:20:56.6620 
+Bat dau ReadLog
+2023-11-12 16:20:56.6620 
+Bat dau ReadLog72
+2023-11-12 16:21:00.0213 
+ ReadLog72 xong - Count: 0
+2023-11-12 16:21:00.2935 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog72 xong - Count: 0 ======== Count: 0
+2023-11-12 16:21:20.4244 
+Bat dau GetLogData_V2
+2023-11-12 16:21:20.4244 
+Bat dau ReadLog
+2023-11-12 16:21:22.3447 
+Bat dau ReadLog72
+2023-11-12 16:21:46.8961 
+ ReadLog72 xong - Count: 0
+2023-11-12 16:21:47.1356 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog72 xong - Count: 0 ======== Count: 0
+2023-11-12 16:21:52.7810 
+Bat dau GetLogData_V2
+2023-11-12 16:21:52.7810 
+Bat dau ReadLog
+2023-11-12 16:21:52.7810 
+Bat dau ReadLog73
+2023-11-12 16:21:56.2518 
+ ReadLog73 xong - Count: 0
+2023-11-12 16:21:56.5295 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog73 xong - Count: 0 ======== Count: 0
+2023-11-12 16:22:02.6313 
+Bat dau GetLogData_V2
+2023-11-12 16:22:02.6313 
+Bat dau ReadLog
+2023-11-12 16:22:02.6313 
+Bat dau ReadLog74
+2023-11-12 16:22:06.1328 
+ ReadLog74 xong - Count: 0
+2023-11-12 16:22:06.3633 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog74 xong - Count: 0 ======== Count: 0
+2023-11-12 16:22:09.6875 
+Bat dau GetLogData_V2
+2023-11-12 16:22:09.6875 
+Bat dau ReadLog
+2023-11-12 16:22:09.6875 
+Bat dau ReadLog75
+2023-11-12 16:22:12.5606 
+ ReadLog75 xong - Count: 4135
+2023-11-12 16:22:12.8086 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog75 xong - Count: 4135 ======== Count: 4135
+2023-11-12 16:22:21.8700 
+Bat dau GetLogData_V2
+2023-11-12 16:22:21.8700 
+Bat dau ReadLog
+2023-11-12 16:22:21.8700 
+Bat dau ReadLog76
+2023-11-12 16:22:24.7205 
+ ReadLog76 xong - Count: 4135
+2023-11-12 16:22:25.0026 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog76 xong - Count: 4135 ======== Count: 4135
+2023-11-12 16:22:32.4822 
+Bat dau GetLogData_V2
+2023-11-12 16:22:32.4822 
+Bat dau ReadLog
+2023-11-12 16:22:32.4822 
+Bat dau ReadLog77
+2023-11-12 16:22:35.4041 
+ ReadLog77 xong - Count: 0
+2023-11-12 16:22:35.6776 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog77 xong - Count: 0 ======== Count: 0
+2023-11-12 16:22:40.4855 
+Bat dau GetLogData_V2
+2023-11-12 16:22:40.4855 
+Bat dau ReadLog
+2023-11-12 16:22:40.4855 
+Bat dau ReadLog78
+2023-11-12 16:22:43.5319 
+ ReadLog78 xong - Count: 0
+2023-11-12 16:22:43.7795 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog78 xong - Count: 0 ======== Count: 0
+2023-11-12 16:22:47.2118 
+Bat dau GetLogData_V2
+2023-11-12 16:22:47.2118 
+Bat dau ReadLog
+2023-11-12 16:22:47.2118 
+Bat dau ReadLog79
+2023-11-12 16:22:50.3044 
+ ReadLog79 xong - Count: 1654
+2023-11-12 16:22:50.5432 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog79 xong - Count: 1654 ======== Count: 1654
+2023-11-12 16:23:16.8093 
+Bat dau GetLogData_V2
+2023-11-12 16:23:16.8093 
+Bat dau ReadLog
+2023-11-12 16:23:16.8093 
+Bat dau ReadLog80
+2023-11-12 16:23:20.7313 
+ ReadLog80 xong - Count: 0
+2023-11-12 16:23:20.9603 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog80 xong - Count: 0 ======== Count: 0
+2023-11-12 16:23:26.0474 
+Bat dau GetLogData_V2
+2023-11-12 16:23:26.0474 
+Bat dau ReadLog
+2023-11-12 16:23:26.0474 
+Bat dau ReadLog81
+2023-11-12 16:23:29.8734 
+ ReadLog81 xong - Count: 0
+2023-11-12 16:23:30.1495 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog81 xong - Count: 0 ======== Count: 0
+2023-11-12 16:23:34.2394 
+Bat dau GetLogData_V2
+2023-11-12 16:23:34.2394 
+Bat dau ReadLog
+2023-11-12 16:23:34.2394 
+Bat dau ReadLog82
+2023-11-12 16:23:37.3111 
+ ReadLog82 xong - Count: 0
+2023-11-12 16:23:37.5525 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog82 xong - Count: 0 ======== Count: 0
+2023-11-12 16:24:00.8480 
+Bat dau GetLogData_V2
+2023-11-12 16:24:00.8480 
+Bat dau ReadLog
+2023-11-12 16:24:00.8480 
+Bat dau ReadLog83
+2023-11-12 16:24:04.0514 
+ ReadLog83 xong - Count: 1085
+2023-11-12 16:24:04.3274 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog83 xong - Count: 1085 ======== Count: 1085
+2023-11-12 16:24:21.4105 
+Bat dau GetLogData_V2
+2023-11-12 16:24:21.4105 
+Bat dau ReadLog
+2023-11-12 16:24:21.4105 
+Bat dau ReadLog84
+2023-11-12 16:24:26.0815 
+ ReadLog84 xong - Count: 0
+2023-11-12 16:24:26.3663 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog84 xong - Count: 0 ======== Count: 0
+2023-11-12 16:24:32.1410 
+Bat dau GetLogData_V2
+2023-11-12 16:24:32.1410 
+Bat dau ReadLog
+2023-11-12 16:24:32.1410 
+Bat dau ReadLog85
+2023-11-12 16:27:47.9300 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 1
+2023-11-12 16:28:20.2072 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-12 16:28:26.0163 
+Bat dau ReadType
+2023-11-12 16:28:46.8677 
+ReadType_2 xong: success_True_ machineNumber: 1===============
+2023-11-12 16:28:46.8677 
+Bat dau ReadLog
+2023-11-12 16:28:46.8677 
+Bat dau ReadLog: 1
+2023-11-12 16:28:47.0336 
+ ReadLog1 xong - Count: 41893
+2023-11-12 16:28:47.0336 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_2 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 41893 ======== Count: 41893
+2023-11-12 16:29:12.1246 
+Bat dau GetLogData_V2
+2023-11-12 16:29:12.1246 
+Bat dau ReadLog
+2023-11-12 16:29:12.1246 
+Bat dau ReadLog: 1
+2023-11-12 16:29:12.6336 
+ ReadLog1====GetLastError: ErrorCode 0
+2023-11-12 16:29:12.8174 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 16:29:17.8878 
+Bat dau GetLogData_V2
+2023-11-12 16:29:17.8878 
+Bat dau ReadLog
+2023-11-12 16:29:17.8878 
+Bat dau ReadLog2
+2023-11-12 16:29:41.3061 
+ ReadLog2 xong - Count: 41893
+2023-11-12 16:29:41.5373 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 41893 ======== Count: 41893
+2023-11-12 16:29:54.9108 
+Bat dau GetLogData_V2
+2023-11-12 16:29:54.9108 
+Bat dau ReadLog
+2023-11-12 16:29:54.9108 
+Bat dau ReadLog3
+2023-11-12 16:30:18.7101 
+ ReadLog3 xong - Count: 41893
+2023-11-12 16:30:18.8714 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 41893 ======== Count: 41893
+2023-11-12 16:31:18.0695 
+Bat dau GetLogData_V2
+2023-11-12 16:31:18.0695 
+Bat dau ReadLog
+2023-11-12 16:31:18.0695 
+Bat dau ReadLog: 1
+2023-11-12 16:31:19.1453 
+ ReadLog1 xong - Count: 745
+2023-11-12 16:31:19.3424 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 745 ======== Count: 745
+2023-11-12 16:31:33.4906 
+Bat dau GetLogData_V2
+2023-11-12 16:31:33.4906 
+Bat dau ReadLog
+2023-11-12 16:31:33.4906 
+Bat dau ReadLog: 1
+2023-11-12 16:31:35.2824 
+ ReadLog1 xong - Count: 2876
+2023-11-12 16:31:35.4771 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 2876 ======== Count: 2876
+2023-11-12 16:32:15.2592 
+Bat dau GetLogData_V2
+2023-11-12 16:32:15.2592 
+Bat dau ReadLog
+2023-11-12 16:32:15.2592 
+Bat dau ReadLog: 1
+2023-11-12 16:32:16.4003 
+ ReadLog1 xong - Count: 1712
+2023-11-12 16:32:16.4504 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 1712 ======== Count: 1712
+2023-11-12 16:32:26.3842 
+Bat dau GetLogData_V2
+2023-11-12 16:32:26.3842 
+Bat dau ReadLog
+2023-11-12 16:32:26.3842 
+Bat dau ReadLog: 1
+2023-11-12 16:32:26.8778 
+ ReadLog1 xong - Count: 158
+2023-11-12 16:32:26.9244 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 158 ======== Count: 158
+2023-11-12 16:32:57.5375 
+Bat dau GetLogData_V2
+2023-11-12 16:32:57.5375 
+Bat dau ReadLog
+2023-11-12 16:32:57.5375 
+Bat dau ReadLog: 1
+2023-11-12 16:32:57.7253 
+ ReadLog1====GetLastError: ErrorCode 0
+2023-11-12 16:32:57.8175 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 16:35:05.8405 
+Bat dau GetLogData_V2
+2023-11-12 16:35:05.8405 
+Bat dau ReadLog
+2023-11-12 16:35:05.8405 
+Bat dau ReadLog: 1
+2023-11-12 16:35:06.3402 
+ ReadLog1 xong - Count: 158
+2023-11-12 16:35:06.3881 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog1 xong - Count: 158 ======== Count: 158
+2023-11-12 16:35:11.0191 
+Bat dau GetLogData_V2
+2023-11-12 16:35:11.0191 
+Bat dau ReadLog
+2023-11-12 16:35:11.0191 
+Bat dau ReadLog2
+2023-11-12 16:35:15.6201 
+ ReadLog2 xong - Count: 10364
+2023-11-12 16:35:15.6756 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 10364 ======== Count: 10364
+2023-11-12 16:35:24.9412 
+Bat dau GetLogData_V2
+2023-11-12 16:35:24.9412 
+Bat dau ReadLog
+2023-11-12 16:35:24.9412 
+Bat dau ReadLog3
+2023-11-12 16:35:29.5149 
+ ReadLog3 xong - Count: 10364
+2023-11-12 16:35:29.5713 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 10364 ======== Count: 10364
+2023-11-12 16:37:21.3710 
+Bat dau ReadType
+2023-11-12 16:37:37.7904 
+ReadType_2 xong: success_True_ machineNumber: 1===============
+2023-11-12 16:37:37.7904 
+Bat dau ReadLog
+2023-11-12 16:37:37.7904 
+Bat dau ReadLog: 1
+2023-11-12 16:37:38.0529 
+ ReadLog1 xong - Count: 67077
+2023-11-12 16:38:09.0658 
+Bat dau GetLogData_V2
+2023-11-12 16:38:09.0658 
+Bat dau ReadLog
+2023-11-12 16:38:09.0658 
+Bat dau ReadLog: 1
+2023-11-12 16:38:09.1685 
+ ReadLog1====GetLastError: ErrorCode -100
+2023-11-12 16:38:09.2675 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0
+2023-11-12 16:38:13.1596 
+Bat dau GetLogData_V2
+2023-11-12 16:38:13.1596 
+Bat dau ReadLog
+2023-11-12 16:38:13.1596 
+Bat dau ReadLog2
+2023-11-12 16:38:31.6112 
+ ReadLog2 xong - Count: 67077
+2023-11-12 16:38:31.7177 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 67077 ======== Count: 67077
+2023-11-12 16:38:38.7246 
+Bat dau GetLogData_V2
+2023-11-12 16:38:38.7246 
+Bat dau ReadLog
+2023-11-12 16:38:38.7246 
+Bat dau ReadLog3
+2023-11-12 16:38:56.1762 
+ ReadLog3 xong - Count: 67077
+2023-11-12 16:38:56.2795 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 67077 ======== Count: 67077
+2023-11-12 16:39:23.9604 
+Bat dau GetLogData_V2
+2023-11-12 16:39:23.9604 
+Bat dau ReadLog
+2023-11-12 16:39:23.9604 
+Bat dau ReadLog3
+2023-11-12 16:39:38.2745 
+ ReadLog3 xong - Count: 34397
+2023-11-12 16:39:38.3225 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog3 xong - Count: 34397 ======== Count: 34397
+2023-11-12 16:40:06.3013 
+Bat dau GetLogData_V2
+2023-11-12 16:40:06.3013 
+Bat dau ReadLog
+2023-11-12 16:40:06.3013 
+Bat dau ReadLog2
+2023-11-12 16:40:20.7223 
+ ReadLog2 xong - Count: 34397
+2023-11-12 16:40:20.7746 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2
+ ReadLog2 xong - Count: 34397 ======== Count: 34397
+2023-11-12 16:40:37.3843 
+Bat dau GetLogData_V2
+2023-11-12 16:40:37.3843 
+Bat dau ReadLog
+2023-11-12 16:40:37.3843 
+Bat dau ReadLog: 1
+2023-11-12 16:40:37.4816 
+ ReadLog1====GetLastError: ErrorCode 0
+2023-11-12 16:40:37.5264 
+ btnGetData_V2ByZkSDKNew_Click: 
+Bat dau GetLogData_V2 ======== Count: 0

@@ -186,13 +186,13 @@ namespace BioMetrixCore
                 if (!int.TryParse(port, out portNumber))
                     throw new Exception("Not a valid port number");
 
-                bool isValidIpA = UniversalStatic.ValidateIP(ipAddress);
-                if (!isValidIpA)
-                    throw new Exception("The Device IP is invalid !!");
+                //bool isValidIpA = UniversalStatic.ValidateIP(ipAddress);
+                //if (!isValidIpA)
+                //    throw new Exception("The Device IP is invalid !!");
 
-                isValidIpA = UniversalStatic.PingTheDevice(ipAddress);
-                if (!isValidIpA)
-                    throw new Exception("The device at " + ipAddress + ":" + port + " did not respond!!");
+                //isValidIpA = UniversalStatic.PingTheDevice(ipAddress);
+                //if (!isValidIpA)
+                //    throw new Exception("The device at " + ipAddress + ":" + port + " did not respond!!");
 
                 string pw = tbxPassWord.Text.Trim();
                 int password = 0;
@@ -209,6 +209,12 @@ namespace BioMetrixCore
                     string deviceInfo = manipulator.FetchDeviceInfo(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()));
                     lblDeviceInfo.Text = deviceInfo;
                 }
+                else
+                {
+                    int code = 0;
+                    objZkeeper.GetLastError(ref code);
+                }
+
 
             }
             catch (Exception ex)
@@ -316,7 +322,7 @@ namespace BioMetrixCore
                 ShowStatusBar(string.Empty, true);
                 string message = string.Empty;
 
-                ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message);
+                ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message, DateTime.Now.AddMonths(-1), DateTime.Now, 2, 1);
                 Logger.LogError($"\btnPullData_Click: {message} ======== Count: {lstMachineInfo.Count}");
 
                 if (lstMachineInfo != null && lstMachineInfo.Count > 0)
@@ -436,6 +442,15 @@ namespace BioMetrixCore
             dgvLogsByHikvision.Controls.Clear();
             dgvLogsByHikvision.Rows.Clear();
             dgvLogsByHikvision.Columns.Clear();
+
+            if (dgvLogDataByZkSDKNew.Controls.Count > 2)
+            {
+                dgvLogDataByZkSDKNew.Controls.RemoveAt(2);
+            }
+            dgvLogDataByZkSDKNew.DataSource = null;
+            dgvLogDataByZkSDKNew.Controls.Clear();
+            dgvLogDataByZkSDKNew.Rows.Clear();
+            dgvLogDataByZkSDKNew.Columns.Clear();
         }
         private void BindToGridView(object list)
         {
@@ -484,6 +499,10 @@ namespace BioMetrixCore
             dgvLogsByHikvision.DataSource = list;
             dgvLogsByHikvision.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UniversalStatic.ChangeGridProperties(dgvLogsByHikvision);
+
+            dgvLogDataByZkSDKNew.DataSource = list;
+            dgvLogDataByZkSDKNew.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            UniversalStatic.ChangeGridProperties(dgvLogDataByZkSDKNew);
         }
 
 
@@ -2710,82 +2729,65 @@ namespace BioMetrixCore
         }
         private List<LogData> GetTimeKeeperDataFromAccess(DateTime fromDate, DateTime toDate, ref string message)
         {
-            var connectionString = "Driver={Microsoft Access Driver (*.mdb)};" + $"Dbq={textPathByAIKYO.Text};";
-            if (!string.IsNullOrWhiteSpace(Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess")))
-            {
-                connectionString = Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess");
-            }
+            var connectionString = "Driver={Microsoft Access Driver (*.mdb)};" + $"Dbq={textPathByAIKYO.Text};Uid=;Pwd=;ExtendedAnsiSQL=1;";
+            //connectionString = "Driver={Microsoft Access Driver (*.mdb)};" + $"Dbq={textPathByAIKYO.Text};Uid=Admin;Pwd=Wse@2021!#$;ExtendedAnsiSQL=1;"; // DB có thiết lập pass
+
+            //if (!string.IsNullOrWhiteSpace(Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess")))
+            //{
+            //    connectionString = Utility.GetAppSetting("ConnectionStringODBCRonaldJackAccess");
+            //}
             List<LogData> timeKeeperDatas = new List<LogData>();
             try
             {
-                //var con = new OdbcConnection();
-                //con.ConnectionString = connectionString;
-                //var cmd = new OdbcCommand { Connection = con };
-                //con.Open();
-                //cmd.CommandText = "SELECT a.UserFullCode, a.UserEnrollNumber, a.TimeStr, a.MachineNo FROM InOutRun a WHERE a.TimeStr BETWEEN ? AND ?;";
-                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = fromDate;
-                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate;
+                var con = new OdbcConnection();
+                con.ConnectionString = connectionString;
+                var cmd = new OdbcCommand { Connection = con };
+                con.Open();
+                // "Driver={Microsoft Access Driver (*.mdb)};DBQ=C:\Users\ADMIN\Desktop\Git\BioMatrix\TaiLieu\AIKYO\RJData.mdb;Uid=;Pwd=;ExtendedAnsiSQL=1;"
+                //cmd.CommandText = "SELECT a.UserFullCode, a.TimeStr FROM InOutRun a;";
 
-                //cmd.CommandText = "SELECT * FROM InOutRun;";
-
-                //System.Data.OleDb.OleDbConnection con = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\Fullshare\\Data\\RJData.mdb;");
-
-                ////cmd.CommandText = "SELECT * FROM InOutRun;";
-                //string query = "SELECT * FROM InOutRun;";
-                //System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(query, con);
-
-                //using (var reader = cmd.ExecuteReader())
-                //{
-                //    while (reader.Read())
-                //    {
-                //        LogData timeKeeperData = new LogData();
-                //        var userID = 1;
-                //        if (reader[0] != null && int.TryParse(reader[0].ToString(), out userID))
-                //        {
-                //            timeKeeperData.UserID = userID.ToString();
-                //            var time = DateTime.Now;
-                //            if(reader[2] != null && DateTime.TryParse(reader[2].ToString(), out time))
-                //            {
-                //                timeKeeperData.CheckTime = time;
-                //                timeKeeperData.DeviceID = reader[3] != null ? reader[3].ToString() : String.Empty;
-                //                timeKeeperDatas.Add(timeKeeperData);
-                //            }
-                //        }
-                //    }
-                //}
-                //con.Close();
+                cmd.CommandText = "SELECT a.UserFullCode, a.TimeStr FROM InOutRun a WHERE a.TimeStr BETWEEN ? AND ?;";
+                cmd.Parameters.Add("?", OdbcType.DateTime).Value = fromDate.Date;
+                cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate.Date.AddDays(1).AddMilliseconds(-1);
 
 
 
-                string connectionString1 =
-                @"Provider=Microsoft.Jet.OLEDB.4.0;" +
-                @"Data Source=C:\Users\ADMIN\Downloads\WiseEyeMix3\WiseEyeMix3.mdb;" +
-                @"User Id=;Password=;";
 
-                string queryString = "SELECT * FROM InOutRun;";
+                // "Driver={Microsoft Access Driver (*.mdb)};DBQ=C:\Users\ADMIN\Desktop\Git\BioMatrix\TaiLieu\Access.mdb;Uid=;Pwd=;ExtendedAnsiSQL=1;"
+                //cmd.CommandText = "SELECT c.USERID, c.CHECKTIME FROM CHECKINOUT c;";
 
-                using (System.Data.OleDb.OleDbConnection connection = new System.Data.OleDb.OleDbConnection(connectionString1))   //tạo lớp kết nối vào .mbd
-                using (System.Data.OleDb.OleDbCommand command = new System.Data.OleDb.OleDbCommand(queryString, connection))    //tạo lớp lệnh sql sử dụng lớp kết nối trên
+                //cmd.CommandText = "SELECT c.USERID, c.CHECKTIME FROM CHECKINOUT c WHERE c.CHECKTIME BETWEEN ? AND ?;";
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = fromDate.Date;
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate.Date.AddDays(1).AddMilliseconds(-1);
+
+
+                // DataBase có dùng mật khẩu admin => tham khảo https://www.connectionstrings.com/access/
+                //"Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=C:\Users\ADMIN\Desktop\Git\BioMatrix\TaiLieu\WiseEyeMix3\WiseEyeMix3.mdb;Uid=Admin;Pwd=Wse@2021!#$;ExtendedAnsiSQL=1;";
+                //cmd.CommandText = "SELECT c.UserEnrollNumber, c.TimeStr FROM CHECKINOUT c;";
+
+                //cmd.CommandText = "SELECT c.UserEnrollNumber, c.TimeStr FROM CHECKINOUT c WHERE c.TimeStr BETWEEN ? AND ?;";
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = fromDate.Date;
+                //cmd.Parameters.Add("?", OdbcType.DateTime).Value = toDate.Date.AddDays(1).AddMilliseconds(-1);
+
+                using (var reader = cmd.ExecuteReader())
                 {
-                    try
+                    while (reader.Read())
                     {
-                        connection.Open();  //bắt đầu kết nối
-                        System.Data.OleDb.OleDbDataReader reader = command.ExecuteReader();  //thực thi sql và trả về kết quả
-
-                        while (reader.Read())  //đọc kết quả
+                        LogData timeKeeperData = new LogData();
+                        var userID = 1;
+                        if (reader[0] != null && int.TryParse(reader[0].ToString(), out userID))
                         {
-                            Console.Write(reader[0].ToString() + ",");
-                            Console.Write(reader[1].ToString() + ",");
-                            Console.WriteLine(reader[2].ToString());
+                            timeKeeperData.UserID = userID.ToString();
+                            var time = DateTime.Now;
+                            if (reader[1] != null && DateTime.TryParse(reader[1].ToString(), out time))
+                            {
+                                timeKeeperData.CheckTime = time;
+                                timeKeeperDatas.Add(timeKeeperData);
+                            }
                         }
-                        reader.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
                     }
                 }
-                return timeKeeperDatas;
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -2793,6 +2795,7 @@ namespace BioMetrixCore
                 Logger.LogInfo($"\n==============GetTimeKeeperDataFromAccess : Exception: {ex.Message}==============");
                 return new List<LogData>();
             }
+            return timeKeeperDatas;
         }
         #endregion
         #region Sunbeam
@@ -3930,7 +3933,7 @@ namespace BioMetrixCore
             {
                 success = ConnectByHikvision(ref message);
             }
-            else if(typeHikvision == 2)
+            else if (typeHikvision == 2)
             {
                 success = ConnectByHikvision_V2(ref message);
             }
@@ -3953,7 +3956,7 @@ namespace BioMetrixCore
             {
                 logs = GetLogsByHikvision(dtFromDateByHikvision.Value.Date, dtToDateByHikvision.Value.Date.AddDays(1).AddSeconds(-1), limit, ref message);
             }
-            else if(typeHikvision == 2)
+            else if (typeHikvision == 2)
             {
                 logs = GetLogDatasByHikvision_V2(ref message);
             }
@@ -5370,7 +5373,7 @@ namespace BioMetrixCore
                 if (IsDeviceConnected)
                 {
                     var serialNo = "";
-                    if(objZkeeper.GetSerialNumber(int.Parse(tbxMachineNumber.Text.Trim()), out serialNo))
+                    if (objZkeeper.GetSerialNumber(int.Parse(tbxMachineNumber.Text.Trim()), out serialNo))
                     {
                         if (string.IsNullOrWhiteSpace(serialNo))
                         {
@@ -5443,6 +5446,147 @@ namespace BioMetrixCore
             this.Cursor = Cursors.Default;
         }
         #endregion
+        #region Zkteco SDK New
+        private void btnPingByZkSDKNew_Click(object sender, EventArgs e)
+        {
+            tbTotalByZkSDKNew.Text = string.Empty;
+            bool isValidIpA = UniversalStatic.ValidateIP(tbIPByZkSDKNew.Text);
+            if (!isValidIpA)
+            {
+                richtbByZkSDKNew.AppendText("\n The Device IP is invalid !!");
+                throw new Exception("The Device IP is invalid !!");
+            }
 
+            isValidIpA = UniversalStatic.PingTheDevice(tbIPByZkSDKNew.Text);
+            if (isValidIpA)
+            {
+                richtbByZkSDKNew.AppendText("\n Ping success !!");
+            }
+            else
+            {
+                richtbByZkSDKNew.AppendText("\n Ping false !!");
+            }
+        }
+        private void btnConnectByZkSDKNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tbTotalByZkSDKNew.Text = string.Empty;
+
+                int portNumber = 4370;
+                if (!int.TryParse(tbPortByZkSDKNew.Text.Trim(), out portNumber)) richtbByZkSDKNew.AppendText("\n Not a valid port number");
+
+                int password = 0;
+                if (!int.TryParse(tbPassByZkSDKNew.Text.Trim(), out password)) richtbByZkSDKNew.AppendText("\n Not a valid password number");
+
+                objZkeeper = new ZkemClient(RaiseDeviceEvent);
+                objZkeeper.Beep(5000);
+                objZkeeper.SetCommPassword(password);
+                IsDeviceConnected = objZkeeper.Connect_Net(tbIPByZkSDKNew.Text, portNumber);
+                richtbByZkSDKNew.AppendText($"\n Connect_Net: {IsDeviceConnected}");
+                Logger.LogInfo($"\n btnConnectByZkSDKNew_Click Connect_Net: {IsDeviceConnected}");
+
+                if (IsDeviceConnected)
+                {
+                    string deviceInfo = manipulator.FetchDeviceInfo(objZkeeper, int.Parse(tbMachineNumberByZkSDKNew.Text.Trim()));
+                    richtbByZkSDKNew.AppendText($"\n {deviceInfo}");
+                }
+                else
+                {
+                    int code = 0;
+                    objZkeeper.GetLastError(ref code);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n btnConnectByZkSDKNew_Click Exception: {ex.Message}");
+                richtbByZkSDKNew.AppendText($"\n {ex.Message}");
+            }
+
+        }
+
+        private void btnGetDataByZkSDKNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowStatusBar(string.Empty, true);
+                string message = string.Empty;
+                tbTotalByZkSDKNew.Text = string.Empty;
+
+                int readType = 1, readLog = 1;
+                int.TryParse(tbReadTypeByZkSDKNew.Text, out readType);
+                int.TryParse(tbReadLogByZkSDKNew.Text, out readLog);
+
+                ICollection<MachineInfo> lstMachineInfo = manipulator.GetLogData(objZkeeper, int.Parse(tbxMachineNumber.Text.Trim()), ref message, dtFromDateByZkSDKNew.Value, dtToDateByZkSDKNew.Value, readType, readLog);
+                Logger.LogInfo($"\n btnGetDataByZkSDKNew_Click: {message} ======== Count: {lstMachineInfo.Count}");
+
+                if (lstMachineInfo != null && lstMachineInfo.Count > 0)
+                {
+                    tbTotalByZkSDKNew.Text = lstMachineInfo.Count.ToString();
+                    BindToGridView(lstMachineInfo);
+                    richtbByZkSDKNew.AppendText($"\n {lstMachineInfo.Count} records found !!");
+                }
+                else richtbByZkSDKNew.AppendText("\n No records found");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n btnGetDataByZkSDKNew_Click Exception: {ex.Message}");
+                richtbByZkSDKNew.AppendText($"\n {ex.Message}");
+            }
+        }
+        private void btnConnect_V2ByZkSDKNew_Click(object sender, EventArgs e)
+        {
+            int ret = _SDKHelper.sta_ConnectTCP(lbSysOutputInfo, tbIPByZkSDKNew.Text.Trim(), tbPortByZkSDKNew.Text.Trim(), tbPassByZkSDKNew.Text.Trim());
+            if (_SDKHelper.GetConnectState())
+            {
+                _SDKHelper.sta_getBiometricType();
+            }
+            if (ret == 1)
+            {
+                richtbByZkSDKNew.AppendText("\n Connect_V2 Success");
+                getCapacityInfo();
+                getDeviceInfo();
+
+            }
+            else if (ret == -2)
+            {
+                richtbByZkSDKNew.AppendText("\n Connect_V2 Fail");
+            }
+            if (_SDKHelper.GetConnectState())
+            {
+                _SDKHelper.sta_getBiometricType();
+            }
+        }
+        private void btnGetData_V2ByZkSDKNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowStatusBar(string.Empty, true);
+                string message = string.Empty;
+                tbTotalByZkSDKNew.Text = string.Empty;
+
+                int readLog = 1;
+                int.TryParse(tbReadLogByZkSDKNew.Text, out readLog);
+
+
+                ICollection<MachineInfo> lstMachineInfo = _SDKHelper.GetLogData(int.Parse(tbMachineNumberByZkSDKNew.Text.Trim()), ref message, dtFromDateByZkSDKNew.Value, dtToDateByZkSDKNew.Value, readLog);
+                Logger.LogInfo($"\n btnGetData_V2ByZkSDKNew_Click: {message} ======== Count: {lstMachineInfo.Count}");
+
+                if (lstMachineInfo != null && lstMachineInfo.Count > 0)
+                {
+                    tbTotalByZkSDKNew.Text = lstMachineInfo.Count.ToString();
+                    BindToGridView(lstMachineInfo);
+                    richtbByZkSDKNew.AppendText($"\n {lstMachineInfo.Count} records found !!");
+                }
+                else richtbByZkSDKNew.AppendText("\n No records found");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"\n btnGetData_V2ByZkSDKNew_Click Exception: {ex.Message}");
+                richtbByZkSDKNew.AppendText($"\n {ex.Message}");
+            }
+        }
+        #endregion
     }
 }

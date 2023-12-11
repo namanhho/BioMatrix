@@ -1,18 +1,21 @@
-﻿using System;
+﻿using Microsoft.Exchange.WebServices.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using zkemkeeper;
 
 namespace BioMetrixCore.Utilities
 {
     public class SDKHelper
     {
-        public zkemkeeper.CZKEMClass axCZKEM1 = new zkemkeeper.CZKEMClass();
+        public CZKEMClass axCZKEM1 = new CZKEMClass();
 
         public List<Employee> employeeList = new List<Employee>();
         public List<BioTemplate> bioTemplateList = new List<BioTemplate>();
@@ -4099,11 +4102,11 @@ namespace BioMetrixCore.Utilities
 
         public int sta_readAttLog(ListBox lblOutputInfo, DataTable dt_log)
         {
-            if (GetConnectState() == false)
-            {
-                lblOutputInfo.Items.Add("*Please connect first!");
-                return -1024;
-            }
+            //if (GetConnectState() == false)
+            //{
+            //    lblOutputInfo.Items.Add("*Please connect first!");
+            //    return -1024;
+            //}
 
             int ret = 0;
 
@@ -4158,11 +4161,11 @@ namespace BioMetrixCore.Utilities
 
         public int sta_readLogByPeriod(ListBox lblOutputInfo, DataTable dt_logPeriod, string fromTime, string toTime)
         {
-            if (GetConnectState() == false)
-            {
-                lblOutputInfo.Items.Add("*Please connect first!");
-                return -1024;
-            }
+            //if (GetConnectState() == false)
+            //{
+            //    lblOutputInfo.Items.Add("*Please connect first!");
+            //    return -1024;
+            //}
 
             int ret = 0;
 
@@ -4216,6 +4219,6857 @@ namespace BioMetrixCore.Utilities
             axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
 
             return ret;
+        }
+
+        public ICollection<MachineInfo> GetLogData(int machineNumber, ref string message, DateTime fromDate, DateTime toDate, int readLog = 1)
+        {
+            message += $"\nBat dau GetLogData_V2";
+            Logger.LogInfo($"\nBat dau GetLogData_V2");
+            ICollection<MachineInfo> lstEnrollData = new List<MachineInfo>();
+            var fromTime = fromDate.ToString("yyyy-MM-dd HH:mm:ss");
+            var toTime = toDate.ToString("yyyy-MM-dd HH:mm:ss");
+
+            int ret = 0;
+            string sdwEnrollNumber = "";
+            int idwVerifyMode = 0;
+            int idwInOutMode = 0;
+            int idwYear = 0;
+            int idwMonth = 0;
+            int idwDay = 0;
+            int idwHour = 0;
+            int idwMinute = 0;
+            int idwSecond = 0;
+            int idwWorkcode = 0;
+
+            string dwEnrollNumber1 = "";
+            int dwVerifyMode = 0;
+            int dwInOutMode = 0;
+            int dwYear = 0;
+            int dwMonth = 0;
+            int dwDay = 0;
+            int dwHour = 0;
+            int dwMinute = 0;
+            int dwSecond = 0;
+            int dwWorkCode = 0;
+
+            int BYear = 0, BMonth = 0, BDay = 0, BHour = 0, BMinute = 0, EYear = 0, EMonth = 0, EDay = 0, EHour = 0, EMinute = 0;
+            int number = 0;
+            int number1 = 0;
+            int number2 = 0;
+            int number3 = 0;
+            int number4 = 0;
+            int number5 = 0;
+            int number6 = 0;
+            int number7 = 0;
+            string str = string.Empty;
+            int dwEnrollNumber = 0;
+            try
+            {
+                /// ========= readType ==========
+                // ReadSuperLogData
+                // ReadAllSLogData
+                // ReadGeneralLogData
+                // ReadAllGLogData
+                // ReadTimeGLogData
+                // ReadNewGLogData
+                // ReadAllBellSchData
+
+
+                /// ============== readLog ============
+                // GetGeneralLogData
+                // GetSuperLogData
+                // GetAllSLogData
+                // GetAllGLogData
+                // GetGeneralLogDataStr
+                // GetGeneralExtLogData
+                // SSR_GetGeneralLogData
+                // SSR_GetSuperLogData
+                // GetSuperLogData2
+                // GetSuperLogDataEx
+                // SSR_GetGeneralLogDataEx
+                // ReadSuperLogDataEx
+                // ReadLastestLogData
+
+
+                // ReadTurnInfo
+                // SSR_OutPutHTMLRep
+
+                Logger.LogInfo($"\nBat dau ReadLog");
+                switch (readLog)
+                {
+                    case 0:
+                        Logger.LogInfo($"\nBat dau ReadLog: 1");
+                        axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(machineNumber, fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog1 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog1 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog1 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog1====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        //axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog2");
+                        //axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(machineNumber))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog2 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog2 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog2 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog2====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        //axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog3");
+                        //axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(machineNumber))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog3 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog3 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog3 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog3====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        //axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+
+
+
+                        /// ================================== ReadGeneralLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog4");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog4 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog4 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog4 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog4====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog5");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog5 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog5 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog5 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog5====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog6");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog6 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog6 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog6 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog6====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog7");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog7 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog7 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog7 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog7====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog8");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog8 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog8 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog8 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog8====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog9");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog9 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog9 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog9 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog9====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+
+                    /// ================================== ReadAllGLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog10");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog10 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog10 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog10 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog10====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog11");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog11 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog11 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog11 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog11====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog12");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog12 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog12 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog12 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog12====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog13");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog13 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog13 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog13 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog13====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog14");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog14 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog14 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog14 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog14====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog15");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog15 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog15 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog15 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog15====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+                    /// ================================== ReadSuperLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog16");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog16 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog16 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog16 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog16====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog17");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog17 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog17 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog17 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog17====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog18");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog18 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog18 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog18 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog18====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog19");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog19 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog19 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog19 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog19====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog20");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog20 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog20 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog20 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog20====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog21");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog21 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog21 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog21 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog21====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog22");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog22 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog22 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog22 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog22====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog23");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog23 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog23 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog23 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog23====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog24");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog24 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog24 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog24 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog24====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog25");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog25 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog25 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog25 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog25====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog26");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog26 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog26 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog26 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog26====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog27");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog27 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog27 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog27 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog27====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog28");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog28 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog28 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog28 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog28====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog29");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog29 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog29 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog29 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog29====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+                    /// ================================== ReadAllSLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog30");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog30 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog30 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog30 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog30====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog31");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog31 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog31 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog31 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog31====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog32");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog32 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog32 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog32 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog32====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog33");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog33 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog33 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog33 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog33====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog34");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog34 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog34 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog34 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog34====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog35");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog35 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog35 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog35 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog35====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog36");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog36 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog36 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog36 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog36====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog37");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog37 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog37 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog37 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog37====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog38");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog38 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog38 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog38 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog38====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog39");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog39 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog39 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog39 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog39====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog40");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog40 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog40 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog40 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog40====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog41");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog41 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog41 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog41 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog41====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog42");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog42 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog42 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog42 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog42====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog43");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog43 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog43 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog43 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog43====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+
+
+
+                    /// ================================== ReadGeneralLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog44");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog44 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog44 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog44 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog44====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog45");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog45 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog45 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog45 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog45====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog46");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog46 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog46 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog46 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog46====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog47");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog47 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog47 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog47 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog47====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog48");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog48 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog48 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog48 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog48====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog49");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog49 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog49 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog49 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog49====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog50");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog50 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog50 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog50 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog50====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog51");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog51 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog51 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog51 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog51====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog52");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog52 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog52 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog52 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog52====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog53");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog53 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog53 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog53 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog53====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog54");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog54 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog54 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog54 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog54====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog55");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog55 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog55 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog55 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog55====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog56");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog56 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog56 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog56 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog56====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog57");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog57 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog57 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog57 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog57====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+
+
+                    /// ================================== ReadAllGLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog58");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog58 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog58 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog58 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog58====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog59");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog59 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog59 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog59 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog59====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog60");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog60 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog60 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog60 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog60====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog61");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog61 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog61 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog61 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog61====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog62");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog62 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog62 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog62 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog62====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog63");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog63 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog63 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog63 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog63====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog64");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog64 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog64 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog64 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog64====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog65");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog65 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog65 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog65 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog65====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog66");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog66 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog66 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog66 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog66====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog67");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog67 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog67 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog67 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog67====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog68");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog68 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog68 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog68 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog68====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog69");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog69 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog69 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog69 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog69====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog70");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog70 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog70 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog70 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog70====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog71");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog71 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog71 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog71 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog71====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+
+                    /// ================================== ReadTimeGLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog72");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog72 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog72 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog72 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog72====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog73");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog73 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog73 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog73 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog73====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog74");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog74 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog74 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog74 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog74====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog75");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog75 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog75 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog75 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog75====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog76");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog76 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog76 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog76 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog76====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog77");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog77 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog77 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog77 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog77====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog78");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog78 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog78 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog78 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog78====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog79");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog79 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog79 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog79 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog79====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog80");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog80 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog80 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog80 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog80====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog81");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog81 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog81 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog81 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog81====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog82");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog82 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog82 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog82 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog82====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog83");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog83 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog83 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog83 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog83====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog84");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog84 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog84 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog84 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog84====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog85");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog85 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog85 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog85 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog85====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+
+                    /// ================================== ReadNewGLogData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog86");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog86 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog86 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog86 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog86====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog87");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog87 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog87 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog87 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog87====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog88");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog88 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog88 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog88 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog88====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog89");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog89 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog89 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog89 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog89====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog90");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog90 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog90 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog90 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog90====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog91");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog91 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog91 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog91 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog91====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog92");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog92 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog92 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog92 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog92====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog93");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog93 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog93 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog93 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog93====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog94");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog94 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog94 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog94 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog94====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog95");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog95 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog95 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog95 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog95====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog96");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog96 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog96 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog96 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog96====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog97");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog97 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog97 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog97 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog97====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog98");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog98 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog98 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog98 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog98====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog99");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog99 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog99 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog99 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog99====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+
+                    /// ================================== ReadAllBellSchData ================================================================
+                        Logger.LogInfo($"\nBat dau ReadLog100");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog100 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog100 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog100 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog100====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog101");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog101 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog101 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog101 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog101====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog102");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog102 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog102 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog102 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog102====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog103");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog103 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog103 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog103 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog103====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog104");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog104 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog104 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog104 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog104====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog105");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog105 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog105 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog105 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog105====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog106");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog106 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog106 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog106 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog106====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog107");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog107 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog107 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog107 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog107====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog108");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog108 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog108 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog108 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog108====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog109");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog109 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog109 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog109 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog109====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog110");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog110 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog110 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog110 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog110====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog111");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog111 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog111 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog111 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog111====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog112");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog112 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog112 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog112 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog112====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+
+
+                        Logger.LogInfo($"\nBat dau ReadLog113");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog113 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog113 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog113 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog113====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 1:
+                        Logger.LogInfo($"\nBat dau ReadLog: 1");
+                        axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(machineNumber, fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog1 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog1 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog1 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog1====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+                        break;
+                    case 2:
+                        Logger.LogInfo($"\nBat dau ReadLog2");
+                        axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(machineNumber))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog2 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog2 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog2 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog2====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+                        break;
+                    case 3:
+                        Logger.LogInfo($"\nBat dau ReadLog3");
+                        axCZKEM1.EnableDevice(machineNumber, false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(machineNumber))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(machineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog3 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog3 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog3 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog3====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(machineNumber, true);//enable the device
+                        break;
+
+
+
+                    /// ================================== ReadGeneralLogData ================================================================
+
+
+                    case 4:
+                        Logger.LogInfo($"\nBat dau ReadLog4");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number2, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog4 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog4 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog4 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog4====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 5:
+                        Logger.LogInfo($"\nBat dau ReadLog5");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number2, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog5 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog5 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog5 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog5====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 6:
+                        Logger.LogInfo($"\nBat dau ReadLog6");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number2, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog6 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog6 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog6 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog6====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 7:
+                        Logger.LogInfo($"\nBat dau ReadLog7");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog7 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog7 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog7 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog7====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 8:
+                        Logger.LogInfo($"\nBat dau ReadLog8");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog8 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog8 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog8 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog8====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 9:
+                        Logger.LogInfo($"\nBat dau ReadLog9");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog9 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog9 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog9 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog9====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+
+                    /// ================================== ReadAllGLogData ================================================================
+                    case 10:
+                        Logger.LogInfo($"\nBat dau ReadLog10");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog10 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog10 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog10 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog10====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 11:
+                        Logger.LogInfo($"\nBat dau ReadLog11");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog11 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog11 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog11 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog11====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 12:
+                        Logger.LogInfo($"\nBat dau ReadLog12");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog12 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog12 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog12 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog12====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 13:
+                        Logger.LogInfo($"\nBat dau ReadLog13");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog13 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog13 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog13 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog13====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 14:
+                        Logger.LogInfo($"\nBat dau ReadLog14");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog14 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog14 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog14 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog14====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 15:
+                        Logger.LogInfo($"\nBat dau ReadLog15");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog15 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog15 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog15 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog15====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+                    /// ================================== ReadSuperLogData ================================================================
+                    case 16:
+                        int number16 = 1;
+                        Logger.LogInfo($"\nBat dau ReadLog16");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number16, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog16 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog16 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog16 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog16====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 17:
+                        Logger.LogInfo($"\nBat dau ReadLog17");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog17 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog17 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog17 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog17====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 18:
+                        Logger.LogInfo($"\nBat dau ReadLog18");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog18 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog18 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog18 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog18====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 19:
+                        Logger.LogInfo($"\nBat dau ReadLog19");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog19 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog19 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog19 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog19====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 20:
+                        Logger.LogInfo($"\nBat dau ReadLog20");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog20 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog20 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog20 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog20====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 21:
+                        Logger.LogInfo($"\nBat dau ReadLog21");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog21 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog21 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog21 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog21====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 22:
+                        Logger.LogInfo($"\nBat dau ReadLog22");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog22 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog22 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog22 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog22====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 23:
+                        Logger.LogInfo($"\nBat dau ReadLog23");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog23 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog23 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog23 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog23====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 24:
+                        Logger.LogInfo($"\nBat dau ReadLog24");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog24 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog24 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog24 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog24====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 25:
+                        Logger.LogInfo($"\nBat dau ReadLog25");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog25 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog25 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog25 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog25====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 26:
+                        Logger.LogInfo($"\nBat dau ReadLog26");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog26 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog26 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog26 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog26====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 27:
+                        Logger.LogInfo($"\nBat dau ReadLog27");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog27 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog27 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog27 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog27====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 28:
+                        Logger.LogInfo($"\nBat dau ReadLog28");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog28 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog28 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog28 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog28====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 29:
+                        Logger.LogInfo($"\nBat dau ReadLog29");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadSuperLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog29 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog29 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog29 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog29====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+                    
+
+                    /// ================================== ReadAllSLogData ================================================================
+
+
+
+
+                    case 30:
+                        Logger.LogInfo($"\nBat dau ReadLog30");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number1, ref number2, ref number3, ref number4, ref number5, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog30 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog30 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog30 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog30====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 31:
+                        Logger.LogInfo($"\nBat dau ReadLog31");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog31 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog31 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog31 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog31====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 32:
+                        Logger.LogInfo($"\nBat dau ReadLog32");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog32 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog32 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog32 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog32====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 33:
+                        Logger.LogInfo($"\nBat dau ReadLog33");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog33 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog33 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog33 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog33====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 34:
+                        Logger.LogInfo($"\nBat dau ReadLog34");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog34 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog34 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog34 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog34====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 35:
+                        Logger.LogInfo($"\nBat dau ReadLog35");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog35 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog35 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog35 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog35====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 36:
+                        Logger.LogInfo($"\nBat dau ReadLog36");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog36 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog36 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog36 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog36====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 37:
+                        Logger.LogInfo($"\nBat dau ReadLog37");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog37 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog37 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog37 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog37====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 38:
+                        Logger.LogInfo($"\nBat dau ReadLog38");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog38 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog38 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog38 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog38====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 39:
+                        Logger.LogInfo($"\nBat dau ReadLog39");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog39 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog39 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog39 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog39====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 40:
+                        Logger.LogInfo($"\nBat dau ReadLog40");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog40 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog40 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog40 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog40====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 41:
+                        Logger.LogInfo($"\nBat dau ReadLog41");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog41 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog41 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog41 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog41====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 42:
+                        Logger.LogInfo($"\nBat dau ReadLog42");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog42 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog42 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog42 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog42====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 43:
+                        Logger.LogInfo($"\nBat dau ReadLog43");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllSLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog43 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog43 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog43 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog43====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+
+
+
+                    /// ================================== ReadGeneralLogData ================================================================
+
+
+                    case 44:
+                        Logger.LogInfo($"\nBat dau ReadLog44");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog44 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog44 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog44 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog44====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 45:
+                        Logger.LogInfo($"\nBat dau ReadLog45");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog45 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog45 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog45 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog45====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 46:
+                        Logger.LogInfo($"\nBat dau ReadLog46");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog46 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog46 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog46 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog46====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 47:
+                        Logger.LogInfo($"\nBat dau ReadLog47");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog47 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog47 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog47 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog47====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 48:
+                        Logger.LogInfo($"\nBat dau ReadLog48");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog48 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog48 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog48 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog48====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 49:
+                        Logger.LogInfo($"\nBat dau ReadLog49");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog49 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog49 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog49 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog49====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 50:
+                        Logger.LogInfo($"\nBat dau ReadLog50");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog50 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog50 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog50 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog50====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 51:
+                        Logger.LogInfo($"\nBat dau ReadLog51");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog51 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog51 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog51 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog51====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 52:
+                        Logger.LogInfo($"\nBat dau ReadLog52");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog52 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog52 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog52 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog52====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 53:
+                        Logger.LogInfo($"\nBat dau ReadLog53");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog53 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog53 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog53 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog53====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 54:
+                        Logger.LogInfo($"\nBat dau ReadLog54");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog54 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog54 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog54 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog54====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 55:
+                        Logger.LogInfo($"\nBat dau ReadLog55");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog55 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog55 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog55 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog55====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 56:
+                        Logger.LogInfo($"\nBat dau ReadLog56");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog56 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog56 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog56 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog56====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 57:
+                        Logger.LogInfo($"\nBat dau ReadLog57");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadGeneralLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog57 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog57 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog57 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog57====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+
+
+                    /// ================================== ReadAllGLogData ================================================================
+
+
+                    case 58:
+                        Logger.LogInfo($"\nBat dau ReadLog58");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog58 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog58 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog58 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog58====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 59:
+                        Logger.LogInfo($"\nBat dau ReadLog59");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog59 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog59 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog59 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog59====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 60:
+                        Logger.LogInfo($"\nBat dau ReadLog60");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog60 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog60 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog60 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog60====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 61:
+                        Logger.LogInfo($"\nBat dau ReadLog61");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog61 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog61 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog61 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog61====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 62:
+                        Logger.LogInfo($"\nBat dau ReadLog62");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog62 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog62 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog62 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog62====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 63:
+                        Logger.LogInfo($"\nBat dau ReadLog63");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog63 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog63 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog63 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog63====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 64:
+                        Logger.LogInfo($"\nBat dau ReadLog64");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog64 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog64 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog64 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog64====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 65:
+                        Logger.LogInfo($"\nBat dau ReadLog65");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog65 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog65 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog65 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog65====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 66:
+                        Logger.LogInfo($"\nBat dau ReadLog66");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog66 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog66 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog66 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog66====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 67:
+                        Logger.LogInfo($"\nBat dau ReadLog67");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog67 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog67 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog67 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog67====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 68:
+                        Logger.LogInfo($"\nBat dau ReadLog68");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog68 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog68 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog68 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog68====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 69:
+                        Logger.LogInfo($"\nBat dau ReadLog69");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog69 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog69 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog69 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog69====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 70:
+                        Logger.LogInfo($"\nBat dau ReadLog70");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog70 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog70 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog70 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog70====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 71:
+                        Logger.LogInfo($"\nBat dau ReadLog71");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog71 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog71 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog71 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog71====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+
+                    /// ================================== ReadTimeGLogData ================================================================
+
+
+                    case 72:
+                        Logger.LogInfo($"\nBat dau ReadLog72");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog72 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog72 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog72 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog72====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 73:
+                        Logger.LogInfo($"\nBat dau ReadLog73");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog73 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog73 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog73 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog73====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 74:
+                        Logger.LogInfo($"\nBat dau ReadLog74");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog74 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog74 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog74 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog74====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 75:
+                        Logger.LogInfo($"\nBat dau ReadLog75");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog75 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog75 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog75 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog75====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 76:
+                        Logger.LogInfo($"\nBat dau ReadLog76");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog76 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog76 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog76 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog76====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 77:
+                        Logger.LogInfo($"\nBat dau ReadLog77");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog77 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog77 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog77 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog77====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 78:
+                        Logger.LogInfo($"\nBat dau ReadLog78");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog78 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog78 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog78 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog78====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 79:
+                        Logger.LogInfo($"\nBat dau ReadLog79");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog79 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog79 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog79 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog79====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 80:
+                        Logger.LogInfo($"\nBat dau ReadLog80");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog80 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog80 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog80 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog80====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 81:
+                        Logger.LogInfo($"\nBat dau ReadLog81");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog81 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog81 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog81 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog81====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 82:
+                        Logger.LogInfo($"\nBat dau ReadLog82");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog82 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog82 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog82 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog82====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 83:
+                        Logger.LogInfo($"\nBat dau ReadLog83");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog83 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog83 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog83 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog83====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 84:
+                        Logger.LogInfo($"\nBat dau ReadLog84");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog84 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog84 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog84 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog84====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 85:
+                        Logger.LogInfo($"\nBat dau ReadLog85");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadTimeGLogData(GetMachineNumber(), fromTime, toTime))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog85 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog85 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog85 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog85====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+
+                    /// ================================== ReadNewGLogData ================================================================
+
+
+                    case 86:
+                        Logger.LogInfo($"\nBat dau ReadLog86");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog86 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog86 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog86 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog86====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 87:
+                        Logger.LogInfo($"\nBat dau ReadLog87");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog87 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog87 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog87 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog87====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 88:
+                        Logger.LogInfo($"\nBat dau ReadLog88");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog88 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog88 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog88 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog88====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 89:
+                        Logger.LogInfo($"\nBat dau ReadLog89");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog89 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog89 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog89 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog89====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 90:
+                        Logger.LogInfo($"\nBat dau ReadLog90");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog90 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog90 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog90 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog90====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 91:
+                        Logger.LogInfo($"\nBat dau ReadLog91");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog91 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog91 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog91 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog91====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 92:
+                        Logger.LogInfo($"\nBat dau ReadLog92");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog92 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog92 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog92 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog92====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 93:
+                        Logger.LogInfo($"\nBat dau ReadLog93");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog93 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog93 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog93 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog93====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 94:
+                        Logger.LogInfo($"\nBat dau ReadLog94");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog94 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog94 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog94 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog94====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 95:
+                        Logger.LogInfo($"\nBat dau ReadLog95");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog95 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog95 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog95 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog95====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 96:
+                        Logger.LogInfo($"\nBat dau ReadLog96");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog96 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog96 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog96 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog96====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 97:
+                        Logger.LogInfo($"\nBat dau ReadLog97");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog97 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog97 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog97 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog97====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 98:
+                        Logger.LogInfo($"\nBat dau ReadLog98");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog98 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog98 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog98 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog98====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 99:
+                        Logger.LogInfo($"\nBat dau ReadLog99");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadNewGLogData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog99 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog99 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog99 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog99====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+
+
+
+
+                    /// ================================== ReadAllBellSchData ================================================================
+
+
+                    case 100:
+                        Logger.LogInfo($"\nBat dau ReadLog100");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllSLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog100 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog100 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog100 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog100====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 101:
+                        Logger.LogInfo($"\nBat dau ReadLog101");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog101 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog101 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog101 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog101====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 102:
+                        Logger.LogInfo($"\nBat dau ReadLog102");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog102 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog102 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog102 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog102====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 103:
+                        Logger.LogInfo($"\nBat dau ReadLog103");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog103 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog103 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog103 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog103====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 104:
+                        Logger.LogInfo($"\nBat dau ReadLog104");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetAllGLogData(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog104 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog104 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog104 xong - Count: {lstEnrollData.Count}");
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog104====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 105:
+                        Logger.LogInfo($"\nBat dau ReadLog105");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            string TimeStr1 = string.Empty;
+                            while (axCZKEM1.GetGeneralLogDataStr(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref TimeStr1))
+                            {
+                                string inputDate = $"ReadLog105 - {TimeStr1}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog105 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog105 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog105====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 106:
+                        Logger.LogInfo($"\nBat dau ReadLog106");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetGeneralExtLogData(GetMachineNumber(), ref dwEnrollNumber, ref dwVerifyMode, ref dwInOutMode, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond, ref number, ref number2))
+                            {
+                                string inputDate = $"ReadLog106 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog106 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog106 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog106====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 107:
+                        Logger.LogInfo($"\nBat dau ReadLog107");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogData(GetMachineNumber(), out sdwEnrollNumber, out idwVerifyMode,
+                                        out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                            {
+                                string inputDate = $" ReadLog107 - {idwDay}/{idwMonth}/{idwYear} {idwHour}:{idwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                int dwEnroll = 0;
+                                int.TryParse(sdwEnrollNumber, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog107 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog107 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog107====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 108:
+                        Logger.LogInfo($"\nBat dau ReadLog108");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            string time = string.Empty;
+                            while (axCZKEM1.SSR_GetSuperLogData(GetMachineNumber(), out number, out str, out str, out number, out time, out number, out number, out number))
+                            {
+                                string inputDate = $"ReadLog108 - {time}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog108 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog108 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog108====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 109:
+                        Logger.LogInfo($"\nBat dau ReadLog109");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogData2(GetMachineNumber(), ref number, ref dwEnrollNumber, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref number))//get records from the memory
+                            {
+                                string inputDate = $"ReadLog109 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog109 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog109 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog109====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 110:
+                        Logger.LogInfo($"\nBat dau ReadLog110");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.GetSuperLogDataEx(GetMachineNumber(), ref dwEnrollNumber1, ref number, ref number, ref number, ref number, ref number, ref dwYear, ref dwMonth, ref dwDay, ref dwHour, ref dwMinute, ref dwSecond))
+                            {
+                                string inputDate = $"ReadLog110 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog110 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog110 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog110====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 111:
+                        Logger.LogInfo($"\nBat dau ReadLog111");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.SSR_GetGeneralLogDataEx(GetMachineNumber(), out dwEnrollNumber1, out dwVerifyMode, out dwInOutMode, out dwYear, out dwMonth, out dwDay, out dwHour, out dwMinute, out dwSecond, out str))
+                            {
+                                string inputDate = $" ReadLog111 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                int dwEnroll = 0;
+                                int.TryParse(dwEnrollNumber1, out dwEnroll);
+                                objInfo.IndRegID = dwEnroll;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog111 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog111 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog111====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 112:
+                        Logger.LogInfo($"\nBat dau ReadLog112");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadSuperLogDataEx(GetMachineNumber(), BYear, BMonth, BDay, BHour, BMinute, number, EYear, EMonth, EDay, EHour, EMinute, number, number))
+                            {
+                                string inputDate = $"ReadLog112 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog112 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog112 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog112====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                    case 113:
+                        Logger.LogInfo($"\nBat dau ReadLog113");
+                        axCZKEM1.EnableDevice(GetMachineNumber(), false);//disable the device
+                        if (axCZKEM1.ReadAllBellSchData(GetMachineNumber()))
+                        {
+                            while (axCZKEM1.ReadLastestLogData(GetMachineNumber(), number, dwYear, dwMonth, dwDay, dwHour, dwMinute, dwSecond))
+                            {
+                                string inputDate = $"ReadLog113 - {dwDay}/{dwMonth}/{dwYear} {dwHour}:{dwMinute}";
+
+                                MachineInfo objInfo = new MachineInfo();
+                                objInfo.MachineNumber = GetMachineNumber();
+                                objInfo.IndRegID = dwEnrollNumber;
+                                objInfo.DateTimeRecord = inputDate;
+
+                                lstEnrollData.Add(objInfo);
+                            }
+                            ret = 1;
+                            message += $"\n ReadLog113 xong - Count: {lstEnrollData.Count}";
+                            Logger.LogInfo($"\n ReadLog113 xong - Count: {lstEnrollData.Count}");
+
+                        }
+                        else
+                        {
+                            axCZKEM1.GetLastError(ref idwErrorCode);
+                            ret = idwErrorCode;
+                            Logger.LogInfo($"\n ReadLog113====GetLastError: ErrorCode {idwErrorCode}");
+                        }
+                        axCZKEM1.EnableDevice(GetMachineNumber(), true);//enable the device
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                message += $"\nLog Exception: {ex.Message}";
+            }
+
+
+            return lstEnrollData;
         }
 
         public int sta_DeleteAttLog(ListBox lblOutputInfo)

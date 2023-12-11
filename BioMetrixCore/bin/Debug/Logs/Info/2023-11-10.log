@@ -1,0 +1,72 @@
+2023-11-10 21:09:50.4067 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [HY024] [Microsoft][ODBC Microsoft Access Driver] '(unknown)' is not a valid path.  Make sure that the path name is spelled correctly and that you are connected to the server on which the file resides.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x1dac Thread 0x25f0 DBC 0x6bc4004 Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [IM006] [Microsoft][ODBC Driver Manager] Driver's SQLSetConnectAttr failed
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x1dac Thread 0x25f0 DBC 0x6bc4004 Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [HY024] [Microsoft][ODBC Microsoft Access Driver] '(unknown)' is not a valid path.  Make sure that the path name is spelled correctly and that you are connected to the server on which the file resides.==============
+2023-11-10 21:25:49.3326 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [42000] [Microsoft][ODBC Microsoft Access Driver] Not a valid password.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x5ca0 Thread 0x5840 DBC 0x6384854 Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [IM006] [Microsoft][ODBC Driver Manager] Driver's SQLSetConnectAttr failed
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01000] [Microsoft][ODBC Microsoft Access Driver]General Warning Unable to open registry key 'Temporary (volatile) Jet DSN for process 0x5ca0 Thread 0x5840 DBC 0x6384854 Jet'.
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute User Id
+ERROR [01S00] [Microsoft][ODBC Microsoft Access Driver]Invalid connection string attribute Password
+ERROR [42000] [Microsoft][ODBC Microsoft Access Driver] Not a valid password.==============
+2023-11-10 21:30:33.6068 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [IM002] [Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified==============
+2023-11-10 21:41:58.1576 
+==============GetTimeKeeperDataFromAccess : Exception: ERROR [IM002] [Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified==============

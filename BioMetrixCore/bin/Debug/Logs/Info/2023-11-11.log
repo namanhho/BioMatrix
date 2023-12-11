@@ -1,0 +1,300 @@
+2023-11-11 00:06:28.2996 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:08:40.6379 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:08:52.8689 
+Bat dau ReadType
+2023-11-11 00:09:13.5808 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:09:13.5808 
+Bat dau ReadLog
+2023-11-11 00:09:13.5808 
+Bat dau ReadLog: 1
+2023-11-11 00:09:13.7473 
+ ReadLog1 - Count: 41840
+2023-11-11 00:09:20.7675 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1 - Count: 41840 ======== Count: 41840
+2023-11-11 00:10:02.8209 
+Bat dau ReadType
+2023-11-11 00:10:28.6957 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:10:29.8924 
+Bat dau ReadLog
+2023-11-11 00:10:30.8698 
+Bat dau ReadLog: 1
+2023-11-11 00:10:36.8614 
+ ReadLog1 - Count: 41840
+2023-11-11 00:10:36.8614 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1 - Count: 41840 ======== Count: 41840
+2023-11-11 00:12:40.1565 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:12:50.1380 
+Bat dau ReadType
+2023-11-11 00:13:10.4474 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:13:10.4474 
+Bat dau ReadLog
+2023-11-11 00:13:10.4474 
+ Bat dau ReadLog 1
+2023-11-11 00:13:10.6139 
+ Bat dau ReadLog 2
+2023-11-11 00:13:10.6139 
+ Bat dau ReadLog 3
+2023-11-11 00:13:10.8044 
+ Bat dau ReadLog 4
+2023-11-11 00:13:10.9899 
+ Bat dau ReadLog 5
+2023-11-11 00:13:10.9899 
+ Bat dau ReadLog 6
+2023-11-11 00:13:10.9899 
+ Bat dau ReadLog 7
+2023-11-11 00:17:10.6650 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:17:14.3788 
+Bat dau ReadType
+2023-11-11 00:17:34.7986 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:17:34.7986 
+Bat dau ReadLog
+2023-11-11 00:17:34.7986 
+ Bat dau ReadLog 1
+2023-11-11 00:17:34.9662 
+ ReadLog1 - Count: 41840===========
+2023-11-11 00:17:34.9662 
+ Bat dau ReadLog 2
+2023-11-11 00:17:34.9662 
+ ReadLog2 - Count: 41840===========
+2023-11-11 00:17:34.9662 
+ Bat dau ReadLog 3
+2023-11-11 00:17:35.1627 
+ ReadLog3 - Count: 41840===========
+2023-11-11 00:17:35.1627 
+ Bat dau ReadLog 4
+2023-11-11 00:18:14.1950 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:18:15.5316 
+Bat dau ReadType
+2023-11-11 00:18:36.0591 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:18:36.0591 
+Bat dau ReadLog
+2023-11-11 00:18:36.0591 
+ Bat dau ReadLog 1
+2023-11-11 00:18:36.2257 
+ ReadLog1 - Count: 41840===========
+2023-11-11 00:18:36.2257 
+ Bat dau ReadLog 2
+2023-11-11 00:18:36.2257 
+ ReadLog2 - Count: 41840===========
+2023-11-11 00:18:36.2257 
+ Bat dau ReadLog 3
+2023-11-11 00:18:36.4202 
+ ReadLog3 - Count: 41840===========
+2023-11-11 00:18:36.4202 
+ Bat dau ReadLog 4
+2023-11-11 00:18:36.6057 
+ ReadLog4 - Count: 41840===========
+2023-11-11 00:18:36.6057 
+ Bat dau ReadLog 5
+2023-11-11 00:18:36.6057 
+ ReadLog5 - Count: 41840===========
+2023-11-11 00:18:36.6057 
+ Bat dau ReadLog 6
+2023-11-11 00:18:36.6057 
+ ReadLog6 - Count: 41840===========
+2023-11-11 00:18:36.6057 
+ Bat dau ReadLog 7
+2023-11-11 00:18:36.6057 
+ ReadLog7 - Count: 41840===========
+2023-11-11 00:18:36.6057 
+ Bat dau ReadLog 8
+2023-11-11 00:18:36.7909 
+ ReadLog8 - Count: 41840===========
+2023-11-11 00:18:36.7909 
+ Bat dau ReadLog 9
+2023-11-11 00:18:36.9784 
+ ReadLog9 - Count: 41840===========
+2023-11-11 00:18:36.9784 
+ Bat dau ReadLog 10
+2023-11-11 00:18:38.0571 
+ ReadLog10 - Count: 41840===========
+2023-11-11 00:18:38.0571 
+ Bat dau ReadLog 11
+2023-11-11 00:18:38.0571 
+ ReadLog11 - Count: 41840===========
+2023-11-11 00:18:38.0571 
+ Bat dau ReadLog 12
+2023-11-11 00:18:38.0571 
+ ReadLog12 - Count: 41840===========
+2023-11-11 00:18:38.0571 
+ Bat dau ReadLog 13
+2023-11-11 00:18:38.0571 
+ ReadLog13 - Count: 41840===========
+2023-11-11 00:18:38.0571 
+ Bat dau ReadLog 14
+2023-11-11 00:18:38.2446 
+ ReadLog14 - Count: 41840===========
+2023-11-11 00:18:38.2446 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 - Count: 41840===========
+ ReadLog2==========
+ ReadLog2 - Count: 41840===========
+ ReadLog3======
+ ReadLog3 - Count: 41840===========
+ ReadLog4==========
+ ReadLog4 - Count: 41840==============
+ ReadLog5==========
+ ReadLog5 - Count: 41840===============
+ ReadLog6==========
+ ReadLog6 - Count: 41840============
+ ReadLog7=========
+ ReadLog7 - Count: 41840==========
+ ReadLog8 ================
+ ReadLog8 - Count: 41840================
+ ReadLog9========
+ ReadLog9 - Count: 41840=============
+ ReadLog10========
+ ReadLog10 - Count: 41840=========
+ ReadLog11=========
+ ReadLog11 - Count: 41840==============
+ ReadLog12==============
+ ReadLog12 - Count: 41840================
+ ReadLog13=============
+ ReadLog13 - Count: 41840==============
+ ReadLog14==========
+ ReadLog14 - Count: 41840=============== ======== Count: 41840
+2023-11-11 00:32:57.2950 
+ btnConnectByZkSDKNew_Click Connect_Net: True
+2023-11-11 00:33:06.3534 
+Bat dau ReadType
+2023-11-11 00:33:26.8095 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:33:26.8095 
+Bat dau ReadLog
+2023-11-11 00:33:26.8095 
+ Bat dau ReadLog 1
+2023-11-11 00:33:26.9870 
+ ReadLog1 xong - Count: 41840===========
+2023-11-11 00:33:26.9870 
+ Bat dau ReadLog 2
+2023-11-11 00:33:26.9870 
+ ReadLog2 xong - Count: 41840===========
+2023-11-11 00:33:26.9870 
+ Bat dau ReadLog 3
+2023-11-11 00:33:27.1675 
+ ReadLog3 xong - Count: 41840===========
+2023-11-11 00:33:27.1675 
+ Bat dau ReadLog 4
+2023-11-11 00:33:27.3505 
+ ReadLog4 xong - Count: 41840===========
+2023-11-11 00:33:27.3505 
+ Bat dau ReadLog 5
+2023-11-11 00:33:27.3505 
+ ReadLog5 xong - Count: 41840===========
+2023-11-11 00:33:27.3505 
+ Bat dau ReadLog 6
+2023-11-11 00:33:27.3505 
+ ReadLog6 xong - Count: 41840===========
+2023-11-11 00:33:27.3505 
+ Bat dau ReadLog 7
+2023-11-11 00:33:27.3505 
+ ReadLog7 xong - Count: 41840===========
+2023-11-11 00:33:27.3505 
+ Bat dau ReadLog 8
+2023-11-11 00:33:27.5021 
+ ReadLog8 xong - Count: 41840===========
+2023-11-11 00:33:27.5021 
+ Bat dau ReadLog 9
+2023-11-11 00:33:27.6991 
+ ReadLog9 xong - Count: 41840===========
+2023-11-11 00:33:27.6991 
+ Bat dau ReadLog 10
+2023-11-11 00:33:28.8047 
+ ReadLog10 xong - Count: 41840===========
+2023-11-11 00:33:28.8047 
+ Bat dau ReadLog 11
+2023-11-11 00:33:28.8047 
+ ReadLog11 xong - Count: 41840===========
+2023-11-11 00:33:28.8047 
+ Bat dau ReadLog 12
+2023-11-11 00:33:28.8047 
+ ReadLog12 xong - Count: 41840===========
+2023-11-11 00:33:28.8047 
+ Bat dau ReadLog 13
+2023-11-11 00:33:28.8047 
+ ReadLog13 xong - Count: 41840===========
+2023-11-11 00:33:28.8047 
+ Bat dau ReadLog 14
+2023-11-11 00:33:28.9892 
+ ReadLog14 xong - Count: 41840===========
+2023-11-11 00:33:28.9892 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1======
+ ReadLog1 xong - Count: 41840===========
+ ReadLog2==========
+ ReadLog2 xong - Count: 41840===========
+ ReadLog3======
+ ReadLog3 xong - Count: 41840===========
+ ReadLog4==========
+ ReadLog4 xong - Count: 41840==============
+ ReadLog5==========
+ ReadLog5 xong - Count: 41840===============
+ ReadLog6==========
+ ReadLog6 xong - Count: 41840============
+ ReadLog7=========
+ ReadLog7 xong - Count: 41840==========
+ ReadLog8 ================
+ ReadLog8 xong - Count: 41840================
+ ReadLog9========
+ ReadLog9 xong - Count: 41840=============
+ ReadLog10========
+ ReadLog10 xong - Count: 41840=========
+ ReadLog11=========
+ ReadLog11 xong - Count: 41840==============
+ ReadLog12==============
+ ReadLog12 xong - Count: 41840================
+ ReadLog13=============
+ ReadLog13 xong - Count: 41840==============
+ ReadLog14==========
+ ReadLog14 xong - Count: 41840=============== ======== Count: 41840
+2023-11-11 00:34:05.0937 
+Bat dau ReadType
+2023-11-11 00:34:25.4183 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:34:25.4183 
+Bat dau ReadLog
+2023-11-11 00:34:25.4183 
+Bat dau ReadLog: 1
+2023-11-11 00:34:25.5864 
+ ReadLog1 xong - Count: 41840
+2023-11-11 00:34:25.5864 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 41840 ======== Count: 41840
+2023-11-11 00:34:37.0299 
+Bat dau ReadType
+2023-11-11 00:34:57.4218 
+ReadType_1 xong: success_True_ machineNumber: 1===============
+2023-11-11 00:34:57.4218 
+Bat dau ReadLog
+2023-11-11 00:34:57.4218 
+Bat dau ReadLog: 2
+2023-11-11 00:34:57.5627 
+ ReadLog2 xong - Count: 104600
+2023-11-11 00:34:57.5627 
+ btnGetDataByZkSDKNew_Click: 
+Bat dau ReadType
+ReadType_1 xong: success_True_ machineNumber: 1===============
+ ReadLog2  xong- Count: 104600 ======== Count: 104600
