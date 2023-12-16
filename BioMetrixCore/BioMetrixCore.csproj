@@ -58,7 +58,7 @@
     </Reference>
     <Reference Include="Interop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\..\..\dll\Interop.FP_CLOCKLib.dll</HintPath>
     </Reference>
     <Reference Include="IPAddressControlLib, Version=1.2.5287.38252, Culture=neutral, PublicKeyToken=7052a5c2c6d6e1fc, processorArchitecture=MSIL">

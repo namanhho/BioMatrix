@@ -1,0 +1,144 @@
+2023-12-16 13:43:58.6028 
+==========Bat dau btnOpenDev_Click========
+2023-12-16 13:43:58.6458 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 13:43:58.6458 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2023-12-16 13:43:58.6458 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2023-12-16 13:43:58.6458 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2023-12-16 13:43:58.6458 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 13:43:58.7129 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: True========
+2023-12-16 13:44:02.4153 
+==========Bat dau btnReadSLogData_Click========
+2023-12-16 13:44:02.4591 
+==========Bat dau btnReadSLogData_Click -----ReadSuperLogData========
+2023-12-16 13:44:32.5220 
+==========ReadSuperLogData xong: False========
+2023-12-16 13:44:32.5220 
+==========Error: 3========
+2023-12-16 13:44:41.8012 
+==========Bat dau btnReadAllSLogData_Click========
+2023-12-16 13:44:41.8432 
+==========Bat dau btnReadAllSLogData_Click------ReadSuperLogData========
+2023-12-16 13:45:11.9104 
+==========ReadSuperLogData xong: False========
+2023-12-16 13:45:11.9104 
+==========Error: 3========
+2023-12-16 13:45:18.5701 
+==========Bat dau btnReadGLogData_Click========
+2023-12-16 13:45:18.6127 
+==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========
+2023-12-16 13:45:19.2726 
+==========ReadGeneralLogData xong: True========
+2023-12-16 13:45:19.2726 
+==========Bat dau btnReadGLogData_Click-----GetGeneralLogData========
+2023-12-16 13:45:19.2902 
+==========GetGeneralLogData xong-----Count: 2004========
+2023-12-16 18:59:13.8819 
+==========Bat dau btnOpenDev_Click========
+2023-12-16 18:59:13.9065 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 18:59:13.9065 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2023-12-16 18:59:13.9065 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2023-12-16 18:59:13.9065 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2023-12-16 18:59:13.9065 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 18:59:13.9862 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: True========
+2023-12-16 18:59:18.6849 
+==========Bat dau btnReadGLogData_Click========
+2023-12-16 18:59:18.7316 
+==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========
+2023-12-16 18:59:48.8544 
+==========ReadGeneralLogData xong: False========
+2023-12-16 18:59:48.8544 
+==========Error: 3========
+2023-12-16 19:03:19.8662 
+==========Bat dau btnReadGLogData_Click========
+2023-12-16 19:03:20.0063 
+==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========
+2023-12-16 19:03:20.0558 
+==========ReadGeneralLogData xong: True========
+2023-12-16 19:03:20.0558 
+==========Bat dau btnReadGLogData_Click-----GetGeneralLogData========
+2023-12-16 19:03:20.0558 
+==========GetGeneralLogData xong-----Count: 0========
+2023-12-16 19:04:06.8298 
+==========Bat dau btnReadGLogData_Click========
+2023-12-16 19:04:09.2137 
+==========Bat dau btnReadGLogData_Click------ReadGeneralLogData========
+2023-12-16 19:04:12.4245 
+==========ReadGeneralLogData xong: True========
+2023-12-16 19:04:13.8265 
+==========Bat dau btnReadGLogData_Click-----GetGeneralLogData========
+2023-12-16 19:04:23.8491 
+==========GetGeneralLogData xong-----Count: 0========
+2023-12-16 19:04:26.4167 
+==========Bat dau btnReadSLogData_Click========
+2023-12-16 19:04:26.4697 
+==========Bat dau btnReadSLogData_Click -----ReadSuperLogData========
+2023-12-16 19:04:56.5717 
+==========ReadSuperLogData xong: False========
+2023-12-16 19:04:56.5717 
+==========Error: 3========
+2023-12-16 19:05:12.6506 
+==========Bat dau btnOpenDev_Click========
+2023-12-16 19:11:20.3648 
+==========Bat dau btnOpenDev_Click========
+2023-12-16 19:11:20.3884 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 19:11:20.3884 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2023-12-16 19:11:20.3884 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2023-12-16 19:11:20.3884 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2023-12-16 19:11:20.3884 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 19:11:20.4805 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: True========
+2023-12-16 19:11:22.5106 
+==========Bat dau btnReadAllGLogData_Click========
+2023-12-16 19:11:22.5696 
+==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========
+2023-12-16 19:11:23.5172 
+==========ReadAllGLogData xong: True========
+2023-12-16 19:11:23.5172 
+==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========
+2023-12-16 19:11:23.5373 
+==========GetAllGLogData xong----Count: 2006========
+2023-12-16 19:20:25.9020 tnPullData_Click: 
+Bat dau ReadType
+ReadType_2 xong: success_True_ machineNumber: 1===============
+ ReadLog1 xong - Count: 105533 ======== Count: 105533
+2023-12-16 19:22:01.5691 
+==========Bat dau btnOpenDev_Click========
+2023-12-16 19:22:01.5885 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 19:22:01.5885 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2023-12-16 19:22:01.5885 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2023-12-16 19:22:01.5885 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2023-12-16 19:22:01.5885 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2023-12-16 19:22:01.6861 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: True========
+2023-12-16 19:22:03.0633 
+==========Bat dau btnReadAllGLogData_Click========
+2023-12-16 19:22:03.1241 
+==========Bat dau btnReadAllGLogData_Click------ReadAllGLogData========
+2023-12-16 19:22:04.3671 
+==========ReadAllGLogData xong: True========
+2023-12-16 19:22:04.3671 
+==========Bat dau btnReadAllGLogData_Click------GetAllGLogData========
+2023-12-16 19:22:04.3961 
+==========GetAllGLogData xong----Count: 2006========
