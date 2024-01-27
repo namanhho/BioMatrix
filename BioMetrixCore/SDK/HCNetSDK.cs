@@ -308,7 +308,7 @@ namespace BioMetrixCore.SDK
         public const int MINOR_HUMAN_DETECT_FAIL = 0x68; // human detect fail 
         public const int MINOR_PEOPLE_AND_ID_CARD_COMPARE_PASS = 0x69; // the comparison with people and id card success 
         public const int MINOR_PEOPLE_AND_ID_CARD_COMPARE_FAIL = 0x70; // the comparison with people and id card failed 
-        public const int MINOR_CERTIFICATE_BLACK_LIST = 0x71; // black list 
+        public const int MINOR_CERTIFICATE_BLOCK_LIST = 0x71;
         public const int MINOR_LEGAL_MESSAGE = 0x72; // legal message 
         public const int MINOR_ILLEGAL_MESSAGE = 0x73; // illegal messag 
         public const int MINOR_MAC_DETECT = 0x74; // mac detect 
