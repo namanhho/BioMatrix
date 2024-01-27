@@ -243,6 +243,22 @@
             this.label52 = new System.Windows.Forms.Label();
             this.tbIPByHikvision = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
+            this.tabPage17 = new System.Windows.Forms.TabPage();
+            this.label75 = new System.Windows.Forms.Label();
+            this.btnConnectByHikvisionSDK = new System.Windows.Forms.Button();
+            this.tbTotalByHikvisionSDK = new System.Windows.Forms.TextBox();
+            this.dgvListLogByHikvisionSDK = new System.Windows.Forms.DataGridView();
+            this.dtToDateByHikvisionSDK = new System.Windows.Forms.DateTimePicker();
+            this.dtFromDateByHikvisionSDK = new System.Windows.Forms.DateTimePicker();
+            this.btnGetLogByHikvisionSDK = new System.Windows.Forms.Button();
+            this.tbPassByHikvisionSDK = new System.Windows.Forms.TextBox();
+            this.label76 = new System.Windows.Forms.Label();
+            this.tbUserNameByHikvisionSDK = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.tbPortByHikvisionSDK = new System.Windows.Forms.TextBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.tbIPByHikvisionSDK = new System.Windows.Forms.TextBox();
+            this.label79 = new System.Windows.Forms.Label();
             this.tabPage13 = new System.Windows.Forms.TabPage();
             this.PnlBottom = new System.Windows.Forms.Panel();
             this.label63 = new System.Windows.Forms.Label();
@@ -307,7 +323,6 @@
             this.tabPage14 = new System.Windows.Forms.TabPage();
             this.label58 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -339,6 +354,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByDahahi)).BeginInit();
             this.tabPage12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).BeginInit();
+            this.tabPage17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHikvisionSDK)).BeginInit();
             this.tabPage13.SuspendLayout();
             this.PnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Attlog)).BeginInit();
@@ -362,6 +379,7 @@
             this.tabControl.Controls.Add(this.tabPage10);
             this.tabControl.Controls.Add(this.tabPage11);
             this.tabControl.Controls.Add(this.tabPage12);
+            this.tabControl.Controls.Add(this.tabPage17);
             this.tabControl.Controls.Add(this.tabPage13);
             this.tabControl.Controls.Add(this.tabPage15);
             this.tabControl.Controls.Add(this.tabPage14);
@@ -2508,6 +2526,157 @@
             this.label53.TabIndex = 14;
             this.label53.Text = "IP";
             // 
+            // tabPage17
+            // 
+            this.tabPage17.Controls.Add(this.label75);
+            this.tabPage17.Controls.Add(this.btnConnectByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.tbTotalByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.dgvListLogByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.dtToDateByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.dtFromDateByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.btnGetLogByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.tbPassByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.label76);
+            this.tabPage17.Controls.Add(this.tbUserNameByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.label77);
+            this.tabPage17.Controls.Add(this.tbPortByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.label78);
+            this.tabPage17.Controls.Add(this.tbIPByHikvisionSDK);
+            this.tabPage17.Controls.Add(this.label79);
+            this.tabPage17.Location = new System.Drawing.Point(4, 22);
+            this.tabPage17.Name = "tabPage17";
+            this.tabPage17.Size = new System.Drawing.Size(796, 428);
+            this.tabPage17.TabIndex = 16;
+            this.tabPage17.Text = "Hikvision SDK";
+            this.tabPage17.UseVisualStyleBackColor = true;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(36, 399);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(32, 13);
+            this.label75.TabIndex = 43;
+            this.label75.Text = "Tổng";
+            // 
+            // btnConnectByHikvisionSDK
+            // 
+            this.btnConnectByHikvisionSDK.Location = new System.Drawing.Point(685, 12);
+            this.btnConnectByHikvisionSDK.Name = "btnConnectByHikvisionSDK";
+            this.btnConnectByHikvisionSDK.Size = new System.Drawing.Size(75, 23);
+            this.btnConnectByHikvisionSDK.TabIndex = 42;
+            this.btnConnectByHikvisionSDK.Text = "Đăng nhập";
+            this.btnConnectByHikvisionSDK.UseVisualStyleBackColor = true;
+            this.btnConnectByHikvisionSDK.Click += new System.EventHandler(this.btnConnectByHikvisionSDK_Click);
+            // 
+            // tbTotalByHikvisionSDK
+            // 
+            this.tbTotalByHikvisionSDK.Location = new System.Drawing.Point(74, 396);
+            this.tbTotalByHikvisionSDK.Name = "tbTotalByHikvisionSDK";
+            this.tbTotalByHikvisionSDK.Size = new System.Drawing.Size(100, 20);
+            this.tbTotalByHikvisionSDK.TabIndex = 41;
+            this.tbTotalByHikvisionSDK.Text = "0";
+            // 
+            // dgvListLogByHikvisionSDK
+            // 
+            this.dgvListLogByHikvisionSDK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListLogByHikvisionSDK.Location = new System.Drawing.Point(39, 109);
+            this.dgvListLogByHikvisionSDK.Name = "dgvListLogByHikvisionSDK";
+            this.dgvListLogByHikvisionSDK.Size = new System.Drawing.Size(664, 271);
+            this.dgvListLogByHikvisionSDK.TabIndex = 40;
+            // 
+            // dtToDateByHikvisionSDK
+            // 
+            this.dtToDateByHikvisionSDK.Location = new System.Drawing.Point(459, 55);
+            this.dtToDateByHikvisionSDK.Name = "dtToDateByHikvisionSDK";
+            this.dtToDateByHikvisionSDK.Size = new System.Drawing.Size(200, 20);
+            this.dtToDateByHikvisionSDK.TabIndex = 39;
+            // 
+            // dtFromDateByHikvisionSDK
+            // 
+            this.dtFromDateByHikvisionSDK.Location = new System.Drawing.Point(459, 12);
+            this.dtFromDateByHikvisionSDK.Name = "dtFromDateByHikvisionSDK";
+            this.dtFromDateByHikvisionSDK.Size = new System.Drawing.Size(200, 20);
+            this.dtFromDateByHikvisionSDK.TabIndex = 38;
+            // 
+            // btnGetLogByHikvisionSDK
+            // 
+            this.btnGetLogByHikvisionSDK.Location = new System.Drawing.Point(685, 52);
+            this.btnGetLogByHikvisionSDK.Name = "btnGetLogByHikvisionSDK";
+            this.btnGetLogByHikvisionSDK.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLogByHikvisionSDK.TabIndex = 37;
+            this.btnGetLogByHikvisionSDK.Text = "Lấy dữ liệu";
+            this.btnGetLogByHikvisionSDK.UseVisualStyleBackColor = true;
+            this.btnGetLogByHikvisionSDK.Click += new System.EventHandler(this.btnGetLogByHikvisionSDK_Click);
+            // 
+            // tbPassByHikvisionSDK
+            // 
+            this.tbPassByHikvisionSDK.Location = new System.Drawing.Point(335, 55);
+            this.tbPassByHikvisionSDK.Name = "tbPassByHikvisionSDK";
+            this.tbPassByHikvisionSDK.Size = new System.Drawing.Size(100, 20);
+            this.tbPassByHikvisionSDK.TabIndex = 36;
+            this.tbPassByHikvisionSDK.Text = "tulip2021";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(248, 62);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(52, 13);
+            this.label76.TabIndex = 35;
+            this.label76.Text = "Mật khẩu";
+            // 
+            // tbUserNameByHikvisionSDK
+            // 
+            this.tbUserNameByHikvisionSDK.Location = new System.Drawing.Point(335, 12);
+            this.tbUserNameByHikvisionSDK.Name = "tbUserNameByHikvisionSDK";
+            this.tbUserNameByHikvisionSDK.Size = new System.Drawing.Size(100, 20);
+            this.tbUserNameByHikvisionSDK.TabIndex = 34;
+            this.tbUserNameByHikvisionSDK.Text = "admin";
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(248, 19);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(81, 13);
+            this.label77.TabIndex = 33;
+            this.label77.Text = "Tên đăng nhập";
+            // 
+            // tbPortByHikvisionSDK
+            // 
+            this.tbPortByHikvisionSDK.Location = new System.Drawing.Point(104, 59);
+            this.tbPortByHikvisionSDK.Name = "tbPortByHikvisionSDK";
+            this.tbPortByHikvisionSDK.Size = new System.Drawing.Size(116, 20);
+            this.tbPortByHikvisionSDK.TabIndex = 32;
+            this.tbPortByHikvisionSDK.Text = "8081";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(36, 62);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(32, 13);
+            this.label78.TabIndex = 31;
+            this.label78.Text = "Cổng";
+            // 
+            // tbIPByHikvisionSDK
+            // 
+            this.tbIPByHikvisionSDK.Location = new System.Drawing.Point(104, 16);
+            this.tbIPByHikvisionSDK.Name = "tbIPByHikvisionSDK";
+            this.tbIPByHikvisionSDK.Size = new System.Drawing.Size(116, 20);
+            this.tbIPByHikvisionSDK.TabIndex = 30;
+            this.tbIPByHikvisionSDK.Text = "113.161.185.53";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(36, 19);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(17, 13);
+            this.label79.TabIndex = 29;
+            this.label79.Text = "IP";
+            // 
             // tabPage13
             // 
             this.tabPage13.Controls.Add(this.PnlBottom);
@@ -3194,13 +3363,6 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
             this.dateTimePicker1.TabIndex = 110;
             // 
-            // sqliteCommand1
-            // 
-            this.sqliteCommand1.CommandTimeout = 30;
-            this.sqliteCommand1.Connection = null;
-            this.sqliteCommand1.Transaction = null;
-            this.sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
-            // 
             // ViewMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3256,6 +3418,9 @@
             this.tabPage12.ResumeLayout(false);
             this.tabPage12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogsByHikvision)).EndInit();
+            this.tabPage17.ResumeLayout(false);
+            this.tabPage17.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListLogByHikvisionSDK)).EndInit();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
             this.PnlBottom.ResumeLayout(false);
@@ -3447,7 +3612,7 @@
         private System.Windows.Forms.TextBox tbWebsiteByDahahi;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Button btnGetLogsByDahahi;
-        private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
+        //private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
         private AxFP_CLOCKLib.AxFP_CLOCK axFP_CLOCK;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.Button btnLoginByHikvision;
@@ -3552,5 +3717,21 @@
         private System.Windows.Forms.DateTimePicker dtToDateByZkSDKNew;
         private System.Windows.Forms.DateTimePicker dtFromDateByZkSDKNew;
         private System.Windows.Forms.Button btnConnect_V2ByZkSDKNew;
+        private System.Windows.Forms.TabPage tabPage17;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Button btnConnectByHikvisionSDK;
+        private System.Windows.Forms.TextBox tbTotalByHikvisionSDK;
+        private System.Windows.Forms.DataGridView dgvListLogByHikvisionSDK;
+        private System.Windows.Forms.DateTimePicker dtToDateByHikvisionSDK;
+        private System.Windows.Forms.DateTimePicker dtFromDateByHikvisionSDK;
+        private System.Windows.Forms.Button btnGetLogByHikvisionSDK;
+        private System.Windows.Forms.TextBox tbPassByHikvisionSDK;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox tbUserNameByHikvisionSDK;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.TextBox tbPortByHikvisionSDK;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.TextBox tbIPByHikvisionSDK;
+        private System.Windows.Forms.Label label79;
     }
 }

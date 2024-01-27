@@ -41,6 +41,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxInterop.FP_CLOCKLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -65,9 +67,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\IPAddressControlLib.dll</HintPath>
     </Reference>
-    <Reference Include="ManagedNativeWifi, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ManagedNativeWifi.2.4.0\lib\netstandard2.0\ManagedNativeWifi.dll</HintPath>
-    </Reference>
     <Reference Include="ManagedWifi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\managedwifi.1.1.0\lib\net20\ManagedWifi.dll</HintPath>
     </Reference>
@@ -76,12 +75,6 @@
     </Reference>
     <Reference Include="Mapster.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e64997d676a9c1d3, processorArchitecture=MSIL">
       <HintPath>..\packages\Mapster.Core.1.0.0\lib\net45\Mapster.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Sqlite, Version=6.0.7.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.6.0.7\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.dll</HintPath>
@@ -101,22 +94,12 @@
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="SQLitePCLRaw.core, Version=2.0.6.1341, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.core.2.0.6\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Odbc, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.Odbc.7.0.0\lib\net462\System.Data.Odbc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.OleDb, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.OleDb.7.0.0\lib\net462\System.Data.OleDb.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -139,9 +122,6 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.5.0.1\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -196,6 +176,8 @@
     <Compile Include="Model\TmpFaceModel.cs" />
     <Compile Include="Model\TmpFPModel.cs" />
     <Compile Include="Model\UserInfoModel.cs" />
+    <Compile Include="SDK\GetAcsEventType.cs" />
+    <Compile Include="SDK\HCNetSDK.cs" />
     <Compile Include="Utilities\AccessPoint.cs" />
     <Compile Include="Utilities\AnalyseVersion.cs" />
     <Compile Include="Utilities\common.cs" />
@@ -256,6 +238,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Debug\BioMetrixCore.exe.config" />
+    <None Include="bin\Release\BioMetrixCore.exe.config" />
+    <None Include="bin\Release\Logs\Error\2023-12-16.log" />
+    <None Include="bin\Release\Logs\Info\2023-12-16.log" />
+    <None Include="bin\Release\NLog.config" />
+    <None Include="bin\Release\pushdb.db" />
+    <None Include="bin\Release_07122023.zip" />
+    <None Include="bin\Release_1.zip" />
+    <None Include="bin\Release_BioMatrix.zip" />
+    <None Include="bin\Release_old.zip" />
+    <None Include="dlls\HCNetSDK\GdiPlus.lib" />
+    <None Include="dlls\HCNetSDK\HCCore.lib" />
+    <None Include="dlls\HCNetSDK\HCNetSDK.lib" />
+    <None Include="dlls\HCNetSDK\HCNetSDKCom\HCAlarm.lib" />
+    <None Include="dlls\HCNetSDK\HCNetSDKCom\HCGeneralCfgMgr.lib" />
+    <None Include="dlls\HCNetSDK\HCNetSDKCom\HCPreview.lib" />
+    <None Include="dlls\HCNetSDK\PlayCtrl.lib" />
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -274,6 +273,99 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\BioMetrixCore.exe" />
+    <Content Include="bin\Debug\BioMetrixCore.pdb" />
+    <Content Include="bin\Release\AxInterop.FP_CLOCKLib.dll" />
+    <Content Include="bin\Release\BioMetrixCore.exe" />
+    <Content Include="bin\Release\BioMetrixCore.pdb" />
+    <Content Include="bin\Release\HCNetSDK.dll" />
+    <Content Include="bin\Release\Interop.FP_CLOCKLib.dll" />
+    <Content Include="bin\Release\Interop.zkemkeeper.dll" />
+    <Content Include="bin\Release\IPAddressControlLib.dll" />
+    <Content Include="bin\Release\ManagedNativeWifi.dll" />
+    <Content Include="bin\Release\ManagedNativeWifi.xml" />
+    <Content Include="bin\Release\ManagedWifi.dll" />
+    <Content Include="bin\Release\Mapster.Core.dll" />
+    <Content Include="bin\Release\Mapster.dll" />
+    <Content Include="bin\Release\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="bin\Release\Microsoft.Bcl.AsyncInterfaces.xml" />
+    <Content Include="bin\Release\Microsoft.Data.Sqlite.dll" />
+    <Content Include="bin\Release\Microsoft.Data.Sqlite.xml" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.Auth.dll" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.Auth.pdb" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.Auth.xml" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.dll" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.pdb" />
+    <Content Include="bin\Release\Microsoft.Exchange.WebServices.xml" />
+    <Content Include="bin\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\Release\Newtonsoft.Json.xml" />
+    <Content Include="bin\Release\NLog.dll" />
+    <Content Include="bin\Release\NLog.xml" />
+    <Content Include="bin\Release\Quartz.dll" />
+    <Content Include="bin\Release\Quartz.pdb" />
+    <Content Include="bin\Release\Quartz.xml" />
+    <Content Include="bin\Release\RestSharp.dll" />
+    <Content Include="bin\Release\RestSharp.xml" />
+    <Content Include="bin\Release\SQLitePCLRaw.core.dll" />
+    <Content Include="bin\Release\System.Buffers.dll" />
+    <Content Include="bin\Release\System.Buffers.xml" />
+    <Content Include="bin\Release\System.Data.Odbc.dll" />
+    <Content Include="bin\Release\System.Data.Odbc.xml" />
+    <Content Include="bin\Release\System.Data.OleDb.dll" />
+    <Content Include="bin\Release\System.Data.OleDb.xml" />
+    <Content Include="bin\Release\System.Data.SQLite.dll" />
+    <Content Include="bin\Release\System.Data.SQLite.xml" />
+    <Content Include="bin\Release\System.Memory.dll" />
+    <Content Include="bin\Release\System.Memory.xml" />
+    <Content Include="bin\Release\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\Release\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\Release\System.Numerics.Vectors.dll" />
+    <Content Include="bin\Release\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\Release\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\Release\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\Release\System.Text.Encodings.Web.xml" />
+    <Content Include="bin\Release\System.Text.Json.dll" />
+    <Content Include="bin\Release\System.Text.Json.xml" />
+    <Content Include="bin\Release\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\Release\System.Threading.Tasks.Extensions.xml" />
+    <Content Include="bin\Release\System.ValueTuple.dll" />
+    <Content Include="bin\Release\System.ValueTuple.xml" />
+    <Content Include="bin\Release\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Release\x86\SQLite.Interop.dll" />
+    <Content Include="bin\Release\ZaloDotNetSDK.dll" />
+    <Content Include="dlls\AxInterop.FP_CLOCKLib.dll" />
+    <Content Include="dlls\HCNetSDK\AudioRender.dll" />
+    <Content Include="dlls\HCNetSDK\EagleEyeRender.dll" />
+    <Content Include="dlls\HCNetSDK\GdiPlus.dll" />
+    <Content Include="dlls\HCNetSDK\HCCore.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDK.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\AnalyzeData.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\AudioIntercom.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCAlarm.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCCoreDevCfg.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCDisplay.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCGeneralCfgMgr.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCIndustry.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCPlayBack.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCPreview.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\HCVoiceTalk.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\libiconv2.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\OpenAL32.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\StreamTransClient.dll" />
+    <Content Include="dlls\HCNetSDK\HCNetSDKCom\SystemTransform.dll" />
+    <Content Include="dlls\HCNetSDK\hlog.dll" />
+    <Content Include="dlls\HCNetSDK\hpr.dll" />
+    <Content Include="dlls\HCNetSDK\HXVA.dll" />
+    <Content Include="dlls\HCNetSDK\libeay32.dll" />
+    <Content Include="dlls\HCNetSDK\libmmd.dll" />
+    <Content Include="dlls\HCNetSDK\MP_Render.dll" />
+    <Content Include="dlls\HCNetSDK\NPQos.dll" />
+    <Content Include="dlls\HCNetSDK\PlayCtrl.dll" />
+    <Content Include="dlls\HCNetSDK\ssleay32.dll" />
+    <Content Include="dlls\HCNetSDK\SuperRender.dll" />
+    <Content Include="dlls\HCNetSDK\YUVProcess.dll" />
+    <Content Include="dlls\Interop.FP_CLOCKLib.dll" />
     <Content Include="dlls\zkemkeeper.dll" />
     <None Include="Resources\noFileIcon.png" />
   </ItemGroup>

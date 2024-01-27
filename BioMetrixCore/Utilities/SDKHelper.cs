@@ -15,6 +15,7 @@ namespace BioMetrixCore.Utilities
 {
     public class SDKHelper
     {
+        //public CZKEMClass axCZKEM1 = null;
         public CZKEMClass axCZKEM1 = new CZKEMClass();
 
         public List<Employee> employeeList = new List<Employee>();

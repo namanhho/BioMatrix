@@ -1,0 +1,184 @@
+2023-12-23 11:17:50.3290 
+ listenClient_OnReceiveDataEvent----Data: 
+2023-12-23 11:17:50.3290 
+ listenClient_OnReceiveDataEvent----logData: 
+2023-12-23 11:17:50.3290 
+ AddCommInfo: Bat dau
+2023-12-23 11:17:50.3290 AddCommInfo: Sever Receive Data:  2023-12-23 11:17:50:331
+
+
+2023-12-23 11:17:55.7388 
+ onRealTimeLog: Bat dau---sBuffer: POST /iclock/cdata?SN=CQUG233760234&table=ATTLOG&Stamp=9999 HTTP/1.1
+Host: 192.168.68.226:8080
+User-Agent: iClock Proxy/1.09
+Connection: close
+Accept: */*
+Content-Type: text/plain
+Content-Length: 52
+
+NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:17:55.7388 
+ onRealTimeLogProcess: Bat dau---attstr: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:17:55.8017 
+ onRealTimeLogProcess: Split xong---strlist: [
+  "NLVJLA052\t2023-12-23 10:12:05\t255\t15\t0\t0\t0\t255\t0\t0\t",
+  ""
+]
+2023-12-23 11:17:55.8017 
+ onCreateRealTimelog: Bat dau---realtimelog: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+2023-12-23 11:17:55.8017 
+ onCreateRealTimelog: Split xong---realtimelogstr: [
+  "NLVJLA052",
+  "2023-12-23 10:12:05",
+  "255",
+  "15",
+  "0",
+  "0",
+  "0",
+  "255",
+  "0",
+  "0"
+]
+2023-12-23 11:17:55.8017 
+AddNewRow: Bat dau
+2023-12-23 11:17:55.8017 
+AddNewRow: Du lieu--CardNo: --Time: 1/1/0001 12:00:00 AM--RealTimeLogModel: BioMetrixCore.Model.RealTimeLogModel
+2023-12-23 11:18:08.0440 
+ onRealTimeLogProcess Exception: Object reference not set to an instance of an object.
+2023-12-23 11:18:10.9510 
+ listenClient_OnReceiveDataEvent----Data: 
+2023-12-23 11:18:10.9510 
+ listenClient_OnReceiveDataEvent----logData: 
+2023-12-23 11:18:10.9510 
+ AddCommInfo: Bat dau
+2023-12-23 11:18:10.9510 AddCommInfo: Sever Receive Data:  2023-12-23 11:18:10:951
+
+
+2023-12-23 11:18:24.0541 
+ onRealTimeLog: Bat dau---sBuffer: POST /iclock/cdata?SN=CQUG233760234&table=ATTLOG&Stamp=9999 HTTP/1.1
+Host: 192.168.68.226:8080
+User-Agent: iClock Proxy/1.09
+Connection: close
+Accept: */*
+Content-Type: text/plain
+Content-Length: 52
+
+NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:18:33.8211 
+ onRealTimeLogProcess: Bat dau---attstr: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:18:35.0791 
+ onRealTimeLogProcess: Split xong---strlist: [
+  "NLVJLA052\t2023-12-23 10:12:05\t255\t15\t0\t0\t0\t255\t0\t0\t",
+  ""
+]
+2023-12-23 11:18:37.5814 
+ onCreateRealTimelog: Bat dau---realtimelog: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+2023-12-23 11:18:37.5814 
+ onCreateRealTimelog: Split xong---realtimelogstr: [
+  "NLVJLA052",
+  "2023-12-23 10:12:05",
+  "255",
+  "15",
+  "0",
+  "0",
+  "0",
+  "255",
+  "0",
+  "0"
+]
+2023-12-23 11:18:55.8381 
+ onCreateRealTimelog: Bat dau---realtimelog: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+2023-12-23 11:18:57.8850 
+ onCreateRealTimelog: Split xong---realtimelogstr: [
+  "NLVJLA052",
+  "2023-12-23 10:12:05",
+  "255",
+  "15",
+  "0",
+  "0",
+  "0",
+  "255",
+  "0",
+  "0"
+]
+2023-12-23 11:20:36.0520 
+ listenClient_OnReceiveDataEvent----Data: 
+2023-12-23 11:20:36.0520 
+ listenClient_OnReceiveDataEvent----logData: 
+2023-12-23 11:20:36.0520 
+ AddCommInfo: Bat dau
+2023-12-23 11:20:36.0520 AddCommInfo: Sever Receive Data:  2023-12-23 11:20:36:054
+
+
+2023-12-23 11:20:40.6428 
+ onRealTimeLog: Bat dau---sBuffer: POST /iclock/cdata?SN=CQUG233760234&table=ATTLOG&Stamp=9999 HTTP/1.1
+Host: 192.168.68.226:8080
+User-Agent: iClock Proxy/1.09
+Connection: close
+Accept: */*
+Content-Type: text/plain
+Content-Length: 52
+
+NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:20:40.6428 
+ onRealTimeLogProcess: Bat dau---attstr: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:20:40.7350 
+ onRealTimeLogProcess: Split xong---strlist: [
+  "NLVJLA052\t2023-12-23 10:12:05\t255\t15\t0\t0\t0\t255\t0\t0\t",
+  ""
+]
+2023-12-23 11:20:40.7350 
+ onCreateRealTimelog: Bat dau---realtimelog: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+2023-12-23 11:20:40.7350 
+ onCreateRealTimelog: Split xong---realtimelogstr: [
+  "NLVJLA052",
+  "2023-12-23 10:12:05",
+  "255",
+  "15",
+  "0",
+  "0",
+  "0",
+  "255",
+  "0",
+  "0"
+]
+2023-12-23 11:20:40.7350 
+AddNewRow: Bat dau
+2023-12-23 11:20:40.7350 
+AddNewRow: Du lieu--CardNo: NLVJLA052--Time: 12/23/2023 10:12:05 AM--RealTimeLogModel: BioMetrixCore.Model.RealTimeLogModel
+2023-12-23 11:20:42.2719 
+ onRealTimeLogProcess Exception: Object reference not set to an instance of an object.
+2023-12-23 11:20:49.8619 
+ listenClient_OnReceiveDataEvent----Data: 
+2023-12-23 11:20:49.8619 
+ listenClient_OnReceiveDataEvent----logData: 
+2023-12-23 11:20:49.8619 
+ AddCommInfo: Bat dau
+2023-12-23 11:20:49.8619 AddCommInfo: Sever Receive Data:  2023-12-23 11:20:49:861
+
+
+2023-12-23 11:20:53.4309 
+ onRealTimeLog: Bat dau---sBuffer: POST /iclock/cdata?SN=CQUG233760234&table=ATTLOG&Stamp=9999 HTTP/1.1
+Host: 192.168.68.226:8080
+User-Agent: iClock Proxy/1.09
+Connection: close
+Accept: */*
+Content-Type: text/plain
+Content-Length: 52
+
+NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:21:02.1827 
+ onRealTimeLogProcess: Bat dau---attstr: NLVJLA052	2023-12-23 10:12:05	255	15	0	0	0	255	0	0	
+
+2023-12-23 11:21:03.6831 
+ onRealTimeLogProcess: Split xong---strlist: [
+  "NLVJLA052\t2023-12-23 10:12:05\t255\t15\t0\t0\t0\t255\t0\t0\t",
+  ""
+]
