@@ -5627,6 +5627,7 @@ namespace BioMetrixCore
             lUserID = CHCNetSDK.NET_DVR_Login_V40(ref struLoginInfo, ref struDeviceInfoV40);
             if (lUserID >= 0)
             {
+                m_UserID = lUserID;
                 tbTotalByHikvisionSDK.Text = "Login Successful";
                 Logger.LogError($"\n =============Login Successful================");
             }
@@ -5654,11 +5655,13 @@ namespace BioMetrixCore
                 {
                     Logger.LogError($"net error or dvr is busy!");
                 }
+                tbTotalByHikvisionSDK.Text = "Login Fail";
             }
         }
 
         private void btnGetLogByHikvisionSDK_Click(object sender, EventArgs e)
         {
+            m_lLogNum = 0;
             CHCNetSDK.NET_DVR_ACS_EVENT_COND struCond = new CHCNetSDK.NET_DVR_ACS_EVENT_COND();
             struCond.Init();
             struCond.dwSize = (uint)Marshal.SizeOf(struCond);
@@ -5706,6 +5709,7 @@ namespace BioMetrixCore
             uint dwSize = struCond.dwSize;
             IntPtr ptrCond = Marshal.AllocHGlobal((int)dwSize);
             Marshal.StructureToPtr(struCond, ptrCond, false);
+            Logger.LogError($"\n =============btnGetLogByHikvisionSDK_Click: m_UserID = {m_UserID}================");
             m_lGetAcsEventHandle = CHCNetSDK.NET_DVR_StartRemoteConfig(m_UserID, CHCNetSDK.NET_DVR_GET_ACS_EVENT, ptrCond, (int)dwSize, null, IntPtr.Zero);
             if (-1 == m_lGetAcsEventHandle)
             {
@@ -5890,6 +5894,7 @@ namespace BioMetrixCore
             var time = DateTime.Now;
             if (DateTime.TryParse(LogTime, out time))
             {
+                Logger.LogError($"\n =============AddAcsEventToList: UserID --- {CsTemp} ===== Format LogTime --- {time}================");
                 listLogByHikvisionSDK.Add(new LogData()
                 {
                     UserID = CsTemp,
@@ -6634,7 +6639,7 @@ namespace BioMetrixCore
                     CsTemp = "Disabled Card";
                     break;
                 case 3:
-                    CsTemp = "Black List Card";
+                    CsTemp = "Block List Card";
                     break;
                 case 4:
                     CsTemp = "Patrol Card";

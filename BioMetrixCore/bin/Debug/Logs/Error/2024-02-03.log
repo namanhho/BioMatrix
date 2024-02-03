@@ -1,0 +1,6 @@
+2024-02-03 17:54:57.0172 net error or dvr is busy!
+2024-02-03 17:55:59.0207 net error or dvr is busy!
+2024-02-03 17:56:02.5761 
+ =============btnGetLogByHikvisionSDK_Click: m_UserID = -1================
+2024-02-03 17:56:02.6689 
+ =============btnGetLogByHikvisionSDK_Click: NET_DVR_StartRemoteConfig FAIL, ERROR CODE 17================
