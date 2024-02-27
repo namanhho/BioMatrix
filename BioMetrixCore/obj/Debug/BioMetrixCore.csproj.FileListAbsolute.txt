@@ -320,3 +320,4 @@ C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.cspro
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.csproj.CopyComplete
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.exe
 C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\BioMetrixCore.pdb
+C:\Users\ADMIN\Desktop\Git\BioMatrix\BioMetrixCore\obj\Debug\Interop.FP_CLOCKLib.dll

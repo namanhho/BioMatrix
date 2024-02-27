@@ -38,6 +38,7 @@ using BioMetrixCore.Model;
 using BioMetrixCore.BLL;
 using BioMetrixCore.Utils;
 using BioMetrixCore.SDK;
+using System.Globalization;
 
 namespace BioMetrixCore
 {
@@ -5611,7 +5612,7 @@ namespace BioMetrixCore
         private string MajorType = null;
         public int m_lGetAcsEventHandle = -1;
         Thread m_pDisplayListThread = null;
-        public List<LogData> listLogByHikvisionSDK = new List<LogData> ();
+        public List<LogData> listLogByHikvisionSDK = new List<LogData>();
         private void btnConnectByHikvisionSDK_Click(object sender, EventArgs e)
         {
             CHCNetSDK.NET_DVR_USER_LOGIN_INFO struLoginInfo = new CHCNetSDK.NET_DVR_USER_LOGIN_INFO();
@@ -5735,7 +5736,7 @@ namespace BioMetrixCore
                 dwStatus = CHCNetSDK.NET_DVR_GetNextRemoteConfig(m_lGetAcsEventHandle, ref struCFG, dwOutBuffSize);
                 switch (dwStatus)
                 {
-                    case CHCNetSDK.NET_SDK_GET_NEXT_STATUS_SUCCESS://成功读取到数据，处理完本次数据后需调用next
+                    case CHCNetSDK.NET_SDK_GET_NEXT_STATUS_SUCCESS: //成功读取到数据，处理完本次数据后需调用next
                         ProcessAcsEvent(ref struCFG, ref Flag);
                         break;
                     case CHCNetSDK.NET_SDK_GET_NEXT_STATUS_NEED_WAIT:
@@ -5891,21 +5892,21 @@ namespace BioMetrixCore
             string LogTime = GetStrLogTime(ref struEventCfg.struTime);
             CsTemp = System.Text.Encoding.UTF8.GetString(struEventCfg.struAcsEventInfo.byCardNo);
             Logger.LogError($"\n =============AddAcsEventToList: UserID --- {CsTemp} ===== LogTime --- {LogTime}================");
-            var time = DateTime.Now;
-            if (DateTime.TryParse(LogTime, out time))
+            var time = DateTime.ParseExact(LogTime, "yyyy:M:d:H:m:s", CultureInfo.InvariantCulture);
+            //if (DateTime.TryParse(LogTime, out time))
+            //{
+            Logger.LogError($"\n =============AddAcsEventToList: UserID --- {CsTemp} ===== Format LogTime --- {time}================");
+            listLogByHikvisionSDK.Add(new LogData()
             {
-                Logger.LogError($"\n =============AddAcsEventToList: UserID --- {CsTemp} ===== Format LogTime --- {time}================");
-                listLogByHikvisionSDK.Add(new LogData()
-                {
-                    UserID = CsTemp,
-                    CheckTime = time
-                });
-                tbTotalByHikvision.Text = listLogByHikvisionSDK.Count.ToString();
-                BindToGridView(listLogByHikvisionSDK);
+                UserID = CsTemp,
+                CheckTime = time
+            });
+            tbTotalByHikvision.Text = listLogByHikvisionSDK.Count.ToString();
+            BindToGridView(listLogByHikvisionSDK);
 
-                this.dgvListLogByHikvisionSDK.DataSource = listLogByHikvisionSDK;
-                this.dgvListLogByHikvisionSDK.Update();
-            }
+            this.dgvListLogByHikvisionSDK.DataSource = listLogByHikvisionSDK;
+            this.dgvListLogByHikvisionSDK.Update();
+            //}
 
             //this.listViewEvent.EndUpdate();
         }

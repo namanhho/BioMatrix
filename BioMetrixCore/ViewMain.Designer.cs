@@ -2615,7 +2615,7 @@
             this.tbPassByHikvisionSDK.Name = "tbPassByHikvisionSDK";
             this.tbPassByHikvisionSDK.Size = new System.Drawing.Size(100, 20);
             this.tbPassByHikvisionSDK.TabIndex = 36;
-            this.tbPassByHikvisionSDK.Text = "tulip2021";
+            this.tbPassByHikvisionSDK.Text = "Tulip2!@";
             // 
             // label76
             // 
@@ -2649,7 +2649,7 @@
             this.tbPortByHikvisionSDK.Name = "tbPortByHikvisionSDK";
             this.tbPortByHikvisionSDK.Size = new System.Drawing.Size(116, 20);
             this.tbPortByHikvisionSDK.TabIndex = 32;
-            this.tbPortByHikvisionSDK.Text = "8081";
+            this.tbPortByHikvisionSDK.Text = "8000";
             // 
             // label78
             // 

@@ -4,3 +4,19 @@
  =============btnGetLogByHikvisionSDK_Click: m_UserID = -1================
 2024-02-03 17:56:02.6689 
  =============btnGetLogByHikvisionSDK_Click: NET_DVR_StartRemoteConfig FAIL, ERROR CODE 17================
+2024-02-03 18:59:05.7278 
+==========Bat dau btnOpenDev_Click========
+2024-02-03 18:59:05.7616 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2024-02-03 18:59:05.7616 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong========
+2024-02-03 18:59:05.7616 
+==========Bat dau btnOpenDev_Click------SetIPAddress========
+2024-02-03 18:59:05.7616 
+==========Bat dau btnOpenDev_Click------SetIPAddress xong: True========
+2024-02-03 18:59:05.7616 
+==========Bat dau btnOpenDev_Click------OpenCommPort========
+2024-02-03 18:59:26.7798 
+==========Bat dau btnOpenDev_Click------OpenCommPort xong: False========
+2024-02-03 18:59:36.9278 
+==========Bat dau btnReadAllSLogData_Click========
